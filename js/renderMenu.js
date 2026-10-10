@@ -1,11 +1,9 @@
-// Главное меню: «Начать игру», пока в выбранной ячейке нет персонажа, иначе «Продолжить»
-// с именем персонажа под кнопкой.
+// Главное меню: блок текущего персонажа и кнопка «Начать игру» (нет персонажа) / «Продолжить».
 function renderMenu() {
   const hero = loadSlot(getActiveSlot());
   document.getElementById('btnStartLabel').textContent = hero ? 'Продолжить' : 'Начать игру';
-  document.getElementById('btnStartSub').textContent = hero ? '' : 'Создание персонажа';
-  document.getElementById('btnStartSub').hidden = !!hero;
-  const name = document.getElementById('heroCaption');
-  name.textContent = hero ? hero.name : '';
-  name.hidden = !hero;
+  const sub = document.getElementById('btnStartSub');
+  sub.textContent = hero ? '' : 'Создание персонажа';
+  sub.hidden = !!hero;
+  renderHeroCard();
 }

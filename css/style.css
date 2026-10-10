@@ -161,16 +161,43 @@ h1 {
   #ver:hover { filter: brightness(1.2); }
 }
 
-/* Имя текущего персонажа под кнопкой «Продолжить» */
-#heroCaption {
-  margin-top: -6px;
-  font: 400 18px/22px var(--font-heading);
-  color: var(--ui-reward);
-  text-align: center;
+/* Блок текущего персонажа над «Продолжить»: тёмная плашка в металлическом ободке */
+.heroCard {
+  padding: 12px 14px;
+  border: 2px solid var(--ui-metal);
+  border-radius: 14px;
+  background: var(--bg-cell);
+  text-align: left;
+}
+
+.heroCardHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+#heroCardName {
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font: var(--font-heading-weight) 20px/24px var(--font-heading);
+  color: var(--ui-reward);
 }
+
+#heroCardSlot { flex: none; font: 800 12px/16px var(--font-label); color: var(--text-muted); }
+
+#heroCardStats {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 12px;
+  margin: 0;
+}
+
+#heroCardStats dt { font: 800 12px/20px var(--font-label); color: var(--text-muted); }
+#heroCardStats dd { margin: 0; font: 600 15px/20px var(--font-body); color: var(--text-primary); }
 
 .menuButtons {
   width: 100%;

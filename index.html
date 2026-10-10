@@ -23,11 +23,14 @@
     <div class="ribbon">Match 3 RPG</div>
   </div>
   <nav class="menuButtons">
+    <div id="heroCard" class="heroCard" hidden>
+      <div class="heroCardHead"><b id="heroCardName"></b><span id="heroCardSlot"></span></div>
+      <dl id="heroCardStats"></dl>
+    </div>
     <button id="btnStart" class="btn green big" type="button">
       <span id="btnStartLabel">Начать игру</span>
       <small id="btnStartSub"></small>
     </button>
-    <div id="heroCaption" hidden></div>
     <button id="btnCharacters" class="btn stone" type="button">Персонажи</button>
     <button id="btnSettings" class="btn stone" type="button">Настройки</button>
     <button id="btnExit" class="btn red" type="button">Выход</button>
@@ -157,6 +160,7 @@
 <script src="js/showScreen.js"></script>
 <script src="js/goBack.js"></script>
 <script src="js/renderScreen.js"></script>
+<script src="js/renderHeroCard.js"></script>
 <script src="js/renderMenu.js"></script>
 <script src="js/renderCharacters.js"></script>
 <script src="js/renderSettings.js"></script>

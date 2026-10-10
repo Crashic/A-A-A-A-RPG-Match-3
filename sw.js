@@ -37,6 +37,7 @@ const FILES = [
   './js/showScreen.js',
   './js/goBack.js',
   './js/renderScreen.js',
+  './js/renderHeroCard.js',
   './js/renderMenu.js',
   './js/renderCharacters.js',
   './js/renderSettings.js',
