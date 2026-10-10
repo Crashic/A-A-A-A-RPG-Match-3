@@ -1,28 +1,16 @@
 {
- "name": "Осколки Бездны",
- "short_name": "Осколки",
- "start_url": "./index.html",
- "scope": "./",
- "display": "fullscreen",
- "display_override": [
-  "fullscreen",
-  "standalone"
- ],
- "orientation": "portrait",
- "background_color": "#1b1624",
- "theme_color": "#1b1624",
- "icons": [
-  {
-   "src": "icon-192.png",
-   "sizes": "192x192",
-   "type": "image/png",
-   "purpose": "any maskable"
-  },
-  {
-   "src": "icon-512.png",
-   "sizes": "512x512",
-   "type": "image/png",
-   "purpose": "any maskable"
-  }
- ]
+  "name": "A-A-A-A Match 3 RPG",
+  "short_name": "AAAA Match 3",
+  "id": "./",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone"],
+  "orientation": "portrait",
+  "background_color": "#14111a",
+  "theme_color": "#14111a",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
 }

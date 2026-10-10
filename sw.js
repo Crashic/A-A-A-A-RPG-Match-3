@@ -1,4 +1,51 @@
-const C='abyss-v2',F=['./', './index.html', './css/style.css', './js/data.js', './js/flasks.js', './js/ascend.js', './js/tree.js', './js/state.js', './js/atlas.js', './js/items.js', './js/enemy.js', './js/board.js', './js/popups.js', './js/ui.js', './js/input.js', './js/start.js', './js/pwa.js', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
-self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(F)).then(()=>self.skipWaiting()))});
-self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!=C).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
-self.addEventListener('fetch',e=>{if(e.request.method!='GET')return;e.respondWith(fetch(e.request).then(r=>{const cp=r.clone();caches.open(C).then(c=>c.put(e.request,cp));return r}).catch(()=>caches.match(e.request).then(m=>m||caches.match('./index.html'))))});
+// Service worker: офлайн-кэш и обновления.
+// Версия берётся из js/version.js — при её смене старый кэш удаляется.
+importScripts('js/version.js');
+
+const CACHE = 'aaaa-' + APP_VERSION;
+const FILES = [
+  './',
+  './index.html',
+  './css/style.css',
+  './js/version.js',
+  './js/showVersion.js',
+  './js/showToast.js',
+  './js/registerServiceWorker.js',
+  './js/enterFullscreen.js',
+  './js/main.js',
+  './manifest.webmanifest',
+  './icon-192.png',
+  './icon-512.png'
+];
+
+self.addEventListener('install', e => {
+  e.waitUntil(
+    caches.open(CACHE)
+      .then(c => c.addAll(FILES.map(f => new Request(f, { cache: 'reload' }))))
+      .then(() => self.skipWaiting())
+  );
+});
+
+self.addEventListener('activate', e => {
+  e.waitUntil(
+    caches.keys()
+      .then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
+      .then(() => self.clients.claim())
+  );
+});
+
+// Сначала сеть (свежая версия), без сети — кэш.
+self.addEventListener('fetch', e => {
+  if (e.request.method !== 'GET') return;
+  e.respondWith(
+    fetch(e.request, { cache: 'no-cache' })
+      .then(r => {
+        if (r.ok) {
+          const copy = r.clone();
+          caches.open(CACHE).then(c => c.put(e.request, copy));
+        }
+        return r;
+      })
+      .catch(() => caches.match(e.request).then(m => m || caches.match('./index.html')))
+  );
+});
