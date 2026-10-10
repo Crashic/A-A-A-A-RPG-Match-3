@@ -1,47 +1,107 @@
-// Карта вылазок: зоны на поверхности с диапазоном уровней, как в World of Warcraft.
-// Сеттинг — постапокалипсис в фэнтезийной России: герой выходит из бункера за провизией.
+// Карта врагов: 9 локаций из документа автора. factionId — чья локация (null — нейтральная, для всех);
+// start — какие расы начинают здесь игру; gems — какие фишки выпадают чаще (вес ×2);
+// field — механика поля (пока описание, препятствия появятся позже).
 // Враг: id, name, level, hp/atk — множители характеристик, elite — элита (сильнее, опыт ×2).
 const ZONES = [
-  { id: 'yard', name: 'Двор у бункера', min: 1, max: 10, enemies: [
-    { id: 'rat',       name: 'Крыса-мутант',          level: 1,  hp: 0.8, atk: 0.8 },
-    { id: 'dog',       name: 'Бродячий пёс',          level: 3,  hp: 0.9, atk: 1.0 },
-    { id: 'drone',     name: 'Ржавый дрон',           level: 6,  hp: 1.0, atk: 1.0 },
-    { id: 'boar',      name: 'Матёрый кабан-мутант',  level: 10, hp: 1.0, atk: 1.0, elite: true }
-  ] },
-  { id: 'garages', name: 'Гаражный кооператив', min: 10, max: 20, enemies: [
-    { id: 'looter',    name: 'Гаражник-мародёр',      level: 11, hp: 0.9, atk: 1.0 },
-    { id: 'barbos',    name: 'Робот-сторож «Барбос»', level: 14, hp: 1.2, atk: 0.9 },
-    { id: 'moonshiner',name: 'Самогонщица',           level: 17, hp: 0.9, atk: 1.2 },
-    { id: 'chairman',  name: 'Председатель ГСК',      level: 20, hp: 1.0, atk: 1.0, elite: true }
-  ] },
-  { id: 'blocks', name: 'Хрущёвки-призраки', min: 20, max: 30, enemies: [
-    { id: 'crows',     name: 'Стая ворон',            level: 21, hp: 0.8, atk: 1.1 },
-    { id: 'gopnik',    name: 'Гопник в противогазе',  level: 24, hp: 1.0, atk: 1.0 },
-    { id: 'lift',      name: 'Лифт-людоед',           level: 27, hp: 1.3, atk: 1.0 },
-    { id: 'housing',   name: 'Управдом',              level: 30, hp: 1.0, atk: 1.0, elite: true }
-  ] },
-  { id: 'plant', name: 'Химзавод «Заря»', min: 30, max: 40, enemies: [
-    { id: 'slime',     name: 'Кислотный слизень',     level: 32, hp: 1.0, atk: 1.1 },
-    { id: 'liquidator',name: 'Ликвидатор',            level: 35, hp: 0.9, atk: 1.1 },
-    { id: 'cyberguard',name: 'Кибер-вахтёр',          level: 37, hp: 0.8, atk: 1.3 },
-    { id: 'director',  name: 'Директор завода',       level: 40, hp: 1.1, atk: 0.9, elite: true }
-  ] },
-  { id: 'metro', name: 'Метро «Глубинная»', min: 40, max: 50, enemies: [
-    { id: 'ghoul',     name: 'Тоннельный упырь',      level: 42, hp: 0.8, atk: 1.2 },
-    { id: 'trolley',   name: 'Дрезинщик',             level: 45, hp: 1.4, atk: 0.9 },
-    { id: 'ratking',   name: 'Крысиный король',       level: 47, hp: 1.0, atk: 1.1 },
-    { id: 'stationboss', name: 'Начальник станции',   level: 50, hp: 1.0, atk: 1.0, elite: true }
-  ] },
-  { id: 'highway', name: 'Ледяная трасса М-11', min: 50, max: 55, enemies: [
-    { id: 'yeti',      name: 'Снежный мутант',        level: 51, hp: 1.1, atk: 1.0 },
-    { id: 'trucker',   name: 'Дальнобой-киборг',      level: 52, hp: 0.8, atk: 1.2 },
-    { id: 'inspector', name: 'Дорожный инспектор',    level: 54, hp: 0.9, atk: 1.2 },
-    { id: 'grader',    name: 'Ледяной грейдер',       level: 55, hp: 1.1, atk: 1.0, elite: true }
-  ] },
-  { id: 'naukograd', name: 'Мёртвый наукоград', min: 55, max: 60, enemies: [
-    { id: 'exo',       name: 'Боевой экзоскелет',     level: 56, hp: 1.1, atk: 1.0 },
-    { id: 'ai',        name: 'Свихнувшийся ИИ',       level: 58, hp: 0.8, atk: 1.3 },
-    { id: 'nanobots',  name: 'Рой нанороботов',       level: 59, hp: 1.2, atk: 1.1 },
-    { id: 'academic',  name: 'Академик',              level: 60, hp: 1.1, atk: 1.1, elite: true }
-  ] }
+  { id: 'rassvet', name: 'Панельный квартал «Рассвет»', factionId: 'council', start: ['ruiners'], min: 1, max: 15,
+    gems: ['sapphire', 'pearl'],
+    description: 'Первые руины панелек с «учётными дворами»: гаражи‑склады, журналы находок, посты охраны, таблички «Не входить — идёт инвентаризация».',
+    field: 'Чаще выпадают Металл и Документы.',
+    note: '«Здесь даже сломанный забор должен быть внесён в ведомость. Если его нет в журнале — значит, его не существует»',
+    enemies: [
+      { id: 'rat',       name: 'Крыса-мутант',          level: 1,  hp: 0.8, atk: 0.8 },
+      { id: 'dog',       name: 'Бродячий пёс',          level: 4,  hp: 0.9, atk: 1.0 },
+      { id: 'drone',     name: 'Ржавый дрон-учётчик',   level: 9,  hp: 1.0, atk: 1.0 },
+      { id: 'storekeep', name: 'Завхоз-инвентаризатор', level: 15, hp: 1.0, atk: 1.0, elite: true }
+    ] },
+  { id: 'pulse', name: 'Заводской цех «Красный Пульс»', factionId: 'council', start: ['factory'], min: 15, max: 30,
+    gems: ['aquamarine'],
+    description: 'Производственный узел с конвейерами, станками, журналами смен и актами списания. Повсюду плакаты «Труд — это отчётность».',
+    field: 'Доминируют Детали.',
+    note: '«Деталь сначала опиши, потом используй. Иначе её спишут на „естественный износ“»',
+    enemies: [
+      { id: 'lathe',     name: 'Сорвавшийся станок',    level: 16, hp: 1.2, atk: 0.9 },
+      { id: 'foreman',   name: 'Сменный мастер-киборг', level: 21, hp: 1.0, atk: 1.0 },
+      { id: 'thieves',   name: 'Крысы-несуны',          level: 26, hp: 0.8, atk: 1.2 },
+      { id: 'shopboss',  name: 'Начальник цеха',        level: 30, hp: 1.0, atk: 1.0, elite: true }
+    ] },
+  { id: 'ventil', name: 'Станция «Вентиль-4»', factionId: 'council', start: ['underAdm'], min: 30, max: 45,
+    gems: ['aquamarine', 'amethyst'],
+    description: 'Станция метро как «учётный центр»: фильтры, генераторы, вентиляция, журналы дежурств, самодельные указатели.',
+    field: 'Чаще выпадают Детали и Плёнка.',
+    note: '«В метро главное — чтобы генератор гудел. А что он гудит на последнем издыхании — это уже детали»',
+    enemies: [
+      { id: 'ventslime', name: 'Вентиляционный слизень', level: 31, hp: 1.1, atk: 0.9 },
+      { id: 'sleepwalk', name: 'Дежурный-лунатик',      level: 36, hp: 0.9, atk: 1.1 },
+      { id: 'generator', name: 'Генератор-мутант',      level: 41, hp: 1.3, atk: 0.9 },
+      { id: 'stationadm',name: 'Начальник станции',     level: 45, hp: 1.0, atk: 1.0, elite: true }
+    ] },
+  { id: 'kanistry', name: 'Степной перекрёсток «Три Канистры»', factionId: 'union', start: ['steppe'], min: 1, max: 20,
+    gems: ['ruby', 'sapphire'],
+    description: 'Перекрёсток дорог с мобильным лагерем, брошенными грузовиками, бочками с топливом и досками с устными объявлениями. Здесь правят договорённости «на словах».',
+    field: 'Доминируют Топливо и Металл.',
+    note: '«На перекрёстке главное правило: если никто не спорит — значит, все согласны. А если спорят — значит, ещё не договорились»',
+    enemies: [
+      { id: 'jackal',    name: 'Степной шакал',         level: 1,  hp: 0.8, atk: 0.8 },
+      { id: 'biker',     name: 'Мародёр на мотоцикле',  level: 6,  hp: 0.9, atk: 1.1 },
+      { id: 'mimicbarrel', name: 'Бочка-мимик',         level: 13, hp: 1.2, atk: 0.9 },
+      { id: 'ataman',    name: 'Атаман грузовиков',     level: 20, hp: 1.0, atk: 1.0, elite: true }
+    ] },
+  { id: 'tishina', name: 'Болотный аванпост «Зелёная Тишина»', factionId: 'union', start: ['forest'], min: 20, max: 35,
+    gems: ['emerald'],
+    description: 'Сырые леса и болота, лагеря Лесных, лечебные пункты, верёвочные тропы и предупреждающие таблички из фанеры.',
+    field: 'Чаще выпадают Травы.',
+    note: '«Лучшее лекарство — знать, чего точно не стоит есть. Остальное — уже дело удачи»',
+    enemies: [
+      { id: 'leech',     name: 'Болотная пиявка',       level: 21, hp: 0.9, atk: 1.0 },
+      { id: 'mold',      name: 'Плесневик',             level: 26, hp: 1.2, atk: 0.9 },
+      { id: 'witch',     name: 'Трясинная ведьма',      level: 31, hp: 0.9, atk: 1.2 },
+      { id: 'mushking',  name: 'Царь-гриб',             level: 35, hp: 1.1, atk: 1.0, elite: true }
+    ] },
+  { id: 'ten7', name: 'Подземная станция «Тень-7»', factionId: 'union', start: ['underFree'], min: 35, max: 50,
+    gems: ['aquamarine', 'amethyst'],
+    description: 'Автономная станция с собственными генераторами, фильтрами, рынками и «станциями связи».',
+    field: 'Чаще выпадают Детали и Плёнка.',
+    note: '«Здесь не ждут приказов сверху. Здесь ждут, когда генератор снова заведётся — и молятся, чтобы фильтры продержались ещё неделю»',
+    enemies: [
+      { id: 'ghoul',     name: 'Тоннельный упырь',      level: 36, hp: 0.8, atk: 1.2 },
+      { id: 'jammer',    name: 'Дрон-глушилка',         level: 41, hp: 0.9, atk: 1.1 },
+      { id: 'ratking',   name: 'Крысиный король',       level: 46, hp: 1.1, atk: 1.0 },
+      { id: 'warden',    name: 'Смотритель станции',    level: 50, hp: 1.0, atk: 1.0, elite: true }
+    ] },
+  { id: 'perehod', name: 'Пересадочный узел «Переход»', factionId: null, start: [], min: 25, max: 40,
+    gems: [],
+    description: 'Старый пересадочный узел между районами — ничейная территория с рынком, обменными пунктами и наблюдательными постами.',
+    field: 'Фишки всех типов поровну.',
+    note: '«Здесь никто не воюет — потому что все слишком заняты торговлей. Но если что-то пропадёт, все знают, у кого спросить»',
+    enemies: [
+      { id: 'pickpocket',name: 'Карманник',             level: 26, hp: 0.8, atk: 1.1 },
+      { id: 'changer',   name: 'Меняла-киборг',         level: 31, hp: 1.0, atk: 1.0 },
+      { id: 'marketguard', name: 'Охранник рынка',      level: 36, hp: 1.2, atk: 1.0 },
+      { id: 'marketboss',name: 'Хозяин рынка',          level: 40, hp: 1.0, atk: 1.1, elite: true }
+    ] },
+  { id: 'zapasnik', name: 'Склад «Запасник-9»', factionId: null, start: [], min: 40, max: 55,
+    gems: ['aquamarine', 'sapphire', 'ruby'],
+    description: 'Огромный склад с ящиками, контейнерами, стеллажами и «чёрными списками» пропавших грузов.',
+    field: 'Чаще выпадают Детали, Металл и Топливо.',
+    note: '«Если груз не числится в журнале — он либо украден, либо ещё не найден. Но в любом случае его уже нет»',
+    enemies: [
+      { id: 'boxmimic',  name: 'Ящик-мимик',            level: 41, hp: 1.2, atk: 0.9 },
+      { id: 'loader',    name: 'Погрузчик-робот',       level: 46, hp: 1.3, atk: 1.0 },
+      { id: 'clerkrats', name: 'Крысы-кладовщики',      level: 51, hp: 0.8, atk: 1.2 },
+      { id: 'chiefclerk',name: 'Главный кладовщик',     level: 55, hp: 1.1, atk: 1.0, elite: true }
+    ] },
+  { id: 'perimetr', name: 'Зона отчуждения «Ржавый периметр»', factionId: null, start: [], min: 50, max: 60,
+    gems: ['topaz', 'topaz'],
+    description: 'Пограничная полоса с радиацией, ржавчиной и старыми минными заграждениями. Много брошенной техники, контейнеров и «чёрных рынков».',
+    field: 'Часто выпадают Радиационные маркеры.',
+    note: '«Периметр не защищает — он просто честно показывает, где риск особенно велик. И где награда особенно сладка»',
+    enemies: [
+      { id: 'raddog',    name: 'Радиоактивный пёс',     level: 51, hp: 0.9, atk: 1.1 },
+      { id: 'minebot',   name: 'Минный робот',          level: 54, hp: 1.0, atk: 1.2 },
+      { id: 'stalker',   name: 'Сталкер-мародёр',       level: 57, hp: 1.1, atk: 1.1 },
+      { id: 'colossus',  name: 'Ржавый колосс',         level: 60, hp: 1.2, atk: 1.1, elite: true }
+    ] }
 ];
+// Где начинает Пресса: с фракцией — в первой локации фракции, нейтральная — на «Переходе»
+const PRESS_START = { council: 'rassvet', union: 'kanistry', none: 'perehod' };

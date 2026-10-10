@@ -1,32 +1,46 @@
-// Карта врагов: слева зоны с диапазоном уровней, справа враги выбранной зоны.
-// Цвет уровня — сложность для героя, как в WoW (difficultyOf).
+// Карта врагов: слева 9 локаций (чужие фракционные — закрыты, чёрно-белые; «Старт» — стартовая),
+// справа описание выбранной локации и её враги. Цвет уровня — сложность для героя, как в WoW.
 function renderMap() {
   const save = loadSlot(getActiveSlot());
   const level = save ? save.level : 1;
+  const start = save ? startZoneOf(save.raceId, save.factionId) : ZONES[0];
   if (!mapZoneId) {
-    const home = ZONES.find(z => level >= z.min && level <= z.max) || ZONES[0];
-    mapZoneId = home.id;
+    const last = save && zoneOfEnemy(save.lastEnemy);
+    mapZoneId = (last && zoneAllowed(save, last) ? last : start).id;
   }
   const zoneList = document.getElementById('zoneList');
   zoneList.innerHTML = '';
   for (const zone of ZONES) {
+    const open = zoneAllowed(save, zone);
     const b = document.createElement('button');
     b.type = 'button';
-    b.className = 'zone' + (zone.id === mapZoneId ? ' selected' : '');
+    b.className = 'zone' + (zone.id === mapZoneId ? ' selected' : '') + (open ? '' : ' locked');
     b.innerHTML = '<b></b><span></span>';
-    b.firstChild.textContent = zone.name;
+    b.firstChild.textContent = (zone.id === start.id ? '★ ' : '') + zone.name;
     b.lastChild.textContent = zone.min + '–' + zone.max;
     b.lastChild.className = 'lvl-' + difficultyOf(level, Math.round((zone.min + zone.max) / 2));
     b.addEventListener('click', () => { vibrate(); mapZoneId = zone.id; renderMap(); });
     zoneList.appendChild(b);
   }
-  const zone = ZONES.find(z => z.id === mapZoneId);
+
+  const zone = findById(ZONES, mapZoneId);
+  const open = zoneAllowed(save, zone);
+  const faction = findById(FACTIONS, zone.factionId);
+  const info = document.getElementById('zoneInfo');
+  info.innerHTML = '<p class="zoneTags"></p><p class="zoneDesc"></p>';
+  const starters = zone.start.map(id => findById(RACES, id).name);
+  info.firstChild.textContent = (faction ? faction.name : 'Нейтральная — для всех') +
+    (starters.length ? ' · старт: ' + starters.join(', ') : '') + ' · ' + zone.field;
+  info.lastChild.textContent = open ? zone.description
+    : 'Закрыто: локация фракции «' + faction.name + '». Сюда пускают только своих.';
+
   const list = document.getElementById('enemyList');
   list.innerHTML = '';
   for (const e of zone.enemies) {
     const b = document.createElement('button');
     b.type = 'button';
-    b.className = 'enemyCard' + (save && save.lastEnemy === e.id ? ' current' : '');
+    b.className = 'enemyCard' + (save && save.lastEnemy === e.id ? ' current' : '') + (open ? '' : ' locked');
+    b.disabled = !open;
     b.innerHTML = '<span class="enemyLvl"></span><b></b><span class="enemyXp"></span>';
     const lvl = b.querySelector('.enemyLvl');
     lvl.textContent = e.level;

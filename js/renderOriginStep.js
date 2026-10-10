@@ -43,11 +43,16 @@ function renderOriginStep() {
     add('p', race.id === 'press'
       ? (faction.id ? 'Пресса фракции «' + faction.name + '»' : 'Нейтральная пресса, без фракции')
       : faction.name, 'sub');
+    const start = startZoneOf(race.id, d.factionId);
+    add('p', 'Начинает игру: ' + start.name + ' (ур. ' + start.min + '–' + start.max + ')', 'start');
     add('p', race.note, 'note');
   } else {
     add('h3', faction.name);
     add('p', faction.alias, 'sub');
   }
+  // куда может попасть: свои локации фракции и нейтральные (нейтральная Пресса — все)
+  const own = ZONES.filter(z => z.factionId === faction.id).map(z => z.name);
+  add('p', faction.id ? 'Локации: ' + own.join(', ') + ' и нейтральные' : 'Локации: все — обеих фракций и нейтральные', 'sub');
   add('p', faction.motto, 'motto');
   add('p', faction.description);
   right.appendChild(info);

@@ -4,7 +4,8 @@ async function startBattle(enemyId, saved = null) {
   const slot = getActiveSlot();
   const save = loadSlot(slot);
   if (!save) return;
-  const found = findEnemy(saved ? saved.enemyId : enemyId) || findEnemy(suggestEnemy(save.level));
+  let found = findEnemy(saved ? saved.enemyId : enemyId);
+  if (!found || !zoneAllowed(save, found.zone)) found = findEnemy(suggestEnemy(save)); // чужая или старая локация
   const e = found.enemy;
   save.lastEnemy = e.id;
   saveSlot(slot, save);

@@ -124,7 +124,7 @@
   </aside>
 </section>
 
-<!-- Карта врагов: зоны по уровням, как в WoW (данные — js/zones.js) -->
+<!-- Карта врагов: 9 локаций — по три у фракций и три нейтральные (данные — js/zones.js) -->
 <section id="map" class="screen">
   <header class="screenHead">
     <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
@@ -132,7 +132,10 @@
   </header>
   <div class="mapBody">
     <div id="zoneList" class="panel"></div>
-    <div id="enemyList" class="panel"></div>
+    <div class="panel zonePanel">
+      <div id="zoneInfo"></div>
+      <div id="enemyList"></div>
+    </div>
   </div>
 </section>
 
@@ -306,6 +309,9 @@
 <script src="js/combatStats.js"></script>
 <script src="js/createFighter.js"></script>
 <script src="js/findEnemy.js"></script>
+<script src="js/zoneOfEnemy.js"></script>
+<script src="js/startZoneOf.js"></script>
+<script src="js/zoneAllowed.js"></script>
 <script src="js/suggestEnemy.js"></script>
 <script src="js/grantXp.js"></script>
 <script src="js/isHeroTurn.js"></script>
