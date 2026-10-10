@@ -6,6 +6,8 @@ const CACHE = 'aaaa-' + APP_VERSION;
 const FILES = [
   './',
   './index.html',
+  './css/fonts.css',
+  './css/tokens.css',
   './css/style.css',
   './js/version.js',
   './js/changelog.js',
@@ -40,6 +42,12 @@ const FILES = [
   './js/setupChangelog.js',
   './js/setupMenu.js',
   './js/main.js',
+  './fonts/nunito-cyrillic-600-normal.woff2',
+  './fonts/nunito-cyrillic-800-normal.woff2',
+  './fonts/nunito-latin-600-normal.woff2',
+  './fonts/nunito-latin-800-normal.woff2',
+  './fonts/russo-one-cyrillic-400-normal.woff2',
+  './fonts/russo-one-latin-400-normal.woff2',
   './manifest.webmanifest',
   './icon-192.png',
   './icon-512.png'

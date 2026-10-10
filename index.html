@@ -4,77 +4,105 @@
 <meta charset="utf-8">
 <title>A-A-A-A Match 3 RPG</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
-<meta name="theme-color" content="#14111a">
+<meta name="theme-color" content="#4e1f3c">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/tokens.css">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <!-- Главное меню -->
 <section id="menu" class="screen active">
-  <h1>A-A-A-A<br><span>Match 3 RPG</span></h1>
+  <div class="logo">
+    <h1>A-A-A-A</h1>
+    <div class="ribbon">Match 3 RPG</div>
+  </div>
   <nav class="menuButtons">
-    <button id="btnStart" class="menuBtn primary" type="button">
+    <button id="btnStart" class="btn green big" type="button">
       <span id="btnStartLabel">Начать игру</span>
       <small id="btnStartSub"></small>
     </button>
-    <button id="btnProfile" class="menuBtn" type="button">Профиль</button>
-    <button id="btnSettings" class="menuBtn" type="button">Настройки</button>
-    <button id="btnExit" class="menuBtn" type="button">Выход</button>
+    <button id="btnProfile" class="btn stone" type="button">Профиль</button>
+    <button id="btnSettings" class="btn stone" type="button">Настройки</button>
+    <button id="btnExit" class="btn red" type="button">Выход</button>
   </nav>
   <button id="ver" type="button"></button>
 </section>
 
 <!-- Профиль: ячейки сохранения -->
 <section id="profile" class="screen">
-  <header class="screenHead"><button class="back" type="button" data-back aria-label="Назад">‹</button><h2>Профиль</h2></header>
-  <p class="hint">Выберите ячейку сохранения</p>
-  <div id="slotList"></div>
+  <header class="screenHead">
+    <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
+    <div class="ribbon">Профиль</div>
+  </header>
+  <div class="panel">
+    <p class="hint">Выберите ячейку сохранения</p>
+    <div id="slotList"></div>
+  </div>
 </section>
 
 <!-- Настройки -->
 <section id="settings" class="screen">
-  <header class="screenHead"><button class="back" type="button" data-back aria-label="Назад">‹</button><h2>Настройки</h2></header>
-  <div class="settingsList">
-    <label class="setRow range"><span>Музыка <b id="val-music"></b></span><input id="set-music" type="range" min="0" max="100" step="5"></label>
-    <label class="setRow range"><span>Звуки <b id="val-sound"></b></span><input id="set-sound" type="range" min="0" max="100" step="5"></label>
-    <label class="setRow"><span>Вибрация</span><input id="set-vibration" type="checkbox" class="switch"></label>
-    <label class="setRow"><span>Полноэкранный режим</span><input id="set-fullscreen" type="checkbox" class="switch"></label>
-    <label class="setRow"><span>Оповещения</span><input id="set-notifications" type="checkbox" class="switch"></label>
+  <header class="screenHead">
+    <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
+    <div class="ribbon">Настройки</div>
+  </header>
+  <div class="panel">
+    <div class="settingsList">
+      <label class="setRow range"><span>Музыка <b id="val-music"></b></span><input id="set-music" type="range" min="0" max="100" step="5"></label>
+      <label class="setRow range"><span>Звуки <b id="val-sound"></b></span><input id="set-sound" type="range" min="0" max="100" step="5"></label>
+      <label class="setRow"><span>Вибрация</span><input id="set-vibration" type="checkbox" class="switch"></label>
+      <label class="setRow"><span>Полноэкранный режим</span><input id="set-fullscreen" type="checkbox" class="switch"></label>
+      <label class="setRow"><span>Оповещения</span><input id="set-notifications" type="checkbox" class="switch"></label>
+    </div>
+    <button id="btnResetSaves" class="btn red" type="button">Сбросить сохранения</button>
   </div>
-  <button id="btnResetSaves" class="menuBtn danger" type="button">Сбросить все сохранения</button>
 </section>
 
 <!-- Игра (пока заглушка) -->
 <section id="game" class="screen">
-  <header class="screenHead"><button class="back" type="button" data-back aria-label="В меню">‹</button><h2>Игра</h2></header>
-  <p id="gameInfo" class="hint"></p>
+  <header class="screenHead">
+    <button class="btn stone round back" type="button" data-back aria-label="В меню"></button>
+    <div class="ribbon">Игра</div>
+  </header>
+  <div class="panel"><p id="gameInfo" class="hint"></p></div>
 </section>
 
 <!-- Экран после «Выхода», если браузер не дал закрыть вкладку -->
 <section id="bye" class="screen">
-  <h1>A-A-A-A<br><span>Match 3 RPG</span></h1>
-  <p class="hint">Игра закрыта. Можно закрыть вкладку.</p>
-  <button id="btnReturn" class="menuBtn" type="button">Вернуться в игру</button>
+  <div class="logo">
+    <h1>A-A-A-A</h1>
+    <div class="ribbon">Match 3 RPG</div>
+  </div>
+  <div class="panel">
+    <p class="hint">Игра закрыта. Можно закрыть вкладку.</p>
+    <button id="btnReturn" class="btn green" type="button">Вернуться</button>
+  </div>
 </section>
 
 <div id="changelog" class="modal">
-  <div class="panel">
-    <div class="panelHead"><h2>Список изменений</h2><button id="changelogClose" type="button">✕</button></div>
-    <div id="changelogList"></div>
+  <div class="modalBox">
+    <div class="ribbon">Список изменений</div>
+    <div class="panel">
+      <button id="changelogClose" class="btn red round close" type="button" aria-label="Закрыть"></button>
+      <div id="changelogList"></div>
+    </div>
   </div>
 </div>
 
 <div id="confirm" class="modal">
-  <div class="panel confirmPanel">
-    <p id="confirmText"></p>
-    <div class="confirmButtons">
-      <button id="confirmNo" class="menuBtn" type="button">Отмена</button>
-      <button id="confirmYes" class="menuBtn danger" type="button"></button>
+  <div class="modalBox">
+    <div class="panel">
+      <p id="confirmText"></p>
+      <div class="confirmButtons">
+        <button id="confirmNo" class="btn stone" type="button">Отмена</button>
+        <button id="confirmYes" class="btn red" type="button"></button>
+      </div>
     </div>
   </div>
 </div>

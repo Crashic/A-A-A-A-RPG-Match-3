@@ -1,0 +1,19 @@
+<!-- @dsCard group="Интерфейс" height=220 subtitle="Кнопки" -->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&family=Russo+One&display=swap" rel="stylesheet"><style>
+.sky{background:linear-gradient(180deg,var(--bg-top),var(--bg-mid) 60%,var(--bg-bottom));border-radius:var(--radius-tile);padding:var(--space-4);display:flex;flex-wrap:wrap;gap:var(--space-4);justify-content:center;align-items:flex-start}
+.tl{margin:0;display:flex;flex-direction:column;align-items:center;gap:6px;width:116px}
+.tl svg{display:block;overflow:visible}
+.plq{background:var(--stone-700);box-shadow:0 4px 0 var(--stone-900);border-radius:10px;padding:4px 10px 5px;text-align:center;min-width:84px}
+.plq b{display:block;font:400 14px/18px "Russo One",Impact,sans-serif;color:var(--ink);letter-spacing:.02em}
+.plq span{display:block;font:800 11px/14px "Nunito",system-ui,sans-serif;color:var(--ink-muted)}
+</style><svg width="0" height="0" style="position:absolute"><defs><filter id="blur6" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="6"/></filter><filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3"/></filter></defs></svg><style>
+.bt{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:var(--radius-tile);padding:12px 26px 13px;font:400 22px/26px "Russo One",Impact,sans-serif;color:var(--ink);text-shadow:0 2px 0 rgba(0,0,0,.35);cursor:pointer}
+.bt.g{background:linear-gradient(var(--green-300),var(--green-500) 55%);box-shadow:0 6px 0 var(--green-700),0 12px 14px rgba(0,0,0,.3),inset 0 2px 0 rgba(255,255,255,.35)}
+.bt.r{background:linear-gradient(var(--red-300),var(--red-500) 55%);box-shadow:0 6px 0 var(--red-700),0 12px 14px rgba(0,0,0,.3),inset 0 2px 0 rgba(255,255,255,.35)}
+.bt.o{background:linear-gradient(var(--orange-300),var(--orange-500) 55%);box-shadow:0 6px 0 var(--orange-700),0 12px 14px rgba(0,0,0,.3),inset 0 2px 0 rgba(255,255,255,.35)}
+.bt.p{background:linear-gradient(var(--ribbon-300),var(--ribbon-500) 55%);box-shadow:0 6px 0 var(--ribbon-700),0 12px 14px rgba(0,0,0,.3),inset 0 2px 0 rgba(255,255,255,.35)}
+.bt.s{background:linear-gradient(var(--stone-300),var(--stone-500) 55%);box-shadow:0 6px 0 var(--stone-900),0 12px 14px rgba(0,0,0,.3),inset 0 2px 0 rgba(255,255,255,.2)}
+.bt.rd{width:56px;height:56px;padding:0;justify-content:center;border-radius:var(--radius-pill)}
+.bt.dis{filter:saturate(.2) brightness(.8)}
+.row{display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:center;width:100%}
+</style><div class="sky" style="padding:24px 16px 30px"><div class="row"><button class="bt g">Играть</button><button class="bt r">Выход</button><button class="bt o"><svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="13" r="10" fill="var(--gold-700)"/><circle cx="12" cy="11" r="10" fill="var(--gold-500)"/><circle cx="12" cy="11" r="6.5" fill="var(--gold-300)"/></svg> 500 Забрать</button><button class="bt p">Магазин</button></div><div class="row" style="margin-top:8px"><button class="bt rd g" aria-label="Назад"><svg width="24" height="24" viewBox="0 0 24 24"><path d="M15 4 L7 12 L15 20" fill="none" stroke="var(--ink)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="bt rd r" aria-label="Закрыть"><svg width="22" height="22" viewBox="0 0 22 22"><path d="M5 5 L17 17 M17 5 L5 17" stroke="var(--ink)" stroke-width="4" stroke-linecap="round"/></svg></button><button class="bt rd s" aria-label="Настройки"><svg width="26" height="26" viewBox="0 0 26 26"><circle cx="13" cy="13" r="8" fill="none" stroke="var(--ink)" stroke-width="4" stroke-dasharray="4 2.3"/><circle cx="13" cy="13" r="3" fill="var(--ink)"/></svg></button><button class="bt s">Настройки</button><button class="bt g dis">Недоступно</button></div></div>

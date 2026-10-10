@@ -26,8 +26,7 @@ function renderProfile() {
     if (save) {
       const del = document.createElement('button');
       del.type = 'button';
-      del.className = 'slotDelete';
-      del.textContent = '🗑';
+      del.className = 'btn red round close slotDelete';
       del.setAttribute('aria-label', 'Удалить сохранение');
       del.addEventListener('click', () => {
         vibrate();
