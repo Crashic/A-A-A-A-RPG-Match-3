@@ -1,12 +1,16 @@
-// Привязывает кнопки главного меню, профиля, настроек и кнопку «Назад» телефона.
+// Привязывает кнопки главного меню, персонажей, создания персонажа, настроек и кнопку «Назад» телефона.
 function setupMenu() {
   const on = (id, fn) => document.getElementById(id).addEventListener('click', () => { vibrate(); fn(); });
 
   on('btnStart', startGame);
-  on('btnProfile', () => { renderProfile(); showScreen('profile'); });
+  on('btnCharacters', () => { renderCharacters(); showScreen('characters'); });
   on('btnSettings', () => { renderSettings(); showScreen('settings'); });
   on('btnExit', exitApp);
   on('btnReturn', () => { renderMenu(); showScreen('menu', false); });
+  // Создание персонажа: «Назад» и «Далее» / «Создать» внизу экрана
+  on('createBack', createStepBack);
+  on('createNext', createStepNext);
+
   document.querySelectorAll('[data-back]').forEach(b =>
     b.addEventListener('click', () => { vibrate(); goBack(); }));
 
@@ -33,7 +37,7 @@ function setupMenu() {
   }
 
   on('btnResetSaves', () => showConfirm(
-    'Удалить все сохранения во всех ячейках? Это нельзя отменить.', 'Удалить всё', () => {
+    'Удалить всех персонажей во всех ячейках? Это нельзя отменить.', 'Удалить всё', () => {
       resetAllSaves();
       showToast('Все сохранения удалены');
     }));
@@ -46,10 +50,13 @@ function setupMenu() {
     else if (!document.getElementById('menu').classList.contains('active')) goBack();
   });
 
-  // Кнопка «Назад» телефона возвращает в меню
+  // Кнопка «Назад» телефона: возврат на предыдущий экран (для создания персонажа — отмена)
   window.addEventListener('popstate', () => {
     document.getElementById('confirm').classList.remove('open');
-    renderMenu();
-    showScreen('menu', false);
+    let id = (history.state && history.state.screen) || 'menu';
+    if (id === 'create' && !creation) id = 'menu';
+    if (id !== 'create') creation = null;
+    renderScreen(id);
+    showScreen(id, false);
   });
 }

@@ -1,9 +1,9 @@
-// Главное меню: «Начать игру» или «Продолжить», если в выбранной ячейке есть сохранение.
+// Главное меню: «Начать игру», пока в выбранной ячейке нет персонажа, иначе «Продолжить».
 function renderMenu() {
   const n = getActiveSlot();
-  const save = loadSlot(n);
-  document.getElementById('btnStartLabel').textContent = save ? 'Продолжить' : 'Начать игру';
-  document.getElementById('btnStartSub').textContent = save
-    ? 'Ячейка ' + n + ': ' + save.name
-    : 'Ячейка ' + n + ': новая игра';
+  const hero = loadSlot(n);
+  document.getElementById('btnStartLabel').textContent = hero ? 'Продолжить' : 'Начать игру';
+  document.getElementById('btnStartSub').textContent = hero
+    ? hero.name + ' · ' + describeCharacter(hero)
+    : 'Создание персонажа';
 }

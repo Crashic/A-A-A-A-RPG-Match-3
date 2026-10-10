@@ -1,6 +1,6 @@
-// Создаёт новое сохранение в ячейке n и возвращает его.
-function createSlot(n) {
-  const data = { name: 'Герой ' + n, created: Date.now() };
+// Записывает нового персонажа в ячейку n и возвращает его.
+function createSlot(n, hero) {
+  const data = Object.assign({ created: Date.now() }, hero);
   saveSlot(n, data);
   return data;
 }

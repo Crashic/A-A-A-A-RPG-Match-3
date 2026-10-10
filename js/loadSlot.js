@@ -1,4 +1,7 @@
-// Возвращает сохранение из ячейки n или null, если она пустая.
+// Возвращает персонажа из ячейки n или null, если ячейка пустая.
+// Записи без класса — заготовки старых версий, их не считаем персонажами.
 function loadSlot(n) {
-  try { return JSON.parse(localStorage.getItem(slotKey(n))); } catch (e) { return null; }
+  let save = null;
+  try { save = JSON.parse(localStorage.getItem(slotKey(n))); } catch (e) {}
+  return save && save.classId ? save : null;
 }

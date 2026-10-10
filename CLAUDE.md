@@ -29,6 +29,8 @@
 - Каждая функция — отдельный файл в `js/`, имя файла = имя функции. Порядок подключения в `index.html` важен, `js/main.js` последний.
 - Спрайты — в `sprites/`.
 - Новый скрипт или стиль подключать в `index.html`, затем `python3 tools/update-sw.py` — он пересобирает список `FILES` в `sw.js` (скрипты, стили, шрифты, спрайты).
-- Экраны — `<section class="screen">` в `index.html` (menu, profile, settings, game), переключение `showScreen(id)`; уход из меню пишется в history, «Назад» телефона возвращает в меню.
-- Сохранения: 3 ячейки, ключи localStorage `aaaa-slot-1..3`, выбранная — `aaaa-active-slot`; настройки — `aaaa-settings`, новые поля добавлять в `DEFAULT_SETTINGS` (`js/state.js`).
+- Экраны — `<section class="screen">` в `index.html` (menu, characters, create, settings, game, bye), переключение `showScreen(id)`; каждый переход пишется в history, «Назад» телефона возвращает на предыдущий экран через `renderScreen(id)`.
+- Персонаж: справочники в отдельных файлах — `js/classes.js`, `js/races.js`, `js/genders.js`, `js/factions.js` (у каждой записи `id`, `name`, `description`, `bonuses` — сюда добавляются различия). Шаги создания — `js/createSteps.js`; новый шаг = новая запись там. В ячейке хранится `{ name, classId, genderId, raceId, factionId, created, updated, version }`; записи без `classId` (заготовки старых версий) не считаются персонажами.
+- «Начать игру» без персонажа в выбранной ячейке открывает создание, с персонажем — «Продолжить».
+- Сохранения: 3 ячейки персонажей, ключи localStorage `aaaa-slot-1..3`, выбранная — `aaaa-active-slot`; настройки — `aaaa-settings`, новые поля добавлять в `DEFAULT_SETTINGS` (`js/state.js`).
 - Версия — `js/version.js` (`APP_VERSION`); `sw.js` берёт её через importScripts, так что кэш и автообновление завязаны на неё.

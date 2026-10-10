@@ -1,10 +1,10 @@
-// «Начать игру» / «Продолжить»: берёт сохранение выбранной ячейки или создаёт новое.
-// Самой игры пока нет — открывается экран-заглушка.
+// «Начать игру» / «Продолжить»: если в выбранной ячейке нет персонажа — создание персонажа,
+// иначе — в игру.
 function startGame() {
   const n = getActiveSlot();
-  const save = loadSlot(n) || createSlot(n);
-  saveSlot(n, save);
-  document.getElementById('gameInfo').textContent =
-    save.name + ' (ячейка ' + n + '). Здесь скоро появится игра.';
+  const hero = loadSlot(n);
+  if (!hero) { openCharacterCreation(n, 'game'); return; }
+  saveSlot(n, hero); // обновляет дату последней игры
+  renderGame();
   showScreen('game');
 }

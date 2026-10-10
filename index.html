@@ -27,23 +27,39 @@
       <span id="btnStartLabel">Начать игру</span>
       <small id="btnStartSub"></small>
     </button>
-    <button id="btnProfile" class="btn stone" type="button">Профиль</button>
+    <button id="btnCharacters" class="btn stone" type="button">Персонажи</button>
     <button id="btnSettings" class="btn stone" type="button">Настройки</button>
     <button id="btnExit" class="btn red" type="button">Выход</button>
   </nav>
   <button id="ver" type="button"></button>
 </section>
 
-<!-- Профиль: ячейки сохранения -->
-<section id="profile" class="screen">
+<!-- Персонажи: три ячейки -->
+<section id="characters" class="screen">
   <header class="screenHead">
     <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
-    <div class="ribbon">Профиль</div>
+    <div class="ribbon">Персонажи</div>
   </header>
   <div class="panel">
-    <p class="hint">Выберите ячейку сохранения</p>
+    <p class="hint">Выберите персонажа или создайте нового</p>
     <div id="slotList"></div>
   </div>
+</section>
+
+<!-- Создание персонажа: по экрану на шаг (шаги — js/createSteps.js) -->
+<section id="create" class="screen">
+  <header class="createHead">
+    <div class="ribbon" id="createTitle"></div>
+    <span id="createProgress"></span>
+  </header>
+  <div class="panel">
+    <p class="hint" id="createHint"></p>
+    <div id="createBody"></div>
+  </div>
+  <footer class="createNav">
+    <button id="createBack" class="btn stone" type="button">Назад</button>
+    <button id="createNext" class="btn green" type="button">Далее</button>
+  </footer>
 </section>
 
 <!-- Настройки -->
@@ -60,7 +76,7 @@
       <label class="setRow"><span>Полноэкранный режим</span><input id="set-fullscreen" type="checkbox" class="switch"></label>
       <label class="setRow"><span>Оповещения</span><input id="set-notifications" type="checkbox" class="switch"></label>
     </div>
-    <button id="btnResetSaves" class="btn red" type="button">Сбросить сохранения</button>
+    <button id="btnResetSaves" class="btn red" type="button">Удалить всех персонажей</button>
   </div>
 </section>
 
@@ -112,6 +128,11 @@
 <script src="js/version.js"></script>
 <script src="js/changelog.js"></script>
 <script src="js/state.js"></script>
+<script src="js/classes.js"></script>
+<script src="js/races.js"></script>
+<script src="js/genders.js"></script>
+<script src="js/factions.js"></script>
+<script src="js/createSteps.js"></script>
 <script src="js/loadSettings.js"></script>
 <script src="js/saveSettings.js"></script>
 <script src="js/slotKey.js"></script>
@@ -124,14 +145,26 @@
 <script src="js/resetAllSaves.js"></script>
 <script src="js/formatDate.js"></script>
 <script src="js/vibrate.js"></script>
+<script src="js/findById.js"></script>
+<script src="js/describeCharacter.js"></script>
 <script src="js/showVersion.js"></script>
 <script src="js/showToast.js"></script>
 <script src="js/showConfirm.js"></script>
 <script src="js/showScreen.js"></script>
 <script src="js/goBack.js"></script>
+<script src="js/renderScreen.js"></script>
 <script src="js/renderMenu.js"></script>
-<script src="js/renderProfile.js"></script>
+<script src="js/renderCharacters.js"></script>
 <script src="js/renderSettings.js"></script>
+<script src="js/renderGame.js"></script>
+<script src="js/isStepComplete.js"></script>
+<script src="js/renderNameStep.js"></script>
+<script src="js/renderChoiceStep.js"></script>
+<script src="js/renderCreateStep.js"></script>
+<script src="js/openCharacterCreation.js"></script>
+<script src="js/createStepNext.js"></script>
+<script src="js/createStepBack.js"></script>
+<script src="js/finishCharacterCreation.js"></script>
 <script src="js/startGame.js"></script>
 <script src="js/setFullscreen.js"></script>
 <script src="js/enterFullscreen.js"></script>

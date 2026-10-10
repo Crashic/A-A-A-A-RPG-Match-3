@@ -8,3 +8,6 @@ const DEFAULT_SETTINGS = {
   notifications: true // всплывающие сообщения игры
 };
 let settings = null;  // заполняется в main() через loadSettings()
+
+// Создание персонажа: черновик, номер шага, ячейка и куда вернуться после «Создать»
+let creation = null;  // { draft, step, slot, returnTo: 'game' | 'characters' }
