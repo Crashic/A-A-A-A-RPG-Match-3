@@ -8,6 +8,7 @@ function saveBattle() {
     enemy: battle.enemy,
     turn: battle.turn,
     gained: battle.gained,
+    skill: battle.skill,
     grid: match3.grid,
     version: APP_VERSION
   };

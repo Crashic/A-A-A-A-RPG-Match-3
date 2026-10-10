@@ -18,8 +18,10 @@ async function startBattle(enemyId, saved = null) {
     enemy: saved ? saved.enemy : createFighter(e.name, e.level, e.hp * (e.elite ? ELITE_HP : 1), e.atk * (e.elite ? ELITE_ATK : 1)),
     turn: saved ? saved.turn : 'hero',
     over: false,
-    gained: saved ? Object.assign({ xp: 0, tape: 0 }, saved.gained) : { xp: 0, tape: 0 }
+    gained: saved ? Object.assign({ xp: 0, tape: 0 }, saved.gained) : { xp: 0, tape: 0 },
+    skill: saved && saved.skill ? Object.assign(createSkillState(), saved.skill) : createSkillState()
   };
+  if (!saved) skillBattleStart(); // стартовые навыки: мана, пометки
   const current = battle;
   renderBattle();
   await startMatch3(saved ? saved.grid : null);

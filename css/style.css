@@ -391,6 +391,14 @@ h1 {
 .lvl-orange { color: var(--gem-topaz-dark) !important; }
 .lvl-red    { color: var(--ui-danger) !important; }
 
+/* Навыки под панелью игрока: активные — кнопки за ману, пассивные — строкой */
+#skillBar { display: flex; flex-direction: column; gap: 6px; min-height: 0; }
+.btn.skillBtn { min-height: 40px; padding: 4px 10px; display: flex; flex-direction: column; align-items: center; gap: 0; }
+.skillBtn b { font: var(--type-menu); font-weight: 600; line-height: 18px; }
+.skillBtn small { font: var(--type-caption); color: var(--text-secondary); }
+.skillBtn:disabled small { color: var(--text-muted); }
+.skillPassive { margin: 0; font: var(--type-caption); color: var(--text-muted); text-align: center; }
+
 /* Кнопки под панелью врага: «В меню» и квадратная «Карта врагов» справа внизу */
 .gameButtons { display: flex; gap: 8px; margin-top: auto; }
 .gameButtons #gameToMenu { flex: 1; min-width: 0; min-height: 52px; padding: 8px 10px; font: var(--type-menu); }
@@ -454,7 +462,10 @@ h1 {
 .infoText p { margin: 3px 0 0; font: var(--type-small); color: var(--text-secondary); }
 .infoText .sub { font: var(--type-stat); color: var(--text-muted); }
 .infoText .note, .infoText .motto { font-style: italic; color: var(--text-primary); }
-.infoText .skill b { color: var(--ui-reward); font-weight: 500; }
+.infoText .skill { margin-top: 6px; }
+.infoText .skill b { color: var(--ui-reward); font-weight: 600; }
+.infoText .skill i { font-style: normal; color: var(--text-muted); }
+.infoText .skill em { color: var(--text-muted); }
 .infoText .start { color: var(--ui-reward); }
 .classBlock { flex: none; }
 /* Классы Прессы: две колонки по фракциям, Хронист посередине */

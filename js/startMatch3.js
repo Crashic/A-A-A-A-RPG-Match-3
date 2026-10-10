@@ -9,5 +9,5 @@ async function startMatch3(grid = null) {
   renderBoardCells();
   await dropInGrid();
   if (match3 !== current) return;
-  if (isHeroTurn()) { match3.busy = false; scheduleHint(); }
+  if (isHeroTurn()) { match3.busy = false; renderSkillBar(); scheduleHint(); }
 }

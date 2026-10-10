@@ -3,6 +3,7 @@ async function enemyTurn() {
   const current = battle;
   match3.busy = true;
   clearHint();
+  battle.skill.lastEnemyLoss = { hp: 0, shield: 0 }; // для «Разрыва хронологии»
   await sleep(ENEMY_THINK_MS);
   if (battle !== current) return;
   const move = chooseEnemyMove(match3.grid);

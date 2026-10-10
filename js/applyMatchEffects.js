@@ -1,7 +1,8 @@
 // Собранные фишки срабатывают для того, кто ходит (роли — из дизайн-системы):
 // топливо — урон, детали — щит, травы — лечение, металл и плёнка — мана,
 // документы — опыт, радиация — изолента (опыт и изолента — только игроку).
-// Бонус класса игрока (+1 % к своему ресурсу) усиливает эффект фишки — gemBonus.
+// Бонус класса игрока (+1 % к своему ресурсу, gemBonus) и навыки (skillGemPct) усиливают эффект фишки;
+// навыки срабатывают после серии (skillAfterGather) и ослабляют удары врага (skillReduceHit, skillAfterHeroHit).
 function applyMatchEffects(cells) {
   if (!battle || battle.over) return;
   const count = countGems(match3.grid, cells);
@@ -11,12 +12,17 @@ function applyMatchEffects(cells) {
   const foe = battle[foeSide];
   const isHero = side === 'hero';
 
+  const run = longestRun(match3.grid);
   for (const id in count) {
-    const mult = isHero ? 1 + gemBonus(battle.save, id) / 100 : 1;
+    // бонус расы-класса (+1 %) и навыки (js/skillGemPct.js)
+    const mult = isHero ? 1 + (gemBonus(battle.save, id) + skillGemPct(id, count[id])) / 100 : 1;
     const n = count[id] * mult;
     const kind = GEM_EFFECTS[id].kind;
     if (kind === 'damage') {
-      const hit = dealDamage(foe, Math.round(n * me.attack));
+      let amount = Math.round(n * me.attack);
+      if (!isHero) amount = skillReduceHit(amount); // защиты и навыки игрока
+      const hit = dealDamage(foe, amount);
+      if (!isHero) { battle.skill.lastEnemyLoss.hp += hit.hp; battle.skill.lastEnemyLoss.shield += hit.shield; }
       if (hit.shield) showFloat(foeSide, '−' + hit.shield, 'shield');
       if (hit.hp) showFloat(foeSide, '−' + hit.hp, 'damage');
     } else if (kind === 'shield') {
@@ -39,6 +45,8 @@ function applyMatchEffects(cells) {
       showFloat(side, '+' + add + ' изоленты', 'tape');
     }
   }
+  if (isHero) skillAfterGather(count, run);
+  else skillAfterHeroHit();
   if (foe.hp <= 0) battle.over = true;
   renderBattle();
 }

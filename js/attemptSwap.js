@@ -2,6 +2,7 @@
 async function attemptSwap(a, b) {
   if (match3.busy || !isAdjacent(a, b) || !isHeroTurn()) return;
   match3.busy = true;
+  renderSkillBar();
   clearHint();
   selectGem(null);
   const current = battle;
@@ -9,5 +10,6 @@ async function attemptSwap(a, b) {
   if (battle !== current) return; // бой сменился, пока шли анимации
   if (result) { await endTurn(result.extra); return; }
   match3.busy = false;
+  renderSkillBar();
   scheduleHint();
 }

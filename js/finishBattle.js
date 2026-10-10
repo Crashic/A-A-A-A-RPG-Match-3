@@ -10,6 +10,7 @@ function finishBattle(won) {
   result.gemXp = save.level >= MAX_LEVEL ? 0 : battle.gained.xp;
   result.tape = battle.gained.tape;
   save.tape = (save.tape || 0) + result.tape;
+  if (battle.skill.notes) save.notes = Math.min(5, (save.notes || 0) + battle.skill.notes); // «Пометка на полях»
   result.levelUps = grantXp(save, result.killXp + result.gemXp);
   result.level = save.level;
   saveSlot(battle.slot, save);

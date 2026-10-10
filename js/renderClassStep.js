@@ -25,14 +25,30 @@ function renderClassStep() {
   info.className = 'infoText';
   if (cls) {
     const bonus = allowed[cls.id];
-    info.innerHTML = '<h3></h3><p class="sub"></p><p></p><p class="skill"><b>Навык: </b><span></span></p>';
+    info.innerHTML = '<h3></h3><p class="sub"></p><p></p>';
     info.querySelector('h3').textContent = cls.name;
     const side = bonus && race.id === 'press' ? findById(FACTIONS, bonus.side) : null;
     const start = startZoneOf(race.id, cls.id);
     info.querySelector('.sub').textContent = race.name + (race.id === 'press' ? (side ? ' · ' + side.name : ' · нейтральный') : '') +
       ': ' + (bonus ? bonus.text : 'класс недоступен') + (bonus ? ' · старт: ' + start.name : '');
     info.querySelectorAll('p')[1].textContent = cls.description;
-    info.querySelector('.skill span').textContent = cls.skill + ' (в разработке)';
+    // навыки этого класса у выбранной расы (js/skills.js)
+    for (const sk of heroSkills({ raceId: race.id, classId: cls.id })) {
+      const p = document.createElement('p');
+      p.className = 'skill';
+      p.innerHTML = '<b></b> <i></i><br><span></span><br><em></em>';
+      p.querySelector('b').textContent = sk.name;
+      p.querySelector('i').textContent = sk.type === 'active' ? '· активный, ' + skillCostText(sk) : '· пассивный';
+      p.querySelector('span').textContent = sk.text;
+      p.querySelector('em').textContent = sk.lore;
+      info.appendChild(p);
+    }
+    if (!bonus) {
+      const p = document.createElement('p');
+      p.className = 'skill';
+      p.textContent = 'Навыки появятся у расы, которой доступен этот класс.';
+      info.appendChild(p);
+    }
   }
   right.appendChild(info);
 

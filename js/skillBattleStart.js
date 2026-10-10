@@ -1,0 +1,15 @@
+// Начало нового боя: стартовые пассивные эффекты (мана) и «Пометки на полях» с прошлых боёв (щит).
+function skillBattleStart() {
+  const sk = battle.skill;
+  const hero = battle.hero;
+  for (const e of hasPassive('start'))
+    if (e.give === 'mana') hero.mana[e.gem] = Math.min(MANA_MAX, hero.mana[e.gem] + e.value);
+  for (const e of hasPassive('afterActive')) if (e.first) sk.pendingPct = Math.max(sk.pendingPct, e.pct);
+  const notes = battle.save.notes || 0;
+  if (notes && hasPassive('notes').length) {
+    hero.shield = Math.min(hero.maxShield, hero.shield + notes * hero.shieldPerGem);
+    battle.save.notes = 0;
+    saveSlot(battle.slot, battle.save);
+    showToast('Пометки на полях: +' + notes * hero.shieldPerGem + ' щита', 2000);
+  }
+}

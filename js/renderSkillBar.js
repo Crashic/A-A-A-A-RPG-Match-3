@@ -1,0 +1,28 @@
+// Навыки под панелью игрока: кнопки активных (название и цена; недоступные — серые)
+// и строка пассивных.
+function renderSkillBar() {
+  const bar = document.getElementById('skillBar');
+  if (!battle) { bar.innerHTML = ''; return; }
+  const skills = heroSkills(battle.save);
+  bar.innerHTML = '';
+  for (const s of skills.filter(s => s.type === 'active')) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'btn purple skillBtn';
+    b.disabled = !canUseSkill(s);
+    b.title = s.text;
+    b.innerHTML = '<b></b><small></small>';
+    b.firstChild.textContent = s.name;
+    b.lastChild.textContent = s.once && battle.skill.used[s.id] ? 'использован' : skillCostText(s) + (s.once ? ' · раз за бой' : '');
+    b.addEventListener('click', () => useSkill(s.id));
+    bar.appendChild(b);
+  }
+  const passive = skills.filter(s => s.type === 'passive');
+  if (passive.length) {
+    const p = document.createElement('p');
+    p.className = 'skillPassive';
+    p.textContent = 'Пассивно: ' + passive.map(s => s.name).join(' · ');
+    p.title = passive.map(s => s.name + ' — ' + s.text).join('\n');
+    bar.appendChild(p);
+  }
+}
