@@ -1,6 +1,7 @@
-// Мигает одна фишка — та, которая при ходе соберёт ряд из 3 и больше. Только пока открыт экран игры.
+// Мигает одна фишка — та, которая при ходе соберёт ряд из 3 и больше.
+// Только в ход игрока и пока открыт экран боя.
 function showHint() {
-  if (!match3 || match3.busy || !document.getElementById('game').classList.contains('active')) {
+  if (!match3 || match3.busy || !isHeroTurn() || !document.getElementById('game').classList.contains('active')) {
     if (match3) match3.hintTimer = setTimeout(showHint, 1000);
     return;
   }

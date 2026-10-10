@@ -86,14 +86,10 @@
   </div>
 </section>
 
-<!-- Игра (пока заглушка) -->
+<!-- Бой: слева игрок, по центру поле на всю высоту, справа враг и кнопки -->
 <section id="game" class="screen">
-  <!-- Слева — герой, по центру — поле на всю высоту, справа — место под врага -->
   <aside class="gameSide">
-    <header class="gameHead">
-      <b id="gameHeroName"></b>
-      <span id="gameHeroInfo"></span>
-    </header>
+    <div id="heroPanel" class="fighter"></div>
   </aside>
   <div class="boardWrap">
     <div id="board" class="board">
@@ -102,11 +98,34 @@
     </div>
   </div>
   <aside class="gameSide">
-    <!-- Временно, пока нет игрового меню: выход в главное меню -->
-    <button id="gameToMenu" class="btn stone" type="button" data-back>В меню</button>
+    <div id="enemyPanel" class="fighter enemy"></div>
+    <div class="gameButtons">
+      <!-- Временно, пока нет игрового меню: выход в главное меню -->
+      <button id="gameToMenu" class="btn stone" type="button" data-back>В меню</button>
+      <button id="btnMap" class="btn stone square" type="button" aria-label="Карта врагов" title="Карта врагов">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M4 7 L11 4 L21 7 L28 4 L28 25 L21 28 L11 25 L4 28 Z" fill="var(--ui-parchment)" stroke="var(--ui-outline)" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M11 4 L11 25 M21 7 L21 28" stroke="var(--gem-topaz-dark)" stroke-width="1.5"/>
+          <path d="M7 19 Q12 13 16 17 T24 12" fill="none" stroke="var(--gem-topaz-dark)" stroke-width="1.5" stroke-dasharray="2 2"/>
+          <path d="M21.5 9.5 L26.5 14.5 M26.5 9.5 L21.5 14.5" stroke="var(--ui-danger)" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M6 9 L10 7.3" stroke="var(--gem-pearl-light)" stroke-width="1.5" stroke-linecap="round" opacity=".8"/>
+        </svg>
+      </button>
+    </div>
   </aside>
 </section>
 
+<!-- Карта врагов: зоны по уровням, как в WoW (данные — js/zones.js) -->
+<section id="map" class="screen">
+  <header class="screenHead">
+    <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
+    <div class="ribbon">Карта врагов</div>
+  </header>
+  <div class="mapBody">
+    <div id="zoneList" class="panel"></div>
+    <div id="enemyList" class="panel"></div>
+  </div>
+</section>
 
 <!-- Шуточная заставка после создания персонажа (текст — js/introText.js) -->
 <section id="intro" class="screen">
@@ -149,6 +168,19 @@
   </div>
 </div>
 
+<div id="battleResult" class="modal">
+  <div class="modalBox">
+    <div class="ribbon" id="resultTitle"></div>
+    <div class="panel">
+      <ul id="resultList"></ul>
+      <div class="confirmButtons">
+        <button id="resultMap" class="btn stone" type="button">Карта</button>
+        <button id="resultAgain" class="btn green" type="button">Ещё раз</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="toast"></div>
 
 <script src="js/version.js"></script>
@@ -163,6 +195,10 @@
 <script src="js/match3Config.js"></script>
 <script src="js/match3State.js"></script>
 <script src="js/introText.js"></script>
+<script src="js/xpTable.js"></script>
+<script src="js/battleConfig.js"></script>
+<script src="js/zones.js"></script>
+<script src="js/battleState.js"></script>
 <script src="js/loadSettings.js"></script>
 <script src="js/saveSettings.js"></script>
 <script src="js/slotKey.js"></script>
@@ -188,7 +224,6 @@
 <script src="js/renderMenu.js"></script>
 <script src="js/renderCharacters.js"></script>
 <script src="js/renderSettings.js"></script>
-<script src="js/renderGame.js"></script>
 <script src="js/isStepComplete.js"></script>
 <script src="js/renderNameStep.js"></script>
 <script src="js/renderChoiceStep.js"></script>
@@ -225,6 +260,39 @@
 <script src="js/cellFromPoint.js"></script>
 <script src="js/setupBoardInput.js"></script>
 <script src="js/startMatch3.js"></script>
+<script src="js/xpToNext.js"></script>
+<script src="js/zeroDifference.js"></script>
+<script src="js/grayLevel.js"></script>
+<script src="js/mobXp.js"></script>
+<script src="js/difficultyOf.js"></script>
+<script src="js/combatStats.js"></script>
+<script src="js/createFighter.js"></script>
+<script src="js/findEnemy.js"></script>
+<script src="js/suggestEnemy.js"></script>
+<script src="js/grantXp.js"></script>
+<script src="js/isHeroTurn.js"></script>
+<script src="js/countGems.js"></script>
+<script src="js/longestRun.js"></script>
+<script src="js/dealDamage.js"></script>
+<script src="js/showFloat.js"></script>
+<script src="js/applyMatchEffects.js"></script>
+<script src="js/setBar.js"></script>
+<script src="js/buildFighterPanel.js"></script>
+<script src="js/renderFighterPanel.js"></script>
+<script src="js/renderBattle.js"></script>
+<script src="js/swapAndResolve.js"></script>
+<script src="js/listMoves.js"></script>
+<script src="js/scoreMove.js"></script>
+<script src="js/chooseEnemyMove.js"></script>
+<script src="js/enemyTurn.js"></script>
+<script src="js/endTurn.js"></script>
+<script src="js/showBattleResult.js"></script>
+<script src="js/closeBattleResult.js"></script>
+<script src="js/finishBattle.js"></script>
+<script src="js/startBattle.js"></script>
+<script src="js/renderMap.js"></script>
+<script src="js/chooseEnemy.js"></script>
+<script src="js/openMap.js"></script>
 <script src="js/renderIntroStars.js"></script>
 <script src="js/stopIntro.js"></script>
 <script src="js/finishIntro.js"></script>

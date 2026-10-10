@@ -1,12 +1,12 @@
-// Открывает экран игры и запускает новое поле.
+// Открывает экран боя и начинает бой с последним выбранным врагом (или подходящим по уровню).
 // replace — заменить текущий экран в истории (после создания/заставки), а не добавлять новый.
 function enterGame(replace = false) {
-  renderGame();
   if (replace) {
     history.replaceState({ screen: 'game' }, '');
     showScreen('game', false);
   } else {
     showScreen('game');
   }
-  startMatch3();
+  const save = loadSlot(getActiveSlot());
+  startBattle(save && save.lastEnemy);
 }

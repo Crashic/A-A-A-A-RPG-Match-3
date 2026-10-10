@@ -1,4 +1,4 @@
-// Блок над кнопкой «Продолжить»: текущий выбранный персонаж — имя, пол, раса, класс, фракция.
+// Блок над кнопкой «Продолжить»: текущий выбранный персонаж — имя, уровень, золото, пол, раса, класс, фракция.
 // Если в выбранной ячейке персонажа нет, блок скрыт.
 function renderHeroCard() {
   const n = getActiveSlot();
@@ -9,6 +9,8 @@ function renderHeroCard() {
   document.getElementById('heroCardName').textContent = hero.name;
   document.getElementById('heroCardSlot').textContent = 'Ячейка ' + n;
   const rows = [
+    ['Уровень', { name: hero.level + (hero.level < MAX_LEVEL ? ' (' + hero.xp + ' / ' + xpToNext(hero.level) + ')' : '') }],
+    ['Золото', { name: String(hero.gold) }],
     ['Пол', findById(GENDERS, hero.genderId)],
     ['Раса', findById(RACES, hero.raceId)],
     ['Класс', findById(CLASSES, hero.classId)],

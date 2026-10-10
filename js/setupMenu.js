@@ -11,6 +11,11 @@ function setupMenu() {
   on('createBack', createStepBack);
   on('createNext', createStepNext);
 
+  // Бой: карта врагов и окно итогов
+  on('btnMap', openMap);
+  on('resultMap', openMap);
+  on('resultAgain', () => { closeBattleResult(); startBattle(battle ? battle.enemyId : null); });
+
   // Заставка: «Пропустить»
   on('introSkip', finishIntro);
 
@@ -56,6 +61,7 @@ function setupMenu() {
   // Кнопка «Назад» телефона: возврат на предыдущий экран (для создания персонажа — отмена)
   window.addEventListener('popstate', () => {
     document.getElementById('confirm').classList.remove('open');
+    if (history.state && history.state.screen !== 'game') closeBattleResult();
     let id = (history.state && history.state.screen) || 'menu';
     if (id === 'create' && !creation) id = 'menu';
     if (id === 'intro') id = 'menu';

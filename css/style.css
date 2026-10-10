@@ -349,20 +349,165 @@ h1 {
 /* ---------- Игра «3 в ряд» (BoardSample, GemsElemental) ---------- */
 
 
-.gameHead {
+/* Панель бойца: камень с металлической кромкой; чей ход — золотая кромка */
+.fighter {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px;
+  border-radius: 16px;
+  background: var(--bg-canvas);
+  box-shadow: inset 0 0 0 2px var(--ui-metal), 0 0 0 2px var(--ui-outline);
+  transition: box-shadow .2s;
+}
+
+.fighter.active { box-shadow: inset 0 0 0 2px var(--ui-reward), 0 0 0 2px var(--ui-outline), 0 0 14px color-mix(in srgb, var(--ui-reward) 45%, transparent); }
+
+.fighterHead { display: flex; flex-direction: column; gap: 1px; min-width: 0; text-align: center; }
+.fighterHead b {
+  overflow: hidden;
+  font: var(--type-button); letter-spacing: var(--type-button-ls);
+  color: var(--ui-reward);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.fighterHead span { overflow: hidden; font: var(--type-small); color: var(--text-muted); white-space: nowrap; text-overflow: ellipsis; }
+
+/* Полоса — тёмная «таблетка» в золотом ободке (Panels), заливка — цвет ресурса */
+.bar {
+  position: relative;
+  height: 18px;
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  background: var(--ui-outline);
+  box-shadow: inset 0 0 0 1.5px var(--ui-gold-shadow);
+}
+.bar i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0;
+  border-radius: inherit;
+  background: var(--glass-top), var(--fill, var(--ui-danger));
+  transition: width .35s;
+}
+.bar span {
+  position: relative;
+  display: block;
+  font: var(--type-caption);
+  font-variant-numeric: tabular-nums;
+  line-height: 18px;
+  color: var(--text-primary);
+  text-align: center;
+  text-shadow: 0 1px 2px var(--ui-outline), 0 0 2px var(--ui-outline);
+}
+.bar.hp     { --fill: var(--ui-danger); height: 22px; }
+.bar.hp span { line-height: 22px; font: var(--type-stat); }
+.bar.shield { --fill: var(--gem-pearl-dark); }
+.bar.xp     { --fill: var(--gem-amethyst); }
+.bar.mana   { flex: 1; height: 14px; }
+.bar.mana span { line-height: 14px; font-size: 10px; }
+.bar.sapphire   { --fill: var(--gem-sapphire); }
+.bar.emerald    { --fill: var(--gem-emerald); }
+.bar.aquamarine { --fill: var(--gem-aquamarine); }
+.manaRow { display: flex; gap: 4px; }
+
+.fighterGold { display: flex; align-items: center; justify-content: center; gap: 6px; font: var(--type-stat); font-variant-numeric: tabular-nums; color: var(--ui-reward); }
+.coin { width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, var(--gem-topaz-light), var(--gem-topaz) 55%, var(--gem-topaz-dark)); box-shadow: 0 0 0 1.5px var(--ui-outline); }
+.fighterReward { font: var(--type-caption); color: var(--text-muted); text-align: center; }
+
+/* Всплывающие цифры: урон, щит, опыт, золото */
+.float {
+  position: absolute;
+  top: 30%;
+  z-index: 2;
+  font: var(--type-heading);
+  font-size: 18px;
+  pointer-events: none;
+  text-shadow: 0 2px 0 var(--ui-outline), 0 0 3px var(--ui-outline);
+  animation: floatUp 1.2s ease-out forwards;
+}
+.float.damage { color: var(--gem-ruby-light); }
+.float.shield { color: var(--gem-pearl); }
+.float.xp     { color: var(--gem-amethyst-light); font-size: 14px; }
+.float.gold   { color: var(--ui-reward); font-size: 14px; }
+@keyframes floatUp { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-40px); opacity: 0; } }
+
+/* Цвет уровня по сложности, как в WoW */
+.lvl-grey   { color: var(--text-muted) !important; opacity: .7; }
+.lvl-green  { color: var(--ui-success) !important; }
+.lvl-yellow { color: var(--ui-reward) !important; }
+.lvl-orange { color: var(--gem-topaz-dark) !important; }
+.lvl-red    { color: var(--ui-danger) !important; }
+
+/* Кнопки под панелью врага: «В меню» и квадратная «Карта врагов» справа внизу */
+.gameButtons { display: flex; gap: 8px; margin-top: auto; }
+.gameButtons #gameToMenu { flex: 1; min-width: 0; min-height: 52px; padding: 8px 10px; font: var(--type-menu); }
+.btn.square {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  min-height: 0;
+  padding: 0;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn.square svg { width: 34px; height: 34px; }
+
+/* ---------- Карта врагов ---------- */
+
+#map { max-width: 960px; height: var(--app-h); gap: 8px; }
+#map .screenHead { margin: 0; }
+.mapBody { flex: 1; min-height: 0; display: flex; gap: 12px; }
+#zoneList { flex: 0 0 38%; display: flex; flex-direction: column; gap: 4px; padding: 8px; overflow-y: auto; }
+#enemyList { flex: 1; display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: 1fr; gap: 8px; padding: 10px; }
+
+.zone {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--bg-cell);
+  color: var(--text-primary);
+  font: var(--type-menu);
+  text-align: left;
+}
+.zone span { font: var(--type-stat); font-variant-numeric: tabular-nums; }
+.zone.selected { background: var(--glass-top), var(--ui-ribbon); box-shadow: inset 0 0 0 2px var(--ui-reward); }
+
+.enemyCard {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 2px;
-  padding: 8px 14px;
-  border: 2px solid var(--ui-metal);
-  border-radius: 14px;
+  min-width: 0;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 12px;
   background: var(--bg-cell);
-  text-align: center;
+  color: var(--text-primary);
+  box-shadow: inset 0 0 0 2px var(--ui-metal);
 }
+.enemyCard.current { box-shadow: inset 0 0 0 2px var(--ui-reward); }
+.enemyCard:active { transform: scale(.97); }
+.enemyCard b { font: var(--type-body-strong); text-align: center; }
+.enemyLvl { font: var(--type-score); font-size: 26px; line-height: 1; font-variant-numeric: tabular-nums; }
+.enemyXp { font: var(--type-caption); color: var(--text-muted); }
+@media (hover: hover) { .zone:hover, .enemyCard:hover { filter: brightness(1.15); } }
 
-#gameHeroName { font: var(--type-button); letter-spacing: var(--type-button-ls); color: var(--ui-reward); }
-#gameHeroInfo { font: var(--type-small); color: var(--text-muted); }
+/* ---------- Итоги боя ---------- */
+
+#battleResult .panel { padding-top: 30px; }
+#resultList { margin: 0 0 var(--space-4); padding: 8px 14px; list-style: none; border-radius: 14px; background: var(--bg-cell); }
+#resultList li { display: flex; justify-content: space-between; gap: 12px; padding: 4px 0; }
+#resultList b { font: var(--type-stat); font-variant-numeric: tabular-nums; color: var(--ui-reward); }
+#resultList li.levelUp { color: var(--ui-reward); font: var(--type-body-strong); }
 
 .boardWrap {
   display: flex;
