@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8"><title>Осколки Бездны</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#0e0b12;--p:#1a1522;--p2:#251d30;--tx:#e6dfd0;--mu:#8d8499;--ac:#c9a24a;--bd:#3a2f48}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.4 system-ui,Segoe UI,sans-serif}
+#app{display:flex;flex-wrap:wrap;gap:14px;padding:14px;max-width:1100px;margin:auto}
+main{flex:1 1 400px;max-width:520px}aside{flex:1 1 360px;min-width:0}
+.box{background:var(--p);border:1px solid var(--bd);border-radius:8px;padding:10px;margin-bottom:10px}
+h1{margin:0 0 10px;font:600 20px Georgia,serif;color:var(--ac);letter-spacing:1px}
+.bar{height:14px;background:#0008;border-radius:4px;overflow:hidden;position:relative;margin:3px 0}
+.bar i{display:block;height:100%;transition:width .25s}.bar span{position:absolute;inset:0;text-align:center;font-size:11px;line-height:14px}
+#b{display:grid;grid-template-columns:repeat(8,1fr);gap:3px;background:var(--p);padding:6px;border-radius:8px;border:1px solid var(--bd);margin-bottom:10px}
+#b div{aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:clamp(14px,4vw,24px);cursor:pointer;color:#3a3046;box-shadow:none;background:var(--c);user-select:none;transition:transform .15s;position:relative}
+#b div.sel{transform:scale(1.15);outline:2px solid #fff}#b div.pop{transform:scale(0);opacity:0;transition:.2s}
+button{background:var(--p2);color:var(--tx);border:1px solid var(--bd);border-radius:6px;padding:6px 10px;cursor:pointer;font:inherit}
+button:hover{border-color:var(--ac)}button.on{border-color:var(--ac);background:#3b2f14}button:disabled{opacity:.4;cursor:default}
+#sk{display:flex;flex-wrap:wrap;gap:6px}#sk button{flex:1 1 30%}
+nav{display:flex;gap:6px;margin-bottom:10px}nav button{flex:1}
+.it{border:1px solid var(--bd);border-left:4px solid var(--rc);border-radius:6px;padding:6px 8px;margin:5px 0;background:var(--p2)}
+.it b{color:var(--rc)}.it small{color:var(--mu);display:block}.it .bt{display:flex;gap:4px;margin-top:4px}.it .bt button{padding:2px 8px;font-size:12px}
+#log{font-size:12px;color:var(--mu);max-height:130px;overflow:auto}
+svg{width:100%;background:#0a070e;border-radius:8px;border:1px solid var(--bd)}
+.n{cursor:pointer;stroke:#000;stroke-width:1}.n.a{fill:var(--ac)!important}
+#md,#gp,#cp{display:none;position:fixed;inset:0;background:#000c;z-index:9;align-items:center;justify-content:center;padding:12px;overflow:auto}
+#md.show,#gp.show,#cp.show{display:flex}
+#b div{color:var(--gl,#3a3046);font-size:clamp(20px,6.2vw,32px)}
+#b div.bomb,#b div.shard{font-size:clamp(30px,10vw,48px);line-height:1;z-index:2}
+#b div.bomb{box-shadow:0 0 0 3px #f4efe6}
+#b div.shard{box-shadow:0 0 0 3px #f2d98a;animation:pl .9s infinite alternate}
+.th{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:6px 0 10px}.th button{text-align:left}
+.th .dots{display:flex;gap:3px;margin-bottom:4px}.th .dots i{width:14px;height:14px;border-radius:50%;display:block}
+#b div.frz{background:linear-gradient(160deg,#e4f2ff,var(--c) 70%);box-shadow:inset 0 0 0 3px #bcdcf5}
+#b div.frz::after{content:'❄';position:absolute;top:-1px;right:2px;font-size:17px;line-height:1;color:#9fd0ff}
+.bar span{text-shadow:0 1px 1px #0008}
+nav{display:grid;grid-template-columns:repeat(8,1fr);gap:2px 3px}
+.cap{font-size:10px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;text-align:center;border-bottom:1px solid var(--bd);padding-bottom:2px;margin-bottom:2px}
+nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px 0;font-size:9.5px;line-height:1.1;min-height:50px;overflow:hidden}
+nav button i{font-style:normal;font-size:20px;line-height:1}nav button{padding:4px 0!important;font-size:10px!important}
+#fl{display:flex;gap:6px;margin-bottom:8px}#fl:empty{display:none}
+#fl .fb{flex:1;min-height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:2px;border-color:var(--fc,var(--bd))}
+#fl .fb span{font-size:20px;line-height:1}#fl .fb small{font-size:10px;color:var(--mu)}
+#fl .fb:disabled{border-style:dashed}
+#toast{position:fixed;top:max(10px,env(safe-area-inset-top));left:50%;transform:translate(-50%,-80px);background:#2b2438;color:#f0e6c8;border:1px solid #e6cf8c;border-radius:20px;padding:8px 16px;font-size:14px;z-index:20;transition:transform .3s;pointer-events:none;white-space:nowrap}
+#toast.show{transform:translate(-50%,0)}
+#b div.born{animation:pl .35s 2}
+@keyframes pl{from{transform:scale(1)}to{transform:scale(1.12)}}
+nav button{padding:6px 2px;font-size:13px}
+.so{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
+.so .sg{width:36px;height:36px;min-height:0;padding:0;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:16px;background:#150f1c;border:2px dashed var(--bd);color:var(--mu)}
+.so .sg.a{background:#4a2a10;border:2px solid #e0912a;color:#fff}.so .sg.s{background:#10304a;border:2px solid #4aa0e0;color:#fff}
+.gr{display:block;width:100%;text-align:left;margin:4px 0}.gr small{display:block;color:var(--mu)}
+.mc{background:var(--p);border:1px solid var(--ac);border-radius:10px;padding:14px;max-width:600px;width:100%;max-height:95vh;overflow:auto}
+.mc h3{margin:0 0 8px;color:var(--ac);font:600 17px Georgia,serif}.cols{display:flex;gap:10px;flex-wrap:wrap}.cols>div{flex:1 1 230px;min-width:0}
+.cols h4{margin:0 0 4px;font-size:12px;color:var(--mu);text-transform:uppercase;letter-spacing:1px}
+.mb{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}.mb button{flex:1 1 30%;padding:10px 6px}
+.df{margin-top:10px;padding:8px;background:var(--p2);border-radius:6px;font-size:13px}.df .up{color:#6fd36f}.df .dn{color:#ff6b6b}.df .eq{color:var(--mu)}
+.tag{display:inline-block;font-size:11px;background:#5a1f2a;border-radius:4px;padding:0 5px;margin-right:3px}
+td{padding:1px 8px 1px 0}
+html{touch-action:manipulation;-webkit-text-size-adjust:100%}body{overscroll-behavior-y:contain;-webkit-tap-highlight-color:transparent}
+#top{position:sticky;top:0;z-index:6;background:var(--bg);padding:4px 0 0;margin-bottom:6px}
+#top .box{margin-bottom:4px;padding:6px 8px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:13px}
+.nm{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}
+.bar.l{height:18px}.bar.l span{line-height:18px;font-size:12px}.bar.m{height:14px}.bar.s{height:5px;margin:4px 0 0}.bar.s span{display:none}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+#b{width:min(100%,calc(100vh - 300px));width:min(100%,calc(100dvh - 300px));min-width:250px;margin:0 auto 8px;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+#b div{font-size:clamp(20px,6.2vw,32px);touch-action:none}
+#sk button{min-height:46px}
+.cols>div{flex:1 1 150px}
+.nd{margin-top:8px}
+#top{display:grid;grid-template-columns:1fr 1fr;gap:6px;align-items:stretch}
+#top .box{margin:0;min-width:0}
+#hero{border-color:#3a5a8a}#en{border-color:#8a3a3a}
+.row.sm{font-size:11px;color:var(--mu)}.row.sm b{color:var(--tx)}
+#top .bar{margin:3px 0}
+#top .tag{margin:0 0 0 3px}
+@media (max-width:700px){
+#app{display:block;padding:8px}
+main,aside{display:contents}
+h1{font-size:16px;margin:0 0 4px}
+button{min-height:42px}.it .bt button{min-height:38px;padding:4px 12px}
+.box{margin-bottom:8px}
+#sk{margin-bottom:8px}
+#b{width:calc(100% + 16px);min-width:0;margin:0 -8px 8px;border-radius:0;border-left:0;border-right:0;padding:4px;gap:3px}
+#md,#gp,#cp{align-items:flex-end;padding:0}
+.mc{border-radius:14px 14px 0 0;max-height:92vh;padding-bottom:max(14px,env(safe-area-inset-bottom))}
+}
+#b{grid-template-columns:repeat(8,minmax(0,1fr))!important;grid-auto-rows:minmax(0,1fr)}
+#b div{min-width:0;min-height:0;line-height:1;overflow:visible}
+#b div.bomb,#b div.shard{font-size:clamp(26px,8.4vw,40px)}
+#b div.frz{background:linear-gradient(160deg,#f2faff,var(--c) 75%);box-shadow:inset 0 0 0 4px #4fb0ff,0 0 0 2px #fff;z-index:1}
+#b div.frz::after{font-size:18px;top:-2px;right:1px;color:#1d7fd6;text-shadow:0 0 3px #fff}
+#hero .sm span{white-space:nowrap}#hero .sm span:first-child{overflow:hidden;text-overflow:ellipsis;min-width:0}
+nav button{position:relative;font-size:9px!important}nav button.has::after{content:"";position:absolute;top:3px;right:5px;width:8px;height:8px;border-radius:50%;background:#f2a96b}
+#b div.sel{transform:none;outline:3px solid #fff;outline-offset:-2px}
+#b div.born{animation:glw .35s 2}#b div.bomb{animation:none}#b div.shard{animation:glw .9s infinite alternate}
+@keyframes glw{from{filter:brightness(1)}to{filter:brightness(1.3)}}
+#fl .fb.pet.act{animation:pf .7s}@keyframes pf{0%{background:#a3d6ae;color:#000}100%{background:transparent}}
+#fl .fb small{white-space:nowrap}
+#b div.hint{animation:ht .8s infinite alternate;z-index:3}@keyframes ht{from{box-shadow:0 0 0 2px #fff}to{box-shadow:0 0 0 4px #ffd34a,0 0 10px 2px #ffd34a}}
+</style><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#1b1624"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"></head><body><div id="app">
+<main><h1>◆ ОСКОЛКИ БЕЗДНЫ</h1><div id="top"><div class="box" id="hero"></div><div class="box" id="en"></div></div><div id="b"></div><div id="sk"></div><div id="fl"></div></main>
+<aside><nav><span class="cap" style="grid-column:span 4">Персонаж</span><span class="cap" style="grid-column:span 2">Мир</span><span class="cap" style="grid-column:span 2">Прочее</span>
+<button data-t="hero"><i>👤</i>Герой</button><button data-t="tree"><i>🌳</i>Древо</button><button data-t="inv"><i>🎒</i>Вещи</button><button data-t="pet"><i>🐾</i>Питомец</button>
+<button data-t="atlas"><i>🗺</i>Атлас</button><button data-t="shop"><i>🛒</i>Лавка</button>
+<button data-t="stats"><i>🎯</i>Цели</button><button data-t="set"><i>⚙</i>Опции</button></nav>
+<div class="box" id="tab"></div><div class="box" id="log"></div></aside></div>
+<div id="md"><div class="mc" id="mc"></div></div>
+<div id="gp"><div class="mc" id="gc"></div></div>
+<div id="cp"><div class="mc" id="cc"></div></div>
+<div id="toast"></div>
+<script>
+const $=s=>document.querySelector(s),sl=t=>new Promise(r=>setTimeout(r,t)),rnd=(a,b)=>a+Math.random()*(b-a),ri=(a,b)=>Math.round(rnd(a,b)),pick=a=>a[Math.floor(Math.random()*a.length)];
+const GL=['⚔','✦','☘','◆','☯','☠'],CL=[0,1,2,3,4,5].map(k=>`var(--r${k})`);
+// 4 palettes from light to dark (runes, bars and page background); chosen in Settings
+const THEMES=[
+{n:'Светлая',r:['#e8a0a0','#9db8ee','#a3d6ae','#ecd89a','#c4aee6','#b5b1c2'],gl:'#3a3046',bh:'#e59a9a',bm:'#8fb0ea',bs:'#b9a1e3',bx:'#e6cf8c',be:'#d98a8a',bg:'#2b2536',p:'#383046',p2:'#443b54',bd:'#5a4e70'},
+{n:'Мягкая',r:['#cf8f8f','#86a2d6','#8cbf9c','#d2be82','#ab96d2','#908c9e'],gl:'#2a2234',bh:'#d28a8a',bm:'#86a2d6',bs:'#ab96d2',bx:'#d2be82',be:'#c47a7a',bg:'#1f1a28',p:'#2a2336',p2:'#352d44',bd:'#4a3f5c'},
+{n:'Тёмная',r:['#b87474','#7089c4','#72a583','#bba466','#9a80c4','#78748a'],gl:'#f4eef8',bh:'#c97d7d',bm:'#6f8fd0',bs:'#9d86cc',bx:'#c9b36e',be:'#b96868',bg:'#15111b',p:'#1e1827',p2:'#292135',bd:'#3a2f48'},
+{n:'Глубокая',r:['#96505a','#4f68a0','#4f8662','#9a8444','#74589e','#5c586c'],gl:'#ece6f2',bh:'#a8545e',bm:'#4f6cae',bs:'#7a5fae',bx:'#a58f4a',be:'#8e464e',bg:'#09070c',p:'#120e18',p2:'#1b1523',bd:'#2a2234'}];
+function applyTheme(){const t=THEMES[P.pal]||THEMES[2],st=document.documentElement.style;t.r.forEach((c,k)=>st.setProperty('--r'+k,c));
+st.setProperty('--gl',t.gl);['bh','bm','bs','bx','be','bg','p','p2','bd'].forEach(k=>st.setProperty('--'+k,t[k]))}
+const RC=['#d8d4e0','#9db4ff','#f0d98a','#f2a96b'],RN=['Обычный','Магический','Редкий','Уникальный'];
+const L={inc:'% урона',hp:' здоровья',mana:' маны',crit:'% крита',armor:' брони',gold:'% золота',shield:' щита',dmg:' ур.',luck:'% удачи',regen:' регена',redHeal:' лечения от красных рун',thorns:' урона врагу при ударе',manaGain:'% маны с рун',critDmg:'% крит. урона'};
+const AFF=[['inc',4,12],['hp',10,30],['mana',10,30],['crit',1,4],['armor',4,15],['gold',5,15],['shield',5,15],['dmg',1,3],['luck',3,10]];
+const SLOT={w:'Оружие',h:'Шлем',a:'Броня',g:'Перчатки',b:'Ботинки',p:'Пояс',r:'Кольцо',m:'Амулет'},
+NM={w:['Топор','Клинок','Посох'],h:['Шлем','Капюшон'],a:['Кираса','Мантия'],g:['Перчатки','Рукавицы'],b:['Сапоги','Ботинки'],p:['Пояс','Кушак'],r:['Кольцо','Перстень'],m:['Амулет','Талисман']};
+const BASE={w:['dmg',2],h:['armor',4],a:['armor',8],g:['inc',3],b:['regen',1],p:['hp',15],r:['mana',10],m:['crit',2]};
+const MAXS={w:4,h:3,a:4,g:2,b:2,p:2,r:2,m:2},BS={w:2,h:1,a:2,g:1,b:1,p:1,r:1,m:1};
+// uniques: fixed stats + special effect
+const UNI=[
+{n:'Кровавый Клык',s:'w',m:[['dmg',3],['redHeal',1],['crit',4]],fx:'Красные руны лечат вас сильнее'},
+{n:'Шлем Паука',s:'h',m:[['armor',8],['spider',1],['hp',20]],fx:'Каждый 4-й ход враг опутан паутиной: +1 ход до удара'},
+{n:'Кираса Стража',s:'a',m:[['armor',15],['thorns',15],['hp',25]],fx:'Враг получает урон, когда бьёт вас'},
+{n:'Перчатки Берсерка',s:'g',m:[['inc',25],['crit',5],['hpMul',.85]],fx:'−15% к здоровью'},
+{n:'Сапоги Ветра',s:'b',m:[['manaGain',50],['regen',2],['luck',10]],fx:'Синие руны дают на 50% больше маны'},
+{n:'Пояс Бури',s:'p',m:[['casc',.2],['shield',20],['hp',20]],fx:'Каскады на 20% сильнее'},
+{n:'Перстень Мидаса',s:'r',m:[['gold',60],['luck',25]],fx:'Золото и удача растут'},
+{n:'Амулет Хаоса',s:'m',m:[['crit',8],['critDmg',50],['mana',20]],fx:'Критические удары бьют сильнее'}];
+// classes: start arm on the tree, bonuses, starter kit
+const CLS=[
+{n:'Воин',arm:0,b:{hp:30,armor:5},d:'+30 здоровья, +5 брони. Старт в ветке Силы.',w:['Ржавый топор',['chain','emp',null]],a:['ice',null],gems:['fire','burn','multi','crit']},
+{n:'Колдун',arm:1,b:{mana:30,inc:5},d:'+30 маны, +5% урона. Старт в ветке Разума.',w:['Посох ученика',['fire','multi',null]],a:['ice',null],gems:['chain','emp','burn','crit']},
+{n:'Следопыт',arm:2,b:{crit:4,luck:5},d:'+4% крита, +5% удачи. Старт в ветке Ловкости.',w:['Короткий лук',['chain','crit',null]],a:['ice',null],gems:['fire','emp','burn','multi']},
+{n:'Авантюрист',arm:3,b:{gold:15,luck:10},d:'+15% золота, +10% удачи. Старт в ветке Удачи.',w:['Ржавый клинок',['fire','emp',null]],a:['ice',null],gems:['chain','burn','multi','crit']},
+{n:'Тень',arm:4,b:{shield:15,regen:1},d:'+15 щита, +1 реген. Старт в ветке Хаоса.',w:['Тёмный кинжал',['ice','burn',null]],a:['chain',null],gems:['fire','emp','multi','crit']},
+{n:'Жрец',arm:5,b:{hp:20,regen:1},d:'+20 здоровья, +1 реген. Старт в ветке Жизни.',w:['Жезл света',['heal','emp',null]],a:['fire',null],gems:['ice','chain','burn','multi']}];
+const d=m=>Object.entries(m).map(([k,v])=>'+'+v+L[k]).join(', ');
+// ---- gems ----
+const GEMS={fire:{k:'a',i:'🔥',n:'Огненный шар',c:30,m:6,f:'burn',d:'Урон ×6 и поджог'},
+ice:{k:'a',i:'❄',n:'Ледяной шип',c:20,m:4,f:'ice',d:'Урон ×4, враг заморожен на 2 хода'},
+chain:{k:'a',i:'⚡',n:'Цепная молния',c:40,m:3,h:3,d:'3 удара по ×3'},
+heal:{k:'a',i:'✚',n:'Целебный свет',c:35,m:0,f:'heal',d:'Лечит 25% здоровья'},
+emp:{k:'s',i:'⬆',n:'Усиление',d:'+40% урона, +30% к цене маны'},
+burn:{k:'s',i:'♨',n:'Ожог',d:'Поджигает врага на 3 хода'},
+multi:{k:'s',i:'✴',n:'Множ. снаряды',d:'+1 попадание, +20% к цене маны'},
+crit:{k:'s',i:'🎯',n:'Меткость',d:'+30% шанса крита, +10% к цене маны'}};
+// ---- flasks (belt slots, recharge on kills) and shop ----
+const FL={hp:{n:'Флакон жизни',i:'🧪',c:'#e59a9a',m:3,pr:60,d:'Лечит 40% здоровья'},
+mp:{n:'Флакон маны',i:'💧',c:'#8fb0ea',m:3,pr:50,d:'Восстанавливает 60 маны'},
+sh:{n:'Флакон щита',i:'🔮',c:'#b9a1e3',m:3,pr:70,d:'Полностью наполняет щит'},
+gr:{n:'Гранитный флакон',i:'🛡',c:'#a7a3b3',m:2,pr:80,d:'+40 брони на 5 ходов'},
+ru:{n:'Рубиновый флакон',i:'⚔',c:'#e8a070',m:2,pr:90,d:'+40% урона на 5 ходов'}};
+const SHOP2=[{id:'chaos',i:'◎',n:'Сфера Хаоса',d:'Для перековки аффиксов и усиления карт',pr:120},
+{id:'gem',i:'💎',n:'Случайный самоцвет',d:'Умение или поддержка',pr:90},
+{id:'map',i:'🗺',n:'Карта Атласа',d:'Случайная карта (с 3-го этапа, до 12 карт)',pr:250,ok:()=>S.stage>=3&&P.maps.length<12}];
+function fixBelt(it){if(!it||it.slot!='p'||it.flasks)return;it.fl=1+Math.floor(Math.random()*5);it.flasks=Array(it.fl).fill(null)}
+function useFlask(i){const bl=P.eq.p,f=bl&&bl.flasks&&bl.flasks[i];if(!f||f.c<1||busy||MD)return;const s=stats(),d=FL[f.t];f.c--;
+if(f.t=='hp')P.hp=Math.min(s.mhp,P.hp+s.mhp*.4);else if(f.t=='mp')P.mana=Math.min(s.mana,P.mana+60);else if(f.t=='sh')P.sh=s.shield;
+else if(f.t=='gr')P.buffs.push({k:'armor',v:40,t:5,n:'Гранит'});else if(f.t=='ru')P.buffs.push({k:'inc',v:40,t:5,n:'Ярость'});
+log(d.i+' '+d.n);drawUI()}
+function shop(a){const [c,v]=a.split(':'),bl=P.eq.p;
+if(c=='buy'){const f=FL[v],i=bl&&bl.flasks?bl.flasks.findIndex(x=>!x):-1;if(i<0||P.gold<f.pr)return;P.gold-=f.pr;bl.flasks[i]={t:v,c:f.m};log('🛒 Куплен: '+f.n)}
+else if(c=='pet'){const p=PETS[v];if(!p||P.pets[v]||P.gold<p.pr)return;P.gold-=p.pr;P.pets[v]={xp:0};if(!P.pet)P.pet=v;log('🐾 Куплен питомец: '+p.n)}
+else if(c=='rm'){const f=bl&&bl.flasks&&bl.flasks[+v];if(f){P.gold+=Math.floor(FL[f.t].pr/2);bl.flasks[+v]=null}}
+else if(c=='refill'){let m=0;if(bl&&bl.flasks)bl.flasks.forEach(f=>{if(f)m+=FL[f.t].m-f.c});if(m&&P.gold>=m*10){P.gold-=m*10;bl.flasks.forEach(f=>{if(f)f.c=FL[f.t].m})}}
+else{const x=SHOP2.find(y=>y.id==c);if(!x||P.gold<x.pr||(x.ok&&!x.ok()))return;P.gold-=x.pr;
+if(c=='chaos')P.chaos++;else if(c=='gem'){const g=pick(Object.keys(GEMS));P.gems.push(g);log('💎 Куплен самоцвет: '+GEMS[g].n)}else if(c=='map'){const mp=mkMap();P.maps.push(mp);log('🗺 Куплена карта: '+mp.name)}}
+drawUI()}
+const DQ=[['kills','Победить врагов',[15,25,40],'kills'],['moves','Сделать ходов',[60,100,160],'moves'],['bosses','Победить босса',[1],'bosses'],['bombs','Создать бомб',[2,4],'bombs'],['items','Найти предметов',[5,8],'items'],['maps','Пройти карту',[1],'maps']];
+const today=()=>new Date().toLocaleDateString('sv');
+function dqNew(){const ks=DQ.slice().sort(()=>Math.random()-.5).slice(0,3),base={};DQ.forEach(d=>base[d[3]]=P.st[d[3]]||0);
+P.dq={day:today(),base,q:ks.map(d=>{const ti=Math.floor(Math.random()*d[2].length),t=d[2][ti];return{id:d[0],t,r:60+ti*40+t*3,c:1+(ti>0?1:0),done:0}})}}
+const dqVal=q=>{const d=DQ.find(x=>x[0]==q.id);return Math.max(0,(P.st[d[3]]||0)-(P.dq.base[d[3]]||0))};
+function claimDq(i){const q=P.dq.q[i];if(!q||q.done||dqVal(q)<q.t)return;q.done=1;P.gold+=q.r;P.chaos+=q.c;log(`📜 Задание выполнено: +${q.r}🪙, +${q.c}◎`);drawUI()}
+function dqHtml(){return `<b>📜 Задания дня</b><small style="display:block;color:var(--mu)">Обновляются каждый день.</small>`+P.dq.q.map((q,i)=>{const d=DQ.find(x=>x[0]==q.id),v=Math.min(q.t,dqVal(q)),ok=v>=q.t;return `<div class="it" style="--rc:${q.done?'#6b6578':ok?'#a3d6ae':'#c9a24a'}"><b>${q.done?'✓ ':''}${d[1]}: ${q.t}</b> <small>Награда: ${q.r}🪙 и ${q.c}◎</small>${bar(v,q.t,'var(--bx)',v+'/'+q.t,'s')}${q.done?'':`<div class="bt"><button data-dq="${i}" ${ok?'':'disabled'}>Забрать</button></div>`}</div>`}).join('')}
+const PETS={wolf:{i:'🐺',n:'Волк',pr:300,d:'Каждые 3 хода кусает врага (урон ×2)'},owl:{i:'🦉',n:'Сова',pr:300,d:'Даёт 3 маны каждый ход'},turtle:{i:'🐢',n:'Черепаха',pr:350,d:'Каждые 3 хода даёт 8 щита'},fairy:{i:'🧚',n:'Фея',pr:400,d:'Каждые 2 хода лечит 3% здоровья'},imp:{i:'😈',n:'Бесёнок',pr:250,d:'+10% золота'}};
+const PU={wolf:'Вой: урон ×5',owl:'+30 маны',turtle:'щит полностью',fairy:'лечит 15%',imp:'находит золото'};;
+const petLv=id=>1+Math.min(4,Math.floor(((P.pets[id]||{}).xp||0)/12)),petPm=id=>1+.25*(petLv(id)-1);
+let petFl=0;
+const PER={wolf:3,owl:1,turtle:3,fairy:2,imp:0};
+function petBtn(){const id=P.pet,p=PETS[id],pr=PER[id],l=petLv(id),f=petFl;petFl=0;return `<button class="fb pet${f?' act':''}" data-pt="1" style="--fc:#a3d6ae"><span>${p.i}</span><small>${l}★ ${pr>1?(mv%pr)+'/'+pr:pr?'ход':'+10%'}</small></button>`}
+function petAct(){const id=P.pet;if(!id||!P.pets[id])return;const s=stats(),pm=petPm(id);
+if(id=='wolf'&&mv%3==0){petFl=1;const d=Math.round(s.dmg*2*pm);en.hp-=d;log('🐺 Волк кусает врага на '+d)}
+else if(id=='owl'){P.mana=Math.min(s.mana,P.mana+3*pm);petFl=1}
+else if(id=='turtle'&&mv%3==0){P.sh=Math.min(s.shield,P.sh+8*pm);petFl=1}
+else if(id=='fairy'&&mv%2==0){P.hp=Math.min(s.mhp,P.hp+s.mhp*.03*pm);petFl=1};if(petLv(id)>=3&&mv%10==0)petUlt(id,s,pm)}
+function petUlt(id,s,pm){petFl=1;const p=PETS[id];if(id=='wolf'){const d=Math.round(s.dmg*5*pm);en.hp-=d;log('🐺 Вой! Волк наносит '+d)}else if(id=='owl'){P.mana=Math.min(s.mana,P.mana+30);log('🦉 Сова вернула 30 маны')}else if(id=='turtle'){P.sh=s.shield;log('🐢 Панцирь: щит полон')}else if(id=='fairy'){P.hp=Math.min(s.mhp,P.hp+s.mhp*.15);log('🧚 Фея исцеляет 15%')}else if(id=='imp'){const g=30*petLv(id);P.gold+=g;log('😈 Бесёнок нашёл '+g+'🪙')}}
+function petHtml(){const ks=Object.keys(P.pets);return '<b>Питомцы</b>'+(ks.length?ks.map(k=>{const p=PETS[k],l=petLv(k),xp=Math.min(48,P.pets[k].xp||0);return `<div class="it" style="--rc:${P.pet==k?'#a3d6ae':'#6b6578'}"><b>${p.i} ${p.n}</b> <small>ур. ${l}${l<5?'':' (макс.)'} · сила ×${petPm(k).toFixed(2)}</small>${bar(l<5?xp%12:12,12,'var(--bx)',l<5?'опыт '+xp%12+'/12':'макс.','s')}<small>Пассивно: ${p.d}</small><small style="color:${l>=3?'#f2d98a':'var(--mu)'}">${l>=3?'★':'🔒 с ур. 3 ·'} Каждые 10 ходов: ${PU[k]}</small><div class="bt"><button data-pet="${k}" ${P.pet==k?'disabled':''}>${P.pet==k?'Активен':'Взять с собой'}</button><button data-feed="${k}" ${l>=5||P.gold<40?'disabled':''}>Покормить 40🪙</button></div></div>`}).join(''):'<div class="df">Питомцев нет. Купите в «Лавке» или найдите яйцо у босса. Питомец растёт с убийствами врагов.<div class="mb"><button data-gotab="shop">В Лавку</button></div></div>')}
+function fixAll(){[...Object.values(P.eq),...P.inv,...Q].forEach(fixBelt);
+if(!P.eq.p&&!P.inv.some(i=>i.slot=='p')&&P.inv.length<16){const bt=mkItem('p',0,1,'Кожаный пояс');bt.flasks[0]={t:'hp',c:3};P.inv.push(bt);log('🎁 Выдан Кожаный пояс со слотами под флаконы — наденьте его во вкладке «Вещи»')}}
+// ---- ascendancy (level 60): 3 subclasses per class, each with a 5-node mini-branch ----
+const ASC=[
+[{n:'Берсерк',d:'Урон ценой защиты',s:[['inc',6],['crit',2],['hp',15],['inc',6]],k:['Неистовство','+30% урона, −20% здоровья',{inc:30,hpMul:.8}]},
+{n:'Страж',d:'Броня и шипы',s:[['armor',8],['hp',20],['thorns',4],['armor',8]],k:['Несокрушимый','+40 брони, +10 шипов',{armor:40,thorns:10}]},
+{n:'Палач',d:'Критические удары',s:[['crit',3],['critDmg',15],['inc',5],['crit',3]],k:['Казнь','+60% крит. урона, +6% крита',{critDmg:60,crit:6}]}],
+[{n:'Пиромант',d:'Чистый урон',s:[['inc',6],['mana',10],['dmg',2],['inc',6]],k:['Пламя Бездны','+35% урона, +20 маны',{inc:35,mana:20}]},
+{n:'Криомант',d:'Щит и контроль',s:[['shield',8],['mana',10],['regen',1],['shield',8]],k:['Вечная мерзлота','+40 щита, +2 реген',{shield:40,regen:2}]},
+{n:'Архимаг',d:'Мана и каскады',s:[['manaGain',10],['mana',12],['casc',.05],['manaGain',10]],k:['Мастер потока','+25% каскадов, +40% маны с рун',{casc:.25,manaGain:40}]}],
+[{n:'Охотник',d:'Меткие криты',s:[['crit',3],['inc',5],['luck',4],['crit',3]],k:['Меткий глаз','+10% крита, +25% крит. урона',{crit:10,critDmg:25}]},
+{n:'Стрелок',d:'Постоянный урон',s:[['inc',6],['dmg',2],['crit',2],['inc',6]],k:['Град стрел','+30% урона',{inc:30}]},
+{n:'Разведчик',d:'Удача и добыча',s:[['luck',6],['gold',8],['regen',1],['luck',6]],k:['Тропа удачи','+30% удачи, +30% золота',{luck:30,gold:30}]}],
+[{n:'Грабитель',d:'Золото и удача',s:[['gold',10],['luck',5],['gold',10],['luck',5]],k:['Золотая жила','+60% золота, +20% удачи',{gold:60,luck:20}]},
+{n:'Дуэлянт',d:'Урон и броня',s:[['inc',6],['crit',2],['armor',6],['inc',6]],k:['Мастер клинка','+25% урона, +15 брони',{inc:25,armor:15}]},
+{n:'Везунчик',d:'Шанс и криты',s:[['luck',8],['crit',2],['luck',8],['gold',6]],k:['Игрок','+50% удачи, +8% крита',{luck:50,crit:8}]}],
+[{n:'Убийца',d:'Удар из тени',s:[['crit',3],['critDmg',15],['inc',5],['crit',3]],k:['Удар из тени','+40% урона, −15% здоровья',{inc:40,hpMul:.85}]},
+{n:'Чародей хаоса',d:'Щит и мана',s:[['shield',8],['mana',10],['regen',1],['shield',8]],k:['Хаос-щит','+60 щита, +1 реген',{shield:60,regen:1}]},
+{n:'Призрак',d:'Выживание',s:[['armor',8],['regen',1],['hp',15],['regen',1]],k:['Эфирность','+3 реген, +30 брони',{regen:3,armor:30}]}],
+[{n:'Целитель',d:'Здоровье и реген',s:[['hp',20],['regen',1],['hp',20],['regen',1]],k:['Благодать','+60 здоровья, +3 реген',{hp:60,regen:3}]},
+{n:'Инквизитор',d:'Урон и лечение',s:[['inc',6],['redHeal',1],['crit',2],['inc',6]],k:['Карающий свет','+25% урона, красные руны лечат +2',{inc:25,redHeal:2}]},
+{n:'Хранитель',d:'Защита',s:[['armor',8],['shield',8],['hp',15],['armor',8]],k:['Священный щит','+40 щита, +30 брони',{shield:40,armor:30}]}]];
+const ascNodes=()=>{const sb=ASC[P.cls][P.asc.sub];return[...sb.s.map(([k,v],i)=>({n:sb.n+': '+['закалка','выучка','мощь','мастерство'][i],d:'+'+(k=='casc'?Math.round(v*100)+'% каскадов':v+L[k]),m:{[k]:v}})),{n:sb.k[0],d:sb.k[1],m:sb.k[2],key:1}]};
+const ascPts=()=>P.asc?3+(P.lv>=70?1:0)+(P.lv>=80?1:0)-P.asc.al.length:0;
+let ascLater=0;
+function showAsc(){if(MD)return;MD=1;const sbs=ASC[P.cls];
+$('#cc').innerHTML=`<h3>Восхождение</h3><small style="color:var(--mu)">Вы достигли 60 уровня. Выберите подкласс: он открывает мини-ветку из 5 узлов (3 очка сразу, ещё по одному на 70 и 80 уровне). Выбор окончателен.</small>`+sbs.map((sb,i)=>`<div class="it" style="--rc:#e6cf8c"><b>${sb.n}</b><small>${sb.d}</small><small>Ключевой узел: <b style="color:var(--tx)">${sb.k[0]}</b> — ${sb.k[1]}</small><div class="bt"><button data-sub="${i}">Выбрать: ${sb.n}</button></div></div>`).join('')+'<div class="mb"><button data-later="1">Позже</button></div>';
+$('#cp').classList.add('show')}
+function maybeAsc(){if(P.lv>=60&&!P.asc&&!ascLater&&!MD&&en)showAsc()}
+function ascHtml(){if(!P.asc){return P.lv>=60?'<div class="df nd"><b>Восхождение доступно!</b><div class="mb"><button data-asc="pick">Выбрать подкласс</button></div></div>':`<div class="df nd" style="color:var(--mu)">🔒 Восхождение откроется на 60 уровне (сейчас ${P.lv}): подкласс и мини-ветка из 5 узлов.</div>`}
+const sb=ASC[P.cls][P.asc.sub],pts=ascPts();
+return `<h4 style="margin:12px 0 4px;color:var(--ac)">Восхождение: ${sb.n}</h4><small style="color:var(--mu)">${sb.d} · Очков: <b style="color:var(--tx)">${pts}</b>${P.lv<80?' · ещё очки на '+(P.lv<70?'70 и 80':'80')+' уровне':''}</small>`+ascNodes().map((nd,i)=>{const ok=P.asc.al.includes(i),can=!ok&&pts>0&&(i==0||P.asc.al.includes(i-1));
+return `<div class="it" style="--rc:${nd.key?'#f2a96b':'#e6cf8c'}"><b>${ok?'✓ ':''}${nd.n}</b><small>${nd.d}</small>${ok?'':`<div class="bt"><button data-asn="${i}" ${can?'':'disabled'}>${can?'Взять узел':i>0&&!P.asc.al.includes(i-1)?'Сначала предыдущий':'Нет очков'}</button></div>`}</div>`}).join('')}
+// ---- tree ----
+const ARMS=[['Сила','inc',6,{inc:20,armor:5},'Кровавый пакт','Красные руны лечат, синие руны не дают маны',{redHeal:1,noBlue:1}],
+['Разум','mana',15,{mana:40,inc:10},'Мастер каскадов','Каскады ×2 сильнее, но урон рун −50%',{casc:.25,baseMul:.5}],
+['Ловкость','crit',2,{crit:6,inc:8},'Тень клинка','+15% крита, здоровье −30%',{crit:15,hpMul:.7}],
+['Удача','gold',10,{gold:25,luck:10},'Золотая лихорадка','+40% удачи, урон −15%',{luck:40,inc:-15}],
+['Хаос','shield',8,{shield:20,regen:1},'Хаос-ядро','+60 щита, здоровье −50%',{shield:60,hpMul:.5}],
+['Жизнь','hp',12,{hp:30,armor:5},'Несокрушимый','+30 брони, урон −10%',{armor:30,inc:-10}]];
+const N={c:{id:'c',x:0,y:0,t:0,m:{},name:'Изгнанник',desc:'Начало пути',nb:[]}};
+ARMS.forEach((a,i)=>{for(let k=1;k<=5;k++){const id=`a${i}_${k}`,an=(i*60-90)*Math.PI/180,t=k==5?2:k==3?1:0;
+const m=t==2?a[6]:t==1?a[3]:{[a[1]]:a[2]};N[id]={id,x:Math.cos(an)*k*42,y:Math.sin(an)*k*42,t,m,name:t==2?a[4]:t==1?a[0]+': заметный':a[0],desc:t==2?a[5]:d(m),nb:[k==1?'c':`a${i}_${k-1}`]}}});
+Object.values(N).forEach(n=>n.nb.slice().forEach(b=>N[b].nb.push(n.id)));
+for(let i=0;i<6;i++){const a=`a${i}_3`,b=`a${(i+1)%6}_3`;N[a].nb.push(b);N[b].nb.push(a)}
+// ---- state ----
+const P={lv:1,xp:0,gold:0,chaos:3,pts:1,cls:3,al:new Set(['c']),inv:[],eq:{},hp:100,mana:50,sh:0,gems:['chain','burn','multi','crit'],maps:[],pal:2,buffs:[],dq:null,pets:{},pet:null,dgBest:0,asc:null,ach:[],st:{kills:0,bosses:0,moves:0,maxCasc:0,bombs:0,shards:0,items:0,uniq:0,gems:0,maps:0,deaths:0}};
+const Q=[];
+// achievements: [id, name, description, current value, target, reward in chaos orbs]
+const ACH=[
+['kill1','Первая кровь','Победите врага',()=>P.st.kills,1,1],
+['kill50','Истребитель','Победите 50 врагов',()=>P.st.kills,50,2],
+['kill250','Легион','Победите 250 врагов',()=>P.st.kills,250,5],
+['boss3','Охотник на боссов','Победите 3 боссов',()=>P.st.bosses,3,3],
+['casc4','Мастер каскадов','Каскад из 4 цепочек за один ход',()=>P.st.maxCasc,4,2],
+['bomb5','Подрывник','Создайте 5 бомб',()=>P.st.bombs,5,1],
+['shard1','Осколочник','Создайте руну-осколок',()=>P.st.shards,1,2],
+['dg20','Бездонная глубина','Победите 20 врагов в Бесконечной Бездне',()=>P.dgBest||0,20,3],
+['pet1','Друг зверей','Заведите питомца',()=>Object.keys(P.pets).length,1,1],
+['stage10','Глубокий спуск','Дойдите до 10-го этапа',()=>S.stage,10,3],
+['map1','Покоритель карт','Пройдите карту',()=>P.st.maps,1,3],
+['uni1','Везунчик','Найдите уникальный предмет',()=>P.st.uniq,1,5],
+['gem10','Огранщик','Найдите 10 самоцветов',()=>P.st.gems,10,2],
+['gold1k','Скряга','Накопите 1000 золота',()=>P.gold,1000,2],
+['mv500','Упорство','Сделайте 500 ходов',()=>P.st.moves,500,2],
+['asc','Вознесение','Выберите подкласс на 60 уровне',()=>P.asc?1:0,1,5],
+['die3','Неудачник','Погибните 3 раза',()=>P.st.deaths,3,1]];
+let tT=0;
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('show');clearTimeout(tT);tT=setTimeout(()=>e.classList.remove('show'),2800)}
+function checkAch(){ACH.forEach(a=>{if(!P.ach.includes(a[0])&&a[3]()>=a[4]){P.ach.push(a[0]);P.chaos+=a[5];log(`🏆 Достижение: ${a[1]} (+${a[5]}◎)`);toast(`🏆 ${a[1]} · +${a[5]}◎`)}})}
+let S={stage:1},en,B=[],sel=-1,busy=0,dead=0,tab='hero',lg=[],M=null,mv=0,ngArm=0,noSave=0,MD=0,GPR=null,selN='',G=null,svT=0;
+const KEY='abyss-shards-v2';
+const need=l=>Math.floor(100*l**1.8);
+function stats(){const s={dmg:5+P.lv,inc:0,hp:100+P.lv*8,mana:100,crit:5,armor:0,gold:0,luck:0,shield:20,regen:0,casc:.25,redHeal:0,noBlue:0,baseMul:1,hpMul:1,spider:0,thorns:0,manaGain:0,critDmg:0};
+const add=m=>{for(const k in m){if(k=='baseMul'||k=='hpMul')s[k]*=m[k];else s[k]+=m[k]}};
+if(CLS[P.cls])add(CLS[P.cls].b);P.al.forEach(id=>add(N[id].m));if(P.asc)ascNodes().forEach((nd,i)=>{if(P.asc.al.includes(i))add(nd.m)});(P.buffs||[]).forEach(b=>add({[b.k]:b.v}));Object.values(P.eq).forEach(i=>i.mods.forEach(([k,v])=>add({[k]:v})));if(P.pet&&P.pet=='imp'&&P.pets[P.pet])s.gold+=10*petPm('imp');s.mhp=Math.round(s.hp*s.hpMul);return s}
+function log(t){lg.unshift(t);lg=lg.slice(0,30);$('#log').innerHTML=lg.join('<br>')}
+// ---- save ----
+function saveNow(){if(noSave)return;try{localStorage.setItem(KEY,JSON.stringify({v:3,P:{...P,al:[...P.al]},S,en,B,M,Q,mv}))}catch(_){}}
+function save(){clearTimeout(svT);svT=setTimeout(saveNow,250)}
+function load(){try{const j=JSON.parse(localStorage.getItem(KEY)||'null');if(!j||!(j.v>=2)||!j.P||!j.en)return 0;
+Object.assign(P,j.P,{al:new Set(j.P.al)});Object.assign(S,j.S);en=j.en;B=j.B||[];M=j.M||null;mv=j.mv||0;Q.push(...(j.Q||[]));return 1}catch(_){return 0}}
+addEventListener('pagehide',saveNow);document.addEventListener('visibilitychange',()=>{if(document.hidden)saveNow()});
+// ---- atlas ----
+const MM={skull:['Череполомы','Черепов на поле почти вдвое больше'],shuffle:['Хаос рун','Поле перемешивается каждые 5 ходов'],stone:['Каменная кожа','Красные руны бьют на 30% слабее'],fast:['Стремительные','Враги бьют на ход быстрее'],tough:['Живучие','У врагов +40% здоровья'],fierce:['Свирепые','Враги наносят на 30% больше урона'],curse:['Проклятая мана','Синие руны дают на 40% меньше маны']};
+const TC=['#cfcfcf','#7c9bff','#7cd6ff','#ffd34a','#ff8a4a'];
+const lv=()=>M?M.map.lvl:S.stage,hasMod=x=>!!M&&M.map.mods.includes(x),rwm=m=>1+.3*m.mods.length+.1*(m.t-1)+(m.dg?.03*(m.lvl-m.b0):0);
+function mkMap(){const t=ri(1,Math.min(5,1+Math.floor(S.stage/4))),ids=Object.keys(MM),mods=[];for(let n=ri(0,Math.min(3,t));n>0;n--)mods.push(pick(ids.filter(i=>!mods.includes(i))));
+return{t,lvl:S.stage+(t-1)*2,mods,name:pick(['Склеп','Пещеры','Руины','Топи','Бастион'])+' '+pick(['Теней','Бездны','Костей','Забвения'])}}
+function enterMap(i){if(M||busy)return;const mp=P.maps.splice(i,1)[0];if(!mp)return;M={map:mp,n:0,total:5};mv=0;log('🗺 Вход в карту «'+mp.name+'»');spawn();drawUI()}
+function enterDg(){if(M||busy)return;M={map:{t:1,lvl:S.stage,b0:S.stage,mods:[],name:'Бесконечная Бездна',dg:1},n:0,total:1e9,dg:1};mv=0;log('🌀 Вы спустились в Бесконечную Бездну');spawn();drawUI()}
+function dgEnd(why){const n=M.n,c=Math.floor(n/5),g=Math.round(n*(20+M.map.b0*6));P.chaos+=c;P.gold+=g;if(n>P.dgBest)P.dgBest=n;log(`🌀 ${why}: врагов ${n}, награда +${g}🪙, +${c}◎`);if(n>=5)Q.push(gen(true));M=null}
+function finishMap(){const mp=M.map,rm=rwm(mp),s=stats(),g=Math.round((100+mp.lvl*20)*rm*(1+s.gold/100)),c=Math.ceil(rm*2);
+P.gold+=g;P.chaos+=c;P.st.maps++;log(`🏆 Карта пройдена! +${g}🪙, +${c} Сфер Хаоса`);Q.push(gen(true));if(mp.mods.length>=2)Q.push(gen(true));M=null;spawn()}
+// ---- items ----
+function mkAff(n,il){const pool=AFF.slice(),o=[];while(n--&&pool.length){const a=pool.splice(Math.floor(Math.random()*pool.length),1)[0];o.push([a[0],Math.max(1,Math.round(rnd(a[1],a[2])*(1+il*.08)))])}return o}
+function mkItem(sl,q,il,nm){const b=BASE[sl],it={slot:sl,r:q,il,base:[b[0],Math.round(b[1]*(1+il*.5))],aff:mkAff(q==2?4:q==1?ri(1,2):0,il)};
+it.sock=Array(Math.min(MAXS[sl],BS[sl]+(q==2?ri(1,2):q==1?ri(0,1):0))).fill(null);
+it.name=nm||(q==2?pick(['Бездонный','Проклятый','Осколочный','Тёмный']):q?'Рунный':'Старый')+' '+pick(NM[sl]);it.mods=[it.base,...it.aff];if(sl=='p')fixBelt(it);return it}
+function mkUnique(u){const it=mkItem(u.s,2,lv(),u.n);it.r=3;it.aff=u.m.map(x=>x.slice());it.mods=[it.base,...it.aff];it.fx=u.fx;return it}
+function gen(boss){const s=stats(),r=Math.random()*100,q=r<6+s.luck/4+(boss?40:0)?2:r<45+s.luck/2?1:0;P.st.items++;
+if(Math.random()<(boss?.1:.02)+s.luck/2500){P.st.uniq++;return mkUnique(pick(UNI))}return mkItem(pick(Object.keys(SLOT)),q,lv())}
+const startAl=()=>new Set(['c','a'+CLS[P.cls].arm+'_1']);
+function starter(){const C=CLS[P.cls],w=mkItem('w',0,1,C.w[0]),a=mkItem('a',0,1,'Рваная роба');w.sock=C.w[1].slice();a.sock=C.a.slice();const bt=mkItem('p',0,1,'Кожаный пояс');bt.flasks[0]={t:'hp',c:3};P.eq={w,a,p:bt};P.gems=C.gems.slice();P.buffs=[];P.al=startAl();P.pts=1}
+const gem=(g,ref,ix)=>{const c='sg '+(g?GEMS[g].k:''),t=g?GEMS[g].n:'Пустое гнездо',ic=g?GEMS[g].i:'○';
+return ref?`<button class="${c}" data-sock="${ref}:${ix}" title="${t}">${ic}</button>`:`<span class="${c}" title="${t}">${ic}</span>`};
+const upCost=it=>Math.round(60*(1+(it.up||0))*(1+it.il*.15));
+const cft=(w,i,it)=>{const u=upCost(it),a=`data-w="${w}" data-i="${i}"`;return `<div class="bt"><button data-a="up" ${a} ${(it.up||0)>=5||P.gold<u?'disabled':''}>Улучшить ${u}🪙 (${it.up||0}/5)</button><button data-a="en" ${a} ${it.r==3||it.aff.length>=4||P.chaos<2||P.gold<100?'disabled':''}>+Свойство 2◎ 100🪙</button><button data-a="so" ${a} ${!it.sock||!(it.sock.length<MAXS[it.slot])||P.chaos<3?'disabled':''}>+Гнездо 3◎</button></div>`};
+const il_=(i,ref)=>`<div class="it" style="--rc:${RC[i.r]}"><b>${i.name}</b> <small>${SLOT[i.slot]} · ${RN[i.r]} · ур.${i.il}</small>${i.mods.filter(([k])=>L[k]).map(([k,v])=>`<small style="color:${i.base[0]==k&&i.mods[0][1]==v?'#cfcfcf':'#9ec8ff'}">+${v}${L[k]}</small>`).join('')}${i.fx?`<small style="color:#ffb066">★ ${i.fx}</small>`:''}${i.flasks?`<small style="color:#9ec8ff">Слоты флаконов (${i.fl}): ${i.flasks.map(f=>f?FL[f.t].i:'○').join(' ')}</small>`:''}${i.sock&&i.sock.length?`<div class="so">${i.sock.map((g,x)=>gem(g,ref,x)).join('')}</div>`:''}`;
+function reroll(it){it.aff=mkAff(it.r==2?4:ri(1,2),it.il);it.mods=[it.base,...it.aff]}
+function retGems(it){(it.sock||[]).forEach((g,i)=>{if(g){P.gems.push(g);it.sock[i]=null}});(it.flasks||[]).forEach((f,i)=>{if(f){P.gold+=Math.floor(FL[f.t].pr/2);it.flasks[i]=null}})}
+const itemByRef=ref=>{const [w,k]=ref.split(':');return w=='e'?P.eq[k]:P.inv[+k]};
+// ---- skills (active gems socketed in equipped items, linked with support gems of the same item) ----
+function skills(){const o=[];Object.keys(SLOT).forEach(k=>{const it=P.eq[k];if(!it||!it.sock)return;const sups=it.sock.filter(g=>g&&GEMS[g].k=='s');it.sock.forEach(g=>{if(g&&GEMS[g].k=='a')o.push({g,sups,from:k})})});return o}
+function sk(x){const G=GEMS[x.g];let cm=1,dm=1,hits=G.h||1,burn=G.f=='burn',cb=0;
+x.sups.forEach(g=>{if(g=='emp'){dm*=1.4;cm*=1.3}else if(g=='burn')burn=true;else if(g=='multi'){hits++;cm*=1.2}else if(g=='crit'){cb+=30;cm*=1.1}});
+return{G,dm,hits,burn,cb,cost:Math.round(G.c*cm)}}
+function cast(i){if(busy||MD)return;const x=skills()[i];if(!x)return;const p=sk(x),g=p.G,s=stats();if(P.mana<p.cost)return;P.mana-=p.cost;
+if(g.f=='heal'){const h=Math.round(s.mhp*.25*p.dm);P.hp=Math.min(s.mhp,P.hp+h);log('Умение: '+g.n+' (+'+h+')')}
+else{for(let h=0;h<p.hits;h++)hit(s.dmg*g.m*p.dm,0,s,p.cb);if(g.f=='ice'){en.t+=2;log('Враг заморожен (+2 хода)')}if(p.burn){en.burn=3;en.bd=Math.round(s.dmg*1.5)}log('Умение: '+g.n)}
+if(en.hp<=0)kill();drawUI()}
+// ---- enemy ----
+function spawn(){const lw=lv(),boss=M?(M.dg?M.n%5==4:M.n==M.total-1):S.stage%5==0,a=[];if(lw>1)for(let i=0;i<(boss?2:Math.random()<.5?1:0);i++){const x=pick(['Регенерирует','Быстрый','Взрывной','Вампир','Иссушающий','Призрачный','Щитоносец','Берсерк']);if(!a.includes(x))a.push(x)}
+const hp=Math.round((60+lw*35)*(boss?3:1)*(hasMod('tough')?1.4:1));
+en={n:boss?pick(['Владыка Осколков','Бездонный Король','Королева Пауков','Лорд Вампиров','Пожиратель Душ']):pick(['Скелет-страж','Тень Бездны','Гнилой упырь','Культист','Каменный голем','Паук-ткач','Призрак шахты','Вурдалак','Рыцарь Бездны']),boss,hp,mhp:hp,atk:Math.round(8+lw*2.2)*(boss?1.5:1)*(hasMod('fierce')?1.3:1),spd:Math.max(2,(a.includes('Быстрый')?3:4)-(hasMod('fast')?1:0)),t:4,a,poison:0,burn:0,bd:0,mc:0};en.t=en.spd;if(a.includes('Щитоносец'))en.sh=Math.round(hp*.25);if(boss){en.mech=pick(Object.keys(MECH));log('⚠ Босс: '+MECH[en.mech][0]+' — '+MECH[en.mech][1])}}
+function kill(){const s=stats(),rm=M?rwm(M.map):1;log(`☠ ${en.n} повержен`);P.st.kills++;if(en.boss)P.st.bosses++;if(P.pet&&P.pets[P.pet])P.pets[P.pet].xp+=en.boss?3:1;if(en.boss&&Math.random()<.3){const f=Object.keys(PETS).filter(k=>!P.pets[k]);if(f.length){const k=pick(f);P.pets[k]={xp:0};if(!P.pet)P.pet=k;log('🥚 Питомец найден: '+PETS[k].n);toast('🥚 Питомец: '+PETS[k].i+' '+PETS[k].n)}}if(en.a.includes('Взрывной')){log('Взрыв!');hurt(15)}
+{const bl=P.eq.p;if(bl&&bl.flasks)bl.flasks.forEach(f=>{if(f)f.c=Math.min(FL[f.t].m,f.c+(en.boss?2:1))})}
+P.xp+=Math.round((40+lv()*25)*rm);P.gold+=Math.round((10+lv()*5)*(1+s.gold/100)*rm);
+while(P.xp>=need(P.lv)){P.xp-=need(P.lv);P.lv++;P.pts++;log('★ Уровень '+P.lv+'! +1 очко древа')}
+if(Math.random()<Math.min(.95,.7*rm)||en.boss){const it=gen(en.boss);Q.push(it);log(`Выпало: <span style="color:${RC[it.r]}">${it.name}</span>`)}
+if(Math.random()<.3*rm+(en.boss?.5:0)){P.chaos++;log('Выпала Сфера Хаоса')}
+if(Math.random()<.22+(en.boss?.35:0)){const g=pick(Object.keys(GEMS));P.gems.push(g);P.st.gems++;log(`💎 Самоцвет: ${GEMS[g].i} ${GEMS[g].n}`)}
+if(P.maps.length<12&&lv()>=3&&Math.random()<(en.boss?.5:.1)){const mp=mkMap();P.maps.push(mp);log('🗺 Выпала карта: '+mp.name)}
+const m=stats();P.hp=Math.min(m.mhp,P.hp+m.mhp*.2);
+if(M){M.n++;if(M.dg){M.map.lvl++;if(M.n>P.dgBest)P.dgBest=M.n;if(M.n%10==0&&M.map.mods.length<4){const x=pick(Object.keys(MM).filter(y=>!M.map.mods.includes(y)));M.map.mods.push(x);log('🌀 Бездна искажается: '+MM[x][0])}}if(M.n>=M.total)finishMap();else spawn()}else{S.stage++;spawn()}
+showDrop()}
+function hurt(x){const s=stats();x=Math.round(x*100/(100+s.armor));const ab=Math.min(P.sh,x);P.sh-=ab;P.hp-=x-ab;if(P.hp<=0){P.hp=0;dead=1}}
+function hit(base,casc,s,cb){let x=base*(1+s.inc/100)*(1+s.casc*casc)*s.baseMul;if(Math.random()*100<s.crit+(cb||0))x*=1.5+s.critDmg/100;x=Math.round(x*(en.a.includes('Призрачный')?.7:1));if(en.sh>0){const ab=Math.min(en.sh,x);en.sh-=ab;x-=ab}en.hp-=x}
+// ---- board ----
+const rr=()=>Math.random()<(hasMod('skull')?.17:.09)?5:Math.floor(Math.random()*5);
+// cell value: colour = v%10, special = floor(v/10): 0 normal, 1 bomb (3x3 blast), 2 shard (clears the whole colour)
+const cl=i=>B[i]%10,sp=v=>Math.floor(v/10)%10,fz=v=>v>=100; // +100 = frozen (cannot be swapped until matched)
+function fixRuns(){let r;while((r=runs()).length)r.forEach(q=>q.cells.forEach(i=>B[i]=rr()))}
+let hA=-1,hB=-1,lastAct=Date.now();
+function findMove(){for(let a=0;a<64;a++)for(const d of[1,8]){const t=a+d;if(t>63||(d==1&&a%8==7)||fz(B[a])||fz(B[t]))continue;
+[B[a],B[t]]=[B[t],B[a]];const ok=runs().length>0||sp(B[a])>0||sp(B[t])>0;[B[a],B[t]]=[B[t],B[a]];if(ok)return[a,t]}return null}
+function clearHint(){lastAct=Date.now();if(hA>=0){hA=hB=-1;drawBoard()}}
+async function settle(){while(runs().length&&!dead&&en.hp>0){await resolve([]);if(en.hp<=0)kill()}}
+setInterval(async()=>{if(busy||MD||G||!B.length)return;
+if(runs().length){busy=1;await settle();if(dead)die();busy=0;drawBoard();drawUI();return}
+if(hA<0&&Date.now()-lastAct>5000){const m=findMove();if(m){hA=m[0];hB=m[1];drawBoard()}}},600);
+function hasMove(){for(let a=0;a<64;a++)for(const d of[1,8]){const t=a+d;if(t>63||(d==1&&a%8==7)||fz(B[a])||fz(B[t]))continue;
+[B[a],B[t]]=[B[t],B[a]];const ok=runs().length>0||sp(B[a])>0||sp(B[t])>0;[B[a],B[t]]=[B[t],B[a]];if(ok)return true}return false}
+function runs(){const o=[];for(let y=0;y<8;y++)for(let x=0;x<8;){let c=cl(y*8+x),e=x;while(e<8&&cl(y*8+e)==c)e++;if(e-x>=3)o.push({c,cells:Array.from({length:e-x},(_,k)=>y*8+x+k)});x=e}
+for(let x=0;x<8;x++)for(let y=0;y<8;){let c=cl(y*8+x),e=y;while(e<8&&cl(e*8+x)==c)e++;if(e-y>=3)o.push({c,cells:Array.from({length:e-y},(_,k)=>(y+k)*8+x)});y=e}return o}
+function init(){B=Array.from({length:64},rr);let r;while((r=runs()).length)r.forEach(q=>q.cells.forEach(i=>B[i]=rr()))}
+function reshuffle(){for(let i=63;i>0;i--){const j=Math.floor(Math.random()*(i+1));[B[i],B[j]]=[B[j],B[i]]}let r;while((r=runs()).length)r.forEach(q=>q.cells.forEach(i=>B[i]=rr()));log('🌀 Руны перемешались!')}
+function gravity(){for(let x=0;x<8;x++){const col=[];for(let y=7;y>=0;y--)if(B[y*8+x]>=0)col.push(B[y*8+x]);for(let y=7;y>=0;y--)B[y*8+x]=col.length?col.shift():rr()}}
+function effect(c,n,casc,s){const a=n>=4?n+2:n;
+if(c==0){hit(a*s.dmg*(hasMod('stone')?.7:1)*(en.mech=='stone'?.5:1),casc,s);if(s.redHeal)P.hp=Math.min(s.mhp,P.hp+a*s.redHeal*2)}
+else if(c==1){if(!s.noBlue)P.mana=Math.min(s.mana,P.mana+Math.round(a*5*(1+s.manaGain/100)*(hasMod('curse')?.6:1)))}
+else if(c==2)en.poison+=a;else if(c==3)P.gold+=Math.round(a*(2+lv())*(1+s.gold/100));
+else if(c==4)P.sh=Math.min(s.shield,P.sh+a*3);else hurt(a*(3+lv()*1.2))}
+async function resolve(trig){let casc=0;
+for(;;){const r=runs();if(!r.length&&!(trig&&trig.length))break;
+const s=stats(),set=new Set(),inRun=new Set(),keep=new Map(),cnt=[0,0,0,0,0,0];
+r.forEach(q=>{q.cells.forEach(i=>{set.add(i);inRun.add(i)});effect(q.c,q.cells.length,casc,s);
+if(q.cells.length>=4&&q.c!=5){const free=q.cells.filter(i=>sp(B[i])==0&&!keep.has(i));if(free.length)keep.set(free[Math.floor(free.length/2)],q.c+(q.cells.length>=5?20:10))}});
+(trig||[]).forEach(i=>set.add(i));trig=null;
+const done=new Set();let ch=1;
+while(ch){ch=0;[...set].forEach(i=>{if(done.has(i)||sp(B[i])==0)return;done.add(i);ch=1;const col=B[i]%10;
+if(sp(B[i])==1){const x=i%8,y=Math.floor(i/8);for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){const nx=x+dx,ny=y+dy;if(nx>=0&&nx<8&&ny>=0&&ny<8)set.add(ny*8+nx)}}
+else for(let j=0;j<64;j++)if(B[j]%10==col)set.add(j)})}
+set.forEach(i=>{if(!inRun.has(i)&&B[i]%10!=5)cnt[B[i]%10]++});
+cnt.forEach((n,c)=>{if(n)effect(c,n,casc,s)});
+keep.forEach((v,k)=>set.delete(k));
+set.forEach(i=>$('#b').children[i].classList.add('pop'));keep.forEach((v,k)=>$('#b').children[k].classList.add('born'));
+drawUI();await sl(200);set.forEach(i=>B[i]=-1);keep.forEach((v,k)=>{B[k]=v});gravity();drawBoard();if(casc)log('Каскад ×'+(casc+1));
+if(keep.size){keep.forEach(v=>{if(v>=20)P.st.shards++;else P.st.bombs++});log(`✨ Создана ${[...keep.values()].some(v=>v>=20)?'руна-осколок':'руна-бомба'}`)}casc++;await sl(220);if(en.hp<=0||dead)break}
+P.st.maxCasc=Math.max(P.st.maxCasc,casc)}
+async function swap(a,b){clearHint();if(fz(B[a])||fz(B[b])){log('❄ Руна заморожена — разбейте её матчем рядом');return}
+busy=1;[B[a],B[b]]=[B[b],B[a]];const trig=[a,b].filter(i=>sp(B[i])>0);
+if(!runs().length&&!trig.length){drawBoard();await sl(150);[B[a],B[b]]=[B[b],B[a]];drawBoard();busy=0;return}
+mv++;P.st.moves++;drawBoard();await resolve(trig);if(!dead&&en.hp<=0)kill();else if(!dead){petAct();if(en.hp<=0)kill();else{enemyTurn();if(!dead&&en.hp>0&&en.mech)bossAct()}}if(dead)die();if(hasMod('shuffle')&&mv%5==0)reshuffle();
+await settle();if(dead)die();if(!hasMove()){B=B.map(v=>v%100);let n=0;do{reshuffle();n++}while(!hasMove()&&n<20)}
+busy=0;drawBoard();drawUI()}
+const MECH={frost:['❄ Ледяное дыхание','Каждые 3 хода замораживает руны'],skull:['☠ Призыв черепов','Каждые 3 хода превращает руны в черепа'],chaos:['🌀 Хаос рун','Каждые 4 хода перемешивает поле'],stone:['🪨 Каменная кожа','Красные руны бьют вдвое слабее'],vamp:['🩸 Кровопийца','Каждые 3 хода лечится на 10%'],drain:['🕳 Иссушитель','Каждые 3 хода крадёт 25 маны'],rage:['🔥 Ярость','Каждые 4 хода бьёт на 15% сильнее']};
+function bossAct(){en.mc=(en.mc||0)+1;const m=en.mech;
+if(m=='frost'&&en.mc%3==0){for(let n=0;n<4;n++){const i=Math.floor(Math.random()*64);if(!fz(B[i]))B[i]+=100}log('❄ Босс заморозил руны!')}
+else if(m=='skull'&&en.mc%3==0){for(let n=0;n<3;n++)B[Math.floor(Math.random()*64)]=5;fixRuns();log('☠ Босс призвал черепа!')}
+else if(m=='chaos'&&en.mc%4==0)reshuffle()
+else if(m=='vamp'&&en.mc%3==0){en.hp=Math.min(en.mhp,en.hp+en.mhp*.1);log('🩸 Босс исцелился')}
+else if(m=='drain'&&en.mc%3==0){P.mana=Math.max(0,P.mana-25);log('🕳 Босс высосал 25 маны')}
+else if(m=='rage'&&en.mc%4==0&&(en.rg||0)<5){en.rg=(en.rg||0)+1;en.atk=Math.round(en.atk*1.15);log('🔥 Босс в ярости!')}}
+function enemyTurn(){const s=stats();en.t--;if(P.buffs.length)P.buffs=P.buffs.map(b=>({...b,t:b.t-1})).filter(b=>b.t>0);if(s.spider&&mv%4==0){en.t++;log('🕸 Паутина замедлила врага')}if(en.poison>0){en.hp-=en.poison*2;en.poison--}if(en.burn>0){en.hp-=en.bd;en.burn--}
+if(en.a.includes('Регенерирует'))en.hp=Math.min(en.mhp,en.hp+en.mhp*.05);if(s.regen)P.hp=Math.min(s.mhp,P.hp+s.regen*3);
+if(en.hp<=0){kill();return}if(en.t<=0){const ak=en.atk*(en.a.includes('Берсерк')&&en.hp<en.mhp/2?1.5:1);hurt(ak);log(`${en.n} бьёт на ${Math.round(ak*100/(100+s.armor))}`);if(en.a.includes('Вампир'))en.hp=Math.min(en.mhp,en.hp+Math.round(ak*.5));if(en.a.includes('Иссушающий'))P.mana=Math.max(0,P.mana-10);en.t=en.spd;
+if(s.thorns&&!dead){en.hp-=s.thorns;log('🌵 Шипы: враг получил '+s.thorns);if(en.hp<=0)kill()}}}
+function die(){dead=0;P.st.deaths++;if(M&&M.dg)dgEnd('Вы пали в Бездне');else if(M){log('✖ Карта провалена и сгорела.');M=null}log('✖ Вы погибли. Потеряно 10% золота.');P.gold=Math.floor(P.gold*.9);P.hp=stats().mhp;P.sh=0;spawn()}
+// ---- drop popup ----
+const price=it=>5+it.il*3+it.r*15;
+function simStats(it){const o=P.eq[it.slot];P.eq[it.slot]=it;const s=stats();if(o)P.eq[it.slot]=o;else delete P.eq[it.slot];return s}
+const CMP=[['Урон руны',s=>s.dmg*(1+s.inc/100)*s.baseMul,1],['Макс. здоровье',s=>s.mhp,0],['Макс. мана',s=>s.mana,0],['Крит, %',s=>s.crit,0],['Броня',s=>s.armor,0],['Щит',s=>s.shield,0],['Золото, %',s=>s.gold,0],['Удача, %',s=>s.luck,0],['Реген',s=>s.regen,0],['Шипы',s=>s.thorns,0],['Мана с рун, %',s=>s.manaGain,0],['Крит. урон, %',s=>150+s.critDmg,0]];
+function showDrop(){if(MD||!Q.length)return;MD=1;const it=Q[0],cur=P.eq[it.slot],s0=stats(),s1=simStats(it),full=P.inv.length>=16;
+const f=(v,fl)=>fl?v.toFixed(1):Math.round(v);
+const rows=CMP.map(([n,fn,fl])=>{const a=fn(s0),b=fn(s1),dl=b-a;if(Math.abs(dl)<.05)return '';const c=dl>0?'up':'dn';return `<div>${n}: ${f(a,fl)} → <b class="${c}">${f(b,fl)}</b> <span class="${c}">(${dl>0?'+':''}${f(dl,fl)})</span></div>`}).join('');
+$('#mc').innerHTML=`<h3>Выпал предмет!${Q.length>1?' <small style="color:var(--mu)">(ещё '+(Q.length-1)+')</small>':''}</h3>
+<div class="cols"><div><h4>Новый предмет</h4>${il_(it)}</div></div>
+<div><h4>${cur?'Сейчас надето':'Слот: '+SLOT[it.slot]}</h4>${cur?il_(cur)+'</div>':'<div class="it" style="--rc:#444"><small>Слот пуст</small></div>'}</div></div>
+<div class="df">${rows||'<span class="eq">Характеристики не изменятся</span>'}</div>
+${cur&&cur.sock.some(Boolean)?'<small style="color:var(--mu)">Самоцветы старого предмета остаются в его гнёздах (он уйдёт в сумку).</small>':''}
+${cur&&full?`<small style="color:var(--mu)">Сумка полна — старый предмет будет продан за ${price(cur)}🪙, самоцветы вернутся в запас.</small>`:''}
+<div class="mb"><button data-m="eq">Надеть</button><button data-m="bag" ${full?'disabled':''}>${full?'Сумка полна':'В сумку'}</button><button data-m="sell">Продать ${price(it)}🪙</button></div>`;
+$('#md').classList.add('show')}
+$('#mc').onclick=e=>{const m=e.target.dataset.m;if(!m)return;const it=Q[0];
+if(m=='bag'&&P.inv.length>=16)return;Q.shift();
+if(m=='eq'){const o=P.eq[it.slot];P.eq[it.slot]=it;if(o){if(P.inv.length<16)P.inv.push(o);else{retGems(o);P.gold+=price(o);log('Сумка полна: '+o.name+' продан')}}P.hp=Math.min(P.hp,stats().mhp);log('Надето: '+it.name)}
+else if(m=='bag'){P.inv.push(it);log('В сумку: '+it.name)}
+else{P.gold+=price(it);log('Продано: '+it.name+' за '+price(it)+'🪙')}
+MD=0;$('#md').classList.remove('show');drawUI();showDrop()};
+// ---- gem picker ----
+function openGP(ref,ix){const it=itemByRef(ref);if(!it)return;GPR={ref,ix};const cur=it.sock[ix];
+const rows=P.gems.map((g,j)=>`<button class="gr" data-g="in:${j}"><span>${GEMS[g].i} <b>${GEMS[g].n}</b> <small style="display:inline">· ${GEMS[g].k=='a'?'умение':'поддержка'}</small></span><small>${GEMS[g].d}</small></button>`).join('');
+$('#gc').innerHTML=`<h3>Гнездо ${ix+1} · ${it.name}</h3>${cur?`<div class="df"><b>${GEMS[cur].i} ${GEMS[cur].n}</b><br><small>${GEMS[cur].d}</small></div><button data-g="rm" style="width:100%;margin-top:8px">Вынуть самоцвет</button>`:''}<h4 style="margin:10px 0 4px;color:var(--mu);font-size:12px">В запасе (${P.gems.length})</h4>${rows||'<small style="color:var(--mu)">Запас пуст — самоцветы выпадают с врагов</small>'}<div class="mb"><button data-g="x">Закрыть</button></div>`;
+$('#gp').classList.add('show')}
+$('#gc').onclick=e=>{const b=e.target.closest('button');if(!b||!GPR)return;const v=b.dataset.g,it=itemByRef(GPR.ref);
+if(it&&v=='rm'){const c=it.sock[GPR.ix];if(c){P.gems.push(c);it.sock[GPR.ix]=null}}
+else if(it&&v&&v.startsWith('in:')){const j=+v.slice(3),g=P.gems[j];if(g){P.gems.splice(j,1);const c=it.sock[GPR.ix];if(c)P.gems.push(c);it.sock[GPR.ix]=g}}
+GPR=null;$('#gp').classList.remove('show');drawUI()};
+// ---- draw ----
+function drawBoard(){$('#b').innerHTML=B.map((c,i)=>{const k=c%10,x=sp(c),t=x==2?'shard':x==1?'bomb':'';return `<div data-i="${i}" class="${i==sel?'sel ':''}${i==hA||i==hB?'hint ':''}${t}${fz(c)?' frz':''}" style="--c:${CL[k]}">${t=='bomb'?'💣':t=='shard'?'🌟':GL[k]}</div>`}).join('')}
+const bar=(v,m,c,t,k)=>`<div class="bar ${k||''}"><i style="width:${Math.max(0,Math.min(100,v/m*100))}%;background:${c}"></i><span>${t}</span></div>`;
+function drawUI(){if(!P.dq||P.dq.day!=today())dqNew();document.querySelector('[data-t="stats"]').classList.toggle('has',P.dq.q.some(q=>!q.done&&dqVal(q)>=q.t));checkAch();maybeAsc();const s=stats();
+const tg=(en.mech?`<span class="tag" style="background:#4a3d66">${MECH[en.mech][0]}</span>`:'')+en.a.map(x=>`<span class="tag">${x}</span>`).join('')+(en.poison?`<span class="tag" style="background:#2f5a3a">Яд ${en.poison}</span>`:'')+(en.burn?'<span class="tag" style="background:#6a4a2a">Ожог</span>':'')+(en.sh>0?`<span class="tag" style="background:#3a4f6a">🛡 ${en.sh}</span>`:'')+(M?M.map.mods.map(x=>`<span class="tag" style="background:#3a2f48">${MM[x][0]}</span>`).join(''):'');
+$('#en').innerHTML=`<div class="row"><span class="nm" style="text-align:right;width:100%">${en.boss?'👑 ':''}${en.n}</span></div>${bar(en.hp,en.mhp,'var(--be)','☠ '+Math.max(0,Math.round(en.hp))+' / '+en.mhp,'l')}<div class="row sm" style="margin-top:3px"><span>${M?(M.dg?'🌀 Бездна · враг '+(M.n+1):'🗺 Карта '+(M.n+1)+'/'+M.total):'Этап '+S.stage}</span><span>Удар через <b style="color:${en.t<=1?'#f55':'inherit'}">${en.t}</b></span></div>${tg?'<div style="margin-top:3px;text-align:right">'+tg+'</div>':''}`;
+$('#hero').innerHTML=`<div class="row"><span class="nm">${P.asc?ASC[P.cls][P.asc.sub].n:CLS[P.cls].n} <span style="color:var(--mu);font-weight:400">ур. ${P.lv}</span></span></div>${bar(P.hp,s.mhp,'var(--bh)','❤ '+Math.round(P.hp)+' / '+s.mhp,'l')}${bar(P.mana,s.mana,'var(--bm)','Мана '+Math.round(P.mana)+'/'+s.mana,'m')}${bar(P.sh,s.shield,'var(--bs)','Щит '+Math.round(P.sh)+'/'+s.shield,'m')}${bar(P.xp,need(P.lv),'var(--bx)','','s')}<div class="row sm" style="margin-top:3px"><span>🪙 ${P.gold} · ◎ ${P.chaos}${P.buffs.map(b=>' · '+b.n+' '+b.t).join('')}${P.pet&&P.pets[P.pet]?' · '+PETS[P.pet].i+petLv(P.pet):''}</span>${P.pts?`<span style="color:var(--ac)">★ ${P.pts} оч.</span>`:''}</div>`;
+const ks=skills();
+$('#sk').innerHTML=ks.length?ks.map((x,i)=>{const p=sk(x);return `<button data-s="${i}" ${P.mana<p.cost?'disabled':''}>${p.G.i} ${p.G.n}<br><small>${x.sups.map(g=>GEMS[g].i).join('')} ${p.cost} маны</small></button>`}).join(''):'<button data-go="inv" style="flex:1 1 100%">Нет умений — вставьте самоцвет умения в гнездо предмета</button>';
+const bl=P.eq.p;$('#fl').innerHTML=bl&&bl.flasks?bl.flasks.map((f,i)=>f?`<button class="fb" data-f="${i}" ${f.c<1?'disabled':''} style="--fc:${FL[f.t].c}"><span>${FL[f.t].i}</span><small>${f.c}/${FL[f.t].m}</small></button>`:'<button class="fb" disabled><span>○</span><small>пусто</small></button>').join('')+(P.pet&&P.pets[P.pet]?petBtn():''):(P.pet&&P.pets[P.pet]?petBtn():'');
+drawTab();save()}
+function drawTab(){document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.t==tab));const s=stats(),el=$('#tab');
+if(tab=='hero'){el.innerHTML=`<table>${[['Урон руны',(s.dmg*(1+s.inc/100)*s.baseMul).toFixed(1)],['Доп. урон','+'+s.inc+'%'],['Крит',s.crit+'%'],['Множитель каскада','+'+Math.round(s.casc*100)+'%'],['Броня',s.armor],['Золото','+'+s.gold+'%'],['Удача',s.luck+'%']].map(r=>`<tr><td style="color:var(--mu)">${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</table><p style="color:var(--mu)">🔴 урон · 🔵 мана · 🟢 яд · 🟡 золото · 🟣 щит · ☠ урон по вам. 4+ в ряд даёт бонус.<br>4 в ряд создаёт 💣 бомбу (взрыв 3×3), 5 в ряд — 🌟 осколок (очищает весь цвет). Бомбу или осколок можно пустить в ход, поменяв с соседней руной.</p><p style="color:var(--mu)">Класс: <b style="color:var(--tx)">${CLS[P.cls].n}</b> — ${CLS[P.cls].d}</p>`}
+else if(tab=='tree'){let h=`<div>Очков: <b>${P.pts}</b> <button id="rs">Респек ${P.lv<=20?'(бесплатно)':P.lv*10+' 🪙'}</button></div><svg viewBox="-250 -250 500 500">`;
+Object.values(N).forEach(n=>n.nb.forEach(b=>{if(n.id<b)h+=`<line x1="${n.x}" y1="${n.y}" x2="${N[b].x}" y2="${N[b].y}" stroke="${P.al.has(n.id)&&P.al.has(b)?'#c9a24a':'#3a2f48'}" stroke-width="2"/>`}));
+Object.values(N).forEach(n=>{const can=!P.al.has(n.id)&&P.pts>0&&n.nb.some(b=>P.al.has(b));h+=`<circle class="n ${P.al.has(n.id)?'a':''}" data-n="${n.id}" cx="${n.x}" cy="${n.y}" r="${[7,11,15][n.t]}" fill="${can?'#6b5a2a':['#2a2234','#4a3a66','#7a2a3a'][n.t]}"${n.id==selN?' style="stroke:#fff;stroke-width:2.5"':''}></circle><circle data-n="${n.id}" cx="${n.x}" cy="${n.y}" r="17" fill="transparent" style="cursor:pointer"></circle>`});
+el.innerHTML=h+'</svg><div class="df nd">'+ndHtml()+'</div>'+ascHtml()}
+else if(tab=='atlas'){const rows=P.maps.map((m,i)=>`<div class="it" style="--rc:${TC[m.t-1]}"><b>🗺 ${m.name}</b> <small>Тир ${m.t} · ур. ${m.lvl} · награда ×${rwm(m).toFixed(1)}</small>${m.mods.map(x=>`<small>• <b style="color:var(--tx)">${MM[x][0]}</b> — ${MM[x][1]}</small>`).join('')||'<small>Без модификаторов</small>'}<div class="bt"><button data-at="go:${i}" ${M||busy?'disabled':''}>Войти</button><button data-at="up:${i}" ${P.chaos<1||m.mods.length>=4?'disabled':''}>Усилить ◎1</button></div></div>`).join('');
+el.innerHTML=`<b>Атлас Бездны</b> <small style="color:var(--mu)">карт: ${P.maps.length}/12 · ◎ ${P.chaos}</small>`+(!M?`<div class="df"><b>🌀 Бесконечная Бездна</b> <small style="color:var(--mu)">рекорд: ${P.dgBest||0}</small><small style="display:block;color:var(--mu)">Враги без конца, сложнее с каждым убитым; каждые 5 — босс, каждые 10 — новый модификатор. Награда выдаётся при выходе или гибели: золото, сферы хаоса и предмет.</small><div class="mb"><button data-at="dg" ${busy?'disabled':''}>Спуститься</button></div></div>`:'')+(M?`<div class="df">Идёт карта «${M.map.name}» — враг ${M.n+1}${M.dg?'':'/'+M.total}<div class="mb"><button data-at="leave">${M.dg?'Выйти и забрать награду':'Покинуть (карта сгорит)'}</button></div></div>`:'')+(rows||'<p style="color:var(--mu)">Карт нет. Они выпадают с врагов начиная с 3-го этапа, у боссов чаще. «Усилить» добавляет случайный модификатор (до 4) и повышает награду; на карте враги сильнее, но опыт, золото и предметы богаче. Награда за проход: золото, сферы и 1–2 редких предмета.</p>')}
+else if(tab=='pet'){el.innerHTML=petHtml()}
+else if(tab=='shop'){const bl=P.eq.p,has=bl&&bl.flasks,free=has?bl.flasks.findIndex(f=>!f):-1;
+const slots=has?bl.flasks.map((f,i)=>f?`<div class="it" style="--rc:${FL[f.t].c}"><b>${FL[f.t].i} ${FL[f.t].n}</b> <small>${FL[f.t].d} · заряды ${f.c}/${FL[f.t].m}</small><div class="bt"><button data-shop="rm:${i}">Убрать (+${Math.floor(FL[f.t].pr/2)}🪙)</button></div></div>`:`<div class="it" style="--rc:#555"><small>Слот ${i+1}: пусто</small></div>`).join(''):'';
+const miss=has?bl.flasks.reduce((n,f)=>n+(f?FL[f.t].m-f.c:0),0):0;
+el.innerHTML=`<b>🛒 Магазин</b> <small style="color:var(--mu)">🪙 ${P.gold}</small>`
++(has?`<small style="display:block;color:var(--mu);margin:4px 0">Пояс «${bl.name}»: слотов под флаконы — ${bl.fl}. Флаконы заряжаются от убийств врагов, применяются кнопками под умениями.</small>${slots}<div class="mb"><button data-shop="refill" ${miss&&P.gold>=miss*10?'':'disabled'}>Заправить все (${miss*10}🪙)</button></div>`:'<div class="df">Наденьте пояс (вкладка «Вещи»): в нём от 1 до 5 слотов под флаконы.</div>')
++'<b>Флаконы</b>'+Object.keys(FL).map(k=>{const f=FL[k];return `<div class="it" style="--rc:${f.c}"><b>${f.i} ${f.n}</b> <small>${f.d} · зарядов: ${f.m}</small><div class="bt"><button data-shop="buy:${k}" ${free>=0&&P.gold>=f.pr?'':'disabled'}>${free<0&&has?'Нет свободного слота':'Купить '+f.pr+'🪙'}</button></div></div>`}).join('')
++'<b>Питомцы</b>'+Object.keys(PETS).map(k=>{const p=PETS[k];return `<div class="it" style="--rc:#a3d6ae"><b>${p.i} ${p.n}</b> <small>${p.d}</small><div class="bt"><button data-shop="pet:${k}" ${P.pets[k]||P.gold<p.pr?'disabled':''}>${P.pets[k]?'Уже есть':'Купить '+p.pr+'🪙'}</button></div></div>`}).join('')+'<b>Прочее</b>'+SHOP2.map(x=>`<div class="it" style="--rc:#e6cf8c"><b>${x.i} ${x.n}</b> <small>${x.d}</small><div class="bt"><button data-shop="${x.id}" ${P.gold>=x.pr&&(!x.ok||x.ok())?'':'disabled'}>Купить ${x.pr}🪙</button></div></div>`).join('')}
+else if(tab=='set'){el.innerHTML=`<b>Цветовая палитра</b><small style="display:block;color:var(--mu)">От светлой к тёмной: меняет руны, полосы и фон.</small><div class="th">${THEMES.map((t,i)=>`<button data-th="${i}" class="${P.pal==i?'on':''}"><span class="dots">${t.r.slice(0,5).map(c=>`<i style="background:${c}"></i>`).join('')}</span>${i+1}. ${t.n}</button>`).join('')}</div><b>Игра</b><small style="display:block;color:var(--mu)">Прогресс сохраняется автоматически в браузере.</small><div class="mb"><button id="ng">${ngArm?'Точно? Нажмите ещё раз':'Новая игра'}</button></div>`}
+else if(tab=='stats'){const st=P.st;
+el.innerHTML=dqHtml()+`<b>Статистика</b><table>${[['Врагов побеждено',st.kills],['Боссов побеждено',st.bosses],['Ходов сделано',st.moves],['Лучший каскад',st.maxCasc],['Бомб создано',st.bombs],['Осколков создано',st.shards],['Предметов найдено',st.items],['Уникальных',st.uniq],['Самоцветов найдено',st.gems],['Карт пройдено',st.maps],['Смертей',st.deaths],['Рекорд Бездны',P.dgBest||0],['Питомцев',Object.keys(P.pets).length],['Этап',S.stage]].map(r=>`<tr><td style="color:var(--mu)">${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</table><b>Достижения ${P.ach.length}/${ACH.length}</b>`
++ACH.map(a=>{const ok=P.ach.includes(a[0]),v=Math.min(a[4],a[3]());return `<div class="it" style="--rc:${ok?'#a3d6ae':'#6b6578'}"><b>${ok?'✓ ':''}${a[1]}</b> <small>${a[2]} · награда ${a[5]}◎</small>${ok?'':`<small>Прогресс: ${v}/${a[4]}</small>`}</div>`}).join('')}
+else{el.innerHTML='<b>Надето</b><small style="display:block;color:var(--mu)">Верстак: «Улучшить» +12% к свойствам (до 5 раз), «+Свойство» добавляет новое, «+Гнездо» — слот под самоцвет.</small>'+(Object.keys(SLOT).map(k=>P.eq[k]?il_(P.eq[k],'e:'+k)+`<div class="bt"><button data-a="ch" data-w="e" data-i="${k}">Хаос</button></div>${cft('e',k,P.eq[k])}</div>`:`<div class="it" style="--rc:#444"><small>${SLOT[k]}: пусто</small></div>`).join(''))
++`<b>Самоцветы в запасе (${P.gems.length})</b><div class="it" style="--rc:#4aa0e0">${P.gems.length?P.gems.map(g=>`<small>${GEMS[g].i} <b style="color:var(--tx)">${GEMS[g].n}</b> — ${GEMS[g].d}</small>`).join(''):'<small>Пусто</small>'}<small style="margin-top:4px">Нажмите на гнездо ○ у предмета, чтобы вставить самоцвет. Поддержки усиливают умения в этом же предмете.</small></div>`
++`<b>Сумка (${P.inv.length}/16)</b>`+P.inv.map((it,i)=>il_(it,'i:'+i)+`<div class="bt"><button data-a="eq" data-w="i" data-i="${i}">Надеть</button><button data-a="ch" data-w="i" data-i="${i}">Хаос</button><button data-a="sell" data-w="i" data-i="${i}">Продать ${price(it)}🪙</button></div>${cft('i',i,it)}</div>`).join('')}}
+// ---- events ----
+function ndHtml(){const n=N[selN];if(!n)return '<span class="eq" style="color:var(--mu)">Нажмите на узел, чтобы увидеть описание. Крупные красные — ключевые.</span>';
+const al=P.al.has(n.id),can=!al&&P.pts>0&&n.nb.some(b=>P.al.has(b));
+return `<b style="color:var(--ac)">${n.name}</b>: ${n.desc}<div class="mb"><button data-take="${n.id}" ${can?'':'disabled'}>${al?'Уже взято':can?'Взять узел':P.pts<1?'Нет очков':'Недоступен'}</button></div>`}
+// board: tap-to-select OR drag a rune toward a neighbour
+const bd=$('#b');
+function tap(i){lastAct=Date.now();if(sel<0){sel=i;drawBoard();return}
+const a=sel,ok=Math.abs(a%8-i%8)+Math.abs(Math.floor(a/8)-Math.floor(i/8))==1;
+if(a==i){sel=-1;drawBoard()}else if(ok){sel=-1;swap(a,i)}else{sel=i;drawBoard()}}
+bd.addEventListener('pointerdown',e=>{if(busy||MD||G)return;const c=e.target.closest('[data-i]');if(!c)return;
+G={i:+c.dataset.i,x:e.clientX,y:e.clientY,el:c,done:0,id:e.pointerId};try{bd.setPointerCapture(e.pointerId)}catch(_){}
+c.style.transition='none';c.style.zIndex=5});
+bd.addEventListener('pointermove',e=>{if(!G||G.done||e.pointerId!==G.id)return;
+const dx=e.clientX-G.x,dy=e.clientY-G.y,ax=Math.abs(dx),ay=Math.abs(dy),cs=G.el.offsetWidth,h=ax>=ay,v=h?dx:dy;
+G.el.style.transform=h?`translate(${Math.max(-cs,Math.min(cs,v))}px,0)`:`translate(0,${Math.max(-cs,Math.min(cs,v))}px)`;
+if(Math.max(ax,ay)>cs*.4){G.done=1;const i=G.i,x=i%8,y=Math.floor(i/8);let t=-1;
+if(h){const nx=x+(dx>0?1:-1);if(nx>=0&&nx<8)t=y*8+nx}else{const ny=y+(dy>0?1:-1);if(ny>=0&&ny<8)t=ny*8+x}
+if(t>=0&&!busy){sel=-1;swap(i,t)}else{G.el.style.transform='';G.el.style.transition=''}}});
+const gEnd=e=>{if(!G||e.pointerId!==G.id)return;const g=G;G=null;
+if(g.el.isConnected){g.el.style.transform='';g.el.style.transition='';g.el.style.zIndex=''}
+if(g.done||e.type=='pointercancel'||busy||MD)return;tap(g.i)};
+bd.addEventListener('pointerup',gEnd);bd.addEventListener('pointercancel',gEnd);
+bd.addEventListener('contextmenu',e=>e.preventDefault());
+$('#sk').onclick=e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.s!=null)cast(+b.dataset.s);else if(b.dataset.go){tab=b.dataset.go;drawTab()}};
+$('#fl').onclick=e=>{if(e.target.closest('[data-pt]')){tab='pet';drawTab();return}const b=e.target.closest('[data-f]');if(b)useFlask(+b.dataset.f)};
+document.querySelector('nav').onclick=e=>{const b=e.target.closest('[data-t]');if(b){tab=b.dataset.t;drawTab()}};
+$('#tab').onclick=e=>{const t=e.target;
+const th=t.closest('[data-th]');if(th){P.pal=+th.dataset.th;applyTheme();drawUI();return}
+if(t.dataset.shop){shop(t.dataset.shop);return}
+if(t.dataset.pet){P.pet=t.dataset.pet;drawUI();return}
+if(t.dataset.feed){const k=t.dataset.feed;if(P.pets[k]&&P.gold>=40&&petLv(k)<5){P.gold-=40;P.pets[k].xp=Math.min(48,P.pets[k].xp+4);drawUI()}return}
+if(t.dataset.gotab){tab=t.dataset.gotab;drawTab();return}
+if(t.dataset.dq!=null&&t.dataset.dq!==''){claimDq(+t.dataset.dq);return}
+if(t.dataset.asc){showAsc();return}
+if(t.dataset.asn!=null&&t.dataset.asn!==''&&P.asc){const i=+t.dataset.asn;if(!P.asc.al.includes(i)&&(i==0||P.asc.al.includes(i-1))&&ascPts()>0){P.asc.al.push(i);drawUI()}return}
+if(t.dataset.sock){const p=t.dataset.sock.split(':');openGP(p[0]+':'+p[1],+p[2]);return}
+if(t.dataset.n){selN=t.dataset.n;drawTab();return}
+if(t.dataset.take){const n=N[t.dataset.take];if(!P.al.has(n.id)&&P.pts>0&&n.nb.some(b=>P.al.has(b))){P.al.add(n.id);P.pts--;drawUI()}return}
+if(t.dataset.at){const [c,v]=t.dataset.at.split(':');
+if(c=='go')enterMap(+v);
+else if(c=='up'){const m=P.maps[+v];if(m&&P.chaos>=1&&m.mods.length<4){P.chaos--;m.mods.push(pick(Object.keys(MM).filter(x=>!m.mods.includes(x))));drawUI()}}
+else if(c=='leave'&&!busy){if(M.dg)dgEnd('Вы покинули Бездну');else{M=null;log('Карта покинута — она сгорела.')}spawn();drawUI()}
+else if(c=='dg')enterDg()
+return}
+if(t.id=='ng'){if(!ngArm){ngArm=1;drawTab();return}noSave=1;clearTimeout(svT);try{localStorage.removeItem(KEY)}catch(_){}location.reload();return}
+if(t.id=='rs'){const c=P.lv<=20?0:P.lv*10;if(P.gold<c)return;P.gold-=c;const sa=startAl();P.pts+=P.al.size-sa.size;P.al=sa;if(P.asc)P.asc.al=[];drawUI();return}
+const a=t.dataset.a;if(!a)return;const it=t.dataset.w=='e'?P.eq[t.dataset.i]:P.inv[+t.dataset.i];if(!it)return;
+if(a=='ch'){if(P.chaos<1||it.r==0||it.r==3)return;P.chaos--;reroll(it)}
+else if(a=='up'){const c=upCost(it);if((it.up||0)>=5||P.gold<c)return;P.gold-=c;it.up=(it.up||0)+1;const f=v=>Math.max(v+1,Math.round(v*1.12));it.base[1]=f(it.base[1]);it.aff.forEach(x=>x[1]=f(x[1]));it.mods=[it.base,...it.aff]}
+else if(a=='en'){if(it.r==3||it.aff.length>=4||P.chaos<2||P.gold<100)return;const ex=it.aff.map(x=>x[0]),pl=AFF.filter(x=>!ex.includes(x[0])&&x[0]!=it.base[0]);if(!pl.length)return;P.chaos-=2;P.gold-=100;const x=pick(pl);it.aff.push([x[0],Math.max(1,Math.round(rnd(x[1],x[2])*(1+it.il*.08)))]);it.mods=[it.base,...it.aff];if(it.r==0)it.r=1;if(it.r==1&&it.aff.length>=3)it.r=2}
+else if(a=='so'){if(!it.sock||!(it.sock.length<MAXS[it.slot])||P.chaos<3)return;P.chaos-=3;it.sock.push(null)}
+else if(a=='sell'){retGems(it);P.gold+=price(it);P.inv.splice(+t.dataset.i,1)}
+else{P.inv.splice(+t.dataset.i,1);if(P.eq[it.slot])P.inv.push(P.eq[it.slot]);P.eq[it.slot]=it;const m=stats().mhp;P.hp=Math.min(P.hp,m)}drawUI()};
+// ---- start ----
+function newGame(i){P.cls=i;starter();init();spawn();P.hp=stats().mhp;P.mana=50;MD=0;$('#cp').classList.remove('show');drawBoard();drawUI();log('Класс: '+CLS[i].n+'. Потяните руну к соседней или нажмите две подряд.')}
+function showClass(){MD=1;$('#cc').innerHTML='<h3>Выберите класс</h3><small style="color:var(--mu)">Класс задаёт стартовую точку на древе, бонусы и набор умений.</small>'+CLS.map((c,i)=>`<div class="it" style="--rc:#c9a24a"><b>${c.n}</b><small>${c.d}</small><small>Умения: ${[c.w[1][0],c.a[0]].map(g=>GEMS[g].i+' '+GEMS[g].n).join(', ')}</small><div class="bt"><button data-c="${i}">Играть: ${c.n}</button></div></div>`).join('');$('#cp').classList.add('show')}
+$('#cc').onclick=e=>{const d=e.target.dataset;
+if(d.sub!=null&&d.sub!==''){P.asc={sub:+d.sub,al:[]};MD=0;$('#cp').classList.remove('show');log('✨ Восхождение: '+ASC[P.cls][P.asc.sub].n);toast('✨ Подкласс: '+ASC[P.cls][P.asc.sub].n);drawUI();showDrop();return}
+if(d.later){ascLater=1;MD=0;$('#cp').classList.remove('show');showDrop();return}
+if(d.c!=null&&d.c!=='')newGame(+d.c)};
+applyTheme();
+if(load()){applyTheme();fixAll();if(B.length!=64||B.some(c=>c<0)||runs().length)init();if(en.hp<=0)spawn();drawBoard();drawUI();log('Прогресс загружен.');if(Q.length)showDrop()}
+else showClass();
+</script><script>if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js').catch(()=>{})</script></body></html>
