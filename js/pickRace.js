@@ -1,8 +1,7 @@
-// Выбор расы: обычная раса задаёт и свою фракцию; Пресса остаётся при текущей фракции (или нейтральной).
+// Выбор расы: раса задаёт и свою фракцию (Пресса — фракция «Пресса»).
 function pickRace(id) {
   const d = creation.draft;
-  const race = findById(RACES, id);
   d.raceId = id;
-  if (race.factionId) d.factionId = race.factionId;
+  d.factionId = findById(RACES, id).factionId;
   renderCreateStep();
 }

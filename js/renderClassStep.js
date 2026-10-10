@@ -2,8 +2,8 @@
 // справа описание выбранного класса с навыком и бонусом расы, имя, пол и «Создать персонажа».
 function renderClassStep() {
   const d = creation.draft;
-  const list = factionClassList(d.factionId, d.raceId);
-  const allowed = raceClasses(d.raceId, d.factionId);
+  const list = factionClassList(d.factionId);
+  const allowed = raceClasses(d.raceId);
   const race = findById(RACES, d.raceId);
 
   const left = document.getElementById('createLeft');

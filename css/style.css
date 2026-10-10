@@ -421,6 +421,7 @@ h1 {
 .pick {
   display: flex;
   align-items: center;
+  justify-content: center; /* иконка и название по центру кнопки */
   gap: 8px;
   min-width: 0;
   padding: 3px 8px 3px 3px;
@@ -429,7 +430,7 @@ h1 {
   background: var(--bg-cell);
   color: var(--text-primary);
   font: var(--type-menu);
-  text-align: left;
+  text-align: center;
   transition: filter .2s, opacity .2s;
 }
 .pick .tile { flex: none; width: 36px; height: 36px; }
@@ -455,8 +456,12 @@ h1 {
 .infoText .note, .infoText .motto { font-style: italic; color: var(--text-primary); }
 .infoText .skill b { color: var(--ui-reward); font-weight: 500; }
 .infoText .start { color: var(--ui-reward); }
-.classRow { display: flex; flex-wrap: wrap; gap: 4px; }
-.mini .tile { display: block; width: 28px; height: 28px; }
+.classBlock { flex: none; }
+.classTitle { margin: 0 0 4px; font: var(--type-stat); color: var(--ui-reward); }
+.classRow { display: flex; flex-wrap: wrap; gap: 6px 4px; }
+.mini { width: 52px; display: flex; flex-direction: column; align-items: center; gap: 1px; transition: filter .2s, opacity .2s; }
+.mini .tile { display: block; width: 40px; height: 40px; }
+.mini small { max-width: 100%; overflow: hidden; font: var(--type-caption); color: var(--text-muted); white-space: nowrap; text-overflow: ellipsis; }
 .createInfo > .btn { min-height: 44px; padding: 8px 16px; }
 
 .nameRow { display: flex; align-items: center; gap: 6px; }

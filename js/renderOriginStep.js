@@ -1,32 +1,32 @@
-// Экран «Происхождение». Слева две колонки: сверху иконки фракций, под ними по три расы,
-// внизу посередине — нейтральная Пресса. Справа — описание выбранного и классы
-// (доступные — цветные, недоступные — чёрно-белые), внизу «Выбрать класс».
+// Экран «Происхождение». Слева две колонки: сверху Совет и Союз, под каждой по три расы,
+// внизу посередине — Пресса (фракция и раса сразу). Справа — описание выбранного,
+// под ним «Доступные классы» (классы расы — цветные, остальные классы фракции — чёрно-белые)
+// и кнопка «Выбрать класс».
 function renderOriginStep() {
   const d = creation.draft;
   const left = document.getElementById('createLeft');
   left.className = 'panel originGrid';
   left.innerHTML = '';
-  for (const f of FACTIONS)
+  const sides = FACTIONS.filter(f => f.id !== 'press');
+  for (const f of sides)
     left.appendChild(originButton(f, { selected: d.factionId === f.id }, () => pickFaction(f.id), 'faction'));
-  // расы по строкам: слева Совет, справа Союз
-  const byFaction = FACTIONS.map(f => RACES.filter(r => r.factionId === f.id));
-  for (let i = 0; i < 3; i++) {
-    for (const list of byFaction) {
-      const r = list[i];
-      const dim = !!d.factionId && r.factionId !== d.factionId;
-      left.appendChild(originButton(r, { selected: d.raceId === r.id, dim }, () => pickRace(r.id), 'race'));
-    }
-  }
+  const byFaction = sides.map(f => RACES.filter(r => r.factionId === f.id));
+  const dimRace = r => !!d.factionId && r.factionId !== d.factionId;
+  for (let i = 0; i < 3; i++)
+    for (const list of byFaction)
+      left.appendChild(originButton(list[i], { selected: d.raceId === list[i].id, dim: dimRace(list[i]) },
+        () => pickRace(list[i].id), 'race'));
   const press = findById(RACES, 'press');
-  left.appendChild(originButton(press, { selected: d.raceId === 'press' }, () => pickRace('press'), 'race press'));
+  left.appendChild(originButton(press, { selected: d.raceId === 'press', dim: dimRace(press) },
+    () => pickRace('press'), 'race press'));
 
   const right = document.getElementById('createRight');
   right.className = 'panel createInfo';
   right.innerHTML = '';
   const race = findById(RACES, d.raceId);
-  const faction = findById(FACTIONS, d.factionId) || (d.raceId === 'press' ? PRESS_NEUTRAL : null);
-  if (!race && !faction) {
-    right.innerHTML = '<p class="hint">Выберите фракцию или расу. Пресса нейтральна: с фракцией она становится её прессой.</p>';
+  const faction = findById(FACTIONS, d.factionId);
+  if (!faction) {
+    right.innerHTML = '<p class="hint">Выберите фракцию или расу. Пресса — отдельная нейтральная фракция посередине.</p>';
     return;
   }
   const info = document.createElement('div');
@@ -36,45 +36,40 @@ function renderOriginStep() {
     if (cls) el.className = cls;
     el.textContent = text;
     info.appendChild(el);
-    return el;
   };
+  add('h3', race ? race.name : faction.name);
+  add('p', race && race.id !== 'press' ? faction.name : faction.alias, 'sub');
   if (race) {
-    add('h3', race.name);
-    add('p', race.id === 'press'
-      ? (faction.id ? 'Пресса фракции «' + faction.name + '»' : 'Нейтральная пресса, без фракции')
-      : faction.name, 'sub');
-    const start = startZoneOf(race.id, d.factionId);
+    const start = startZoneOf(race.id);
     add('p', 'Начинает игру: ' + start.name + ' (ур. ' + start.min + '–' + start.max + ')', 'start');
     add('p', race.note, 'note');
-  } else {
-    add('h3', faction.name);
-    add('p', faction.alias, 'sub');
   }
-  // куда может попасть: свои локации фракции и нейтральные (нейтральная Пресса — все)
-  const own = ZONES.filter(z => z.factionId === faction.id).map(z => z.name);
-  add('p', faction.id ? 'Локации: ' + own.join(', ') + ' и нейтральные' : 'Локации: все — обеих фракций и нейтральные', 'sub');
   add('p', faction.motto, 'motto');
   add('p', faction.description);
+  const own = ZONES.filter(z => z.factionId === faction.id).map(z => z.name);
+  add('p', own.length ? 'Локации: ' + own.join(', ') + ' и нейтральные' : 'Локации: все — обеих фракций и нейтральные', 'sub');
   right.appendChild(info);
 
-  // классы фракции: доступные выбранной расе — цветные, остальные — чёрно-белые
-  const list = factionClassList(d.factionId, d.raceId);
-  const allowed = race ? raceClasses(race.id, d.factionId) : null;
-  const row = document.createElement('div');
-  row.className = 'classRow';
-  for (const c of list) {
+  // «Доступные классы» фракции: доступные выбранной расе — цветные, остальные — чёрно-белые
+  const allowed = race ? raceClasses(race.id) : null;
+  const block = document.createElement('div');
+  block.className = 'classBlock';
+  block.innerHTML = '<p class="classTitle">Доступные классы</p><div class="classRow"></div>';
+  const row = block.lastChild;
+  for (const c of factionClassList(faction.id)) {
     const tile = document.createElement('span');
     tile.className = 'mini' + (allowed && !allowed[c.id] ? ' dim' : '');
     tile.title = c.name;
-    tile.innerHTML = iconTile(c.icon, c.color);
+    tile.innerHTML = iconTile(c.icon, c.color) + '<small></small>';
+    tile.querySelector('small').textContent = c.name.replace('‑Репортёр', '');
     row.appendChild(tile);
   }
-  right.appendChild(row);
+  right.appendChild(block);
 
   const next = document.createElement('button');
   next.type = 'button';
   next.className = 'btn green';
-  next.textContent = 'Выбрать класс';
+  next.textContent = race ? 'Выбрать класс' : 'Выберите расу';
   next.disabled = !race;
   next.addEventListener('click', () => { vibrate(); openClassStep(); });
   right.appendChild(next);

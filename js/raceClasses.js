@@ -1,7 +1,5 @@
-// Классы, доступные расе raceId во фракции factionId (null — нейтральная): { classId: bonus }.
-function raceClasses(raceId, factionId) {
+// Классы, доступные расе raceId: { classId: bonus }.
+function raceClasses(raceId) {
   const race = findById(RACES, raceId);
-  if (!race) return {};
-  if (race.classesByFaction) return race.classesByFaction[factionId || 'none'] || {};
-  return race.classes;
+  return race ? race.classes : {};
 }

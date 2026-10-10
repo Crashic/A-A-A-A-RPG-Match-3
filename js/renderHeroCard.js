@@ -14,7 +14,7 @@ function renderHeroCard() {
     ['Пол', findById(GENDERS, hero.genderId)],
     ['Раса', findById(RACES, hero.raceId)],
     ['Класс', findById(CLASSES, hero.classId)],
-    ['Фракция', findById(FACTIONS, hero.factionId) || { name: 'Нейтралы' }]
+    ['Фракция', findById(FACTIONS, hero.factionId)]
   ];
   const list = document.getElementById('heroCardStats');
   list.innerHTML = '';

@@ -1,5 +1,4 @@
-// Стартовая локация расы (для Прессы — по фракции). Возвращает зону из ZONES.
-function startZoneOf(raceId, factionId) {
-  if (raceId === 'press') return findById(ZONES, PRESS_START[factionId || 'none']);
+// Стартовая локация расы (Пресса начинает на нейтральном «Переходе»). Возвращает зону из ZONES.
+function startZoneOf(raceId) {
   return ZONES.find(z => z.start.includes(raceId)) || ZONES[0];
 }

@@ -69,7 +69,7 @@ const ZONES = [
       { id: 'ratking',   name: 'Крысиный король',       level: 46, hp: 1.1, atk: 1.0 },
       { id: 'warden',    name: 'Смотритель станции',    level: 50, hp: 1.0, atk: 1.0, elite: true }
     ] },
-  { id: 'perehod', name: 'Пересадочный узел «Переход»', factionId: null, start: [], min: 25, max: 40,
+  { id: 'perehod', name: 'Пересадочный узел «Переход»', factionId: null, start: ['press'], min: 25, max: 40,
     gems: [],
     description: 'Старый пересадочный узел между районами — ничейная территория с рынком, обменными пунктами и наблюдательными постами.',
     field: 'Фишки всех типов поровну.',
@@ -103,5 +103,3 @@ const ZONES = [
       { id: 'colossus',  name: 'Ржавый колосс',         level: 60, hp: 1.2, atk: 1.1, elite: true }
     ] }
 ];
-// Где начинает Пресса: с фракцией — в первой локации фракции, нейтральная — на «Переходе»
-const PRESS_START = { council: 'rassvet', union: 'kanistry', none: 'perehod' };

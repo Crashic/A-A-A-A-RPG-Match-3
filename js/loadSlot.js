@@ -8,5 +8,6 @@ function loadSlot(n) {
   if (!save || !save.classId) return null;
   if (save.tape === undefined) save.tape = save.gold || 0;
   delete save.gold;
+  if (save.raceId === 'press') save.factionId = 'press'; // в 0.3.0 Пресса была при Совете/Союзе
   return Object.assign({ level: 1, xp: 0, tape: 0, lastEnemy: null }, save);
 }

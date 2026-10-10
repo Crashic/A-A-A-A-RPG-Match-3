@@ -7,5 +7,6 @@ function describeCharacter(hero, withGender = false) {
     findById(CLASSES, hero.classId),
     findById(FACTIONS, hero.factionId)
   ];
-  return parts.filter(Boolean).map(x => x.name).join(' · ');
+  const names = parts.filter(Boolean).map(x => x.name);
+  return names.filter((n, i) => names.indexOf(n) === i).join(' · '); // «Пресса» — и раса, и фракция
 }
