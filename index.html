@@ -24,6 +24,7 @@
     </button>
     <button id="btnProfile" class="menuBtn" type="button">Профиль</button>
     <button id="btnSettings" class="menuBtn" type="button">Настройки</button>
+    <button id="btnExit" class="menuBtn" type="button">Выход</button>
   </nav>
   <button id="ver" type="button"></button>
 </section>
@@ -52,6 +53,13 @@
 <section id="game" class="screen">
   <header class="screenHead"><button class="back" type="button" data-back aria-label="В меню">‹</button><h2>Игра</h2></header>
   <p id="gameInfo" class="hint"></p>
+</section>
+
+<!-- Экран после «Выхода», если браузер не дал закрыть вкладку -->
+<section id="bye" class="screen">
+  <h1>A-A-A-A<br><span>Match 3 RPG</span></h1>
+  <p class="hint">Игра закрыта. Можно закрыть вкладку.</p>
+  <button id="btnReturn" class="menuBtn" type="button">Вернуться в игру</button>
 </section>
 
 <div id="changelog" class="modal">
@@ -102,6 +110,7 @@
 <script src="js/registerServiceWorker.js"></script>
 <script src="js/openChangelog.js"></script>
 <script src="js/closeChangelog.js"></script>
+<script src="js/exitApp.js"></script>
 <script src="js/setupChangelog.js"></script>
 <script src="js/setupMenu.js"></script>
 <script src="js/main.js"></script>

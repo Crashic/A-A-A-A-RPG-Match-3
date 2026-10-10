@@ -36,6 +36,7 @@ const FILES = [
   './js/registerServiceWorker.js',
   './js/openChangelog.js',
   './js/closeChangelog.js',
+  './js/exitApp.js',
   './js/setupChangelog.js',
   './js/setupMenu.js',
   './js/main.js',

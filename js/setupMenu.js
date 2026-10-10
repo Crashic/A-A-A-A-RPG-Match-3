@@ -5,6 +5,8 @@ function setupMenu() {
   on('btnStart', startGame);
   on('btnProfile', () => { renderProfile(); showScreen('profile'); });
   on('btnSettings', () => { renderSettings(); showScreen('settings'); });
+  on('btnExit', exitApp);
+  on('btnReturn', () => { renderMenu(); showScreen('menu', false); });
   document.querySelectorAll('[data-back]').forEach(b =>
     b.addEventListener('click', () => { vibrate(); goBack(); }));
 
@@ -35,6 +37,14 @@ function setupMenu() {
       resetAllSaves();
       showToast('Все сохранения удалены');
     }));
+
+  // Esc на ПК: закрывает окно, иначе возвращает в меню
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    const open = document.querySelector('.modal.open');
+    if (open) open.classList.remove('open');
+    else if (!document.getElementById('menu').classList.contains('active')) goBack();
+  });
 
   // Кнопка «Назад» телефона возвращает в меню
   window.addEventListener('popstate', () => {

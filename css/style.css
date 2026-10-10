@@ -36,6 +36,12 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 .screen.active { display: flex; }
 
+/* На ПК и планшете всё держится узкой колонкой по центру */
+.screen { width: 100%; max-width: 480px; margin: 0 auto; }
+
+#bye { align-items: center; justify-content: center; gap: 24px; text-align: center; }
+#bye .menuBtn { width: 100%; max-width: 300px; }
+
 #menu { align-items: center; justify-content: center; gap: 48px; text-align: center; }
 
 h1 {
@@ -113,6 +119,24 @@ h1 span {
 }
 
 .menuBtn.danger { border-color: var(--danger); color: #ff8a80; }
+
+#btnExit { color: var(--muted); }
+
+/* Наведение мышью (ПК) */
+@media (hover: hover) {
+  .menuBtn:hover { background: var(--panel2); border-color: var(--muted); }
+  .menuBtn.primary:hover { background: linear-gradient(#4a3a20, #2e2416); border-color: var(--accent); }
+  .menuBtn.danger:hover { border-color: #ff8a80; }
+  .slotInfo:hover, .slotDelete:hover, .back:hover, #changelogClose:hover { background: var(--panel2); }
+  #ver:hover { color: var(--text); }
+}
+
+/* Широкий экран */
+@media (min-width: 768px) {
+  h1 { font-size: 56px; }
+  h1 span { font-size: 26px; }
+  #menu { gap: 56px; }
+}
 
 #btnResetSaves { margin-top: 24px; }
 
