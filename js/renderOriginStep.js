@@ -41,7 +41,7 @@ function renderOriginStep() {
   add('p', race && race.id !== 'press' ? faction.name : faction.alias, 'sub');
   if (race) {
     if (race.id === 'press') {
-      add('p', 'Начинает игру по фракции класса: Совет — «Рассвет», Союз — «Три Канистры», Хронист — «Переход»', 'start');
+      add('p', 'Начинает игру по фракции класса: Совет — «Учёт и Ржавчина», Союз — «Ветер и Торговля», Хронист — «Учёт и Ржавчина»', 'start');
     } else {
       const start = startZoneOf(race.id);
       add('p', 'Начинает игру: ' + start.name + ' (ур. ' + start.min + '–' + start.max + ')', 'start');

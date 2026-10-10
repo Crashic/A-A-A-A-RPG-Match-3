@@ -152,6 +152,7 @@ const FILES = [
   './js/setBar.js',
   './js/buildFighterPanel.js',
   './js/renderFighterPanel.js',
+  './js/renderEnemySkill.js',
   './js/renderBattle.js',
   './js/swapAndResolve.js',
   './js/listMoves.js',
