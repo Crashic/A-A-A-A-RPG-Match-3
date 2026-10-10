@@ -8,14 +8,16 @@ function setupBoardInput() {
     const cell = cellFromPoint(e.clientX, e.clientY);
     if (!cell) return;
     clearHint();
-    drag = { cell, x: e.clientX, y: e.clientY, moved: false };
+    const start = toAppPoint(e.clientX, e.clientY);
+    drag = { cell, x: start.x, y: start.y, moved: false };
     board.setPointerCapture(e.pointerId);
   });
 
   board.addEventListener('pointermove', e => {
     if (!drag || drag.moved || !match3 || match3.busy) return;
-    const dx = e.clientX - drag.x;
-    const dy = e.clientY - drag.y;
+    const now = toAppPoint(e.clientX, e.clientY);
+    const dx = now.x - drag.x;
+    const dy = now.y - drag.y;
     const limit = match3.layout.cell * 0.35;
     if (Math.max(Math.abs(dx), Math.abs(dy)) < limit) return;
     drag.moved = true;

@@ -4,6 +4,10 @@
    Цвета, отступы и радиусы — только переменные из css/tokens.css. */
 
 :root {
+  /* Размер экрана приложения (в повёрнутом режиме меняются местами — см. конец файла) */
+  --app-w: 100vw;
+  --app-h: 100dvh;
+
   /* Общие слои «стекла» из GlassOverlays */
   --glass-top: radial-gradient(150% 95% at 50% -42%, rgba(255,255,255,.45) 0, rgba(255,255,255,.06) 70%, rgba(255,255,255,0) 71%);
   --rim: 3px;
@@ -33,7 +37,7 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; }
   display: none;
   width: 100%;
   max-width: 480px;
-  min-height: 100vh;
+  min-height: var(--app-h);
   margin: 0 auto;
   flex-direction: column;
   gap: var(--space-4);
@@ -429,7 +433,7 @@ h1 {
   position: relative;
   overflow: hidden;
   max-width: none;
-  height: 100vh;
+  height: var(--app-h);
   padding: 0;
   background: #000;
 }
@@ -450,7 +454,7 @@ h1 {
   position: absolute;
   left: 50%;
   top: 100%;
-  width: min(86vw, 520px);
+  width: min(calc(var(--app-w) * .86), 520px);
   color: var(--ui-reward);
   font: var(--type-body-strong);
   font-size: 22px;
@@ -690,8 +694,8 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
   align-items: stretch;
   gap: 12px;
   max-width: none;
-  height: 100vh;
-  height: 100dvh;
+  height: var(--app-h);
+
   padding-top: 0;
   padding-bottom: 0;
 }
@@ -709,31 +713,26 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 
 .boardWrap {
   flex: none;
-  width: min(100vh, 100dvh, 60vw);
+  width: min(var(--app-h), calc(var(--app-w) * .6));
   height: 100%;
 }
 
-/* Подсказка повернуть телефон (только на сенсорных экранах в вертикальном положении) */
-#rotateHint {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  padding: 24px;
-  background: var(--bg-canvas);
-  color: var(--text-primary);
-  text-align: center;
-}
-
-#rotateHint svg { animation: rotateHint 2s ease-in-out infinite; color: var(--ui-reward); }
-#rotateHint p { margin: 0; font: var(--type-button); }
-
-@keyframes rotateHint { 0%, 20% { transform: rotate(0); } 60%, 100% { transform: rotate(-90deg); } }
-
+/* Телефон держат вертикально (или выключен автоповорот): приложение рисуется
+   повёрнутым на 90° на весь экран — достаточно повернуть телефон в руках.
+   Размеры экрана приложения — --app-w × --app-h (в повёрнутом режиме меняются местами).
+   Касания пересчитываются в js/toAppPoint.js. */
 @media (orientation: portrait) and (pointer: coarse) {
-  #rotateHint { display: flex; }
+  body {
+    --app-w: 100dvh;
+    --app-h: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100dvh;
+    height: 100vw;
+    min-height: 0;
+    overflow: hidden;
+    transform-origin: 0 0;
+    transform: translateX(100vw) rotate(90deg);
+  }
 }
