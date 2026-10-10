@@ -83,10 +83,13 @@
 <!-- Игра (пока заглушка) -->
 <section id="game" class="screen">
   <header class="screenHead">
-    <button class="btn stone round back" type="button" data-back aria-label="В меню"></button>
     <div class="ribbon">Игра</div>
   </header>
   <div class="panel"><p id="gameInfo" class="hint"></p></div>
+  <!-- Временно, пока нет игры: выход в главное меню -->
+  <footer class="createNav">
+    <button id="gameToMenu" class="btn stone" type="button" data-back>В главное меню</button>
+  </footer>
 </section>
 
 <!-- Экран после «Выхода», если браузер не дал закрыть вкладку -->
