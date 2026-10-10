@@ -1,5 +1,7 @@
-// Может ли персонаж попасть в локацию: свои фракционные и нейтральные; Пресса — везде.
+// Может ли персонаж попасть в локацию: локации своей стороны (mapSide) и нейтральные;
+// Свободный Хронист — во все.
 function zoneAllowed(hero, zone) {
-  if (!zone.factionId || !hero || !hero.factionId || hero.factionId === 'press') return true;
-  return zone.factionId === hero.factionId;
+  if (!zone.factionId || !hero) return true;
+  const side = mapSide(hero.raceId, hero.factionId, hero.classId);
+  return !side || zone.factionId === side;
 }

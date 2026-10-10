@@ -40,14 +40,19 @@ function renderOriginStep() {
   add('h3', race ? race.name : faction.name);
   add('p', race && race.id !== 'press' ? faction.name : faction.alias, 'sub');
   if (race) {
-    const start = startZoneOf(race.id);
-    add('p', 'Начинает игру: ' + start.name + ' (ур. ' + start.min + '–' + start.max + ')', 'start');
+    if (race.id === 'press') {
+      add('p', 'Начинает игру по фракции класса: Совет — «Рассвет», Союз — «Три Канистры», Хронист — «Переход»', 'start');
+    } else {
+      const start = startZoneOf(race.id);
+      add('p', 'Начинает игру: ' + start.name + ' (ур. ' + start.min + '–' + start.max + ')', 'start');
+    }
     add('p', race.note, 'note');
   }
   add('p', faction.motto, 'motto');
   add('p', faction.description);
   const own = ZONES.filter(z => z.factionId === faction.id).map(z => z.name);
-  add('p', own.length ? 'Локации: ' + own.join(', ') + ' и нейтральные' : 'Локации: все — обеих фракций и нейтральные', 'sub');
+  add('p', own.length ? 'Локации: ' + own.join(', ') + ' и нейтральные'
+    : 'Локации: фракции своего класса и нейтральные (Хронист — все)', 'sub');
   right.appendChild(info);
 
   // «Доступные классы» фракции: доступные выбранной расе — цветные, остальные — чёрно-белые
@@ -56,14 +61,17 @@ function renderOriginStep() {
   block.className = 'classBlock';
   block.innerHTML = '<p class="classTitle">Доступные классы</p><div class="classRow"></div>';
   const row = block.lastChild;
-  for (const c of factionClassList(faction.id)) {
+  const mini = c => {
     const tile = document.createElement('span');
     tile.className = 'mini' + (allowed && !allowed[c.id] ? ' dim' : '');
     tile.title = c.name;
     tile.innerHTML = iconTile(c.icon, c.color) + '<small></small>';
     tile.querySelector('small').textContent = c.name.replace('‑Репортёр', '');
-    row.appendChild(tile);
-  }
+    return tile;
+  };
+  // у Прессы — две колонки по фракциям классов, Хронист посередине
+  if (faction.id === 'press') fillPressColumns(row, mini, true);
+  else for (const c of factionClassList(faction.id)) row.appendChild(mini(c));
   right.appendChild(block);
 
   const next = document.createElement('button');

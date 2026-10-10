@@ -3,7 +3,7 @@
 function renderMap() {
   const save = loadSlot(getActiveSlot());
   const level = save ? save.level : 1;
-  const start = save ? startZoneOf(save.raceId) : ZONES[0];
+  const start = save ? startZoneOf(save.raceId, save.classId) : ZONES[0];
   if (!mapZoneId) {
     const last = save && zoneOfEnemy(save.lastEnemy);
     mapZoneId = (last && zoneAllowed(save, last) ? last : start).id;

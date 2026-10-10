@@ -457,6 +457,15 @@ h1 {
 .infoText .skill b { color: var(--ui-reward); font-weight: 500; }
 .infoText .start { color: var(--ui-reward); }
 .classBlock { flex: none; }
+/* Классы Прессы: две колонки по фракциям, Хронист посередине */
+.classGrid.pressCols { grid-template-columns: 1fr 1fr; grid-auto-rows: auto; }
+.pressCols .pick.cls { flex-direction: row; gap: 6px; padding: 5px 6px; font: var(--type-menu); font-size: 13px; }
+.colTitle { margin: 0; font: var(--type-caption); font-weight: 500; color: var(--ui-reward); text-align: center; }
+.pressCols .neutral { grid-column: 1 / -1; justify-self: center; width: 62%; }
+.classRow.pressGroups { flex-wrap: nowrap; gap: 10px; }
+.pressGroup { display: flex; flex-direction: column; gap: 2px; }
+.groupRow { display: flex; gap: 2px; }
+.pressGroup .mini { width: 46px; }
 .classTitle { margin: 0 0 4px; font: var(--type-stat); color: var(--ui-reward); }
 .classRow { display: flex; flex-wrap: wrap; gap: 6px 4px; }
 .mini { width: 52px; display: flex; flex-direction: column; align-items: center; gap: 1px; transition: filter .2s, opacity .2s; }

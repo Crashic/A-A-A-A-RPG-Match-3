@@ -9,11 +9,13 @@ function renderClassStep() {
   const left = document.getElementById('createLeft');
   left.className = 'panel classGrid';
   left.innerHTML = '';
-  for (const c of list)
-    left.appendChild(originButton(c, { selected: d.classId === c.id, dim: !allowed[c.id] }, () => {
-      d.classId = c.id;
-      renderCreateStep();
-    }, 'cls'));
+  const tile = c => originButton(c, { selected: d.classId === c.id, dim: !allowed[c.id] }, () => {
+    d.classId = c.id;
+    renderCreateStep();
+  }, 'cls');
+  // у Прессы — две колонки с названием фракции класса сверху, Хронист посередине внизу
+  if (d.raceId === 'press') fillPressColumns(left, tile);
+  else for (const c of list) left.appendChild(tile(c));
 
   const right = document.getElementById('createRight');
   right.className = 'panel createInfo';
@@ -25,7 +27,10 @@ function renderClassStep() {
     const bonus = allowed[cls.id];
     info.innerHTML = '<h3></h3><p class="sub"></p><p></p><p class="skill"><b>Навык: </b><span></span></p>';
     info.querySelector('h3').textContent = cls.name;
-    info.querySelector('.sub').textContent = race.name + ': ' + (bonus ? bonus.text : 'класс недоступен');
+    const side = bonus && race.id === 'press' ? findById(FACTIONS, bonus.side) : null;
+    const start = startZoneOf(race.id, cls.id);
+    info.querySelector('.sub').textContent = race.name + (race.id === 'press' ? (side ? ' · ' + side.name : ' · нейтральный') : '') +
+      ': ' + (bonus ? bonus.text : 'класс недоступен') + (bonus ? ' · старт: ' + start.name : '');
     info.querySelectorAll('p')[1].textContent = cls.description;
     info.querySelector('.skill span').textContent = cls.skill + ' (в разработке)';
   }
