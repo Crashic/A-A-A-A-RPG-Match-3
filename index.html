@@ -16,14 +16,24 @@
 <div id="app">
   <h1>A-A-A-A<br><span>Match 3 RPG</span></h1>
   <p id="status">Игра в разработке</p>
-  <div id="ver"></div>
+  <button id="ver" type="button"></button>
+</div>
+<div id="changelog">
+  <div class="panel">
+    <div class="panelHead"><h2>Список изменений</h2><button id="changelogClose" type="button">✕</button></div>
+    <div id="changelogList"></div>
+  </div>
 </div>
 <div id="toast"></div>
 <script src="js/version.js"></script>
+<script src="js/changelog.js"></script>
 <script src="js/showVersion.js"></script>
 <script src="js/showToast.js"></script>
 <script src="js/registerServiceWorker.js"></script>
 <script src="js/enterFullscreen.js"></script>
+<script src="js/openChangelog.js"></script>
+<script src="js/closeChangelog.js"></script>
+<script src="js/setupChangelog.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
