@@ -1,5 +1,5 @@
 // Карта врагов: слева 9 локаций (чужие фракционные — закрыты, чёрно-белые; «Старт» — стартовая),
-// справа описание выбранной локации и её враги. Цвет уровня — сложность для героя, как в WoW.
+// справа описание выбранной локации и её враги (уровень, имя, мини-описание, опыт). Цвет уровня — сложность для героя, как в WoW.
 function renderMap() {
   const save = loadSlot(getActiveSlot());
   const level = save ? save.level : 1;
@@ -41,7 +41,10 @@ function renderMap() {
     b.type = 'button';
     b.className = 'enemyCard' + (save && save.lastEnemy === e.id ? ' current' : '') + (open ? '' : ' locked');
     b.disabled = !open;
-    b.innerHTML = '<span class="enemyLvl"></span><b></b><span class="enemyXp"></span>';
+    b.innerHTML = '<span class="enemyHead"><span class="enemyLvl"></span><b></b></span>' +
+      '<span class="enemyAbout"></span><span class="enemyXp"></span>';
+    b.title = e.description;
+    b.querySelector('.enemyAbout').textContent = e.short;
     const lvl = b.querySelector('.enemyLvl');
     lvl.textContent = e.level;
     lvl.classList.add('lvl-' + difficultyOf(level, e.level));

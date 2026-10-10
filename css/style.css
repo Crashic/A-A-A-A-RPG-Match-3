@@ -313,9 +313,9 @@ h1 {
   overflow: hidden;
   font: var(--type-button); letter-spacing: var(--type-button-ls);
   color: var(--ui-reward);
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; /* длинные имена врагов — в две строки */
 }
+.enemy .fighterHead b { font-size: 15px; line-height: 19px; overflow-wrap: anywhere; }
 .fighterHead span { overflow: hidden; font: var(--type-small); color: var(--text-muted); white-space: nowrap; text-overflow: ellipsis; }
 
 /* Полоса — тёмная «таблетка» в золотом ободке (Panels), заливка — цвет ресурса */
@@ -530,8 +530,10 @@ h1 {
 }
 .enemyCard.current { box-shadow: inset 0 0 0 2px var(--ui-reward); }
 .enemyCard:active { transform: scale(.97); }
-.enemyCard b { font: var(--type-body-strong); text-align: center; }
-.enemyLvl { font: var(--type-score); font-size: 22px; line-height: 1; font-variant-numeric: tabular-nums; }
+.enemyHead { display: flex; align-items: baseline; justify-content: center; gap: 6px; max-width: 100%; }
+.enemyCard b { font: var(--type-small); font-weight: 600; color: var(--text-primary); text-align: center; }
+.enemyLvl { flex: none; font: var(--type-heading); font-size: 18px; line-height: 1; font-variant-numeric: tabular-nums; }
+.enemyAbout { font: var(--type-caption); color: var(--text-secondary); text-align: center; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .enemyXp { font: var(--type-caption); color: var(--text-muted); }
 @media (hover: hover) { .zone:hover, .enemyCard:hover { filter: brightness(1.15); } }
 
