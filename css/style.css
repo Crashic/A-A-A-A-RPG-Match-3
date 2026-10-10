@@ -342,7 +342,6 @@ h1 {
 
 /* ---------- Игра «3 в ряд» (BoardSample, GemsElemental) ---------- */
 
-#game { gap: var(--space-2); }
 
 .gameHead {
   display: flex;
@@ -360,11 +359,9 @@ h1 {
 #gameHeroInfo { font: var(--type-small); color: var(--text-muted); }
 
 .boardWrap {
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 88px; /* место под нижней кнопкой */
 }
 
 /* Поле приглушённое, фишки насыщенные: холст bg-canvas, клетки bg-cell */
@@ -618,7 +615,7 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 #toast {
   position: fixed;
   left: 50%;
-  bottom: calc(env(safe-area-inset-bottom, 0px) + 100px);
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
   z-index: 20;
   width: max-content;
   max-width: calc(100% - 32px);
@@ -640,4 +637,103 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 
 @media (min-width: 768px) {
   h1 { font-size: 64px; }
+}
+
+/* =====================================================================
+   Горизонтальная ориентация: всё приложение «лёжа» (телефон ~820×360).
+   ===================================================================== */
+
+.screen {
+  max-width: 960px;
+  padding-left: calc(env(safe-area-inset-left, 0px) + var(--space-4));
+  padding-right: calc(env(safe-area-inset-right, 0px) + var(--space-4));
+  padding-top: calc(env(safe-area-inset-top, 0px) + 12px);
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px);
+}
+
+/* Меню: слева логотип, справа персонаж и кнопки */
+#menu { flex-direction: row; gap: 48px; }
+#menu .logo { flex: none; }
+.menuButtons { max-width: 440px; gap: 12px; }
+.btn.big { min-height: 64px; }
+.menuRow { display: flex; gap: 10px; }
+.menuRow .btn { flex: 1; min-width: 0; min-height: 52px; padding: 10px 8px; }
+#heroCardStats { grid-template-columns: auto 1fr auto 1fr; }
+
+/* Персонажи: три ячейки в ряд */
+#slotList { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.slot { min-width: 0; }
+.slotInfo { min-width: 0; }
+.slotInfo b, .slotInfo span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.slotInfo span:first-of-type { white-space: normal; }
+
+/* Создание персонажа: варианты в несколько колонок */
+.choiceGrid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+.choice { min-height: 56px; }
+#create .panel { margin-bottom: 76px; }
+.createNav { max-width: 960px; padding-top: 8px; padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 10px); }
+.createHead { margin: 0; }
+
+/* Настройки: две колонки */
+.settingsList { display: grid; grid-template-columns: 1fr 1fr; margin-bottom: var(--space-4); }
+.setRow { border-bottom: 0; border-top: 2px solid var(--bg-canvas); }
+.setRow:nth-child(-n+2) { border-top: 0; }
+.settingsList { margin-bottom: 0; }
+#btnResetSaves { width: 100%; min-height: 44px; padding: 8px 12px; font: var(--type-menu); }
+
+/* Экран «игра закрыта» */
+#bye { flex-direction: row; }
+
+/* Игра: герой слева, поле по центру на всю высоту, справа место под врага */
+#game {
+  flex-direction: row;
+  align-items: stretch;
+  gap: 12px;
+  max-width: none;
+  height: 100vh;
+  height: 100dvh;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.gameSide {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: calc(env(safe-area-inset-top, 0px) + 12px) 0 calc(env(safe-area-inset-bottom, 0px) + 12px);
+}
+
+.gameSide .btn { align-self: stretch; }
+
+.boardWrap {
+  flex: none;
+  width: min(100vh, 100dvh, 60vw);
+  height: 100%;
+}
+
+/* Подсказка повернуть телефон (только на сенсорных экранах в вертикальном положении) */
+#rotateHint {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px;
+  background: var(--bg-canvas);
+  color: var(--text-primary);
+  text-align: center;
+}
+
+#rotateHint svg { animation: rotateHint 2s ease-in-out infinite; color: var(--ui-reward); }
+#rotateHint p { margin: 0; font: var(--type-button); }
+
+@keyframes rotateHint { 0%, 20% { transform: rotate(0); } 60%, 100% { transform: rotate(-90deg); } }
+
+@media (orientation: portrait) and (pointer: coarse) {
+  #rotateHint { display: flex; }
 }

@@ -86,6 +86,7 @@ const FILES = [
   './js/playIntro.js',
   './js/enterGame.js',
   './js/startGame.js',
+  './js/lockLandscape.js',
   './js/setFullscreen.js',
   './js/enterFullscreen.js',
   './js/registerServiceWorker.js',

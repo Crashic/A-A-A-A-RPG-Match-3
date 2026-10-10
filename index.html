@@ -31,9 +31,11 @@
       <span id="btnStartLabel">Начать игру</span>
       <small id="btnStartSub"></small>
     </button>
-    <button id="btnCharacters" class="btn stone" type="button">Персонажи</button>
-    <button id="btnSettings" class="btn stone" type="button">Настройки</button>
-    <button id="btnExit" class="btn red" type="button">Выход</button>
+    <div class="menuRow">
+      <button id="btnCharacters" class="btn stone" type="button">Персонажи</button>
+      <button id="btnSettings" class="btn stone" type="button">Настройки</button>
+      <button id="btnExit" class="btn red" type="button">Выход</button>
+    </div>
   </nav>
   <button id="ver" type="button"></button>
 </section>
@@ -79,28 +81,37 @@
       <label class="setRow"><span>Вибрация</span><input id="set-vibration" type="checkbox" class="switch"></label>
       <label class="setRow"><span>Полноэкранный режим</span><input id="set-fullscreen" type="checkbox" class="switch"></label>
       <label class="setRow"><span>Оповещения</span><input id="set-notifications" type="checkbox" class="switch"></label>
+      <div class="setRow"><button id="btnResetSaves" class="btn red" type="button">Удалить всех персонажей</button></div>
     </div>
-    <button id="btnResetSaves" class="btn red" type="button">Удалить всех персонажей</button>
   </div>
 </section>
 
 <!-- Игра (пока заглушка) -->
 <section id="game" class="screen">
-  <header class="gameHead">
-    <b id="gameHeroName"></b>
-    <span id="gameHeroInfo"></span>
-  </header>
+  <!-- Слева — герой, по центру — поле на всю высоту, справа — место под врага -->
+  <aside class="gameSide">
+    <header class="gameHead">
+      <b id="gameHeroName"></b>
+      <span id="gameHeroInfo"></span>
+    </header>
+  </aside>
   <div class="boardWrap">
     <div id="board" class="board">
       <div id="boardCells"></div>
       <div id="boardGems"></div>
     </div>
   </div>
-  <!-- Временно, пока нет игрового меню: выход в главное меню -->
-  <footer class="createNav">
-    <button id="gameToMenu" class="btn stone" type="button" data-back>В главное меню</button>
-  </footer>
+  <aside class="gameSide">
+    <!-- Временно, пока нет игрового меню: выход в главное меню -->
+    <button id="gameToMenu" class="btn stone" type="button" data-back>В меню</button>
+  </aside>
 </section>
+
+<!-- Подсказка повернуть телефон, если он держится вертикально -->
+<div id="rotateHint">
+  <svg viewBox="0 0 48 48" width="64" height="64" aria-hidden="true"><rect x="14" y="4" width="20" height="36" rx="3" fill="none" stroke="currentColor" stroke-width="3"/><path d="M8 30 A16 16 0 0 0 30 44" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M26 40 L31 44 L26 47" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <p>Поверните телефон горизонтально</p>
+</div>
 
 <!-- Шуточная заставка после создания персонажа (текст — js/introText.js) -->
 <section id="intro" class="screen">
@@ -222,6 +233,7 @@
 <script src="js/playIntro.js"></script>
 <script src="js/enterGame.js"></script>
 <script src="js/startGame.js"></script>
+<script src="js/lockLandscape.js"></script>
 <script src="js/setFullscreen.js"></script>
 <script src="js/enterFullscreen.js"></script>
 <script src="js/registerServiceWorker.js"></script>
