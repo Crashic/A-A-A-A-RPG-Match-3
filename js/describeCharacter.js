@@ -1,7 +1,11 @@
 // Короткое описание персонажа: «Человек · Мечник · Светлые».
-function describeCharacter(hero) {
-  const race = findById(RACES, hero.raceId);
-  const cls = findById(CLASSES, hero.classId);
-  const faction = findById(FACTIONS, hero.factionId);
-  return [race, cls, faction].filter(Boolean).map(x => x.name).join(' · ');
+// withGender — добавить пол в начало: «Женский · Человек · Мечник · Светлые».
+function describeCharacter(hero, withGender = false) {
+  const parts = [
+    withGender ? findById(GENDERS, hero.genderId) : null,
+    findById(RACES, hero.raceId),
+    findById(CLASSES, hero.classId),
+    findById(FACTIONS, hero.factionId)
+  ];
+  return parts.filter(Boolean).map(x => x.name).join(' · ');
 }

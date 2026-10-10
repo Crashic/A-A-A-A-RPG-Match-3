@@ -15,7 +15,7 @@ function renderCharacters() {
     const title = document.createElement('b');
     title.textContent = hero ? hero.name : '+ Создать персонажа';
     const sub = document.createElement('span');
-    sub.textContent = hero ? describeCharacter(hero) : 'Ячейка ' + n;
+    sub.textContent = hero ? describeCharacter(hero, true) : 'Ячейка ' + n;
     info.append(title, sub);
     if (hero) {
       const date = document.createElement('span');
