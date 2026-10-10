@@ -6,8 +6,9 @@ function combatStats(level, hpMul = 1, atkMul = 1) {
     maxHp,
     attack,                                                    // урон за рубин
     shieldPerGem: Math.max(1, Math.round(attack * SHIELD_PER_ATK)),
+    healPerGem: Math.max(1, Math.round(attack * HEAL_PER_ATK)),     // лечение за траву
     maxShield: Math.round(maxHp * SHIELD_MAX_SHARE),
-    xpPerGem: Math.max(1, Math.round(mobXp(level, level) / 25)), // опыт за аметист
-    goldPerGem: 1 + Math.floor(level / 10)                      // золото за топаз
+    xpPerGem: Math.max(1, Math.round(mobXp(level, level) / 25)), // опыт за документы
+    tapePerGem: Math.round(2 + level * level / 12)              // белая изолента за радиацию
   };
 }

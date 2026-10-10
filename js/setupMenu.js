@@ -7,9 +7,13 @@ function setupMenu() {
   on('btnSettings', () => { renderSettings(); showScreen('settings'); });
   on('btnExit', exitApp);
   on('btnReturn', () => { renderMenu(); showScreen('menu', false); });
-  // Создание персонажа: «Назад» и «Далее» / «Создать» внизу экрана
+  // Создание персонажа: «Назад» (к происхождению / выход) и «Случайно»
   on('createBack', createStepBack);
-  on('createNext', createStepNext);
+  on('createRandom', randomCharacter);
+  // Своя клавиатура имени: касание мимо клавиш закрывает её
+  document.getElementById('keyboard').addEventListener('click', e => {
+    if (e.target.id === 'keyboard') closeKeyboard();
+  });
 
   // Бой: карта врагов и окно итогов
   on('btnMap', openMap);
@@ -61,6 +65,7 @@ function setupMenu() {
   // Кнопка «Назад» телефона: возврат на предыдущий экран (для создания персонажа — отмена)
   window.addEventListener('popstate', () => {
     document.getElementById('confirm').classList.remove('open');
+    document.getElementById('keyboard').classList.remove('open');
     if (history.state && history.state.screen !== 'game') closeBattleResult();
     let id = (history.state && history.state.screen) || 'menu';
     if (id === 'create' && !creation) id = 'menu';

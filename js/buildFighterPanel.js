@@ -1,5 +1,5 @@
 // Создаёт содержимое панели бойца (один раз): имя, строка уровня, полосы.
-// У игрока ещё опыт и золото.
+// У игрока ещё опыт и изолента.
 function buildFighterPanel(panel, isHero) {
   const manaBars = MANA_COLORS.map(id =>
     `<div class="bar mana ${id}" data-bar="${id}" title="Мана"><i></i><span></span></div>`).join('');
@@ -10,7 +10,7 @@ function buildFighterPanel(panel, isHero) {
     `<div class="manaRow">${manaBars}</div>` +
     (isHero
       ? '<div class="bar xp" data-bar="xp"><i></i><span></span></div>' +
-        '<div class="fighterGold"><span class="coin"></span><b data-f="gold"></b></div>'
-      : '<div class="fighterReward" data-f="reward"></div>');
+        '<div class="fighterTape" data-f="tape"></div>'
+      : '');
   panel.dataset.built = '1';
 }

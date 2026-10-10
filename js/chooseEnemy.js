@@ -5,6 +5,7 @@ function chooseEnemy(id) {
     closeBattleResult();
     battle = null;
     const slot = getActiveSlot();
+    clearBattle(slot); // брошенный бой не продолжается
     const save = loadSlot(slot);
     save.lastEnemy = id;
     saveSlot(slot, save);

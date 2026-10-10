@@ -6,7 +6,7 @@ function renderScreen(id) {
   else if (id === 'map') renderMap();
   else if (id === 'game') {
     if (battle) renderBattle();
-    else setTimeout(() => { const s = loadSlot(getActiveSlot()); startBattle(s && s.lastEnemy); });
+    else setTimeout(() => { const n = getActiveSlot(); const s = loadSlot(n); startBattle(s && s.lastEnemy, loadBattle(n)); });
   }
   else if (id === 'create' && creation) renderCreateStep();
 }

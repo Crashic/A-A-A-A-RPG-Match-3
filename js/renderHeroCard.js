@@ -1,4 +1,4 @@
-// Блок над кнопкой «Продолжить»: текущий выбранный персонаж — имя, уровень, золото, пол, раса, класс, фракция.
+// Блок над кнопкой «Продолжить»: текущий выбранный персонаж — имя, уровень, изолента, пол, раса, класс, фракция.
 // Если в выбранной ячейке персонажа нет, блок скрыт.
 function renderHeroCard() {
   const n = getActiveSlot();
@@ -10,11 +10,11 @@ function renderHeroCard() {
   document.getElementById('heroCardSlot').textContent = 'Ячейка ' + n;
   const rows = [
     ['Уровень', { name: hero.level + (hero.level < MAX_LEVEL ? ' (' + hero.xp + ' / ' + xpToNext(hero.level) + ')' : '') }],
-    ['Золото', { name: String(hero.gold) }],
+    ['Изолента', { html: formatTape(hero.tape) }],
     ['Пол', findById(GENDERS, hero.genderId)],
     ['Раса', findById(RACES, hero.raceId)],
     ['Класс', findById(CLASSES, hero.classId)],
-    ['Фракция', findById(FACTIONS, hero.factionId)]
+    ['Фракция', findById(FACTIONS, hero.factionId) || { name: 'Нейтралы' }]
   ];
   const list = document.getElementById('heroCardStats');
   list.innerHTML = '';
@@ -22,7 +22,8 @@ function renderHeroCard() {
     const dt = document.createElement('dt');
     dt.textContent = label;
     const dd = document.createElement('dd');
-    dd.textContent = item ? item.name : '—';
+    if (item && item.html) dd.innerHTML = item.html;
+    else dd.textContent = item ? item.name : '—';
     list.append(dt, dd);
   }
 }

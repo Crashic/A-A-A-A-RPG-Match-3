@@ -1,4 +1,4 @@
-// Открывает экран боя и начинает бой с последним выбранным врагом (или подходящим по уровню).
+// Открывает экран боя: продолжает сохранённый бой или начинает новый с последним выбранным врагом.
 // replace — заменить текущий экран в истории (после создания/заставки), а не добавлять новый.
 function enterGame(replace = false) {
   if (replace) {
@@ -7,6 +7,7 @@ function enterGame(replace = false) {
   } else {
     showScreen('game');
   }
-  const save = loadSlot(getActiveSlot());
-  startBattle(save && save.lastEnemy);
+  const slot = getActiveSlot();
+  const save = loadSlot(slot);
+  startBattle(save && save.lastEnemy, loadBattle(slot)); // незаконченный бой — продолжить
 }

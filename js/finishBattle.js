@@ -1,23 +1,20 @@
-// Конец боя. Победа: опыт за врага (WoW) + опыт и золото с фишек, подъём уровня, сохранение.
-// Поражение: награды нет. Показывает окно итогов.
+// Конец боя. Опыт и изолента, собранные с фишек, остаются и при поражении.
+// Победа добавляет опыт за врага (WoW). Уровни, сохранение, окно итогов.
 function finishBattle(won) {
   clearHint();
+  clearBattle(battle.slot);
   const save = battle.save;
   const e = battle.enemyInfo;
-  const result = { won, enemy: e.name, killXp: 0, gemXp: 0, gold: 0, levelUps: 0, level: save.level };
-  if (won) {
-    result.killXp = mobXp(save.level, e.level, e.elite);
-    result.gemXp = save.level >= MAX_LEVEL ? 0 : battle.gained.xp;
-    result.gold = battle.gained.gold;
-    save.gold = (save.gold || 0) + result.gold;
-    result.levelUps = grantXp(save, result.killXp + result.gemXp);
-    result.level = save.level;
-    saveSlot(battle.slot, save);
-    battle.gained = { xp: 0, gold: 0 }; // уже начислено в сохранение
-    vibrate([30, 40, 30]);
-  } else {
-    vibrate(80);
-  }
+  const result = { won, enemy: e.name, killXp: 0, gemXp: 0, tape: 0, levelUps: 0, level: save.level };
+  result.killXp = won ? mobXp(save.level, e.level, e.elite) : 0;
+  result.gemXp = save.level >= MAX_LEVEL ? 0 : battle.gained.xp;
+  result.tape = battle.gained.tape;
+  save.tape = (save.tape || 0) + result.tape;
+  result.levelUps = grantXp(save, result.killXp + result.gemXp);
+  result.level = save.level;
+  saveSlot(battle.slot, save);
+  battle.gained = { xp: 0, tape: 0 }; // уже начислено в сохранение
+  vibrate(won ? [30, 40, 30] : 80);
   renderBattle();
   showBattleResult(result);
 }

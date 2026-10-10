@@ -13,16 +13,16 @@ function renderFighterPanel(side) {
 
   if (side === 'hero') {
     const save = battle.save;
-    q('[data-f="info"]').textContent = 'Ур. ' + save.level + ' · ' + describeCharacter(save);
+    const cls = findById(CLASSES, save.classId);
+    q('[data-f="info"]').textContent = 'Ур. ' + save.level + (cls ? ' · ' + cls.name : '');
     const need = xpToNext(save.level);
     const xp = Math.min(need, save.xp + battle.gained.xp);
     setBar(q('[data-bar="xp"]'), xp, need, need ? 'Опыт ' + xp + ' / ' + need : 'Макс. уровень');
-    q('[data-f="gold"]').textContent = (save.gold + battle.gained.gold);
+    q('[data-f="tape"]').innerHTML = formatTape(save.tape + battle.gained.tape);
   } else {
     const e = battle.enemyInfo;
     const info = q('[data-f="info"]');
     info.textContent = 'Ур. ' + e.level + (e.elite ? ' · Элита' : '');
     info.className = 'lvl-' + difficultyOf(battle.save.level, e.level);
-    q('[data-f="reward"]').textContent = 'Награда: ' + mobXp(battle.save.level, e.level, e.elite) + ' опыта';
   }
 }

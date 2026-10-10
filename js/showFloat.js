@@ -1,5 +1,5 @@
-// Всплывающая цифра над панелью бойца: урон, щит, опыт, золото.
-// side — 'hero' | 'enemy', kind — класс цвета (damage, shield, xp, gold).
+// Всплывающая цифра над панелью бойца: урон, щит, лечение, опыт, изолента.
+// side — 'hero' | 'enemy', kind — класс цвета (damage, shield, heal, xp, tape).
 function showFloat(side, text, kind) {
   const panel = document.getElementById(side === 'hero' ? 'heroPanel' : 'enemyPanel');
   const el = document.createElement('span');

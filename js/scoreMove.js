@@ -1,4 +1,5 @@
-// Оценка хода для врага: урон важнее всего, потом щит (если не полный), мана, лишний ход.
+// Оценка хода для врага: урон важнее всего, потом лечение (если ранен), щит (если не полный),
+// мана, лишний ход.
 function scoreMove(grid, move, me) {
   swapInGrid(grid, move.a, move.b);
   const cells = findMatches(grid);
@@ -9,6 +10,7 @@ function scoreMove(grid, move, me) {
   for (const id in count) {
     const kind = GEM_EFFECTS[id].kind;
     if (kind === 'damage') score += count[id] * 10;
+    else if (kind === 'heal') score += me.hp < me.maxHp ? count[id] * 6 : 1;
     else if (kind === 'shield') score += me.shield < me.maxShield ? count[id] * 5 : 1;
     else if (kind === 'mana') score += count[id] * 3;
     else score += count[id];

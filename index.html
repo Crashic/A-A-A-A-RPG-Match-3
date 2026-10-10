@@ -16,6 +16,18 @@
 </head>
 <body>
 
+<!-- Общие части фишек: градиент «Внутреннего ободка» и обрезка «Полос» по сквирклу (GlassOverlays) -->
+<svg id="gemDefs" width="0" height="0" aria-hidden="true">
+  <defs>
+    <linearGradient id="gemRimGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".8"/>
+      <stop offset=".5" stop-color="#fff" stop-opacity=".15"/>
+      <stop offset="1" stop-color="#fff" stop-opacity=".45"/>
+    </linearGradient>
+    <clipPath id="gemClip"><polygon id="gemClipShape" points=""/></clipPath>
+  </defs>
+</svg>
+
 <!-- Главное меню -->
 <section id="menu" class="screen active">
   <div class="logo">
@@ -52,20 +64,17 @@
   </div>
 </section>
 
-<!-- Создание персонажа: по экрану на шаг (шаги — js/createSteps.js) -->
+<!-- Создание персонажа: «Происхождение» (фракции, расы, Пресса) → «Класс» (класс, имя, пол) -->
 <section id="create" class="screen">
-  <header class="createHead">
+  <header class="screenHead createHead">
+    <button id="createBack" class="btn stone round back" type="button" aria-label="Назад"></button>
     <div class="ribbon" id="createTitle"></div>
-    <span id="createProgress"></span>
+    <button id="createRandom" class="btn stone createRandom" type="button">Случайно</button>
   </header>
-  <div class="panel">
-    <p class="hint" id="createHint"></p>
-    <div id="createBody"></div>
+  <div class="createBody">
+    <div id="createLeft" class="panel"></div>
+    <div id="createRight" class="panel"></div>
   </div>
-  <footer class="createNav">
-    <button id="createBack" class="btn stone" type="button">Назад</button>
-    <button id="createNext" class="btn green" type="button">Далее</button>
-  </footer>
 </section>
 
 <!-- Настройки -->
@@ -181,6 +190,14 @@
   </div>
 </div>
 
+<!-- Своя клавиатура для имени на телефоне (системная не поворачивается вместе с игрой) -->
+<div id="keyboard" class="modal">
+  <div class="kbBox">
+    <div id="kbValue" class="kbValue"></div>
+    <div id="kbKeys"></div>
+  </div>
+</div>
+
 <div id="toast"></div>
 
 <script src="js/version.js"></script>
@@ -190,7 +207,8 @@
 <script src="js/races.js"></script>
 <script src="js/genders.js"></script>
 <script src="js/factions.js"></script>
-<script src="js/createSteps.js"></script>
+<script src="js/createConfig.js"></script>
+<script src="js/originIcons.js"></script>
 <script src="js/gemTypes.js"></script>
 <script src="js/match3Config.js"></script>
 <script src="js/match3State.js"></script>
@@ -199,6 +217,7 @@
 <script src="js/battleConfig.js"></script>
 <script src="js/zones.js"></script>
 <script src="js/battleState.js"></script>
+<script src="js/tapeConfig.js"></script>
 <script src="js/loadSettings.js"></script>
 <script src="js/saveSettings.js"></script>
 <script src="js/slotKey.js"></script>
@@ -224,12 +243,26 @@
 <script src="js/renderMenu.js"></script>
 <script src="js/renderCharacters.js"></script>
 <script src="js/renderSettings.js"></script>
-<script src="js/isStepComplete.js"></script>
-<script src="js/renderNameStep.js"></script>
-<script src="js/renderChoiceStep.js"></script>
+<script src="js/raceClasses.js"></script>
+<script src="js/factionClassList.js"></script>
+<script src="js/gemBonus.js"></script>
+<script src="js/iconTile.js"></script>
+<script src="js/originButton.js"></script>
+<script src="js/randomName.js"></script>
+<script src="js/useGameKeyboard.js"></script>
+<script src="js/renderKeyboard.js"></script>
+<script src="js/openKeyboard.js"></script>
+<script src="js/closeKeyboard.js"></script>
+<script src="js/canCreateHero.js"></script>
+<script src="js/updateCreateButton.js"></script>
+<script src="js/renderOriginStep.js"></script>
+<script src="js/renderClassStep.js"></script>
 <script src="js/renderCreateStep.js"></script>
+<script src="js/pickFaction.js"></script>
+<script src="js/pickRace.js"></script>
+<script src="js/openClassStep.js"></script>
+<script src="js/randomCharacter.js"></script>
 <script src="js/openCharacterCreation.js"></script>
-<script src="js/createStepNext.js"></script>
 <script src="js/createStepBack.js"></script>
 <script src="js/finishCharacterCreation.js"></script>
 <script src="js/randomGemType.js"></script>
@@ -261,6 +294,11 @@
 <script src="js/setupBoardInput.js"></script>
 <script src="js/startMatch3.js"></script>
 <script src="js/xpToNext.js"></script>
+<script src="js/formatTape.js"></script>
+<script src="js/battleKey.js"></script>
+<script src="js/saveBattle.js"></script>
+<script src="js/loadBattle.js"></script>
+<script src="js/clearBattle.js"></script>
 <script src="js/zeroDifference.js"></script>
 <script src="js/grayLevel.js"></script>
 <script src="js/mobXp.js"></script>

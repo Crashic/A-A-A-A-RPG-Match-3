@@ -1,9 +1,8 @@
-// «Назад»: предыдущий шаг; с первого шага — выход из создания без сохранения.
+// «Назад» на экране создания: с выбора класса — к происхождению, с происхождения — выход без сохранения.
 function createStepBack() {
-  if (creation.step > 0) {
-    creation.step--;
+  if (creation && creation.step === 'class') {
+    creation.step = 'origin';
     renderCreateStep();
-    window.scrollTo(0, 0);
   } else {
     goBack();
   }

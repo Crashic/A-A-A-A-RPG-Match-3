@@ -1,9 +1,16 @@
-// Для подсказки: из пары возможного хода выбирает ту фишку, которая сама встанет в ряд из 3+.
-// Возвращает [r, c] этой фишки или null, если ходов нет.
+// Для подсказки: выбирает ход с самым длинным рядом (4+ в приоритете — они дают ещё ход)
+// и из его пары — ту фишку, которая сама встанет в ряд. Возвращает [r, c] или null, если ходов нет.
 function findHintGem(grid) {
-  const move = findPossibleMove(grid);
-  if (!move) return null;
-  const { a, b } = move;
+  const moves = listMoves(grid).sort(() => Math.random() - 0.5);
+  if (!moves.length) return null;
+  let best = null, bestRun = 0;
+  for (const m of moves) {
+    swapInGrid(grid, m.a, m.b);
+    const run = longestRun(grid);
+    swapInGrid(grid, m.a, m.b);
+    if (run > bestRun) { best = m; bestRun = run; }
+  }
+  const { a, b } = best;
   swapInGrid(grid, a, b);
   const matched = findMatches(grid);
   swapInGrid(grid, a, b);
