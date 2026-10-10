@@ -1,5 +1,6 @@
-// Короткое всплывающее сообщение внизу экрана.
+// Короткое всплывающее сообщение внизу экрана. Не показывается, если оповещения выключены.
 function showToast(text, ms = 2500) {
+  if (settings && !settings.notifications) return;
   const el = document.getElementById('toast');
   el.textContent = text;
   el.classList.add('show');

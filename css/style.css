@@ -1,9 +1,12 @@
 :root {
   --bg: #14111a;
   --panel: #1f1a28;
+  --panel2: #2a2336;
+  --line: #3a3148;
   --text: #ece6d8;
   --muted: #8d8499;
   --accent: #e0b54a;
+  --danger: #c2453d;
 }
 
 * { box-sizing: border-box; }
@@ -20,16 +23,20 @@ html, body {
   -webkit-tap-highlight-color: transparent;
 }
 
-#app {
+button { font: inherit; color: inherit; cursor: pointer; }
+
+/* ---------- Экраны ---------- */
+
+.screen {
+  display: none;
   min-height: 100%;
-  display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  padding: env(safe-area-inset-top, 0px) 16px env(safe-area-inset-bottom, 0px);
-  text-align: center;
+  padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px calc(env(safe-area-inset-bottom, 0px) + 16px);
 }
+
+.screen.active { display: flex; }
+
+#menu { align-items: center; justify-content: center; gap: 48px; text-align: center; }
 
 h1 {
   margin: 0;
@@ -46,7 +53,167 @@ h1 span {
   color: var(--text);
 }
 
-#status { margin: 0; color: var(--muted); }
+.screenHead {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0 -8px 8px;
+}
+
+.screenHead h2 { margin: 0; font: 700 22px Georgia, serif; color: var(--accent); }
+
+.back {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: none;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.hint { margin: 0 0 12px; color: var(--muted); }
+
+/* ---------- Кнопки ---------- */
+
+.menuButtons {
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.menuBtn {
+  min-height: 52px;
+  padding: 10px 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  font-size: 18px;
+  font-weight: 600;
+  transition: transform .08s, background .15s;
+}
+
+.menuBtn:active { transform: scale(.97); background: var(--panel2); }
+
+.menuBtn.primary {
+  min-height: 64px;
+  border-color: var(--accent);
+  background: linear-gradient(#3a2e1a, #251d12);
+  color: var(--accent);
+  font-size: 20px;
+}
+
+.menuBtn small {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.menuBtn.danger { border-color: var(--danger); color: #ff8a80; }
+
+#btnResetSaves { margin-top: 24px; }
+
+/* ---------- Профиль ---------- */
+
+#slotList { display: flex; flex-direction: column; gap: 10px; }
+
+.slot {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  overflow: hidden;
+}
+
+.slot.active { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+
+.slotInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-height: 64px;
+  padding: 12px 14px;
+  border: 0;
+  background: none;
+  text-align: left;
+}
+
+.slotInfo b { font-size: 17px; }
+.slot.active .slotInfo b { color: var(--accent); }
+.slot.empty .slotInfo b { color: var(--muted); font-weight: 500; }
+.slotInfo span { font-size: 13px; color: var(--muted); }
+
+.slotDelete {
+  width: 56px;
+  border: 0;
+  border-left: 1px solid var(--line);
+  background: none;
+  font-size: 20px;
+}
+
+/* ---------- Настройки ---------- */
+
+.settingsList {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+}
+
+.setRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 56px;
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.setRow:last-child { border-bottom: 0; }
+
+.setRow.range { flex-direction: column; align-items: stretch; gap: 6px; padding: 12px 14px; }
+.setRow.range span { display: flex; justify-content: space-between; }
+.setRow.range b { font-weight: 400; color: var(--muted); }
+
+input[type=range] { width: 100%; height: 28px; accent-color: var(--accent); }
+
+.switch {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: none;
+  width: 50px;
+  height: 30px;
+  margin: 0;
+  border-radius: 15px;
+  background: var(--line);
+  position: relative;
+  transition: background .2s;
+}
+
+.switch::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--text);
+  transition: transform .2s;
+}
+
+.switch:checked { background: var(--accent); }
+.switch:checked::after { transform: translateX(20px); }
+
+/* ---------- Версия и окна ---------- */
 
 #ver {
   position: fixed;
@@ -58,10 +225,9 @@ h1 span {
   font: 12px system-ui, sans-serif;
   color: var(--muted);
   text-decoration: underline dotted;
-  cursor: pointer;
 }
 
-#changelog {
+.modal {
   position: fixed;
   inset: 0;
   display: none;
@@ -72,16 +238,16 @@ h1 span {
   z-index: 10;
 }
 
-#changelog.open { display: flex; }
+.modal.open { display: flex; }
 
-#changelog .panel {
+.panel {
   width: 100%;
   max-width: 420px;
   max-height: 100%;
   display: flex;
   flex-direction: column;
   background: var(--panel);
-  border: 1px solid #3a3148;
+  border: 1px solid var(--line);
   border-radius: 12px;
 }
 
@@ -90,7 +256,7 @@ h1 span {
   align-items: center;
   justify-content: space-between;
   padding: 12px 8px 8px 16px;
-  border-bottom: 1px solid #3a3148;
+  border-bottom: 1px solid var(--line);
 }
 
 .panelHead h2 { margin: 0; font: 700 18px Georgia, serif; color: var(--accent); }
@@ -100,7 +266,6 @@ h1 span {
   height: 40px;
   border: 0;
   background: none;
-  color: var(--text);
   font-size: 20px;
 }
 
@@ -115,16 +280,21 @@ h1 span {
 }
 
 #changelogList h3 span { font-weight: 400; font-size: 12px; color: var(--muted); }
-
 #changelogList ul { margin: 0; padding-left: 18px; }
-
 #changelogList li { margin: 4px 0; }
+
+.confirmPanel { padding: 18px 16px 16px; }
+.confirmPanel p { margin: 0 0 16px; }
+.confirmButtons { display: flex; gap: 10px; }
+.confirmButtons .menuBtn { flex: 1; font-size: 16px; }
 
 #toast {
   position: fixed;
   left: 50%;
-  bottom: calc(env(safe-area-inset-bottom, 0px) + 40px);
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 48px);
   transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100% - 32px);
   padding: 10px 16px;
   border-radius: 8px;
   background: var(--panel);
@@ -132,6 +302,7 @@ h1 span {
   opacity: 0;
   pointer-events: none;
   transition: opacity .3s;
+  z-index: 20;
 }
 
 #toast.show { opacity: 1; }

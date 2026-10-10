@@ -18,4 +18,7 @@
 - Каждая функция — отдельный файл в `js/`, имя файла = имя функции. Порядок подключения в `index.html` важен, `js/main.js` последний.
 - Спрайты — в `sprites/`.
 - Новый файл добавлять в `index.html` (для скриптов) и в список `FILES` в `sw.js`.
+- Экраны — `<section class="screen">` в `index.html` (menu, profile, settings, game), переключение `showScreen(id)`; уход из меню пишется в history, «Назад» телефона возвращает в меню.
+- Сохранения: 3 ячейки, ключи localStorage `aaaa-slot-1..3`, выбранная — `aaaa-active-slot`; настройки — `aaaa-settings`, новые поля добавлять в `DEFAULT_SETTINGS` (`js/state.js`).
+- Список `FILES` в `sw.js` должен совпадать со скриптами в `index.html` плюс css, манифест, иконки, спрайты.
 - Версия — `js/version.js` (`APP_VERSION`); `sw.js` берёт её через importScripts, так что кэш и автообновление завязаны на неё.

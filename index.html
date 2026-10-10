@@ -13,27 +13,97 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div id="app">
+
+<!-- Главное меню -->
+<section id="menu" class="screen active">
   <h1>A-A-A-A<br><span>Match 3 RPG</span></h1>
-  <p id="status">Игра в разработке</p>
+  <nav class="menuButtons">
+    <button id="btnStart" class="menuBtn primary" type="button">
+      <span id="btnStartLabel">Начать игру</span>
+      <small id="btnStartSub"></small>
+    </button>
+    <button id="btnProfile" class="menuBtn" type="button">Профиль</button>
+    <button id="btnSettings" class="menuBtn" type="button">Настройки</button>
+  </nav>
   <button id="ver" type="button"></button>
-</div>
-<div id="changelog">
+</section>
+
+<!-- Профиль: ячейки сохранения -->
+<section id="profile" class="screen">
+  <header class="screenHead"><button class="back" type="button" data-back aria-label="Назад">‹</button><h2>Профиль</h2></header>
+  <p class="hint">Выберите ячейку сохранения</p>
+  <div id="slotList"></div>
+</section>
+
+<!-- Настройки -->
+<section id="settings" class="screen">
+  <header class="screenHead"><button class="back" type="button" data-back aria-label="Назад">‹</button><h2>Настройки</h2></header>
+  <div class="settingsList">
+    <label class="setRow range"><span>Музыка <b id="val-music"></b></span><input id="set-music" type="range" min="0" max="100" step="5"></label>
+    <label class="setRow range"><span>Звуки <b id="val-sound"></b></span><input id="set-sound" type="range" min="0" max="100" step="5"></label>
+    <label class="setRow"><span>Вибрация</span><input id="set-vibration" type="checkbox" class="switch"></label>
+    <label class="setRow"><span>Полноэкранный режим</span><input id="set-fullscreen" type="checkbox" class="switch"></label>
+    <label class="setRow"><span>Оповещения</span><input id="set-notifications" type="checkbox" class="switch"></label>
+  </div>
+  <button id="btnResetSaves" class="menuBtn danger" type="button">Сбросить все сохранения</button>
+</section>
+
+<!-- Игра (пока заглушка) -->
+<section id="game" class="screen">
+  <header class="screenHead"><button class="back" type="button" data-back aria-label="В меню">‹</button><h2>Игра</h2></header>
+  <p id="gameInfo" class="hint"></p>
+</section>
+
+<div id="changelog" class="modal">
   <div class="panel">
     <div class="panelHead"><h2>Список изменений</h2><button id="changelogClose" type="button">✕</button></div>
     <div id="changelogList"></div>
   </div>
 </div>
+
+<div id="confirm" class="modal">
+  <div class="panel confirmPanel">
+    <p id="confirmText"></p>
+    <div class="confirmButtons">
+      <button id="confirmNo" class="menuBtn" type="button">Отмена</button>
+      <button id="confirmYes" class="menuBtn danger" type="button"></button>
+    </div>
+  </div>
+</div>
+
 <div id="toast"></div>
+
 <script src="js/version.js"></script>
 <script src="js/changelog.js"></script>
+<script src="js/state.js"></script>
+<script src="js/loadSettings.js"></script>
+<script src="js/saveSettings.js"></script>
+<script src="js/slotKey.js"></script>
+<script src="js/loadSlot.js"></script>
+<script src="js/saveSlot.js"></script>
+<script src="js/createSlot.js"></script>
+<script src="js/deleteSlot.js"></script>
+<script src="js/getActiveSlot.js"></script>
+<script src="js/setActiveSlot.js"></script>
+<script src="js/resetAllSaves.js"></script>
+<script src="js/formatDate.js"></script>
+<script src="js/vibrate.js"></script>
 <script src="js/showVersion.js"></script>
 <script src="js/showToast.js"></script>
-<script src="js/registerServiceWorker.js"></script>
+<script src="js/showConfirm.js"></script>
+<script src="js/showScreen.js"></script>
+<script src="js/goBack.js"></script>
+<script src="js/renderMenu.js"></script>
+<script src="js/renderProfile.js"></script>
+<script src="js/renderSettings.js"></script>
+<script src="js/startGame.js"></script>
+<script src="js/setFullscreen.js"></script>
 <script src="js/enterFullscreen.js"></script>
+<script src="js/registerServiceWorker.js"></script>
 <script src="js/openChangelog.js"></script>
 <script src="js/closeChangelog.js"></script>
 <script src="js/setupChangelog.js"></script>
+<script src="js/setupMenu.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
