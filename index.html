@@ -46,6 +46,7 @@
     <div class="menuRow">
       <button id="btnCharacters" class="btn stone" type="button">Персонажи</button>
       <button id="btnSettings" class="btn stone" type="button">Настройки</button>
+      <button id="btnGlossary" class="btn stone" type="button">Глоссарий</button>
       <button id="btnExit" class="btn red" type="button">Выход</button>
     </div>
   </nav>
@@ -101,6 +102,10 @@
     <div id="heroPanel" class="fighter"></div>
     <!-- Навыки: кнопки активных (за ману) и строка пассивных — js/renderSkillBar.js -->
     <div id="skillBar"></div>
+    <!-- Подсказка, какая фишка что даёт — js/openGemLegend.js -->
+    <div class="gameButtons">
+      <button id="btnLegend" class="btn stone" type="button">? Фишки</button>
+    </div>
   </aside>
   <div class="boardWrap">
     <div id="board" class="board">
@@ -115,6 +120,13 @@
     <div class="gameButtons">
       <!-- Временно, пока нет игрового меню: выход в главное меню -->
       <button id="gameToMenu" class="btn stone" type="button" data-back>В меню</button>
+      <button id="btnGlossaryGame" class="btn stone square" type="button" aria-label="Глоссарий" title="Глоссарий">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M5 6 Q10 4 16 7 Q22 4 27 6 L27 26 Q22 24 16 27 Q10 24 5 26 Z" fill="var(--ui-parchment)" stroke="var(--ui-outline)" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M16 7 L16 27" stroke="var(--ui-outline)" stroke-width="2"/>
+          <path d="M8 11 Q11 10 13 11 M8 15 Q11 14 13 15 M19 11 Q21 10 24 11 M19 15 Q21 14 24 15 M19 19 Q21 18 24 19" fill="none" stroke="var(--gem-topaz-dark)" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
       <button id="btnMap" class="btn stone square" type="button" aria-label="Карта врагов" title="Карта врагов">
         <svg viewBox="0 0 32 32" aria-hidden="true">
           <path d="M4 7 L11 4 L21 7 L28 4 L28 25 L21 28 L11 25 L4 28 Z" fill="var(--ui-parchment)" stroke="var(--ui-outline)" stroke-width="2" stroke-linejoin="round"/>
@@ -143,6 +155,18 @@
   </div>
 </section>
 
+<!-- Глоссарий-книга: разделы слева, страница справа (разделы — js/glossarySections.js) -->
+<section id="glossary" class="screen">
+  <header class="screenHead">
+    <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
+    <div class="ribbon">Глоссарий</div>
+  </header>
+  <div class="mapBody">
+    <div id="glossaryTabs" class="panel"></div>
+    <div id="glossaryPage" class="panel"></div>
+  </div>
+</section>
+
 <!-- Шуточная заставка после создания персонажа (текст — js/introText.js) -->
 <section id="intro" class="screen">
   <div id="introStars"></div>
@@ -168,6 +192,21 @@
     <div class="panel">
       <button id="changelogClose" class="btn red round close" type="button" aria-label="Закрыть"></button>
       <div id="changelogList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Подсказка «Фишки»: что даёт каждая фишка в бою -->
+<div id="gemLegend" class="modal">
+  <div class="modalBox">
+    <div class="ribbon">Фишки</div>
+    <div class="panel">
+      <button id="gemLegendClose" class="btn red round close" type="button" aria-label="Закрыть"></button>
+      <div id="gemLegendList"></div>
+      <div class="legendFoot">
+        <p id="gemLegendNote"></p>
+        <button id="gemLegendMore" class="btn stone" type="button">Весь глоссарий</button>
+      </div>
     </div>
   </div>
 </div>
@@ -379,6 +418,25 @@
 <script src="js/closeChangelog.js"></script>
 <script src="js/exitApp.js"></script>
 <script src="js/setupChangelog.js"></script>
+<script src="js/gemMiniIcon.js"></script>
+<script src="js/showGemLabels.js"></script>
+<script src="js/openGemLegend.js"></script>
+<script src="js/closeGemLegend.js"></script>
+<script src="js/showFirstLegend.js"></script>
+<script src="js/glossaryEntry.js"></script>
+<script src="js/glossaryHeading.js"></script>
+<script src="js/glossaryGems.js"></script>
+<script src="js/glossaryBattle.js"></script>
+<script src="js/glossaryFactions.js"></script>
+<script src="js/glossaryRaces.js"></script>
+<script src="js/glossaryClasses.js"></script>
+<script src="js/glossarySkills.js"></script>
+<script src="js/glossaryZones.js"></script>
+<script src="js/glossaryProgress.js"></script>
+<script src="js/glossarySections.js"></script>
+<script src="js/renderGlossary.js"></script>
+<script src="js/openGlossary.js"></script>
+<script src="js/setupGlossary.js"></script>
 <script src="js/setupMenu.js"></script>
 <script src="js/main.js"></script>
 </body>

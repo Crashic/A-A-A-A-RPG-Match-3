@@ -65,6 +65,7 @@ function setupMenu() {
   // Кнопка «Назад» телефона: возврат на предыдущий экран (для создания персонажа — отмена)
   window.addEventListener('popstate', () => {
     document.getElementById('confirm').classList.remove('open');
+    closeGemLegend();
     document.getElementById('keyboard').classList.remove('open');
     if (history.state && history.state.screen !== 'game') closeBattleResult();
     let id = (history.state && history.state.screen) || 'menu';

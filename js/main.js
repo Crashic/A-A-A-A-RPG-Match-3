@@ -4,6 +4,7 @@ function main() {
   document.getElementById('gemClipShape').setAttribute('points', GEM_SQUIRCLE); // обрезка «Полос» по фишке
   showVersion();
   setupChangelog();
+  setupGlossary();
   setupMenu();
   setupBoardInput();
   renderMenu();

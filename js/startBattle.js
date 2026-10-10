@@ -24,6 +24,7 @@ async function startBattle(enemyId, saved = null) {
   if (!saved) skillBattleStart(); // стартовые навыки: мана, пометки
   const current = battle;
   renderBattle();
+  showFirstLegend(); // в первом бою — подсказка, какая фишка что даёт
   await startMatch3(saved ? saved.grid : null);
   if (battle !== current) return;
   saveBattle();

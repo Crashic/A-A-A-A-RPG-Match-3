@@ -5,7 +5,8 @@ const DEFAULT_SETTINGS = {
   sound: 80,          // громкость звуков, 0–100
   vibration: true,
   fullscreen: true,
-  notifications: true // всплывающие сообщения игры
+  notifications: true, // всплывающие сообщения игры
+  gemLegendSeen: false // подсказка «Фишки» уже показана в первом бою
 };
 let settings = null;  // заполняется в main() через loadSettings()
 
@@ -14,3 +15,6 @@ let creation = null;  // { draft, step, slot, returnTo: 'game' | 'characters' }
 
 // Заставка после создания персонажа: { onDone, timer } пока идёт
 let intro = null;
+
+// Глоссарий: открытый раздел (id из GLOSSARY_SECTIONS)
+let glossaryTab = 'gems';
