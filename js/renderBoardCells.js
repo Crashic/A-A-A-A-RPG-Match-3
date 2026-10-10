@@ -5,7 +5,7 @@ function renderBoardCells() {
   for (let r = 0; r < BOARD_SIZE; r++) {
     for (let c = 0; c < BOARD_SIZE; c++) {
       const cell = document.createElement('div');
-      cell.className = 'cell';
+      cell.className = (r + c) % 2 ? 'cell alt' : 'cell'; // шахматка bg-cell / bg-cell-alt
       cell.style.transform = 'translate(' + cellOffset(c) + 'px,' + cellOffset(r) + 'px)';
       layer.appendChild(cell);
     }
