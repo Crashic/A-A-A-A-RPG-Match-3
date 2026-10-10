@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>A-A-A-A Match 3 RPG</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
-<meta name="theme-color" content="#101318">
+<meta name="theme-color" content="#1C1620">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="manifest" href="manifest.webmanifest">
@@ -86,14 +86,27 @@
 
 <!-- Игра (пока заглушка) -->
 <section id="game" class="screen">
-  <header class="screenHead">
-    <div class="ribbon">Игра</div>
+  <header class="gameHead">
+    <b id="gameHeroName"></b>
+    <span id="gameHeroInfo"></span>
   </header>
-  <div class="panel"><p id="gameInfo" class="hint"></p></div>
-  <!-- Временно, пока нет игры: выход в главное меню -->
+  <div class="boardWrap">
+    <div id="board" class="board">
+      <div id="boardCells"></div>
+      <div id="boardGems"></div>
+    </div>
+  </div>
+  <!-- Временно, пока нет игрового меню: выход в главное меню -->
   <footer class="createNav">
     <button id="gameToMenu" class="btn stone" type="button" data-back>В главное меню</button>
   </footer>
+</section>
+
+<!-- Шуточная заставка после создания персонажа (текст — js/introText.js) -->
+<section id="intro" class="screen">
+  <div id="introStars"></div>
+  <div class="introView"><div id="introCrawl"></div></div>
+  <button id="introSkip" class="btn stone" type="button">Пропустить</button>
 </section>
 
 <!-- Экран после «Выхода», если браузер не дал закрыть вкладку -->
@@ -140,6 +153,10 @@
 <script src="js/genders.js"></script>
 <script src="js/factions.js"></script>
 <script src="js/createSteps.js"></script>
+<script src="js/gemTypes.js"></script>
+<script src="js/match3Config.js"></script>
+<script src="js/match3State.js"></script>
+<script src="js/introText.js"></script>
 <script src="js/loadSettings.js"></script>
 <script src="js/saveSettings.js"></script>
 <script src="js/slotKey.js"></script>
@@ -152,6 +169,7 @@
 <script src="js/resetAllSaves.js"></script>
 <script src="js/formatDate.js"></script>
 <script src="js/vibrate.js"></script>
+<script src="js/sleep.js"></script>
 <script src="js/findById.js"></script>
 <script src="js/describeCharacter.js"></script>
 <script src="js/showVersion.js"></script>
@@ -173,6 +191,35 @@
 <script src="js/createStepNext.js"></script>
 <script src="js/createStepBack.js"></script>
 <script src="js/finishCharacterCreation.js"></script>
+<script src="js/randomGemType.js"></script>
+<script src="js/findMatches.js"></script>
+<script src="js/swapInGrid.js"></script>
+<script src="js/findPossibleMove.js"></script>
+<script src="js/generateGrid.js"></script>
+<script src="js/createGemElement.js"></script>
+<script src="js/computeBoardLayout.js"></script>
+<script src="js/cellOffset.js"></script>
+<script src="js/placeGem.js"></script>
+<script src="js/renderBoardCells.js"></script>
+<script src="js/dropInGrid.js"></script>
+<script src="js/clearGems.js"></script>
+<script src="js/collapseAndRefill.js"></script>
+<script src="js/rebuildBoard.js"></script>
+<script src="js/resolveBoard.js"></script>
+<script src="js/isAdjacent.js"></script>
+<script src="js/selectGem.js"></script>
+<script src="js/clearHint.js"></script>
+<script src="js/scheduleHint.js"></script>
+<script src="js/showHint.js"></script>
+<script src="js/attemptSwap.js"></script>
+<script src="js/cellFromPoint.js"></script>
+<script src="js/setupBoardInput.js"></script>
+<script src="js/startMatch3.js"></script>
+<script src="js/renderIntroStars.js"></script>
+<script src="js/stopIntro.js"></script>
+<script src="js/finishIntro.js"></script>
+<script src="js/playIntro.js"></script>
+<script src="js/enterGame.js"></script>
 <script src="js/startGame.js"></script>
 <script src="js/setFullscreen.js"></script>
 <script src="js/enterFullscreen.js"></script>

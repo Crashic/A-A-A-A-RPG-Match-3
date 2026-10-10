@@ -1,4 +1,4 @@
-// «Создать»: сохраняет персонажа в ячейку и делает её текущей.
+// «Создать»: сохраняет персонажа, делает его текущим и показывает заставку, после неё — игра.
 function finishCharacterCreation() {
   const d = creation.draft;
   const hero = {
@@ -10,15 +10,9 @@ function finishCharacterCreation() {
   };
   createSlot(creation.slot, hero);
   setActiveSlot(creation.slot);
-  showToast('Персонаж «' + hero.name + '» создан');
-  const returnTo = creation.returnTo;
   creation = null;
-  if (returnTo === 'game') {
-    // экран создания заменяется игрой: «Назад» из игры ведёт в меню
-    history.replaceState({ screen: 'game' }, '');
-    renderGame();
-    showScreen('game', false);
-  } else {
-    goBack();
-  }
+  // экран создания заменяется заставкой: «Назад» с неё ведёт туда, откуда начали создание
+  history.replaceState({ screen: 'intro' }, '');
+  showScreen('intro', false);
+  playIntro(hero, () => enterGame(true));
 }

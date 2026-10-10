@@ -4,6 +4,7 @@ function main() {
   showVersion();
   setupChangelog();
   setupMenu();
+  setupBoardInput();
   renderMenu();
   enterFullscreen();
   registerServiceWorker();

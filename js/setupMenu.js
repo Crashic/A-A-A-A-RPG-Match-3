@@ -11,6 +11,9 @@ function setupMenu() {
   on('createBack', createStepBack);
   on('createNext', createStepNext);
 
+  // Заставка: «Пропустить»
+  on('introSkip', finishIntro);
+
   document.querySelectorAll('[data-back]').forEach(b =>
     b.addEventListener('click', () => { vibrate(); goBack(); }));
 
@@ -55,7 +58,9 @@ function setupMenu() {
     document.getElementById('confirm').classList.remove('open');
     let id = (history.state && history.state.screen) || 'menu';
     if (id === 'create' && !creation) id = 'menu';
+    if (id === 'intro') id = 'menu';
     if (id !== 'create') creation = null;
+    stopIntro();
     renderScreen(id);
     showScreen(id, false);
   });

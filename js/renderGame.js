@@ -1,8 +1,6 @@
-// Экран игры (пока заглушка): показывает текущего персонажа.
+// Шапка экрана игры: имя текущего персонажа и его описание.
 function renderGame() {
-  const n = getActiveSlot();
-  const hero = loadSlot(n);
-  document.getElementById('gameInfo').textContent = hero
-    ? hero.name + ' — ' + describeCharacter(hero) + '. Здесь скоро появится игра.'
-    : '';
+  const hero = loadSlot(getActiveSlot());
+  document.getElementById('gameHeroName').textContent = hero ? hero.name : '';
+  document.getElementById('gameHeroInfo').textContent = hero ? describeCharacter(hero) : '';
 }

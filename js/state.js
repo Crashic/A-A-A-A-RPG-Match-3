@@ -11,3 +11,6 @@ let settings = null;  // заполняется в main() через loadSetting
 
 // Создание персонажа: черновик, номер шага, ячейка и куда вернуться после «Создать»
 let creation = null;  // { draft, step, slot, returnTo: 'game' | 'characters' }
+
+// Заставка после создания персонажа: { onDone, timer } пока идёт
+let intro = null;

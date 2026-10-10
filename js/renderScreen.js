@@ -3,6 +3,6 @@ function renderScreen(id) {
   if (id === 'menu') renderMenu();
   else if (id === 'characters') renderCharacters();
   else if (id === 'settings') renderSettings();
-  else if (id === 'game') renderGame();
+  else if (id === 'game') { renderGame(); if (!match3) setTimeout(startMatch3); }
   else if (id === 'create' && creation) renderCreateStep();
 }

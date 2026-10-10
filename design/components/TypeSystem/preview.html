@@ -1,0 +1,113 @@
+<!-- @dsCard group="Шрифты" height=1180 subtitle="Три роли: Noto Sans Display · Noto Sans · IBM Plex Sans" -->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Sans+Display:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;600&family=Noto+Sans+Hebrew:wght@400;600&family=Noto+Sans+Thai:wght@400&family=Noto+Sans+Devanagari:wght@400&display=swap" rel="stylesheet">
+<style>
+.ts{
+  --t-head:var(--font-head,"Noto Sans Display","Noto Sans",system-ui,"Segoe UI",Roboto,sans-serif);
+  --t-body:var(--font-body,"Noto Sans",system-ui,"Segoe UI",Roboto,sans-serif);
+  --t-small:var(--font-small,"IBM Plex Sans","Noto Sans",system-ui,"Segoe UI",Roboto,sans-serif);
+  --t-cjk-sc:"Noto Sans SC","Noto Sans",sans-serif; --t-cjk-jp:"Noto Sans JP","Noto Sans",sans-serif; --t-cjk-kr:"Noto Sans KR","Noto Sans",sans-serif;
+  --body-size:15px; --small-size:12px;
+  --c-bg:var(--bg-canvas,#1C1620); --c-panel:var(--bg-cell,#2E2635); --c-text:var(--text-primary,#F0E8F2); --c-muted:var(--text-muted,#A79BB0);
+  --c-line:var(--ui-metal,#3E3345); --c-accent:var(--ui-primary,#2B9268); --c-danger:var(--ui-danger,#B3102B); --c-reward:var(--ui-reward,#F8A355); --c-info:var(--ui-info,#01B9EC);
+  background:var(--c-bg); color:var(--c-text); font-family:var(--t-body); font-variant-numeric:tabular-nums;
+  padding:16px; border-radius:4px; display:grid; gap:14px;
+}
+.ts[data-mode="light"]{ --c-bg:#F6F1F7; --c-panel:#FFFFFF; --c-text:#1C1620; --c-muted:#5E5266; --c-line:#D9CFDD; --c-accent:#1F7A55; --c-danger:#A30E27; --c-reward:#8A4A0C; --c-info:#036C8C }
+.ts *{box-sizing:border-box}
+.pnl{background:var(--c-panel); border:1px solid var(--c-line); border-radius:4px; padding:14px 16px}
+.top{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px}
+.h1{margin:0; font:700 40px/44px var(--t-head); letter-spacing:-0.02em}
+.h2{margin:0 0 8px; font:600 24px/30px var(--t-head); letter-spacing:-0.01em}
+.btns{display:flex; flex-wrap:wrap; gap:8px}
+.btn{border:0; border-radius:4px; padding:10px 18px; font:600 18px/22px var(--t-body); letter-spacing:.005em; color:#fff; background:var(--c-accent); cursor:pointer}
+.btn.d{background:var(--c-danger)} .btn.g{background:transparent; color:var(--c-text); border:1px solid var(--c-line); font-weight:500; font-size:15px}
+.body{font:400 var(--body-size)/1.47 var(--t-body); max-width:68ch; margin:0}
+.body b{font-weight:600} .body .num{font-weight:600; color:var(--c-reward)}
+.small{font:400 var(--small-size)/1.35 var(--t-small)}
+.small b{font-weight:500}
+.grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px}
+.tip{border:1px solid var(--c-line); border-radius:4px; padding:8px 10px; display:inline-block; max-width:280px}
+.stats{width:100%; border-collapse:collapse; font:inherit}
+.stats td{padding:3px 0; border-bottom:1px solid var(--c-line)} .stats td:last-child{text-align:end; font-weight:500}
+.status{display:flex; flex-wrap:wrap; gap:16px; border-top:1px solid var(--c-line); padding-top:8px; margin-top:8px}
+.ctrl{display:flex; flex-wrap:wrap; gap:16px; align-items:center}
+.ctrl label{display:flex; align-items:center; gap:8px; font:400 13px/1.35 var(--t-small)}
+.ctrl input[type=range]{width:140px}
+.ctrl output{min-width:38px; font-weight:500}
+.langs{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:8px}
+.lang{border:1px solid var(--c-line); border-radius:4px; padding:8px 10px}
+.lang .tag{display:block; font:500 11px/1.35 var(--t-small); color:var(--c-muted); margin-bottom:2px}
+.lang p{margin:0; font:400 var(--body-size)/1.5 var(--t-body)}
+.lang [lang="zh"]{font-family:var(--t-cjk-sc)} .lang [lang="ja"]{font-family:var(--t-cjk-jp)} .lang [lang="ko"]{font-family:var(--t-cjk-kr)}
+.muted{color:var(--c-muted)}
+.warn{display:none; background:var(--c-danger); color:#fff; border-radius:4px; padding:10px 12px; font:500 13px/1.4 var(--t-body)}
+.warn.on{display:block}
+.foot{font:400 11px/1.35 var(--t-small); color:var(--c-muted); border-top:1px solid var(--c-line); padding-top:8px}
+.foot a{color:var(--c-info)}
+</style>
+<div class="ts" id="ts" data-mode="dark">
+  <div class="warn" id="warn" role="alert">Веб-шрифты не подгрузились — показаны системные (system-ui, Segoe UI, Roboto). Для правильной вёрстки нужен интернет.</div>
+
+  <div class="pnl top">
+    <h1 class="h1">Подземелье Бездны</h1>
+    <div class="btns"><button class="btn">Играть</button><button class="btn d">Выход</button><button class="btn g" id="mode">Светлая тема</button></div>
+  </div>
+
+  <div class="pnl ctrl">
+    <label>Основной текст <input type="range" id="bs" min="11" max="22" value="15"> <output id="bso">15 px</output></label>
+    <label>Мелкий текст <input type="range" id="ss" min="10" max="16" value="12"> <output id="sso">12 px</output></label>
+  </div>
+
+  <div class="grid2">
+    <div class="pnl">
+      <h2 class="h2">Клинок Пепла</h2>
+      <p class="body">«Этот клинок выкован из осколка упавшей звезды. Каждый удар по противнику со стихией <b>Огонь</b> наносит дополнительно <span class="num">24</span> урона и восстанавливает <span class="num">3</span> единицы маны. Собери три гранатовых камня подряд, чтобы зарядить способность быстрее.»</p>
+    </div>
+    <div class="pnl small">
+      <div class="tip"><b>Подсказка.</b> Удерживайте фишку, чтобы увидеть, какой камень даёт какую стихию.</div>
+      <table class="stats" style="margin-top:10px">
+        <tr><td>Урон</td><td>1 248</td></tr>
+        <tr><td>Скорость атаки</td><td>1.35</td></tr>
+        <tr><td>Шанс крита</td><td>12.5%</td></tr>
+        <tr><td>Сопротивление огню</td><td>40%</td></tr>
+      </table>
+      <div class="status"><span>HP <b>2 000 / 3 000</b></span><span>Мана <b>145 / 300</b></span><span>Ход <b>00:47</b></span><span>Золото <b>19 456</b></span></div>
+    </div>
+  </div>
+
+  <div class="pnl">
+    <h2 class="h2">Многоязычность</h2>
+    <div class="langs">
+      <div class="lang"><span class="tag">Русский</span><p lang="ru">Собери три камня в ряд, чтобы атаковать.</p></div>
+      <div class="lang"><span class="tag">English</span><p lang="en">Match three gems in a row to attack.</p></div>
+      <div class="lang"><span class="tag">Deutsch</span><p lang="de">Verbinde drei Edelsteine, um anzugreifen.</p></div>
+      <div class="lang"><span class="tag">Ελληνικά</span><p lang="el">Συνδύασε τρία πετράδια για να επιτεθείς.</p></div>
+      <div class="lang" dir="rtl"><span class="tag">العربية</span><p lang="ar" dir="rtl">طابق ثلاث جواهر في صف للهجوم.</p></div>
+      <div class="lang" dir="rtl"><span class="tag">עברית</span><p lang="he" dir="rtl">התאם שלוש אבני חן בשורה כדי לתקוף.</p></div>
+      <div class="lang"><span class="tag">ไทย</span><p lang="th">จับคู่อัญมณีสามเม็ดเพื่อโจมตี</p></div>
+      <div class="lang"><span class="tag">हिन्दी</span><p lang="hi">हमला करने के लिए तीन रत्न एक पंक्ति में मिलाएँ।</p></div>
+      <div class="lang"><span class="tag">中文</span><p lang="zh">连成三颗宝石即可发动攻击。</p></div>
+      <div class="lang"><span class="tag">日本語</span><p lang="ja">宝石を三つ並べて攻撃しよう。</p></div>
+      <div class="lang"><span class="tag">한국어</span><p lang="ko">보석 세 개를 맞춰 공격하세요.</p></div>
+    </div>
+  </div>
+
+  <div class="foot">Шрифты Noto Sans, Noto Sans Display, IBM Plex Sans — лицензия SIL OFL 1.1, <a href="https://scripts.sil.org/OFL" target="_blank" rel="noopener">https://scripts.sil.org/OFL</a></div>
+</div>
+<script>
+(function(){
+  var ts=document.getElementById('ts');
+  function bind(id,out,prop){var r=document.getElementById(id),o=document.getElementById(out);
+    function u(){ts.style.setProperty(prop,r.value+'px');o.textContent=r.value+' px';}r.addEventListener('input',u);u();}
+  bind('bs','bso','--body-size'); bind('ss','sso','--small-size');
+  var m=document.getElementById('mode');
+  m.addEventListener('click',function(){var l=ts.dataset.mode==='dark';ts.dataset.mode=l?'light':'dark';m.textContent=l?'Тёмная тема':'Светлая тема';});
+  function check(){
+    if(!document.fonts||!document.fonts.check)return;
+    var ok=document.fonts.check('700 40px "Noto Sans Display"')&&document.fonts.check('400 15px "Noto Sans"')&&document.fonts.check('400 12px "IBM Plex Sans"');
+    document.getElementById('warn').classList.toggle('on',!ok);
+  }
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(function(){setTimeout(check,300);});}
+  setTimeout(check,4000);
+})();
+</script>

@@ -4,33 +4,33 @@
 
 ## Палитра
 
-Палитра по luma — равночитаемая в сером: яркость камней разнесена равномерно (luma 52 → 204 с шагом ~25), насыщенность C* ≥ 50. 18 цветов; живой образец — `Palette`.
+Комфортная палитра по диапазону Fantasy UI Kit: насыщенность C* 42–58 вместо неона, тёплый сливовый фон вместо почти чёрного, лестница яркости сохранена. 18 цветов; живой образец — `Palette`.
 
-**Фон.** `bg-canvas` #101318 — глубокий фон / холст. `bg-cell` #1A1E25 — ячейка поля / панель.
+**Фон.** `bg-canvas` #1C1620 — глубокий фон / холст. `bg-cell` #2E2635 — ячейка поля / панель.
 
 | Камень | Форма | Токен | HEX |
 |---|---|---|---|
-| Синий | шестиугольник | `gem-blue` | #121FFA |
-| Красный | круг | `gem-red` | #E40D03 |
-| Маджента | треугольник | `gem-magenta` | #E411DA |
-| Зелёный | крест | `gem-green` | #15C638 |
-| Оранжевый | квадрат | `gem-orange` | #F68B0A |
-| Циан | капля | `gem-cyan` | #1EF7E4 |
-| Розовый | звезда | `gem-pink` | #FAABFE |
+| Гранат | круг | `gem-garnet` | #B3102B |
+| Слива | треугольник | `gem-plum` | #883F75 |
+| Изумруд | крест | `gem-emerald` | #2B9268 |
+| Небо | капля | `gem-sky` | #01B9EC |
+| Лаванда | шестиугольник | `gem-lavender` | #909CE7 |
+| Янтарь | квадрат | `gem-amber` | #F8A355 |
+| Орхидея | звезда | `gem-orchid` | #F3A9E7 |
 
 | Роль | Токен | HEX |
 |---|---|---|
-| Primary | `ui-primary` | #15C638 (= Зелёный) |
-| Success | `ui-success` | #1EF7E4 (= Циан) |
-| Danger | `ui-danger` | #E40D03 (= Красный) |
-| Info | `ui-info` | #1EF7E4 (= Циан) |
-| Reward | `ui-reward` | #F68B0A (= Оранжевый) |
-| Metal | `ui-metal` | #3A4150 |
-| Text primary | `text-primary` | #EAF0F8 |
-| Text muted | `text-muted` | #9CA8BA |
-| Disabled | `ui-disabled` | #333B47 |
+| Primary | `ui-primary` | #2B9268 (= Изумруд) |
+| Success | `ui-success` | #2B9268 (= Изумруд) |
+| Danger | `ui-danger` | #B3102B (= Гранат) |
+| Info | `ui-info` | #01B9EC (= Небо) |
+| Reward | `ui-reward` | #F8A355 (= Янтарь) |
+| Metal | `ui-metal` | #3E3345 |
+| Text primary | `text-primary` | #F0E8F2 |
+| Text muted | `text-muted` | #A79BB0 |
+| Disabled | `ui-disabled` | #463A4E |
 
-В превью: рамы и ободки — `ui-metal`; «Играть» — primary, «Выход» — danger, «Забрать», звёзды, монеты и крылья — reward; лента и кнопка магазина — `gem-magenta`; сердце и полоса здоровья — danger.
+В превью: рамы и ободки — `ui-metal`; «Играть» — primary, «Выход» — danger, «Забрать», звёзды, монеты и крылья — reward; лента и кнопка магазина — `gem-plum`; сердце и полоса здоровья — danger.
 
 ## Стили
 
@@ -70,13 +70,13 @@
 
 | Камень | Форма | Роль в бою |
 |---|---|---|
-| Красный | круг | урон, ярость |
-| Оранжевый | квадрат | золото, награды |
-| Розовый | звезда | благословение, свет |
-| Зелёный | крест | лечение, яд |
-| Циан | капля | мана, призыв |
-| Синий | шестиугольник | щит, контроль |
-| Маджента | треугольник | проклятия, вампиризм |
+| Гранат | круг | урон, ярость |
+| Янтарь | квадрат | золото, награды |
+| Орхидея | звезда | благословение, свет |
+| Изумруд | крест | лечение, яд |
+| Небо | капля | мана, призыв |
+| Лаванда | шестиугольник | щит, контроль |
+| Слива | треугольник | проклятия, вампиризм |
 
 ## Варианты фишек
 
@@ -93,35 +93,25 @@
 
 ## Шрифты
 
-Заголовки, цифры, кнопки — **Russo One** (Google Fonts, есть кириллица), текст — **Nunito** 600/800.
+Три роли — и ни одного четвёртого шрифта. Живая демонстрация — `TypeSystem`.
+
+| Роль | Шрифт и токен | Вес | Кегль |
+|---|---|---|---|
+| 1 · Заголовки | Noto Sans Display, `--font-head` | 600–700 | от 24 px, трекинг −2…−1 % |
+| 1 · Кнопки и меню | Noto Sans, `--font-body` | 600 коротко, 500 длинно | 14–20 px, трекинг 0…+1 % |
+| 2 · Основной текст | Noto Sans, `--font-body` | 400; акценты 500–600 | 13–16 px, интерлиньяж 1.4–1.5 |
+| 3 · Мелкий текст и цифры | IBM Plex Sans, `--font-small` | 400; акцент 500 | 10–13 px, интерлиньяж 1.3–1.4 |
+
+- CJK — Noto Sans SC / JP / KR (`--font-cjk`) первыми в цепочке; нелатинские заголовки — `--font-head-cjk` (Noto Sans 700). GNU Unifont — только последний fallback (`--font-fallback`).
+- Вес 300 не используется; текст мельче 16 px — не тоньше 400; контраст ≥ 4.5:1.
+- Арабский и иврит — `dir="rtl"` и логические отступы; у арабского, иврита, тайского и деванагари — без letter-spacing.
+- Все цифры — `font-variant-numeric: tabular-nums`.
+- Подключение — только `<link>` к Google Fonts (не `@import`); стек подстановок — system-ui, Segoe UI, Roboto, sans-serif.
 
 ## Поле
 
 Поле 9×9 (81 клетка). Поле приглушённое, фишки насыщенные: холст `bg-canvas`, клетки `bg-cell` — видна сетка и «колодец» под фишкой; фишки — полный цвет палитры. Клетка 46 px, фишка 40 px. Выбор — светлая рамка `text-primary`, найденная тройка — тонкий контур.
 
-
 ---
 
-## Consuming this system (generated — do not edit)
-
-Every path named below is under `project/` in this design system: read `project/api/tokens.md`, not `api/tokens.md`.
-
-10 components are documented without a runnable `components/bundle.js`: read each component’s card, and its README where it has one (`components/<Comp>/README.md`), and build to those guidelines. Tokens: the values are on `api/tokens.md`; a Slides deck or Design canvas also takes `tokens.json` by file path.
-
-**Read, per thing:** a component’s props, parts and examples: `api/components/<Comp>.md`; token values: `api/tokens.md`. After this README, fetch the cards and fonts you need in ONE message as parallel calls — none depends on another.
-
-**Two rules.** Before you use a thing — a component, a token group, an icon, an asset — read its card from the index below; a value you did not read from a card is a guess. `tokens.json`, `manifest.json` and `design-system.json` are sources for tools: hand them over. `components/<Comp>/README.md` is the long-form second read a card links to; `SKILL.md` and `artifact-type/` beside them are authoring guidance, not needed to consume the system.
-
-## Index (generated — do not edit)
-
-**Tokens**
-
-- `api/tokens.md` — Every token: text, fill, palette, type, spacing, radius, shadow. (4.6k)
-
-**Components** (`api/components/<Comp>.md`, 10)
-
-- **Варианты элементов**: `AbyssShards` — Вариант D: кристаллы стихий в квадратной золотой оправе · `GemsElemental` — Вариант A (основной): семь фишек — чистые геометрические фигуры без скруглений, под реальный размер 40–60 px: тёмный кант, насыщенное тело и один блик, без вну… · `RelicTokens` — Вариант C: боевые предметы на монете своей стихии в круглой золотой оправе — меч, щит, зелье, кристалл маны, монета, череп · `RuneStones` — Вариант B: монета стихии с выдавленной руной в круглой золотой оправе
-- **Поле**: `BoardSample` — Пример поля 7×7: толстая глянцевая золотая рама (ребро, ободок, фаска, блик), клетки stone-700/slate-800, самоцветы без оправ, выбор и найденная тройка золотом
-- **Интерфейс**: `Buttons` — Кнопки-«таблетки» по уроку монеты: золотой ободок, диагональный градиент цвета, глянец на верхней половине, ребро orange-700 снизу, текст с тенью вниз и светлы… · `GlassOverlays` — Набор стеклянных бликов, которые накладываются поверх любой иконки или элемента интерфейса — одинаково на двенадцать форм: квадрат, круг, сквиркл, шестигранник… · `Panels` — Окна и HUD: фиолетовая лента с золотой кромкой, глянцем и раздвоенными хвостами над панелью в золотой раме, вдавленные блоки, выпуклые звёзды, золотая монета с…
-- **Палитра**: `Palette` — Статичное превью палитры: два цвета фона, семь камней и цвета кнопок, иконок и текста
-- **Спец-элементы**: `SpecialTiles` — Спец-элементы: бонусы за длинные совпадения и препятствия, в тех же золотых оправах
+Шрифты Noto Sans, Noto Sans Display, IBM Plex Sans — лицензия SIL OFL 1.1, https://scripts.sil.org/OFL
