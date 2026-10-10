@@ -1,4 +1,4 @@
-/* Стиль по дизайн-системе (design/README.md, палитра «Сумерки»):
+/* Стиль по дизайн-системе (design/README.md, палитра по luma):
    ровный тёмный холст, металлические панели, кнопки-«таблетки» сплошного цвета
    с металлическим ободком и стеклянным глянцем сверху (GlassOverlays · «Верхний глянец»).
    Цвета, отступы и радиусы — только переменные из css/tokens.css. */
@@ -16,7 +16,7 @@ html, body {
   min-height: 100%;
   background: var(--bg-canvas);
   color: var(--text-primary);
-  font: 600 15px/22px var(--font-sans);
+  font: 600 15px/22px var(--font-body);
   overscroll-behavior: none;
   -webkit-user-select: none;
   user-select: none;
@@ -48,12 +48,13 @@ button { font: inherit; color: inherit; cursor: pointer; border: 0; }
 
 h1 {
   margin: 0;
-  font: 400 56px/1 var(--font-display);
+  font: 700 56px/1 var(--font-title); /* Oswald 700 ≈ Bebas Neue по насыщенности */
+  text-transform: uppercase;
   color: var(--text-primary);
   letter-spacing: 1px;
 }
 
-/* Лента: аметист в металлическом ободке, раздвоенные хвосты темнее */
+/* Лента: маджента в металлическом ободке, раздвоенные хвосты темнее */
 .ribbon {
   position: relative;
   z-index: 2;
@@ -63,8 +64,8 @@ h1 {
   padding: 6px 24px 7px;
   border: 2px solid var(--ui-metal);
   border-radius: var(--radius-tile);
-  background: var(--glass-top), var(--gem-amethyst);
-  font: 400 22px/26px var(--font-display);
+  background: var(--glass-top), var(--gem-magenta);
+  font: 400 22px/26px var(--font-heading);
   color: var(--text-primary);
 }
 
@@ -75,7 +76,7 @@ h1 {
   top: 10px;
   width: 22px;
   height: calc(100% - 4px);
-  background: color-mix(in srgb, var(--gem-amethyst) 70%, #000);
+  background: color-mix(in srgb, var(--gem-magenta) 70%, #000);
 }
 
 .ribbon::before { left: -22px; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 40% 50%); }
@@ -112,15 +113,15 @@ h1 {
   border: var(--rim) solid transparent;
   border-radius: var(--radius-pill);
   background: var(--glass-top) padding-box, linear-gradient(var(--fill), var(--fill)) padding-box, linear-gradient(var(--ui-metal), var(--ui-metal)) border-box;
-  font: 400 22px/26px var(--font-display);
+  font: 400 22px/26px var(--font-heading);
   color: var(--text-primary);
   transition: transform .08s, filter .15s;
 }
 
-.btn.green  { --fill: var(--ui-success); }
+.btn.green  { --fill: var(--ui-primary); }
 .btn.red    { --fill: var(--ui-danger); }
-.btn.orange { --fill: var(--ui-primary); }
-.btn.purple { --fill: var(--gem-amethyst); }
+.btn.orange { --fill: var(--ui-reward); }
+.btn.purple { --fill: var(--gem-magenta); }
 .btn.stone  { --fill: color-mix(in srgb, var(--ui-metal) 85%, var(--text-muted)); }
 
 .btn:active { transform: scale(.96); filter: brightness(.92); }
@@ -132,7 +133,7 @@ h1 {
 .btn small {
   display: block;
   margin-top: 2px;
-  font: 800 12px/16px var(--font-sans);
+  font: 800 12px/16px var(--font-body);
   opacity: .9;
 }
 
@@ -163,7 +164,7 @@ h1 {
 /* Имя текущего персонажа под кнопкой «Продолжить» */
 #heroCaption {
   margin-top: -6px;
-  font: 400 18px/22px var(--font-display);
+  font: 400 18px/22px var(--font-heading);
   color: var(--ui-reward);
   text-align: center;
   overflow: hidden;
@@ -217,15 +218,15 @@ h1 {
   text-align: left;
 }
 
-.slotInfo b { font: 400 18px/22px var(--font-display); }
+.slotInfo b { font: 400 18px/22px var(--font-heading); }
 .slot.active .slotInfo b { color: var(--ui-reward); }
-.slotInfo span { font: 800 12px/16px var(--font-sans); color: var(--text-muted); }
+.slotInfo span { font: 800 12px/16px var(--font-body); color: var(--text-muted); }
 
 .slotDelete { width: 44px; height: 44px; }
 .slotDelete::after { background-size: 16px; }
 
 .slotInfo span + span { font-weight: 600; }
-.slot.empty .slotInfo b { color: var(--ui-success); }
+.slot.empty .slotInfo b { color: var(--ui-primary); }
 
 /* ---------- Создание персонажа ---------- */
 
@@ -237,7 +238,7 @@ h1 {
   margin: var(--space-2) 0;
 }
 
-#createProgress { font: 800 13px/18px var(--font-sans); color: var(--text-muted); }
+#createProgress { font: 800 13px/18px var(--font-body); color: var(--text-muted); }
 
 #create .panel { margin-bottom: 96px; }
 
@@ -259,8 +260,8 @@ h1 {
   transition: box-shadow .15s, transform .08s;
 }
 
-.choice b { font: 400 18px/22px var(--font-display); }
-.choice span { font: 600 12px/16px var(--font-sans); color: var(--text-muted); }
+.choice b { font: 400 18px/22px var(--font-heading); }
+.choice span { font: 600 12px/16px var(--font-body); color: var(--text-muted); }
 .choice:active { transform: scale(.97); }
 .choice.selected { box-shadow: inset 0 0 0 3px var(--text-primary); background: var(--glass-top), var(--bg-cell); }
 .choice.selected b { color: var(--ui-reward); }
@@ -275,7 +276,7 @@ h1 {
   border-radius: 14px;
   background: var(--bg-canvas);
   color: var(--text-primary);
-  font: 400 22px/28px var(--font-display);
+  font: 400 22px/28px var(--font-heading);
   outline: none;
   -webkit-user-select: text;
   user-select: text;
@@ -297,7 +298,7 @@ h1 {
   display: flex;
   gap: 12px;
   padding: 12px 16px calc(env(safe-area-inset-bottom, 0px) + 16px);
-  background: linear-gradient(rgba(19,22,25,0), var(--bg-canvas) 30%);
+  background: linear-gradient(rgba(16,19,24,0), var(--bg-canvas) 30%);
   transform: translateX(-50%);
 }
 
@@ -327,7 +328,7 @@ h1 {
 
 .setRow.range { flex-direction: column; align-items: stretch; gap: 6px; padding: 12px 14px; }
 .setRow.range span { display: flex; justify-content: space-between; }
-.setRow.range b { font: 400 15px/22px var(--font-display); color: var(--ui-reward); }
+.setRow.range b { font: 400 15px/22px var(--font-score); color: var(--ui-reward); }
 
 input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui-primary); }
 
@@ -357,7 +358,7 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
   transition: transform .2s, background .2s;
 }
 
-.switch:checked { background: var(--glass-top), var(--ui-success); }
+.switch:checked { background: var(--glass-top), var(--ui-primary); }
 .switch:checked::after { transform: translateX(24px); background: var(--text-primary); }
 
 #settings .panel > .btn, #bye .btn { width: 100%; }
@@ -372,7 +373,7 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
   border: 2px solid var(--ui-metal);
   border-radius: var(--radius-pill);
   background: var(--bg-cell);
-  font: 400 13px/18px var(--font-display);
+  font: 400 13px/18px var(--font-score);
   color: var(--text-muted);
 }
 
@@ -386,7 +387,7 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
   align-items: center;
   justify-content: center;
   padding: calc(env(safe-area-inset-top, 0px) + 24px) 16px calc(env(safe-area-inset-bottom, 0px) + 24px);
-  background: rgba(19, 22, 25, .8);
+  background: rgba(16, 19, 24, .8);
 }
 
 .modal.open { display: flex; }
@@ -420,11 +421,11 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
   justify-content: space-between;
   align-items: baseline;
   margin: 14px 0 6px;
-  font: 400 18px/22px var(--font-display);
+  font: 400 18px/22px var(--font-heading);
   color: var(--ui-reward);
 }
 
-#changelogList h3 span { font: 800 12px/16px var(--font-sans); color: var(--text-muted); }
+#changelogList h3 span { font: 800 12px/16px var(--font-body); color: var(--text-muted); }
 #changelogList ul { margin: 0; padding-left: 18px; }
 #changelogList li { margin: 4px 0; }
 

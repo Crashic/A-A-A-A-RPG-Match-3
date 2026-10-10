@@ -11,7 +11,7 @@
 | `index.html` | разметка и подключение скриптов |
 | `css/style.css` | стили интерфейса |
 | `css/tokens.css` | цвета, отступы, радиусы (генерируется из `design/tokens.json`) |
-| `css/fonts.css`, `fonts/` | шрифты Russo One и Nunito (OFL), работают офлайн |
+| `css/fonts.css`, `fonts/` | шрифты Oswald, Manrope и Russo One (OFL), работают офлайн |
 | `design/` | копия дизайн-системы: правила стиля, палитра, гайд по иконкам, образцы элементов |
 | `tools/` | `build-tokens.py` — токены в CSS, `update-sw.py` — список файлов кэша |
 | `js/` | по одной функции на файл, имя файла = имя функции |

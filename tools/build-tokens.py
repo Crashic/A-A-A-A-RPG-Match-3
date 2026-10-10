@@ -20,8 +20,25 @@ for name, v in colors.items():
 for fam in ('spacing', 'radius', 'shadow'):
     for tok in t.get(fam, {}).get('tokens', []):
         out.append(f"  --{tok['name']}: {first(tok['value'])};")
-out.append('  --font-display: "Russo One", Impact, sans-serif;')
-out.append('  --font-sans: "Nunito", system-ui, sans-serif;')
+# Шрифты стилей текста: --font-title, --font-heading, --font-score, --font-body, --font-label.
+# У Bebas Neue и Space Grotesk нет кириллицы, поэтому они заменяются аналогами (лежат в fonts/).
+FONT_SUBSTITUTE = {
+    'Bebas Neue': '"Oswald", "Arial Narrow", sans-serif',
+    'Space Grotesk': '"Manrope", system-ui, sans-serif',
+    'Nunito': '"Manrope", system-ui, sans-serif',
+}
+families = t['type']['families']
+def font_stack(key):
+    stack = families.get(key, families.get('sans'))
+    for name, repl in FONT_SUBSTITUTE.items():
+        if name in stack:
+            return repl
+    return stack
+for group in t['type']['groups']:
+    for st in group['styles']:
+        key = st.get('family') or group.get('family')
+        out.append(f"  --font-{st['name']}: {font_stack(key)};")
+        out.append(f"  --font-{st['name']}-weight: {st['fontWeight']};")
 out.append('}')
 open(os.path.join(root, 'css', 'tokens.css'), 'w', encoding='utf-8').write('\n'.join(out) + '\n')
 print('css/tokens.css:', len(out) - 3, 'tokens')
