@@ -74,6 +74,7 @@ const FILES = [
   './js/selectGem.js',
   './js/clearHint.js',
   './js/scheduleHint.js',
+  './js/findHintGem.js',
   './js/showHint.js',
   './js/attemptSwap.js',
   './js/cellFromPoint.js',

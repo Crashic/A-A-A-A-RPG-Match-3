@@ -373,7 +373,6 @@ h1 {
   overflow: hidden;
   border-radius: 10px;
   background: var(--bg-canvas);
-  box-shadow: 0 0 0 2px var(--ui-metal);
   touch-action: none;
   -webkit-user-select: none;
   user-select: none;
@@ -412,8 +411,7 @@ h1 {
 .gem.clearing svg { transform: scale(0); opacity: 0; }
 
 /* выбор — светлая рамка text-primary (GlassOverlays · «Рамка выбора») */
-.gem.selected::after,
-.gem.hint::after {
+.gem.selected::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -423,12 +421,10 @@ h1 {
 
 .gem.selected svg { transform: scale(1.08); }
 
-/* подсказка через 10 с бездействия — пульсирует одна фишка */
-.gem.hint::after { animation: hintFrame 1s ease-in-out infinite; }
-.gem.hint svg { animation: hintPulse 1s ease-in-out infinite; }
+/* подсказка через 10 с бездействия — мигает одна фишка, которая соберёт ряд */
+.gem.hint svg { animation: hintBlink .8s steps(1, end) infinite; }
 
-@keyframes hintPulse { 50% { transform: scale(1.15); } }
-@keyframes hintFrame { 0%, 100% { opacity: .2; } 50% { opacity: 1; } }
+@keyframes hintBlink { 50% { opacity: .15; } }
 
 /* ---------- Заставка: бегущий текст в перспективе ---------- */
 
