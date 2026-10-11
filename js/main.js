@@ -6,6 +6,7 @@ function main() {
   setupChangelog();
   setupGlossary();
   setupCharacter();
+  setupTips();
   setupMenu();
   setupBoardInput();
   renderMenu();

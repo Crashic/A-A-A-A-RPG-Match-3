@@ -43,7 +43,8 @@ function renderMap() {
     b.disabled = !open;
     b.innerHTML = '<span class="enemyHead"><span class="enemyLvl"></span><b></b></span>' +
       '<span class="enemyAbout"></span><span class="enemyXp"></span>';
-    b.title = e.skill + ': ' + e.short + ' ' + e.description;
+    b.dataset.tipTitle = '«' + e.skill + '»';
+    b.dataset.tip = e.short + ' ' + e.description;
     b.querySelector('.enemyAbout').textContent = '«' + e.skill + '»';
     const lvl = b.querySelector('.enemyLvl');
     lvl.textContent = e.level;

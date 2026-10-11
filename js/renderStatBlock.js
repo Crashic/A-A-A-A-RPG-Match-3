@@ -1,5 +1,6 @@
 // Блок характеристик на экране «Персонаж»: свободные очки, сброс (круглая стрелка), пять строк
-// с названием расы (подсказка), значением и кнопками «−/+», итог в бою. В бою — только просмотр:
+// с названием расы (подсказка), значением и кнопками «−/+», итог в бою. Сброс — оранжевый, если есть
+// розданные очки, и спрашивает подтверждение. В бою — только просмотр:
 // кнопок «−/+» и сброса нет.
 function renderStatBlock(box, hero, readOnly) {
   const free = statPointsFree(hero);
@@ -16,13 +17,14 @@ function renderStatBlock(box, hero, readOnly) {
   if (!readOnly) {
     const reset = document.createElement('button');
     reset.type = 'button';
-    reset.className = 'btn stone round resetStats';
+    const spent = free < statPointsTotal(hero);
+    reset.className = 'btn round resetStats ' + (spent ? 'orange' : 'stone'); // есть что сбросить — оранжевая
     reset.setAttribute('aria-label', 'Сбросить очки');
-    reset.title = 'Сбросить очки';
+    reset.dataset.tip = 'Сбросить розданные очки';
     reset.innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M24 16 A8 8 0 1 1 16 8 L20 8" fill="none" stroke="var(--text-primary)" stroke-width="3" stroke-linecap="round"/>' +
       '<path d="M18 3 L23 8 L18 13" fill="none" stroke="var(--text-primary)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-    reset.disabled = free === statPointsTotal(hero);
-    reset.addEventListener('click', () => resetStats());
+    reset.disabled = !spent;
+    reset.addEventListener('click', e => { e.stopPropagation(); showConfirm('Сбросить все розданные очки характеристик?', 'Подтвердить', () => resetStats(), 'orange'); });
     head.appendChild(reset);
   }
   box.appendChild(head);
@@ -39,7 +41,7 @@ function renderStatBlock(box, hero, readOnly) {
     attachTip(label, statName(hero.raceId, s.id).name, statTipText(hero.raceId, s.id));
     const val = row.querySelector('.statVal');
     val.textContent = stats[s.id];
-    val.title = 'База класса ' + (base[s.id] || STAT_BASE) + ', ваших очков ' + pts[s.id];
+    val.dataset.tip = 'База класса ' + (base[s.id] || STAT_BASE) + ', ваших очков ' + pts[s.id];
     if (!readOnly) {
       const [minus, plus] = row.querySelectorAll('.statBtn');
       minus.disabled = pts[s.id] <= 0;

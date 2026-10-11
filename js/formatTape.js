@@ -7,7 +7,7 @@ function formatTape(amount) {
     const n = Math.floor(rest / k.value);
     rest -= n * k.value;
     if (n || parts.length || k.id === 'white')
-      parts.push(`<span title="${k.name} изолента"><i class="roll ${k.id}"></i>${n}</span>`);
+      parts.push(`<span data-tip-title="Изолента" data-tip="${k.name[0].toUpperCase() + k.name.slice(1)} изолента"><i class="roll ${k.id}"></i>${n}</span>`);
   }
   return '<span class="tape">' + parts.join('') + '</span>';
 }

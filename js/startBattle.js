@@ -15,7 +15,7 @@ async function startBattle(enemyId, saved = null) {
     enemyId: e.id,
     enemyInfo: e,
     hero: saved ? saved.hero : createHeroFighter(save), // с характеристиками героя
-    enemy: saved ? saved.enemy : createFighter(e.name, e.level, e.hp * (e.elite ? ELITE_HP : 1), e.atk * (e.elite ? ELITE_ATK : 1)),
+    enemy: saved ? saved.enemy : createEnemyFighter(e), // с характеристиками врага
     turn: saved ? saved.turn : 'hero',
     over: false,
     gained: saved ? Object.assign({ xp: 0, tape: 0 }, saved.gained) : { xp: 0, tape: 0 },

@@ -11,7 +11,8 @@ function renderSkillBar() {
     b.type = 'button';
     b.className = 'btn purple skillBtn';
     b.disabled = !canUseSkill(s);
-    b.title = s.text;
+    b.dataset.tipTitle = s.name;
+    b.dataset.tip = s.text;
     b.innerHTML = '<b></b><small></small>';
     b.firstChild.textContent = s.name;
     const wait = (battle.skill.cooldowns || {})[s.id];

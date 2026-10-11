@@ -20,7 +20,9 @@ function skillTurnEnd(side) {
       for (const id in sk.cooldowns || {}) if (--sk.cooldowns[id] <= 0) delete sk.cooldowns[id];
     }
     if (sk.buff && sk.steps > 0 && --sk.buff.turns <= 0) sk.buff = null;
+    if (sk.steps > 0 && sk.weaken && --sk.weaken.turns <= 0) sk.weaken = null; // ослабление от врага
   } else {
+    if (sk.enemyCd > 0) sk.enemyCd--; // перезарядка навыка врага
     for (const w of sk.wards) if ('turns' in w) w.turns--;
     sk.wards = sk.wards.filter(w => !('turns' in w) || w.turns > 0);
   }

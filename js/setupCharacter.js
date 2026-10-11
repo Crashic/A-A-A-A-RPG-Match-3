@@ -5,10 +5,15 @@ function setupCharacter() {
   on('btnCharacter', openCharacter);
   on('btnCharGame', openCharacter);
   on('btnBattleMenu', () => toggleBattleMenu());
+  // меню на карте (справа, вертикально)
+  on('mapChar', openCharacter);
+  on('mapGlossary', () => openGlossary());
+  on('mapLegend', openGemLegend);
+  on('mapHome', goHome);
   // пункты меню боя закрывают меню (их действия привязаны в setupMenu и setupGlossary)
   document.querySelectorAll('#battleMenu .menuItem').forEach(b => b.addEventListener('click', () => closeBattleMenu()));
   document.addEventListener('click', e => {
     if (!e.target.closest('#battleMenu') && !e.target.closest('#btnBattleMenu')) closeBattleMenu();
-    if (!e.target.closest('.hasTip')) hideTip();
+    if (!e.target.closest('.hasTip') && !e.target.closest('[data-tip]')) hideTip();
   });
 }

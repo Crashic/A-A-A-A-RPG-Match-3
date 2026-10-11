@@ -6,7 +6,7 @@ function originButton(item, state, onClick, cls = '') {
   b.className = 'pick ' + cls + (state.selected ? ' selected' : '') + (state.dim ? ' dim' : '');
   b.innerHTML = iconTile(item.icon, item.color) + '<span></span>';
   b.querySelector('span').textContent = item.short || item.name;
-  b.title = item.name;
+  b.dataset.tip = item.name;
   b.addEventListener('click', () => { vibrate(); onClick(); });
   return b;
 }

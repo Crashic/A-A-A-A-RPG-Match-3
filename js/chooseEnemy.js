@@ -9,8 +9,10 @@ function chooseEnemy(id) {
     const save = loadSlot(slot);
     save.lastEnemy = id;
     saveSlot(slot, save);
-    goBack(); // назад на экран боя — renderScreen('game') начнёт бой с выбранным врагом
+    if (fromBattle) goBack(); // назад на экран боя — renderScreen('game') начнёт бой с выбранным врагом
+    else enterGame(true);     // карта после боя: экран боя заменяет карту и начинает бой
   };
+  const fromBattle = !!battle;
   if (battle && !battle.over && battle.enemyId === id) { goBack(); return; } // тот же враг — вернуться в бой
   if (battle && !battle.over) showConfirm('Бросить текущий бой?', 'Бросить', go);
   else go();

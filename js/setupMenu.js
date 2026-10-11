@@ -17,8 +17,8 @@ function setupMenu() {
 
   // Бой: карта врагов и окно итогов
   on('btnMap', openMap);
-  on('resultMap', openMap);
-  on('resultAgain', () => { closeBattleResult(); startBattle(battle ? battle.enemyId : null); });
+  on('resultMap', closeBattleResult); // окно итогов показано поверх карты — «Закрыть»
+  on('resultAgain', () => { closeBattleResult(); enterGame(true); }); // тот же враг (lastEnemy)
 
   // Заставка: «Пропустить»
   on('introSkip', finishIntro);

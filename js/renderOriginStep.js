@@ -64,7 +64,7 @@ function renderOriginStep() {
   const mini = c => {
     const tile = document.createElement('span');
     tile.className = 'mini' + (allowed && !allowed[c.id] ? ' dim' : '');
-    tile.title = c.name;
+    tile.dataset.tip = c.name;
     tile.innerHTML = iconTile(c.icon, c.color) + '<small></small>';
     tile.querySelector('small').textContent = c.name.replace('‑Репортёр', '');
     return tile;

@@ -21,12 +21,11 @@ function applyMatchEffects(cells) {
     const kind = GEM_EFFECTS[id].kind;
     if (kind === 'damage') {
       let amount = Math.round(n * me.attack);
+      const c = rollCrit(me, amount); // Ловкость: шанс крита (у героя и врага)
+      amount = c.amount;
+      if (c.crit) showFloat(foeSide, 'Крит!', 'damage');
       if (!isHero) amount = skillReduceHit(amount); // защиты и навыки игрока
-      else { // Ловкость героя: шанс крита
-        const c = rollCrit(me, amount);
-        amount = c.amount;
-        if (c.crit) showFloat('enemy', 'Крит!', 'damage');
-      }
+      else amount = heroWeakened(amount);           // навык врага ослабил ваши удары
       const hit = dealDamage(foe, amount);
       if (!isHero) { battle.skill.lastEnemyLoss.hp += hit.hp; battle.skill.lastEnemyLoss.shield += hit.shield; }
       if (hit.shield) showFloat(foeSide, '−' + hit.shield, 'shield');

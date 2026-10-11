@@ -3,9 +3,10 @@
 // 2) урон — по 10 за Топливо; 3) щит, если он не полный;
 // 4) мешает игроку: забирает с поля фишки маны, нужной его навыкам (heroNeedGems),
 //    и выбирает ход, после которого игрок соберёт этой маны меньше всего (bestGatherOf);
-// 5) бесполезные врагу фишки (мана, Радиация, Документы) — ноль, кроме нужных его навыкам (enemy.needs).
+// 5) мана для своего навыка (ENEMY_SKILLS) — +3 за фишку; остальное бесполезное (Радиация, Документы, чужая мана) — ноль.
 function scoreMove(grid, move, me) {
-  const needs = (battle && battle.enemyInfo.needs) || [];
+  const own = battle && ENEMY_SKILLS[battle.enemyId];
+  const needs = own ? Object.keys(own.cost) : []; // мана для навыка врага
   const heroNeed = heroNeedGems();
   swapInGrid(grid, move.a, move.b);
   const cells = findMatches(grid);

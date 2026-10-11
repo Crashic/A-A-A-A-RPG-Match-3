@@ -1,5 +1,5 @@
 // Конец боя. Опыт и изолента, собранные с фишек, остаются и при поражении.
-// Победа добавляет опыт за врага (WoW). Уровни, сохранение, окно итогов.
+// Победа добавляет опыт за врага (WoW). Уровни, сохранение; затем — карта врагов и окно итогов поверх неё.
 function finishBattle(won) {
   clearHint();
   clearBattle(battle.slot);
@@ -17,5 +17,12 @@ function finishBattle(won) {
   battle.gained = { xp: 0, tape: 0 }; // уже начислено в сохранение
   vibrate(won ? [30, 40, 30] : 80);
   renderBattle();
+  // экран боя убирается: вместо него в истории — карта, поверх неё окно итогов
+  battle = null;
+  closeBattleMenu();
+  mapZoneId = null;
+  renderMap();
+  history.replaceState({ screen: 'map' }, '');
+  showScreen('map', false);
   showBattleResult(result);
 }

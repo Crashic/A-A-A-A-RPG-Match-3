@@ -1,12 +1,42 @@
-// Навык врага под его панелью: название и что он делает (js/zones.js).
-// Пока только описание — в бою навыки врагов появятся позже.
+// Под панелью врага: его характеристики (значки с подсказкой), активный навык за ману (как у героя:
+// значок маны, цена, перезарядка; подсказка — что делает) и навык из списка автора — иконкой с подсказкой.
 function renderEnemySkill() {
   const box = document.getElementById('enemySkill');
   const found = battle && findEnemy(battle.enemyId);
-  if (!found || !found.enemy.skill) { box.innerHTML = ''; return; }
+  box.innerHTML = '';
+  if (!found) return;
   const e = found.enemy;
-  box.innerHTML = '<b></b><span></span><em></em>';
-  box.children[0].textContent = '«' + e.skill + '»';
-  box.children[1].textContent = e.short;
-  box.children[2].textContent = e.description;
+  const f = battle.enemy;
+
+  if (f.stats) {
+    const chips = document.createElement('div');
+    chips.className = 'statChips enemyStats';
+    for (const s of STATS) chips.appendChild(statChip(null, s.id, f.stats[s.id]));
+    box.appendChild(chips);
+  }
+
+  const row = document.createElement('div');
+  row.className = 'enemySkillRow';
+  const skill = ENEMY_SKILLS[e.id];
+  if (skill) {
+    const gem = Object.keys(skill.cost)[0];
+    const wait = battle.skill.enemyCd || 0;
+    const ready = !wait && (f.mana[gem] || 0) >= skill.cost[gem];
+    const card = document.createElement('div');
+    card.className = 'enemyActive' + (ready ? ' ready' : '');
+    card.innerHTML = '<b></b><small>' + gemMiniIcon(gem) + '<span></span></small>';
+    card.querySelector('b').textContent = skill.name;
+    card.querySelector('small span').textContent = skill.cost[gem] + (wait ? ' · ждать ' + wait : ' · перезарядка ' + skill.cooldown);
+    attachTip(card, skill.name + ' · активный', skill.text + ' ' + skill.lore);
+    row.appendChild(card);
+  }
+  if (e.skill) {
+    const icon = document.createElement('span');
+    icon.className = 'passiveIcon';
+    icon.innerHTML = iconTile('eye', 'var(--gem-ruby)');
+    icon.setAttribute('aria-label', e.skill);
+    attachTip(icon, e.skill + ' · пассивный', e.short + ' ' + e.description + ' (в бою пока не работает)');
+    row.appendChild(icon);
+  }
+  box.appendChild(row);
 }

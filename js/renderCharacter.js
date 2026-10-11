@@ -1,4 +1,4 @@
-// Экран «Персонаж»: слева — шапка (имя, фракция и класс, уровень и опыт), кукла со слотами и рунами,
+// Экран «Персонаж»: слева — шапка (имя по центру, уровень и опыт), кукла со слотами и рунами,
 // характеристики и вкладки класса, фракции и расы; справа — инвентарь (сумки и ячейки).
 // В бою — только просмотр (renderStatBlock без кнопок).
 function renderCharacter() {
@@ -16,7 +16,7 @@ function renderCharacter() {
     return d;
   });
   renderCharHead(parts[0], hero);
-  renderDoll(parts[1], hero);
+  renderDoll(parts[1]);
   renderStatBlock(parts[2], hero, readOnly);
   renderCharTabs(parts[3], hero);
   left.scrollTop = scroll;
