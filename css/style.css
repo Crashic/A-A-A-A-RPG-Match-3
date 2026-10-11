@@ -403,9 +403,12 @@ h1 {
 
 /* Навыки под панелью игрока: активные — кнопки за ману, пассивные — строкой */
 #skillBar { display: flex; flex-direction: column; gap: 6px; min-height: 0; }
-.btn.skillBtn { min-height: 40px; padding: 4px 10px; display: flex; flex-direction: column; align-items: center; gap: 0; }
-.skillBtn b { font: var(--type-menu); font-weight: 600; line-height: 18px; }
-.skillBtn small { font: var(--type-caption); color: var(--text-secondary); }
+.btn.skillBtn { flex: none; min-height: 0; padding: 3px 10px 4px; display: flex; flex-direction: column; align-items: center; gap: 0; }
+.skillBtn b { font: var(--type-menu); font-size: 14px; font-weight: 600; line-height: 18px; }
+.skillBtn small { font: var(--type-caption); color: var(--text-secondary); display: inline-flex; align-items: center; gap: 3px; }
+.skillBtn small .gemMini { width: 12px; height: 12px; }
+.skillBtn b { overflow: hidden; max-width: 100%; white-space: nowrap; text-overflow: ellipsis; }
+.infoText .skill.combat .gemMini { display: inline-block; vertical-align: -3px; margin-right: 4px; }
 .skillBtn:disabled small { color: var(--text-muted); }
 .skillPassive { margin: 0; font: var(--type-caption); color: var(--text-muted); text-align: center; }
 /* Навык врага под его панелью (пока описание) */
@@ -415,8 +418,7 @@ h1 {
 #enemySkill em { font: var(--type-caption); font-style: italic; color: var(--text-muted); }
 
 /* Кнопки под панелью врага: «В меню» и квадратная «Карта врагов» справа внизу */
-.gameButtons { display: flex; justify-content: flex-end; gap: 8px; margin-top: auto; }
-.gameSide:first-child .gameButtons { justify-content: flex-start; } /* «Фишки» — слева внизу */
+.gameButtons { display: flex; justify-content: flex-end; gap: 6px; margin-top: auto; }
 .btn.square {
   flex: none;
   width: 56px;
@@ -1021,9 +1023,9 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .gBody .g-lore { font-style: italic; color: var(--text-muted); }
 .gBody .g-list { font: var(--type-caption); color: var(--text-muted); }
 
-/* Кнопки боя — квадратные иконки: «Фишки» слева; «В меню», глоссарий и карта справа */
-#game .btn.square { width: 52px; height: 52px; }
-#game .btn.square svg { width: 32px; height: 32px; }
+/* Кнопки боя — квадратные иконки справа внизу: «Фишки», «В меню», глоссарий, карта */
+#game .btn.square { width: 46px; height: 46px; }
+#game .btn.square svg { width: 28px; height: 28px; }
 
 /* Вкладки глоссария — ниже, 4 px от текста сверху и снизу */
 #glossaryTabs .zone { flex: none; min-height: 0; padding: 4px 10px; }

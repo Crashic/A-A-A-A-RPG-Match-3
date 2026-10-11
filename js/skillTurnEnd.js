@@ -14,7 +14,11 @@ function skillTurnEnd(side) {
         }
       }
     }
-    if (sk.steps > 0) sk.heroTurns++;
+    if (sk.steps > 0) {
+      sk.heroTurns++;
+      // перезарядка боевых навыков считается ходами игрока
+      for (const id in sk.cooldowns || {}) if (--sk.cooldowns[id] <= 0) delete sk.cooldowns[id];
+    }
     if (sk.buff && sk.steps > 0 && --sk.buff.turns <= 0) sk.buff = null;
   } else {
     for (const w of sk.wards) if ('turns' in w) w.turns--;

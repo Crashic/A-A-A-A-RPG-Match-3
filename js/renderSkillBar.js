@@ -1,4 +1,5 @@
-// Навыки под панелью игрока: кнопки активных (название и цена; недоступные — серые)
+// Навыки под панелью игрока: кнопки активных (название и цена; у боевого навыка класса — значок маны
+// и перезарядка; недоступные — серые)
 // и строка пассивных.
 function renderSkillBar() {
   const bar = document.getElementById('skillBar');
@@ -13,7 +14,15 @@ function renderSkillBar() {
     b.title = s.text;
     b.innerHTML = '<b></b><small></small>';
     b.firstChild.textContent = s.name;
-    b.lastChild.textContent = s.once && battle.skill.used[s.id] ? 'использован' : skillCostText(s) + (s.once ? ' · раз за бой' : '');
+    const wait = (battle.skill.cooldowns || {})[s.id];
+    const gems = Object.keys(s.cost || {});
+    if (s.classSkill && gems.length === 1) {
+      // боевой навык класса: значок маны, цена и перезарядка
+      b.lastChild.innerHTML = gemMiniIcon(gems[0]) + '<span></span>';
+      b.lastChild.lastChild.textContent = s.cost[gems[0]] + (wait ? ' · ждать ' + wait : ' · перезарядка ' + s.cooldown);
+    } else {
+      b.lastChild.textContent = s.once && battle.skill.used[s.id] ? 'использован' : skillCostText(s) + (s.once ? ' · раз за бой' : '');
+    }
     b.addEventListener('click', () => useSkill(s.id));
     bar.appendChild(b);
   }

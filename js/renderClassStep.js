@@ -33,12 +33,16 @@ function renderClassStep() {
       ': ' + (bonus ? bonus.text : 'класс недоступен') + (bonus ? ' · старт: ' + start.name : '');
     info.querySelectorAll('p')[1].textContent = cls.description;
     // навыки этого класса у выбранной расы (js/skills.js)
-    for (const sk of heroSkills({ raceId: race.id, classId: cls.id })) {
+    for (const sk of bonus ? heroSkills({ raceId: race.id, classId: cls.id }) : []) {
       const p = document.createElement('p');
       p.className = 'skill';
       p.innerHTML = '<b></b> <i></i><br><span></span><br><em></em>';
       p.querySelector('b').textContent = sk.name;
       p.querySelector('i').textContent = sk.type === 'active' ? '· активный, ' + skillCostText(sk) : '· пассивный';
+      if (sk.classSkill) { // боевой навык класса: значок маны перед названием
+        p.classList.add('combat');
+        p.querySelector('b').insertAdjacentHTML('beforebegin', gemMiniIcon(Object.keys(sk.cost)[0]));
+      }
       p.querySelector('span').textContent = sk.text;
       p.querySelector('em').textContent = sk.lore;
       info.appendChild(p);

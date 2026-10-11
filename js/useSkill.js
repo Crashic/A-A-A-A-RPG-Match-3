@@ -1,5 +1,5 @@
 // Применяет активный навык игрока: списывает ману и делает действие.
-// show — показать ход; ward — защита; shield / heal — щит / лечение; buff — усиление ходов;
+// strike — боевой навык класса (skillStrike); show — показать ход; ward — защита; shield / heal — щит / лечение; buff — усиление ходов;
 // undo — вернуть отнятое последним ходом врага (ход не тратится);
 // calibrate / convert — меняют фишки на поле, серия срабатывает сразу, ход тратится.
 async function useSkill(id) {
@@ -9,11 +9,15 @@ async function useSkill(id) {
   const hero = battle.hero;
   for (const [gem, n] of Object.entries(skill.cost || {})) hero.mana[gem] -= n;
   if (skill.once) sk.used[skill.id] = true;
+  if (skill.cooldown) (sk.cooldowns = sk.cooldowns || {})[skill.id] = skill.cooldown;
   for (const e of hasPassive('afterActive')) sk.pendingPct = Math.max(sk.pendingPct, e.pct);
   vibrate(20);
   showToast(skill.name, 1200);
 
-  if (skill.act === 'show') {
+  if (skill.act === 'strike') {
+    skillStrike(skill);
+    if (battle.over) { renderBattle(); match3.busy = true; await endTurn(false); return; } // враг повержен
+  } else if (skill.act === 'show') {
     showBestMove(skill.gem);
   } else if (skill.act === 'ward') {
     sk.wards.push(skill.hits ? { pct: skill.pct, hits: skill.hits } : { pct: skill.pct, turns: skill.turns });

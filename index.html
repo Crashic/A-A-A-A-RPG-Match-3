@@ -102,17 +102,6 @@
     <div id="heroPanel" class="fighter"></div>
     <!-- Навыки: кнопки активных (за ману) и строка пассивных — js/renderSkillBar.js -->
     <div id="skillBar"></div>
-    <!-- Подсказка, какая фишка что даёт — js/openGemLegend.js -->
-    <div class="gameButtons">
-      <button id="btnLegend" class="btn stone square" type="button" aria-label="Фишки: что даёт каждая" title="Фишки: что даёт каждая">
-        <svg viewBox="0 0 32 32" aria-hidden="true">
-          <rect x="3" y="3" width="26" height="26" rx="8" fill="var(--gem-amethyst)"/>
-          <rect x="4.5" y="4.5" width="23" height="23" rx="7" fill="none" stroke="var(--gem-amethyst-light)" stroke-width="1" opacity=".7"/>
-          <path d="M11.5 12.5 Q11.5 7.5 16 7.5 Q20.5 7.5 20.5 11.5 Q20.5 14.5 17.5 15.5 Q16 16.2 16 18.5" fill="none" stroke="var(--text-primary)" stroke-width="3" stroke-linecap="round"/>
-          <circle cx="16" cy="23.5" r="2" fill="var(--text-primary)"/>
-        </svg>
-      </button>
-    </div>
   </aside>
   <div class="boardWrap">
     <div id="board" class="board">
@@ -125,6 +114,15 @@
     <!-- Навык врага: название, что делает, лор — js/renderEnemySkill.js -->
     <div id="enemySkill"></div>
     <div class="gameButtons">
+      <!-- Подсказка, какая фишка что даёт — js/openGemLegend.js -->
+      <button id="btnLegend" class="btn stone square" type="button" aria-label="Фишки: что даёт каждая" title="Фишки: что даёт каждая">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <rect x="3" y="3" width="26" height="26" rx="8" fill="var(--gem-amethyst)"/>
+          <rect x="4.5" y="4.5" width="23" height="23" rx="7" fill="none" stroke="var(--gem-amethyst-light)" stroke-width="1" opacity=".7"/>
+          <path d="M11.5 12.5 Q11.5 7.5 16 7.5 Q20.5 7.5 20.5 11.5 Q20.5 14.5 17.5 15.5 Q16 16.2 16 18.5" fill="none" stroke="var(--text-primary)" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="16" cy="23.5" r="2" fill="var(--text-primary)"/>
+        </svg>
+      </button>
       <!-- Временно, пока нет игрового меню: выход в главное меню (иконка-домик) -->
       <button id="gameToMenu" class="btn stone square" type="button" data-back aria-label="В меню" title="В меню">
         <svg viewBox="0 0 32 32" aria-hidden="true">
@@ -277,6 +275,7 @@
 <script src="js/zones.js"></script>
 <script src="js/battleState.js"></script>
 <script src="js/skills.js"></script>
+<script src="js/classSkills.js"></script>
 <script src="js/tapeConfig.js"></script>
 <script src="js/loadSettings.js"></script>
 <script src="js/saveSettings.js"></script>
@@ -398,6 +397,7 @@
 <script src="js/convertLine.js"></script>
 <script src="js/skillCostText.js"></script>
 <script src="js/canUseSkill.js"></script>
+<script src="js/skillStrike.js"></script>
 <script src="js/useSkill.js"></script>
 <script src="js/renderSkillBar.js"></script>
 <script src="js/applyMatchEffects.js"></script>
