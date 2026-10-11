@@ -30,7 +30,7 @@ function renderOriginStep() {
     return;
   }
   const info = document.createElement('div');
-  info.className = 'infoText';
+  info.className = 'infoText arrowList';
   const add = (tag, text, cls) => {
     const el = document.createElement(tag);
     if (cls) el.className = cls;

@@ -3,7 +3,7 @@
 // rune, bag, cell…), tip — текст подсказки.
 function emptySlot(kind, tip) {
   const s = document.createElement('span');
-  s.className = 'slot ' + kind + (DOLL_SLOTS.left.includes(kind) || DOLL_SLOTS.right.includes(kind) ? ' gear' : '');
+  s.className = 'invSlot ' + kind + (DOLL_SLOTS.left.includes(kind) || DOLL_SLOTS.right.includes(kind) ? ' gear' : '');
   s.innerHTML = slotIcon(kind);
   if (tip) attachTip(s, SLOT_NAMES[kind] || 'Пустая ячейка', tip);
   return s;

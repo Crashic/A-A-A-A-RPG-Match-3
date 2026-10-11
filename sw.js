@@ -257,6 +257,7 @@ const FILES = [
   './js/setupCheat.js',
   './js/openEnemyInfo.js',
   './js/setupScrollArrows.js',
+  './js/setupScrollers.js',
   './js/goHome.js',
   './js/setupMenu.js',
   './js/main.js',

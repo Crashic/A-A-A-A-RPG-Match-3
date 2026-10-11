@@ -1094,13 +1094,13 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .charLevel .bar { flex: 1; height: 14px; }
 .charLevel .bar span { line-height: 14px; font-size: 10px; }
 /* слоты: квадрат с пунктиром («Строчка-пунктир»), подпись внутри */
-.slot { position: relative; flex: none; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 8px; background: var(--bg-cell); box-shadow: inset 0 0 0 2px var(--ui-metal); color: var(--text-muted); }
-.slot::before { content: ''; position: absolute; inset: 5px; border: 1.5px dashed color-mix(in srgb, var(--text-primary) 30%, transparent); border-radius: 5px; pointer-events: none; }
+.invSlot { position: relative; flex: none; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 8px; background: var(--bg-cell); box-shadow: inset 0 0 0 2px var(--ui-metal); color: var(--text-muted); }
+.invSlot::before { content: ''; position: absolute; inset: 5px; border: 1.5px dashed color-mix(in srgb, var(--text-primary) 30%, transparent); border-radius: 5px; pointer-events: none; }
 .slotIcon { position: relative; width: 60%; height: 60%; opacity: .45; }
-.slot.rune { border-radius: 50%; }
-.slot.rune::before { border-radius: 50%; }
-.slot.bag { background: var(--ui-outline); }
-.slot.plus { font: var(--type-button); color: var(--ui-reward); cursor: pointer; }
+.invSlot.rune { border-radius: 50%; }
+.invSlot.rune::before { border-radius: 50%; }
+.invSlot.bag { background: var(--ui-outline); }
+.invSlot.plus { font: var(--type-button); color: var(--ui-reward); cursor: pointer; }
 .charDoll { display: flex; flex-direction: column; align-items: center; gap: 8px; }
 .dollBody { width: 100%; display: flex; align-items: stretch; justify-content: space-between; gap: 6px; }
 .dollSlots { display: flex; flex-direction: column; gap: 5px; }
@@ -1152,16 +1152,16 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .menuItem svg { flex: none; width: 28px; height: 28px; }
 .menuItem:active { transform: scale(.97); }
 @media (hover: hover) { .menuItem:hover { filter: brightness(1.2); } }
-.slot.gear { width: 44px; height: 44px; }
+.invSlot.gear { width: 44px; height: 44px; }
 
 /* Меню карты — вертикальный столбец иконок справа */
 .mapMenu { flex: none; display: flex; flex-direction: column; gap: 6px; }
 .mapMenu .btn.square { width: 46px; height: 46px; }
 .mapMenu .btn.square svg { width: 28px; height: 28px; }
 
-.slot.gear { width: 44px; height: 44px; }
-.slot.weapon { height: 93px; } /* оружие — вдвое выше обычного слота */
-.slot.weapon .slotIcon { width: 70%; height: 40%; }
+.invSlot.gear { width: 44px; height: 44px; }
+.invSlot.weapon { height: 93px; } /* оружие — вдвое выше обычного слота */
+.invSlot.weapon .slotIcon { width: 70%; height: 40%; }
 .btn.resetStats.orange { color: var(--ui-outline); }
 .btn.resetStats.stone { color: var(--text-primary); }
 .confirmButtons .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
@@ -1181,15 +1181,6 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .enemyStats { flex-wrap: nowrap; gap: 4px; }
 .enemyStats .statChip { gap: 2px; }
 .enemyStats .statChip b { font-size: 11px; }
-
-/* Прокрутка стрелками (setupScrollArrows): без полосы, стрелки «Небо низ» пульсируют сверху и снизу по центру */
-.arrowScroll .scrollArrow { position: absolute; left: 50%; z-index: 3; width: 44px; height: 22px; padding: 0; border: 0; background: none; transform: translateX(-50%); animation: arrowPulse 1.1s ease-in-out infinite; cursor: pointer; }
-.arrowScroll .scrollArrow svg { width: 24px; height: 14px; filter: drop-shadow(0 1px 1px var(--ui-outline)); }
-.arrowScroll .scrollArrow.up { top: 0; }
-.arrowScroll .scrollArrow.down { bottom: 0; }
-.arrowScroll .scrollArrow[hidden] { display: none; }
-@keyframes arrowPulse { 0%, 100% { opacity: .45; transform: translateX(-50%) scale(.9); } 50% { opacity: 1; transform: translateX(-50%) scale(1.1); } }
-.charScroll.grabbing { cursor: grabbing; }
 
 /* Изолента внизу инвентаря */
 .invTape { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; padding: 6px 10px; border-radius: 10px; background: var(--bg-cell); }
@@ -1251,3 +1242,47 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .statRowBig.detail .statVal { width: auto; min-width: 60px; text-align: right; }
 .detailIcon { flex: none; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; }
 .detailIcon svg, .detailIcon .tile, .detailIcon .gemMini { width: 22px; height: 22px; }
+
+/* ---------- Раскладка всех экранов: блоки от верхнего края по центру, отступ от краёв экрана 4 px ---------- */
+.screen {
+  justify-content: flex-start;
+  gap: 6px;
+  padding: calc(env(safe-area-inset-top, 0px) + 4px) calc(env(safe-area-inset-right, 0px) + 4px)
+           calc(env(safe-area-inset-bottom, 0px) + 4px) calc(env(safe-area-inset-left, 0px) + 4px);
+}
+#menu, #bye { justify-content: center; align-items: flex-start; }
+#menu .logo { margin-top: 8px; }
+#menu .menuButtons { margin-top: 4px; }
+
+/* Заголовков у экранов нет: кнопки «назад» (и «Случайно» при создании) — квадратные иконки в правом верхнем углу */
+.screenHead {
+  position: absolute;
+  top: calc(env(safe-area-inset-top, 0px) + 4px);
+  right: calc(env(safe-area-inset-right, 0px) + 4px);
+  z-index: 6;
+  min-height: 0;
+  margin: 0 !important;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.screen:has(> .screenHead) { position: relative; padding-right: calc(env(safe-area-inset-right, 0px) + 56px); }
+.screenHead .btn.round.back, .screenHead .createRandom { width: 46px; height: 46px; min-height: 0; padding: 0; margin: 0; border-radius: var(--radius-tile); }
+.screenHead .createRandom svg { width: 28px; height: 28px; }
+.screenHead .btn.round.back::after { background-size: 20px; }
+/* карта: «назад» — вверху своего столбца иконок справа */
+#map { padding-right: calc(env(safe-area-inset-right, 0px) + 4px); }
+#map .mapMenu { margin-top: 52px; }
+
+/* бой: тоже 4 px от краёв */
+#game { padding-left: calc(env(safe-area-inset-left, 0px) + 4px); padding-right: calc(env(safe-area-inset-right, 0px) + 4px); gap: 8px; }
+.gameSide { padding: calc(env(safe-area-inset-top, 0px) + 4px) 0 calc(env(safe-area-inset-bottom, 0px) + 4px); gap: 8px; }
+#battleMenu { right: 4px; bottom: calc(env(safe-area-inset-bottom, 0px) + 60px); }
+
+/* Списки без полосы прокрутки — стрелки (setupScrollArrows) */
+.arrowList { overflow: hidden !important; touch-action: none; }
+.arrowList.grabbing { cursor: grabbing; }
+.scrollArrow { position: absolute; z-index: 4; width: 44px; height: 22px; padding: 0; border: 0; background: none; transform: translateX(-50%); animation: arrowPulse2 1.1s ease-in-out infinite; cursor: pointer; }
+.scrollArrow svg { width: 24px; height: 14px; filter: drop-shadow(0 1px 1px var(--ui-outline)); }
+.scrollArrow[hidden] { display: none; }
+@keyframes arrowPulse2 { 0%, 100% { opacity: .45; transform: translateX(-50%) scale(.9); } 50% { opacity: 1; transform: translateX(-50%) scale(1.1); } }

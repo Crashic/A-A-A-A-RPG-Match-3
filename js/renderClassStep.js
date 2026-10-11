@@ -8,6 +8,7 @@ function renderClassStep() {
 
   const left = document.getElementById('createLeft');
   left.className = 'panel classGrid';
+  setupScrollArrows(left);
   left.innerHTML = '';
   const tile = c => originButton(c, { selected: d.classId === c.id, dim: !allowed[c.id] }, () => {
     d.classId = c.id;
@@ -22,7 +23,7 @@ function renderClassStep() {
   right.innerHTML = '';
   const cls = findById(CLASSES, d.classId);
   const info = document.createElement('div');
-  info.className = 'infoText';
+  info.className = 'infoText arrowList';
   if (cls) {
     const bonus = allowed[cls.id];
     info.innerHTML = '<h3></h3><p class="sub"></p><p></p>';

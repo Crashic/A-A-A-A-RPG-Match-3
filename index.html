@@ -64,7 +64,6 @@
 <section id="characters" class="screen">
   <header class="screenHead">
     <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
-    <div class="ribbon">Персонажи</div>
   </header>
   <div class="panel">
     <p class="hint">Выберите персонажа или создайте нового</p>
@@ -76,8 +75,14 @@
 <section id="create" class="screen">
   <header class="screenHead createHead">
     <button id="createBack" class="btn stone round back" type="button" aria-label="Назад"></button>
-    <div class="ribbon" id="createTitle"></div>
-    <button id="createRandom" class="btn stone createRandom" type="button">Случайно</button>
+    <button id="createRandom" class="btn stone square createRandom" type="button" aria-label="Случайно" data-tip="Случайный персонаж">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <rect x="5" y="5" width="22" height="22" rx="5" fill="var(--ui-parchment)" stroke="var(--ui-outline)" stroke-width="2"/>
+        <circle cx="11" cy="11" r="2.2" fill="var(--ui-outline)"/><circle cx="21" cy="11" r="2.2" fill="var(--ui-outline)"/>
+        <circle cx="16" cy="16" r="2.2" fill="var(--ui-danger)"/>
+        <circle cx="11" cy="21" r="2.2" fill="var(--ui-outline)"/><circle cx="21" cy="21" r="2.2" fill="var(--ui-outline)"/>
+      </svg>
+    </button>
   </header>
   <div class="createBody">
     <div id="createLeft" class="panel"></div>
@@ -89,7 +94,6 @@
 <section id="settings" class="screen">
   <header class="screenHead">
     <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
-    <div class="ribbon">Настройки</div>
   </header>
   <div class="panel">
     <div class="settingsList">
@@ -182,7 +186,6 @@
 <section id="map" class="screen">
   <header class="screenHead">
     <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
-    <div class="ribbon">Карта врагов</div>
   </header>
   <div class="mapBody">
     <div id="zoneList" class="panel"></div>
@@ -229,7 +232,6 @@
 <section id="character" class="screen">
   <header class="screenHead">
     <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
-    <div class="ribbon">Персонаж</div>
   </header>
   <div class="mapBody">
     <div class="panel charCol charColLeft"><div id="charLeft" class="charScroll"></div></div>
@@ -241,7 +243,6 @@
 <section id="glossary" class="screen">
   <header class="screenHead">
     <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
-    <div class="ribbon">Глоссарий</div>
   </header>
   <div class="mapBody">
     <div id="glossaryTabs" class="panel"></div>
@@ -618,6 +619,7 @@
 <script src="js/setupCheat.js"></script>
 <script src="js/openEnemyInfo.js"></script>
 <script src="js/setupScrollArrows.js"></script>
+<script src="js/setupScrollers.js"></script>
 <script src="js/goHome.js"></script>
 <script src="js/setupMenu.js"></script>
 <script src="js/main.js"></script>

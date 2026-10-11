@@ -8,6 +8,7 @@ function main() {
   setupCharacter();
   setupTips();
   setupCheat();
+  setupScrollers();
   setupMenu();
   setupBoardInput();
   renderMenu();

@@ -7,7 +7,7 @@ function renderInventory(box) {
   for (let i = 0; i < BAG_SLOTS; i++) bags.appendChild(emptySlot('bag', 'Слот для сумки. Сумки найдутся позже — в пустошах они на вес изоленты.'));
   const plus = document.createElement('button');
   plus.type = 'button';
-  plus.className = 'slot bag plus';
+  plus.className = 'invSlot bag plus';
   plus.textContent = '+';
   plus.setAttribute('aria-label', 'Добавить слот для сумки');
   plus.dataset.tip = 'Ещё слот для сумки';
