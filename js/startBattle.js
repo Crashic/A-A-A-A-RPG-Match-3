@@ -21,6 +21,8 @@ async function startBattle(enemyId, saved = null) {
     gained: saved ? Object.assign({ xp: 0, tape: 0 }, saved.gained) : { xp: 0, tape: 0 },
     skill: saved && saved.skill ? Object.assign(createSkillState(), saved.skill) : createSkillState()
   };
+  for (const side of ['hero', 'enemy']) // бой, сохранённый до новой маны, — добавить её с нуля
+    for (const id of MANA_COLORS) if (battle[side].mana[id] === undefined) battle[side].mana[id] = 0;
   if (!saved) skillBattleStart(); // стартовые навыки: мана, пометки
   const current = battle;
   renderBattle();

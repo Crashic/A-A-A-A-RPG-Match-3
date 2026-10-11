@@ -7,8 +7,8 @@ const GEM_EFFECTS = {
                 text: 'Урон противнику. Сначала сбивает его щит, потом здоровье.' },
   aquamarine: { kind: 'shield', label: 'Детали — щит', short: 'Щит',
                 text: 'Щит тому, кто ходит: поглощает урон первым, не больше четверти здоровья.' },
-  emerald:    { kind: 'heal',   label: 'Травы — лечение', short: 'Лечение',
-                text: 'Лечит того, кто ходит. Зелёная полоса — здоровье.' },
+  emerald:    { kind: 'mana',   label: 'Травы — мана', short: 'Мана',
+                text: 'Зелёная мана (Травы) — тратится на активные навыки.' },
   topaz:      { kind: 'tape',   label: 'Радиация — изолента', short: 'Изолента',
                 text: 'Изолента — деньги пустошей. Достаётся только игроку.' },
   sapphire:   { kind: 'mana',   label: 'Металл — мана', short: 'Мана',
@@ -18,9 +18,10 @@ const GEM_EFFECTS = {
   pearl:      { kind: 'xp',     label: 'Документы — опыт', short: 'Опыт',
                 text: 'Опыт — только игроку. Остаётся даже при поражении.' }
 };
-const MANA_COLORS = ['sapphire', 'amethyst']; // две маны под будущие заклинания
+const MANA_COLORS = ['sapphire', 'emerald', 'amethyst']; // три маны: Металл, Травы, Плёнка — на навыки и заклинания
 
 const EXTRA_TURN_RUN = 4;        // ряд из 4+ — ход повторяется
+const EXTRA_TURN_GROUP = 5;      // или 5+ одинаковых вместе (крест, «Г», «Т») — тоже ещё ход
 const ENEMY_THINK_MS = 700;      // пауза перед ходом врага
 const ENEMY_SHOW_MS = 450;       // сколько показывать выбранную врагом фишку
 
@@ -32,6 +33,6 @@ const STAT_ATK_PER_LEVEL = 0.75;
 const SHIELD_PER_ATK = 0.6;      // щит за жемчужину — доля от урона
 const SHIELD_MAX_SHARE = 0.25;   // щит не больше четверти здоровья
 const MANA_MAX = 30;             // запас каждой маны
-const HEAL_PER_ATK = 0.8;         // лечение за траву — доля от урона
+const HEAL_PER_ATK = 0.8;         // запас: фишки больше не лечат (Травы — мана), лечат только навыки
 const ELITE_HP = 1.8;            // элита: здоровье ×1.8, урон ×1.2, опыт ×2 (как в WoW)
 const ELITE_ATK = 1.2;

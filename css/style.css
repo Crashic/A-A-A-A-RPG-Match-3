@@ -345,20 +345,23 @@ h1 {
   text-align: center;
   text-shadow: 0 1px 2px var(--ui-outline), 0 0 2px var(--ui-outline);
 }
-.bar.hp     { --fill: var(--gem-emerald); height: 22px; }  /* здоровье — цвет Трав, которые лечат */
+.bar.hp     { --fill: var(--ui-danger); height: 22px; }     /* здоровье — красное, у полосы сердце */
 .bar.hp span { line-height: 22px; font: var(--type-stat); }
+/* щит и опыт — той же высоты, что мана */
+.bar.shield, .bar.xp { height: 14px; }
+.bar.shield span, .bar.xp span { line-height: 14px; font-size: 10px; }
 .bar.shield { --fill: var(--gem-aquamarine-dark); }        /* щит — Детали */
 .bar.xp     { --fill: var(--gem-pearl-dark); }             /* опыт — Документы */
 /* Строка полосы: слева фишка, которая её пополняет */
 .statRow { display: flex; align-items: center; gap: 4px; min-width: 0; }
 .statRow > .bar, .statRow > .fighterTape { flex: 1; min-width: 0; }
-.statRow > .fighterTape { justify-content: flex-start; }
-.gemMini { flex: none; width: 18px; height: 18px; display: block; }
-.manaRow .statRow { flex: 1; }
-.manaRow .gemMini { width: 14px; height: 14px; }
+.statRow > .fighterTape { justify-content: flex-end; } /* изолента — по правому краю */
+.gemMini { flex: none; width: 16px; height: 16px; display: block; } /* все значки панели одного размера */
+.manaRow .statRow { flex: 1; min-width: 0; gap: 3px; }
 .bar.mana   { flex: 1; height: 14px; }
 .bar.mana span { line-height: 14px; font-size: 10px; }
 .bar.sapphire   { --fill: var(--gem-sapphire); }
+.bar.amethyst   { --fill: var(--gem-amethyst); }
 .bar.emerald    { --fill: var(--gem-emerald); }
 .bar.aquamarine { --fill: var(--gem-aquamarine); }
 .manaRow { display: flex; gap: 4px; }
@@ -412,8 +415,8 @@ h1 {
 #enemySkill em { font: var(--type-caption); font-style: italic; color: var(--text-muted); }
 
 /* Кнопки под панелью врага: «В меню» и квадратная «Карта врагов» справа внизу */
-.gameButtons { display: flex; gap: 8px; margin-top: auto; }
-.gameButtons #gameToMenu { flex: 1; min-width: 0; min-height: 52px; padding: 8px 10px; font: var(--type-menu); }
+.gameButtons { display: flex; justify-content: flex-end; gap: 8px; margin-top: auto; }
+.gameSide:first-child .gameButtons { justify-content: flex-start; } /* «Фишки» — слева внизу */
 .btn.square {
   flex: none;
   width: 56px;
@@ -606,6 +609,21 @@ h1 {
 
 .cell { border-radius: var(--radius-cell); background: var(--bg-cell); }
 .cell.alt { background: var(--bg-cell-alt); } /* шахматка */
+/* клетка под выбранной фишкой — золотая обводка, как у того, кто ходит */
+.cell.picked { box-shadow: inset 0 0 0 2px var(--ui-reward), inset 0 0 8px color-mix(in srgb, var(--ui-reward) 45%, transparent); }
+/* ход игрока — золотая рамка поля, как у его панели */
+.board::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 3px var(--ui-reward), inset 0 0 14px color-mix(in srgb, var(--ui-reward) 45%, transparent);
+  opacity: 0;
+  transition: opacity .25s;
+}
+.board.heroTurn::after { opacity: 1; }
 
 .gem {
   transition-property: transform;
@@ -1003,9 +1021,18 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .gBody .g-lore { font-style: italic; color: var(--text-muted); }
 .gBody .g-list { font: var(--type-caption); color: var(--text-muted); }
 
-/* Справа внизу три кнопки: «В меню», глоссарий и карта — квадраты поменьше */
-#game .btn.square { width: 48px; height: 48px; }
-#game .btn.square svg { width: 30px; height: 30px; }
-.gameButtons #gameToMenu { min-height: 48px; padding: 6px 6px; }
-/* Кнопка «? Фишки» под навыками героя */
-#game .gameSide:first-child .gameButtons #btnLegend { flex: 1; min-height: 40px; padding: 6px 10px; font: var(--type-menu); }
+/* Кнопки боя — квадратные иконки: «Фишки» слева; «В меню», глоссарий и карта справа */
+#game .btn.square { width: 52px; height: 52px; }
+#game .btn.square svg { width: 32px; height: 32px; }
+
+/* Вкладки глоссария — ниже, 4 px от текста сверху и снизу */
+#glossaryTabs .zone { flex: none; min-height: 0; padding: 4px 10px; }
+#glossaryTabs .zone b { line-height: 16px; }
+
+/* Выбор класса — кнопки как у Прессы: иконка и название в строку, две колонки */
+.classGrid:not(.pressCols) { grid-template-columns: 1fr 1fr; grid-auto-rows: auto; }
+.classGrid:not(.pressCols) .pick.cls { flex-direction: row; gap: 6px; padding: 5px 6px; font: var(--type-menu); font-size: 13px; }
+
+/* Заголовок экрана (лента) — по центру экрана, кнопки по краям */
+.screenHead { position: relative; min-height: 48px; }
+.screenHead .ribbon { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); margin: 0; }
