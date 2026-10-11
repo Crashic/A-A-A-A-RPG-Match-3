@@ -1,6 +1,6 @@
 // Прокрутка без полосы для блока inner: полоса скрыта, сверху и снизу по центру блока — пульсирующие
 // стрелки цвета «Небо низ» (видны, только если есть куда листать); по стрелке — листает на ~70 % высоты.
-// Перетаскивание: зажать палец или мышь на 1 секунду и тянуть; колесо мыши тоже листает.
+// Листать можно и пальцем или мышью — просто тянуть блок (с лёгкой инерцией); колесо мыши тоже листает.
 // Стрелки кладутся в родителя блока и ставятся по его краям (блок не оборачивается — вёрстка не меняется).
 function setupScrollArrows(inner) {
   if (!inner || inner.dataset.arrows) return;
@@ -40,39 +40,54 @@ function setupScrollArrows(inner) {
   new MutationObserver(() => requestAnimationFrame(update)).observe(inner, { childList: true, subtree: true });
   window.addEventListener('resize', update);
 
-  // зажать на 1 с и тянуть
-  let hold = null, start = null, drag = null, dragged = false;
+  // листание пальцем или мышью: тянуть сразу, без удержания; после отпускания — лёгкая инерция
+  let start = null, drag = null, dragged = false, vel = 0, lastY = 0, lastT = 0, glide = 0;
   const point = e => toAppPoint(e.clientX, e.clientY);
   inner.addEventListener('pointerdown', e => {
+    if (e.button > 0) return;
+    cancelAnimationFrame(glide);
     start = point(e);
+    drag = null;
     dragged = false;
-    hold = setTimeout(() => {
-      drag = { y: start.y, top: inner.scrollTop };
-      inner.classList.add('grabbing');
-      vibrate(15);
-    }, 1000);
+    vel = 0;
   });
   inner.addEventListener('pointermove', e => {
+    if (!start) return;
     const p = point(e);
-    if (drag) {
-      inner.scrollTop = drag.top - (p.y - drag.y);
-      dragged = true;
-      update();
-    } else if (hold && start && Math.hypot(p.x - start.x, p.y - start.y) > 8) {
-      clearTimeout(hold);
-      hold = null;
+    if (!drag) {
+      if (Math.abs(p.y - start.y) < 6) return; // мелкое дрожание пальца — ещё касание, не листание
+      drag = { y: p.y, top: inner.scrollTop };
+      lastY = p.y;
+      lastT = performance.now();
+      inner.classList.add('grabbing');
     }
+    inner.scrollTop = drag.top - (p.y - drag.y);
+    const now = performance.now();
+    if (now > lastT) vel = (lastY - p.y) / (now - lastT); // px за мс
+    lastY = p.y;
+    lastT = now;
+    dragged = true;
+    update();
   });
   const end = () => {
-    clearTimeout(hold);
-    hold = null;
+    if (drag && Math.abs(vel) > 0.05) {
+      let v = vel * 16;
+      const step = () => {
+        inner.scrollTop += v;
+        v *= 0.92;
+        update();
+        if (Math.abs(v) > 0.5) glide = requestAnimationFrame(step);
+      };
+      glide = requestAnimationFrame(step);
+    }
+    start = null;
     drag = null;
     inner.classList.remove('grabbing');
   };
   inner.addEventListener('pointerup', end);
   inner.addEventListener('pointercancel', end);
   inner.addEventListener('pointerleave', end);
-  // после перетаскивания касание не должно нажимать кнопки
+  // после листания касание не должно нажимать кнопки
   inner.addEventListener('click', e => { if (dragged) { e.stopPropagation(); e.preventDefault(); dragged = false; } }, true);
   requestAnimationFrame(update);
 }

@@ -21,7 +21,7 @@ function renderCharacter() {
   renderCharTabs(parts[3], hero);
   left.scrollTop = scroll;
   renderInventory(right);
-  // без полосы прокрутки: стрелки «вверх/вниз», перетаскивание после удержания 1 с
+  // без полосы прокрутки: стрелки «вверх/вниз», листание пальцем или мышью
   setupScrollArrows(left);
   setupScrollArrows(right);
 }
