@@ -18,4 +18,5 @@ function changeCheat(field, delta) {
   vibrate(8);
   renderCheat();
   renderMenu();
+  if (document.getElementById('map').classList.contains('active')) renderMap(); // цвета сложности врагов
 }

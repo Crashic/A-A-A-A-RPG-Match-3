@@ -1,4 +1,4 @@
-// Экран «Персонажи»: три ячейки. Касание по персонажу делает его текущим,
+// Экран «Персонажи»: три ячейки столбиком, по одной в ряд — имя и уровень. Касание по персонажу делает его текущим,
 // по пустой ячейке — открывает создание персонажа, крестик удаляет персонажа.
 function renderCharacters() {
   const list = document.getElementById('slotList');
@@ -15,13 +15,8 @@ function renderCharacters() {
     const title = document.createElement('b');
     title.textContent = hero ? hero.name : '+ Создать персонажа';
     const sub = document.createElement('span');
-    sub.textContent = hero ? 'Ур. ' + hero.level + ' · ' + describeCharacter(hero, true) : 'Ячейка ' + n;
+    sub.textContent = hero ? 'Уровень ' + hero.level : 'Ячейка ' + n; // только имя и уровень
     info.append(title, sub);
-    if (hero) {
-      const date = document.createElement('span');
-      date.textContent = 'Последняя игра: ' + formatDate(hero.updated);
-      info.appendChild(date);
-    }
     info.addEventListener('click', () => {
       vibrate();
       if (hero) { setActiveSlot(n); renderCharacters(); }

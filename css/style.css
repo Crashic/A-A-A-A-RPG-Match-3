@@ -907,7 +907,7 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 #heroCardStats { grid-template-columns: auto 1fr auto 1fr; }
 
 /* Персонажи: три ячейки в ряд */
-#slotList { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+#slotList { display: flex; flex-direction: column; gap: 6px; } /* по одной ячейке в ряд */
 .slot { min-width: 0; }
 .slotInfo { min-width: 0; }
 .slotInfo b, .slotInfo span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -1286,3 +1286,11 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .scrollArrow svg { width: 24px; height: 14px; filter: drop-shadow(0 1px 1px var(--ui-outline)); }
 .scrollArrow[hidden] { display: none; }
 @keyframes arrowPulse2 { 0%, 100% { opacity: .45; transform: translateX(-50%) scale(.9); } 50% { opacity: 1; transform: translateX(-50%) scale(1.1); } }
+
+/* Ячейки персонажей: имя слева, уровень справа, в одну строку */
+#characters .panel { width: 100%; max-width: 520px; align-self: center; }
+#slotList .slot { padding: 4px 6px 4px 4px; }
+#slotList .slotInfo { flex-direction: row; align-items: center; justify-content: space-between; gap: 10px; min-height: 0; padding: 8px 10px; }
+#slotList .slotInfo b { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+#slotList .slotInfo span { flex: none; font: var(--type-stat); color: var(--text-secondary); }
+#slotList .slotDelete { width: 40px; height: 40px; }
