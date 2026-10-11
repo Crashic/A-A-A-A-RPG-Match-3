@@ -10,6 +10,11 @@ function setupCharacter() {
   on('mapGlossary', () => openGlossary());
   on('mapLegend', openGemLegend);
   on('mapHome', goHome);
+  // окно «Враг»: касание по панели врага в бою; закрыть — крестик или касание мимо
+  document.getElementById('enemyPanel').addEventListener('click', e => { e.stopPropagation(); vibrate(); openEnemyInfo(); });
+  const info = document.getElementById('enemyInfo');
+  on('enemyInfoClose', () => info.classList.remove('open'));
+  info.addEventListener('click', e => { if (e.target === info) info.classList.remove('open'); });
   // пункты меню боя закрывают меню (их действия привязаны в setupMenu и setupGlossary)
   document.querySelectorAll('#battleMenu .menuItem').forEach(b => b.addEventListener('click', () => closeBattleMenu()));
   document.addEventListener('click', e => {

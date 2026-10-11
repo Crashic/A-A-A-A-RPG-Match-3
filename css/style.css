@@ -1163,6 +1163,7 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .slot.weapon { height: 93px; } /* оружие — вдвое выше обычного слота */
 .slot.weapon .slotIcon { width: 70%; height: 40%; }
 .btn.resetStats.orange { color: var(--ui-outline); }
+.btn.resetStats.stone { color: var(--text-primary); }
 .confirmButtons .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
 .confirmButtons .btn svg { width: 20px; height: 20px; flex: none; }
 
@@ -1218,3 +1219,35 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .btn.cheatBtn { min-height: 0; height: 28px; padding: 0 8px; font: var(--type-small); font-weight: 600; }
 .menuRow .btn { font-size: 13px; }
 #payJoke .ribbon { max-width: none; white-space: nowrap; font-size: 19px; }
+
+/* Иконки слева от навыков героя: бонус расы, пассивные, баффы и дебаффы */
+.heroSkillRow { display: flex; align-items: flex-start; gap: 6px; }
+.heroBuffs { flex: none; display: grid; grid-template-columns: repeat(2, 26px); gap: 4px; }
+.heroBuffs .passiveIcon, .heroBuffs .passiveIcon .tile { width: 26px; height: 26px; }
+.heroBuffs .passiveIcon.buff { box-shadow: 0 0 0 2px var(--ui-primary); border-radius: 8px; }
+.heroBuffs .passiveIcon.debuff { box-shadow: 0 0 0 2px var(--ui-danger); border-radius: 8px; }
+.heroSkillBtns { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+
+/* Панель врага — нажимается: окно «Враг» */
+#enemyPanel { cursor: pointer; }
+#enemyInfo .modalBox { max-width: 520px; }
+#enemyInfo .panel { padding-top: 28px; }
+#enemyInfoClose { position: absolute; top: -20px; right: -10px; z-index: 3; width: 48px; height: 48px; }
+#enemyInfoBody { display: flex; flex-direction: column; gap: 6px; min-height: 0; overflow-y: auto; }
+#enemyInfoBody p { margin: 0; }
+#enemyInfoTitle { font-size: 20px; white-space: nowrap; }
+.eiSub { font: var(--type-stat); color: var(--text-muted); text-align: center; }
+.eiLore { font: var(--type-small); font-style: italic; color: var(--text-secondary); }
+.eiHead { font: var(--type-menu); font-weight: 600; color: var(--ui-reward); }
+.eiStats { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.eiDerived { font: var(--type-caption); color: var(--text-secondary); text-align: center; }
+.eiSkill { font: var(--type-small); color: var(--text-secondary); }
+
+/* Вкладки характеристик «Характеристики / Подробно» */
+.statsHead { gap: 6px; }
+.statTab { flex: 1; padding: 5px 8px; border: 0; border-radius: 10px; background: var(--bg-cell); color: var(--text-secondary); font: var(--type-small); font-weight: 600; }
+.statTab.selected { background: var(--glass-top), var(--ui-ribbon); color: var(--text-primary); box-shadow: inset 0 0 0 2px var(--ui-reward); }
+.statsPoints { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 32px; }
+.statRowBig.detail .statVal { width: auto; min-width: 60px; text-align: right; }
+.detailIcon { flex: none; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; }
+.detailIcon svg, .detailIcon .tile, .detailIcon .gemMini { width: 22px; height: 22px; }

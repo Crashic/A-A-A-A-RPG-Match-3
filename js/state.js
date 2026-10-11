@@ -24,3 +24,5 @@ let tipOwner = null;
 
 // Экран «Персонаж»: открытая вкладка под характеристиками — 'class' | 'faction' | 'race'
 let charTab = 'class';
+// Вкладка характеристик: 'base' (очки) | 'detail' (что дают в бою)
+let statTab = 'base';

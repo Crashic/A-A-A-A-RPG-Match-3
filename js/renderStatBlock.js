@@ -1,4 +1,5 @@
-// Блок характеристик на экране «Персонаж»: свободные очки, сброс (круглая стрелка), пять строк
+// Блок характеристик на экране «Персонаж»: вкладки «Характеристики» и «Подробно» (renderStatDetails —
+// здоровье, атака, крит, мана, щит). На первой: свободные очки, сброс (круглая стрелка), пять строк
 // с названием расы (подсказка), значением и кнопками «−/+», итог в бою. Сброс — оранжевый, если есть
 // розданные очки, и спрашивает подтверждение. В бою — только просмотр:
 // кнопок «−/+» и сброса нет.
@@ -11,8 +12,22 @@ function renderStatBlock(box, hero, readOnly) {
 
   const head = document.createElement('div');
   head.className = 'statsHead';
-  head.innerHTML = '<b>Характеристики</b><span class="freePts"></span>';
-  head.querySelector('.freePts').textContent = statPointsTotal(hero)
+  // вкладки: «Характеристики» (очки) и «Подробно» (что они дают в бою)
+  for (const [id, label] of [['base', 'Характеристики'], ['detail', 'Подробно']]) {
+    const t = document.createElement('button');
+    t.type = 'button';
+    t.className = 'statTab' + (statTab === id ? ' selected' : '');
+    t.textContent = label;
+    t.addEventListener('click', e => { e.stopPropagation(); vibrate(); statTab = id; renderStatBlock(box, hero, readOnly); });
+    head.appendChild(t);
+  }
+  box.appendChild(head);
+  if (statTab === 'detail') { renderStatDetails(box, hero); return; }
+
+  const pointsRow = document.createElement('div');
+  pointsRow.className = 'statsPoints';
+  pointsRow.innerHTML = '<span class="freePts"></span>';
+  pointsRow.querySelector('.freePts').textContent = statPointsTotal(hero)
     ? 'Свободно очков: ' + free + ' / ' + statPointsTotal(hero) : 'Очки — со 2-го уровня';
   if (!readOnly) {
     const reset = document.createElement('button');
@@ -21,13 +36,13 @@ function renderStatBlock(box, hero, readOnly) {
     reset.className = 'btn round resetStats ' + (spent ? 'orange' : 'stone'); // есть что сбросить — оранжевая
     reset.setAttribute('aria-label', 'Сбросить очки');
     reset.dataset.tip = 'Сбросить розданные очки';
-    reset.innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M24 16 A8 8 0 1 1 16 8 L20 8" fill="none" stroke="var(--text-primary)" stroke-width="3" stroke-linecap="round"/>' +
-      '<path d="M18 3 L23 8 L18 13" fill="none" stroke="var(--text-primary)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    reset.innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M24 16 A8 8 0 1 1 16 8 L20 8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>' +
+      '<path d="M18 3 L23 8 L18 13" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     reset.disabled = !spent;
     reset.addEventListener('click', e => { e.stopPropagation(); showConfirm('Сбросить все розданные очки характеристик?', 'Подтвердить', () => resetStats(), 'orange'); });
-    head.appendChild(reset);
+    pointsRow.appendChild(reset);
   }
-  box.appendChild(head);
+  box.appendChild(pointsRow);
 
   for (const s of STATS) {
     const row = document.createElement('div');
@@ -52,12 +67,6 @@ function renderStatBlock(box, hero, readOnly) {
     box.appendChild(row);
   }
 
-  const f = createHeroFighter(hero);
-  const sum = document.createElement('p');
-  sum.className = 'statsSummary';
-  sum.textContent = 'Здоровье ' + f.maxHp + ' · Атака ' + f.attack + ' · Крит ' + f.critPct.toFixed(1).replace('.', ',') +
-    ' % · Мана до ' + f.manaMax + ' · Щит за Деталь ' + f.shieldPerGem;
-  box.appendChild(sum);
   if (readOnly) {
     const note = document.createElement('p');
     note.className = 'statsNote';

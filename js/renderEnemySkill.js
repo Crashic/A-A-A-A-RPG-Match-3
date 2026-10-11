@@ -1,5 +1,6 @@
-// Под панелью врага: его характеристики (значки с подсказкой), активный навык за ману (как у героя:
-// значок маны, цена, перезарядка; подсказка — что делает) и навык из списка автора — иконкой с подсказкой.
+// Под панелью врага: активный навык за ману (значок маны, цена, перезарядка; подсказка — что делает)
+// и навык из списка автора — иконкой с подсказкой. Характеристики и подробности — по касанию
+// на панель врага (openEnemyInfo).
 function renderEnemySkill() {
   const box = document.getElementById('enemySkill');
   const found = battle && findEnemy(battle.enemyId);
@@ -7,16 +8,16 @@ function renderEnemySkill() {
   if (!found) return;
   const e = found.enemy;
   const f = battle.enemy;
-
-  if (f.stats) {
-    const chips = document.createElement('div');
-    chips.className = 'statChips enemyStats';
-    for (const s of STATS) chips.appendChild(statChip(null, s.id, f.stats[s.id]));
-    box.appendChild(chips);
-  }
-
   const row = document.createElement('div');
   row.className = 'enemySkillRow';
+  if (e.skill) {
+    const icon = document.createElement('span');
+    icon.className = 'passiveIcon';
+    icon.innerHTML = iconTile('eye', 'var(--gem-ruby)');
+    icon.setAttribute('aria-label', e.skill);
+    attachTip(icon, e.skill + ' · пассивный', e.short + ' ' + e.description + ' (в бою пока не работает)');
+    row.appendChild(icon);
+  }
   const skill = ENEMY_SKILLS[e.id];
   if (skill) {
     const gem = Object.keys(skill.cost)[0];
@@ -29,14 +30,6 @@ function renderEnemySkill() {
     card.querySelector('small span').textContent = skill.cost[gem] + (wait ? ' · ждать ' + wait : ' · перезарядка ' + skill.cooldown);
     attachTip(card, skill.name + ' · активный', skill.text + ' ' + skill.lore);
     row.appendChild(card);
-  }
-  if (e.skill) {
-    const icon = document.createElement('span');
-    icon.className = 'passiveIcon';
-    icon.innerHTML = iconTile('eye', 'var(--gem-ruby)');
-    icon.setAttribute('aria-label', e.skill);
-    attachTip(icon, e.skill + ' · пассивный', e.short + ' ' + e.description + ' (в бою пока не работает)');
-    row.appendChild(icon);
   }
   box.appendChild(row);
 }
