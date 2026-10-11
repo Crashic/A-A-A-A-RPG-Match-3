@@ -192,15 +192,15 @@
   </div>
 </section>
 
-<!-- Персонаж: кукла со слотами снаряжения и характеристики (js/renderCharacter.js) -->
+<!-- Персонаж: слева шапка, кукла, руны, характеристики и вкладки; справа инвентарь (js/renderCharacter.js) -->
 <section id="character" class="screen">
   <header class="screenHead">
     <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
     <div class="ribbon">Персонаж</div>
   </header>
   <div class="mapBody">
-    <div id="dollPanel" class="panel"></div>
-    <div id="statsPanel" class="panel"></div>
+    <div id="charLeft" class="panel"></div>
+    <div id="charRight" class="panel"></div>
   </div>
 </section>
 
@@ -449,6 +449,8 @@
 <script src="js/renderBattle.js"></script>
 <script src="js/swapAndResolve.js"></script>
 <script src="js/listMoves.js"></script>
+<script src="js/heroNeedGems.js"></script>
+<script src="js/bestGatherOf.js"></script>
 <script src="js/scoreMove.js"></script>
 <script src="js/chooseEnemyMove.js"></script>
 <script src="js/enemyTurn.js"></script>
@@ -504,6 +506,7 @@
 <script src="js/statNames.js"></script>
 <script src="js/statName.js"></script>
 <script src="js/heroPoints.js"></script>
+<script src="js/statPointsTotal.js"></script>
 <script src="js/statPointsFree.js"></script>
 <script src="js/heroStats.js"></script>
 <script src="js/statBonuses.js"></script>
@@ -514,7 +517,13 @@
 <script src="js/renderStatChips.js"></script>
 <script src="js/changeStat.js"></script>
 <script src="js/resetStats.js"></script>
+<script src="js/inventoryConfig.js"></script>
+<script src="js/emptySlot.js"></script>
 <script src="js/renderDoll.js"></script>
+<script src="js/renderCharHead.js"></script>
+<script src="js/renderStatBlock.js"></script>
+<script src="js/renderCharTabs.js"></script>
+<script src="js/renderInventory.js"></script>
 <script src="js/renderCharacter.js"></script>
 <script src="js/openCharacter.js"></script>
 <script src="js/toggleBattleMenu.js"></script>

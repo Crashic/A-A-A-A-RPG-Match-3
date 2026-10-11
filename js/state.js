@@ -21,3 +21,6 @@ let glossaryTab = 'gems';
 
 // Подсказка: элемент, над которым она сейчас показана (showTip / hideTip)
 let tipOwner = null;
+
+// Экран «Персонаж»: открытая вкладка под характеристиками — 'class' | 'faction' | 'race'
+let charTab = 'class';

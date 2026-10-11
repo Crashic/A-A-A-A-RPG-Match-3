@@ -37,7 +37,7 @@ function renderClassStep() {
       row.className = 'statChips createStats';
       renderStatChips(row, { raceId: race.id, classId: cls.id, level: 1 });
       const note = document.createElement('small');
-      note.textContent = '+' + STAT_POINTS_PER_LEVEL + ' очков — после создания';
+      note.textContent = '+' + STAT_POINTS_PER_LEVEL + ' очков за каждый уровень со 2-го';
       row.appendChild(note);
       info.appendChild(row);
     }

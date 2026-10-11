@@ -1,0 +1,65 @@
+// Блок характеристик на экране «Персонаж»: свободные очки, сброс (круглая стрелка), пять строк
+// с названием расы (подсказка), значением и кнопками «−/+», итог в бою. В бою — только просмотр:
+// кнопок «−/+» и сброса нет.
+function renderStatBlock(box, hero, readOnly) {
+  const free = statPointsFree(hero);
+  const stats = heroStats(hero);
+  const pts = heroPoints(hero);
+  const base = CLASS_STATS[hero.classId] || {};
+  box.innerHTML = '';
+
+  const head = document.createElement('div');
+  head.className = 'statsHead';
+  head.innerHTML = '<b>Характеристики</b><span class="freePts"></span>';
+  head.querySelector('.freePts').textContent = statPointsTotal(hero)
+    ? 'Свободно очков: ' + free : 'Очки — со 2-го уровня';
+  if (!readOnly) {
+    const reset = document.createElement('button');
+    reset.type = 'button';
+    reset.className = 'btn stone round resetStats';
+    reset.setAttribute('aria-label', 'Сбросить очки');
+    reset.title = 'Сбросить очки';
+    reset.innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M24 16 A8 8 0 1 1 16 8 L20 8" fill="none" stroke="var(--text-primary)" stroke-width="3" stroke-linecap="round"/>' +
+      '<path d="M18 3 L23 8 L18 13" fill="none" stroke="var(--text-primary)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    reset.disabled = free === statPointsTotal(hero);
+    reset.addEventListener('click', () => resetStats());
+    head.appendChild(reset);
+  }
+  box.appendChild(head);
+
+  for (const s of STATS) {
+    const row = document.createElement('div');
+    row.className = 'statRowBig';
+    row.innerHTML = iconTile(s.icon, s.color) + '<span class="statLabel"></span>' +
+      (readOnly ? '' : '<button class="btn stone round statBtn" type="button" aria-label="Убрать очко">−</button>') +
+      '<b class="statVal"></b>' +
+      (readOnly ? '' : '<button class="btn green round statBtn" type="button" aria-label="Добавить очко">+</button>');
+    const label = row.querySelector('.statLabel');
+    label.textContent = statName(hero.raceId, s.id).name;
+    attachTip(label, statName(hero.raceId, s.id).name, statTipText(hero.raceId, s.id));
+    const val = row.querySelector('.statVal');
+    val.textContent = stats[s.id];
+    val.title = 'База класса ' + (base[s.id] || STAT_BASE) + ', ваших очков ' + pts[s.id];
+    if (!readOnly) {
+      const [minus, plus] = row.querySelectorAll('.statBtn');
+      minus.disabled = pts[s.id] <= 0;
+      plus.disabled = free <= 0;
+      minus.addEventListener('click', () => changeStat(s.id, -1));
+      plus.addEventListener('click', () => changeStat(s.id, 1));
+    }
+    box.appendChild(row);
+  }
+
+  const f = createHeroFighter(hero);
+  const sum = document.createElement('p');
+  sum.className = 'statsSummary';
+  sum.textContent = 'Здоровье ' + f.maxHp + ' · Атака ' + f.attack + ' · Крит ' + f.critPct.toFixed(1).replace('.', ',') +
+    ' % · Мана до ' + f.manaMax + ' · Щит за Деталь ' + f.shieldPerGem;
+  box.appendChild(sum);
+  if (readOnly) {
+    const note = document.createElement('p');
+    note.className = 'statsNote';
+    note.textContent = 'Идёт бой: только просмотр. Очки можно раздать после боя.';
+    box.appendChild(note);
+  }
+}
