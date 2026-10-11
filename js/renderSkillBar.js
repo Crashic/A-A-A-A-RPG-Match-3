@@ -37,7 +37,7 @@ function renderSkillBar() {
     const k = document.createElement('button');
     k.type = 'button';
     k.className = 'btn red skillBtn killAll';
-    k.disabled = !isHeroTurn() || match3.busy || battle.over;
+    k.disabled = !isHeroTurn() || !match3 || match3.busy || battle.over; // поле может ещё не появиться
     k.dataset.tipTitle = 'KILL ALL';
     k.dataset.tip = 'Чит: мгновенно убивает текущего врага.';
     k.innerHTML = '<b>KILL ALL</b><small>чит · ход не нужен</small>';
