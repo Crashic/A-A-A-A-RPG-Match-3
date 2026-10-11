@@ -53,6 +53,7 @@
       <button id="btnCharacters" class="btn stone" type="button">Персонажи</button>
       <button id="btnSettings" class="btn stone" type="button">Настройки</button>
       <button id="btnGlossary" class="btn stone" type="button">Глоссарий</button>
+      <button id="btnCheat" class="btn purple" type="button">Читер</button>
       <button id="btnExit" class="btn red" type="button">Выход</button>
     </div>
   </nav>
@@ -231,8 +232,8 @@
     <div class="ribbon">Персонаж</div>
   </header>
   <div class="mapBody">
-    <div id="charLeft" class="panel"></div>
-    <div id="charRight" class="panel"></div>
+    <div class="panel charCol charColLeft"><div id="charLeft" class="charScroll"></div></div>
+    <div class="panel charCol charColRight"><div id="charRight" class="charScroll"></div></div>
   </div>
 </section>
 
@@ -266,6 +267,34 @@
     <button id="btnReturn" class="btn green" type="button">Вернуться</button>
   </div>
 </section>
+
+<!-- Шуточная «оплата»: нарисованная карта без полей ввода, ничего не вводится и не сохраняется (js/openPayJoke.js) -->
+<div id="payJoke" class="modal">
+  <div class="modalBox">
+    <div class="ribbon">Шадап эд тейк май мани</div>
+    <div class="panel">
+      <div class="jokeCard" aria-hidden="true">
+        <span class="jokeChip"></span>
+        <span class="jokeNum">••••  ••••  ••••  ••••</span>
+        <span class="jokeRow"><span>ММ/ГГ</span><span>CVC •••</span></span>
+        <span class="jokeBank">Банк «Последний рубль»</span>
+      </div>
+      <p class="jokeNote">Введите данные карты, и мы ничего не пришлём.</p>
+      <button id="payJokeNo" class="btn red" type="button">Я терпила</button>
+    </div>
+  </div>
+</div>
+
+<!-- Читер: уровень, изолента и прибавка к характеристикам текущего героя (js/renderCheat.js) -->
+<div id="cheat" class="modal">
+  <div class="modalBox">
+    <div class="ribbon">Читер</div>
+    <div class="panel">
+      <button id="cheatClose" class="btn red round close" type="button" aria-label="Закрыть"></button>
+      <div id="cheatBody"></div>
+    </div>
+  </div>
+</div>
 
 <div id="changelog" class="modal">
   <div class="modalBox">
@@ -568,6 +597,13 @@
 <script src="js/toggleBattleMenu.js"></script>
 <script src="js/setupCharacter.js"></script>
 <script src="js/setupTips.js"></script>
+<script src="js/openPayJoke.js"></script>
+<script src="js/cheatBonus.js"></script>
+<script src="js/changeCheat.js"></script>
+<script src="js/renderCheat.js"></script>
+<script src="js/openCheat.js"></script>
+<script src="js/setupCheat.js"></script>
+<script src="js/setupScrollArrows.js"></script>
 <script src="js/goHome.js"></script>
 <script src="js/setupMenu.js"></script>
 <script src="js/main.js"></script>

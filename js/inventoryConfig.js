@@ -10,5 +10,5 @@ const SLOT_NAMES = {
   ring: 'Кольцо', legs: 'Ноги', feet: 'Обувь', weapon: 'Оружие', rune: 'Руна', bag: 'Сумка'
 };
 const RUNE_SLOTS = 5;
-const BAG_SLOTS = 6;        // слоты для сумок над инвентарём; в конце — «+» (купить ещё, позже)
+const BAG_SLOTS = 1;        // слоты для сумок над инвентарём; в конце — «+» (шуточная «оплата»)
 const BACKPACK_SLOTS = 30;  // ячейки инвентаря

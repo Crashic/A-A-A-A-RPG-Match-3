@@ -13,7 +13,7 @@ function renderStatBlock(box, hero, readOnly) {
   head.className = 'statsHead';
   head.innerHTML = '<b>Характеристики</b><span class="freePts"></span>';
   head.querySelector('.freePts').textContent = statPointsTotal(hero)
-    ? 'Свободно очков: ' + free : 'Очки — со 2-го уровня';
+    ? 'Свободно очков: ' + free + ' / ' + statPointsTotal(hero) : 'Очки — со 2-го уровня';
   if (!readOnly) {
     const reset = document.createElement('button');
     reset.type = 'button';

@@ -7,6 +7,7 @@ function main() {
   setupGlossary();
   setupCharacter();
   setupTips();
+  setupCheat();
   setupMenu();
   setupBoardInput();
   renderMenu();
