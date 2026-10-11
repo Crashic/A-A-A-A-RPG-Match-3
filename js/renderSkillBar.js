@@ -33,6 +33,17 @@ function renderSkillBar() {
     b.addEventListener('click', () => useSkill(s.id));
     buttons.appendChild(b);
   }
+  if (settings.cheatsOn) { // режим читов: мгновенная победа
+    const k = document.createElement('button');
+    k.type = 'button';
+    k.className = 'btn red skillBtn killAll';
+    k.disabled = !isHeroTurn() || match3.busy || battle.over;
+    k.dataset.tipTitle = 'KILL ALL';
+    k.dataset.tip = 'Чит: мгновенно убивает текущего врага.';
+    k.innerHTML = '<b>KILL ALL</b><small>чит · ход не нужен</small>';
+    k.addEventListener('click', () => killAll());
+    buttons.appendChild(k);
+  }
   if (icons.children.length) row.appendChild(icons);
   row.appendChild(buttons);
   bar.appendChild(row);

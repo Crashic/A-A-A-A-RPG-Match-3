@@ -1,7 +1,7 @@
 // Меняет розданные очки характеристики statId на delta (+1 / −1) у текущего героя.
-// Только вне боя; нельзя уйти ниже базы класса и потратить больше свободных очков.
+// Вне боя (в бою — только в режиме читов, statsLocked); нельзя уйти ниже базы класса и потратить больше свободных очков.
 function changeStat(statId, delta) {
-  if (battle && !battle.over) return;
+  if (statsLocked()) return;
   const slot = getActiveSlot();
   const hero = loadSlot(slot);
   if (!hero) return;
@@ -13,4 +13,5 @@ function changeStat(statId, delta) {
   saveSlot(slot, hero);
   vibrate(10);
   renderCharacter();
+  refreshHeroInBattle(); // режим читов в бою — сразу в силе
 }

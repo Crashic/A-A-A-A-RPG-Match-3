@@ -1,10 +1,24 @@
-// Окно «Читер»: уровень, изолента (синяя, чёрная, белая) и прибавка к пяти характеристикам
+// Окно «Читер»: переключатель «Активировать читы» (settings.cheatsOn), уровень, изолента (синяя, чёрная, белая) и прибавка к пяти характеристикам
 // текущего героя — каждая строка с кнопками −10, −1, +1, +10.
 function renderCheat() {
   const body = document.getElementById('cheatBody');
   const hero = loadSlot(getActiveSlot());
   body.innerHTML = '';
   if (!hero) { body.innerHTML = '<p class="hint">Сначала создайте персонажа — читерить не на ком.</p>'; return; }
+  // переключатель «Активировать читы»
+  const toggle = document.createElement('label');
+  toggle.className = 'setRow cheatToggle';
+  toggle.innerHTML = '<span><b>Активировать читы</b><small>Очки характеристик можно менять и в бою; в бою появляется навык «KILL ALL».</small></span>' +
+    '<input type="checkbox" class="switch">';
+  const box = toggle.querySelector('input');
+  box.checked = !!settings.cheatsOn;
+  box.addEventListener('change', () => {
+    settings.cheatsOn = box.checked;
+    saveSettings();
+    vibrate();
+    if (battle && !battle.over) renderBattle(); // показать или убрать «KILL ALL»
+  });
+  body.appendChild(toggle);
   const bonus = cheatBonus(hero);
   const tape = {};
   let rest = hero.tape || 0;

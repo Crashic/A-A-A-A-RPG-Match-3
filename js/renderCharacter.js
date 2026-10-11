@@ -6,7 +6,7 @@ function renderCharacter() {
   const left = document.getElementById('charLeft');
   const right = document.getElementById('charRight');
   if (!hero) { left.innerHTML = '<p class="hint">Нет персонажа</p>'; right.innerHTML = ''; return; }
-  const readOnly = !!(battle && !battle.over);
+  const readOnly = statsLocked(); // в бою — только просмотр, если не включены читы
   const scroll = left.scrollTop;
   left.innerHTML = '';
   const parts = ['charHead', 'charDoll', 'charStats', 'charTabs'].map(cls => {

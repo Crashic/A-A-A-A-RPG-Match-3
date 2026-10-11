@@ -1,5 +1,5 @@
 // Меняет значение в «Читере» у текущего героя: field — 'level' | 'blue' | 'black' | 'white' | id характеристики.
-// delta — на сколько. Сразу сохраняет и перерисовывает окно.
+// delta — на сколько. Сразу сохраняет и перерисовывает окно; в бою — пересчитывает героя (refreshHeroInBattle).
 function changeCheat(field, delta) {
   const slot = getActiveSlot();
   const hero = loadSlot(slot);
@@ -18,5 +18,6 @@ function changeCheat(field, delta) {
   vibrate(8);
   renderCheat();
   renderMenu();
+  refreshHeroInBattle(); // посреди боя — сразу в силе
   if (document.getElementById('map').classList.contains('active')) renderMap(); // цвета сложности врагов
 }
