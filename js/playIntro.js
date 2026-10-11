@@ -1,18 +1,19 @@
-// Показывает заставку с бегущим текстом, по окончании или по «Пропустить» вызывает onDone.
+// Показывает заставку с бегущим текстом (своя история для расы и класса — introStory), по окончании или по «Пропустить» вызывает onDone.
 function playIntro(hero, onDone) {
   stopIntro();
   const crawl = document.getElementById('introCrawl');
   crawl.innerHTML = '';
+  const story = introStory(hero || {});
   const episode = document.createElement('p');
   episode.className = 'introEpisode';
-  episode.textContent = INTRO_TEXT.episode;
+  episode.textContent = story.episode;
   const title = document.createElement('h2');
   title.className = 'introTitle';
-  title.textContent = INTRO_TEXT.title;
+  title.textContent = story.title;
   crawl.append(episode, title);
-  for (const text of INTRO_TEXT.paragraphs) {
+  for (const text of story.paragraphs) {
     const p = document.createElement('p');
-    p.textContent = text.replace('{name}', hero ? hero.name : '');
+    p.textContent = text;
     crawl.appendChild(p);
   }
   renderIntroStars();

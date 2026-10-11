@@ -1,6 +1,6 @@
 // Навыки под панелью игрока: кнопки активных (название и цена; у боевого навыка класса — значок маны
 // и перезарядка; недоступные — серые)
-// и строка пассивных.
+// и иконки пассивных с подсказкой.
 function renderSkillBar() {
   const bar = document.getElementById('skillBar');
   if (!battle) { bar.innerHTML = ''; return; }
@@ -26,12 +26,20 @@ function renderSkillBar() {
     b.addEventListener('click', () => useSkill(s.id));
     bar.appendChild(b);
   }
+  // пассивные — только иконки; название и описание — в подсказке (attachTip)
   const passive = skills.filter(s => s.type === 'passive');
   if (passive.length) {
-    const p = document.createElement('p');
-    p.className = 'skillPassive';
-    p.textContent = 'Пассивно: ' + passive.map(s => s.name).join(' · ');
-    p.title = passive.map(s => s.name + ' — ' + s.text).join('\n');
-    bar.appendChild(p);
+    const row = document.createElement('div');
+    row.className = 'skillPassive';
+    const cls = findById(CLASSES, battle.save.classId);
+    for (const s of passive) {
+      const icon = document.createElement('span');
+      icon.className = 'passiveIcon';
+      icon.innerHTML = iconTile(cls ? cls.icon : 'stamp', cls ? cls.color : 'var(--gem-amethyst)');
+      icon.setAttribute('aria-label', s.name);
+      attachTip(icon, s.name + ' · пассивный', s.text);
+      row.appendChild(icon);
+    }
+    bar.appendChild(row);
   }
 }

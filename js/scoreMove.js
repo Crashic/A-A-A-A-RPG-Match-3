@@ -1,4 +1,5 @@
-// Оценка хода для врага: урон важнее всего, потом щит (если не полный), мана, лишний ход.
+// Оценка хода для врага: урон важнее всего, потом щит (если не полный), мана, лишний ход;
+// Радиацию и Документы старается не трогать (кроме фишек из enemy.needs — под будущие навыки врага).
 function scoreMove(grid, move, me) {
   swapInGrid(grid, move.a, move.b);
   const cells = findMatches(grid);
@@ -11,7 +12,8 @@ function scoreMove(grid, move, me) {
     if (kind === 'damage') score += count[id] * 10;
     else if (kind === 'shield') score += me.shield < me.maxShield ? count[id] * 5 : 1;
     else if (kind === 'mana') score += count[id] * 3;
-    else score += count[id];
+    // Радиация и Документы врагу ничего не дают — избегает их, если они не нужны его навыкам (needs)
+    else score -= (battle && (battle.enemyInfo.needs || []).includes(id)) ? -count[id] * 3 : count[id] * 2;
   }
   if (extra) score += 25;
   return score + Math.random() * 4; // немного случайности, чтобы враг не был предсказуем

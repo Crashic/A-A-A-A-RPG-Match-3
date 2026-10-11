@@ -7,7 +7,7 @@ function skillAfterHeroHit() {
     const key = 'lowHp:' + e.below;
     if (sk.triggered[key] || hero.hp >= hero.maxHp * e.below / 100) continue;
     sk.triggered[key] = true;
-    const add = Math.min(hero.maxHp - hero.hp, Math.round(hero.maxHp * e.healPct / 100));
+    const add = Math.min(hero.maxHp - hero.hp, Math.round(hero.maxHp * e.healPct / 100 * (1 + (hero.healPct || 0) / 100)));
     hero.hp += add;
     showFloat('hero', '+' + add, 'heal');
   }

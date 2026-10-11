@@ -24,7 +24,7 @@ async function useSkill(id) {
   } else if (skill.act === 'shield') {
     hero.shield = Math.min(hero.maxShield, hero.shield + Math.max(1, Math.round(hero.maxShield * skill.pctMax / 100)));
   } else if (skill.act === 'heal') {
-    const add = Math.min(hero.maxHp - hero.hp, Math.round(hero.maxHp * skill.pct / 100));
+    const add = Math.min(hero.maxHp - hero.hp, Math.round(hero.maxHp * skill.pct / 100 * (1 + (hero.healPct || 0) / 100)));
     hero.hp += add;
     showFloat('hero', '+' + add, 'heal');
   } else if (skill.act === 'buff') {

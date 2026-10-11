@@ -32,6 +32,15 @@ function renderClassStep() {
     info.querySelector('.sub').textContent = race.name + (race.id === 'press' ? (side ? ' · ' + side.name : ' · нейтральный') : '') +
       ': ' + (bonus ? bonus.text : 'класс недоступен') + (bonus ? ' · старт: ' + start.name : '');
     info.querySelectorAll('p')[1].textContent = cls.description;
+    if (bonus) { // характеристики класса с названиями расы; свободные очки — после создания
+      const row = document.createElement('div');
+      row.className = 'statChips createStats';
+      renderStatChips(row, { raceId: race.id, classId: cls.id, level: 1 });
+      const note = document.createElement('small');
+      note.textContent = '+' + STAT_POINTS_PER_LEVEL + ' очков — после создания';
+      row.appendChild(note);
+      info.appendChild(row);
+    }
     // навыки этого класса у выбранной расы (js/skills.js)
     for (const sk of bonus ? heroSkills({ raceId: race.id, classId: cls.id }) : []) {
       const p = document.createElement('p');

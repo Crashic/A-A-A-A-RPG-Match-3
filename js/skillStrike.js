@@ -5,7 +5,9 @@ function skillStrike(skill) {
   const foe = battle.enemy;
   const sk = battle.skill;
   if (skill.breakShield && foe.shield) { showFloat('enemy', '−' + foe.shield, 'shield'); foe.shield = 0; }
-  const amount = Math.max(1, Math.round(hero.attack * skill.mult));
+  const c = rollCrit(hero, Math.max(1, Math.round(hero.attack * skill.mult))); // Ловкость — шанс крита
+  const amount = c.amount;
+  if (c.crit) showFloat('enemy', 'Крит!', 'damage');
   let hp;
   if (skill.pierce) { hp = Math.min(foe.hp, amount); foe.hp -= hp; }
   else {
@@ -22,7 +24,7 @@ function skillStrike(skill) {
     if (add) showFloat('hero', '+' + add + ' щит', 'shield');
   }
   if (skill.lifesteal) {
-    const add = Math.min(hero.maxHp - hero.hp, Math.round(hp * skill.lifesteal / 100));
+    const add = Math.min(hero.maxHp - hero.hp, Math.round(hp * skill.lifesteal / 100 * (1 + (hero.healPct || 0) / 100)));
     hero.hp += add;
     if (add) showFloat('hero', '+' + add, 'heal');
   }

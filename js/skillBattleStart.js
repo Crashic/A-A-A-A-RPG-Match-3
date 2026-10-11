@@ -3,7 +3,7 @@ function skillBattleStart() {
   const sk = battle.skill;
   const hero = battle.hero;
   for (const e of hasPassive('start'))
-    if (e.give === 'mana') hero.mana[e.gem] = Math.min(MANA_MAX, hero.mana[e.gem] + e.value);
+    if (e.give === 'mana') hero.mana[e.gem] = Math.min(hero.manaMax || MANA_MAX, hero.mana[e.gem] + e.value);
   for (const e of hasPassive('afterActive')) if (e.first) sk.pendingPct = Math.max(sk.pendingPct, e.pct);
   const notes = battle.save.notes || 0;
   if (notes && hasPassive('notes').length) {

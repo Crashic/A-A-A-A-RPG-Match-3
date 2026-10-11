@@ -18,3 +18,6 @@ let intro = null;
 
 // Глоссарий: открытый раздел (id из GLOSSARY_SECTIONS)
 let glossaryTab = 'gems';
+
+// Подсказка: элемент, над которым она сейчас показана (showTip / hideTip)
+let tipOwner = null;

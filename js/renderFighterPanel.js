@@ -9,7 +9,7 @@ function renderFighterPanel(side) {
 
   setBar(q('[data-bar="hp"]'), f.hp, f.maxHp);
   setBar(q('[data-bar="shield"]'), f.shield, f.maxShield, 'Щит ' + f.shield);
-  for (const id of MANA_COLORS) setBar(q(`[data-bar="${id}"]`), f.mana[id], MANA_MAX, String(f.mana[id]));
+  for (const id of MANA_COLORS) setBar(q(`[data-bar="${id}"]`), f.mana[id], f.manaMax || MANA_MAX, String(f.mana[id]));
 
   if (side === 'hero') {
     const save = battle.save;

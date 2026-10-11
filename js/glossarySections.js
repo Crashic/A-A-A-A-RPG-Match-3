@@ -7,6 +7,7 @@ const GLOSSARY_SECTIONS = [
   { id: 'factions', name: 'Фракции',        build: glossaryFactions },
   { id: 'races',    name: 'Расы',           build: glossaryRaces },
   { id: 'classes',  name: 'Классы',         build: glossaryClasses },
+  { id: 'stats',    name: 'Характеристики', build: glossaryStats },
   { id: 'skills',   name: 'Навыки',         build: glossarySkills },
   { id: 'zones',    name: 'Локации и враги', build: glossaryZones },
   { id: 'progress', name: 'Опыт и изолента', build: glossaryProgress }

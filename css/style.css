@@ -410,7 +410,9 @@ h1 {
 .skillBtn b { overflow: hidden; max-width: 100%; white-space: nowrap; text-overflow: ellipsis; }
 .infoText .skill.combat .gemMini { display: inline-block; vertical-align: -3px; margin-right: 4px; }
 .skillBtn:disabled small { color: var(--text-muted); }
-.skillPassive { margin: 0; font: var(--type-caption); color: var(--text-muted); text-align: center; }
+.skillPassive { display: flex; justify-content: center; gap: 6px; }
+.passiveIcon { width: 30px; height: 30px; cursor: help; }
+.passiveIcon .tile { display: block; width: 30px; height: 30px; }
 /* Навык врага под его панелью (пока описание) */
 #enemySkill { display: flex; flex-direction: column; gap: 2px; min-height: 0; overflow: hidden; text-align: center; }
 #enemySkill b { font: var(--type-small); font-weight: 600; color: var(--ui-reward); }
@@ -528,7 +530,7 @@ h1 {
 #zoneInfo p { margin: 0; }
 .zoneTags { font: var(--type-stat); color: var(--ui-reward); }
 .zoneDesc { margin-top: 2px !important; font: var(--type-small); color: var(--text-secondary); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-#enemyList { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: 1fr; gap: 6px; }
+#enemyList { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: auto; align-content: start; gap: 6px; overflow-y: auto; }
 
 .zone {
   display: flex;
@@ -652,8 +654,9 @@ h1 {
 /* «Полосы» (GlassOverlays) — только у подсказки */
 .gemStripes { display: none; }
 
-/* выбор — без увеличения, «Внутренний ободок» становится ярким и плотным */
-.gem.selected .gemRim { stroke: var(--text-primary); stroke-width: 4; }
+/* ободок у фишек спрятан (вместо него «Верхний глянец»); выбор — без увеличения, ободок появляется ярким и плотным */
+.gemRim { display: none; }
+.gem.selected .gemRim { display: inline; stroke: var(--text-primary); stroke-width: 4; }
 
 /* подсказка через 10 с бездействия — фишка мигает на 20 % ярче и получает «Полосы» */
 .gem.hint .gemStripes { display: inline; }
@@ -1038,3 +1041,83 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 /* Заголовок экрана (лента) — по центру экрана, кнопки по краям */
 .screenHead { position: relative; min-height: 48px; }
 .screenHead .ribbon { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); margin: 0; }
+
+/* Список локаций — как кнопки классов: по высоте содержимого, не на всю высоту блока */
+#zoneList .zone { flex: none; min-height: 0; padding: 6px 10px; }
+#zoneList .zone b { line-height: 18px; }
+
+/* ---------- Подсказка (showTip): камень, заголовок «Небо низ», текст вторичный, рамка «Обводка» ---------- */
+#tip {
+  position: fixed;
+  z-index: 30;
+  max-width: 260px;
+  padding: 6px 10px 7px;
+  border: 2px solid var(--ui-outline);
+  border-radius: 10px;
+  background: var(--bg-canvas);
+  box-shadow: var(--shadow-drop);
+  pointer-events: none;
+}
+#tip[hidden] { display: none; }
+#tip b { display: block; font: var(--type-small); font-weight: 600; color: var(--bg-sky-bottom); }
+#tip span { display: block; font: var(--type-caption); line-height: 14px; color: var(--text-secondary); }
+.hasTip { cursor: help; }
+
+/* ---------- Характеристики: значки (меню, создание) ---------- */
+.statChips { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.statChip { display: inline-flex; align-items: center; gap: 3px; }
+.statChip .tile { width: 22px; height: 22px; display: block; }
+.statChip b { font: var(--type-stat); color: var(--text-primary); font-variant-numeric: tabular-nums; }
+.createStats { margin-top: 4px; }
+.createStats small { font: var(--type-caption); color: var(--text-muted); }
+#heroCardChars { margin-top: 4px; justify-content: center; }
+.heroCardBtn { flex: none; min-height: 0; padding: 3px 12px; margin-left: 8px; font: var(--type-small); font-weight: 600; }
+
+/* ---------- Экран «Персонаж»: кукла и характеристики ---------- */
+#character { max-width: 960px; height: var(--app-h); gap: 8px; }
+#character .screenHead { margin: 0; }
+#dollPanel { flex: 0 0 40%; display: flex; align-items: center; justify-content: space-between; gap: 6px; padding: 8px; }
+.dollSlots { display: flex; flex-direction: column; gap: 6px; }
+.dollSlot { display: flex; flex-direction: column; align-items: center; gap: 1px; }
+.dollSlot i { width: 42px; height: 42px; border-radius: 10px; background: var(--bg-cell); box-shadow: inset 0 0 0 2px var(--ui-metal); outline: 1.5px dashed color-mix(in srgb, var(--text-primary) 35%, transparent); outline-offset: -6px; }
+.dollSlot small { font: var(--type-caption); color: var(--text-muted); }
+.dollFigure { position: relative; flex: 1; height: 100%; display: flex; align-items: center; justify-content: center; }
+.dollFigure svg { height: 92%; max-height: 250px; }
+.dollFigure .tile { position: absolute; bottom: 4px; width: 34px; height: 34px; }
+#statsPanel { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; padding: 8px 12px; }
+.statsHead { display: flex; align-items: center; gap: 8px; }
+.statsHead > div { flex: 1; min-width: 0; }
+.statsHead h3 { margin: 0; font: var(--type-heading); font-size: 20px; line-height: 24px; color: var(--ui-reward); }
+.statsHead p { margin: 0; font: var(--type-small); color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.freePts { font: var(--type-stat); color: var(--ui-reward); white-space: nowrap; }
+.btn.resetStats { width: 40px; height: 40px; min-height: 0; padding: 0; display: flex; align-items: center; justify-content: center; }
+.btn.resetStats::after { display: none; }
+.btn.resetStats svg { width: 24px; height: 24px; }
+.statRows { display: flex; flex-direction: column; gap: 4px; }
+.statRowBig { display: flex; align-items: center; gap: 8px; padding: 3px 6px; border-radius: 10px; background: var(--bg-cell); }
+.statRowBig .tile { flex: none; width: 26px; height: 26px; }
+.statLabel { flex: 1; min-width: 0; font: var(--type-menu); font-size: 14px; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.statVal { width: 34px; text-align: center; font: var(--type-stat); font-size: 15px; color: var(--text-primary); font-variant-numeric: tabular-nums; }
+.btn.statBtn { width: 30px; height: 30px; min-height: 0; padding: 0; font: var(--type-button); font-size: 18px; line-height: 1; }
+.btn.statBtn::after { display: none; }
+.statsSummary { margin: 0; font: var(--type-caption); color: var(--text-secondary); }
+.statsNote { margin: 0; font: var(--type-caption); color: var(--ui-reward); }
+
+/* ---------- Меню боя: одна кнопка и выпадающий список ---------- */
+#game { position: relative; }
+#battleMenu {
+  position: absolute;
+  right: 12px;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 72px);
+  z-index: 12;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px;
+  min-width: 200px;
+}
+#battleMenu[hidden] { display: none; }
+.menuItem { display: flex; align-items: center; gap: 10px; padding: 5px 10px 5px 6px; border: 0; border-radius: 10px; background: var(--bg-cell); color: var(--text-primary); font: var(--type-menu); text-align: left; }
+.menuItem svg { flex: none; width: 28px; height: 28px; }
+.menuItem:active { transform: scale(.97); }
+@media (hover: hover) { .menuItem:hover { filter: brightness(1.2); } }

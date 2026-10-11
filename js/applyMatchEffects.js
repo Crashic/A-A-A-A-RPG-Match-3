@@ -2,6 +2,7 @@
 // топливо — урон, детали — щит, металл, травы и плёнка — мана,
 // документы — опыт, радиация — изолента (опыт и изолента — только игроку).
 // Бонус класса игрока (+1 % к своему ресурсу, gemBonus) и навыки (skillGemPct) усиливают эффект фишки;
+// характеристики героя (createHeroFighter): атака, крит (rollCrit), приток и запас маны, щит за Детали;
 // навыки срабатывают после серии (skillAfterGather) и ослабляют удары врага (skillReduceHit, skillAfterHeroHit).
 function applyMatchEffects(cells) {
   if (!battle || battle.over) return;
@@ -21,6 +22,11 @@ function applyMatchEffects(cells) {
     if (kind === 'damage') {
       let amount = Math.round(n * me.attack);
       if (!isHero) amount = skillReduceHit(amount); // защиты и навыки игрока
+      else { // Ловкость героя: шанс крита
+        const c = rollCrit(me, amount);
+        amount = c.amount;
+        if (c.crit) showFloat('enemy', 'Крит!', 'damage');
+      }
       const hit = dealDamage(foe, amount);
       if (!isHero) { battle.skill.lastEnemyLoss.hp += hit.hp; battle.skill.lastEnemyLoss.shield += hit.shield; }
       if (hit.shield) showFloat(foeSide, '−' + hit.shield, 'shield');
@@ -34,7 +40,8 @@ function applyMatchEffects(cells) {
       me.hp += add;
       if (add) showFloat(side, '+' + add, 'heal');
     } else if (kind === 'mana') {
-      me.mana[id] = Math.min(MANA_MAX, me.mana[id] + Math.round(n));
+      // Интеллект героя: больше маны с фишек и больше запас
+      me.mana[id] = Math.min(me.manaMax || MANA_MAX, me.mana[id] + Math.round(n * (1 + (me.manaPct || 0) / 100)));
     } else if (isHero && kind === 'xp') {
       const add = Math.round(n * me.xpPerGem);
       battle.gained.xp += add;
