@@ -15,6 +15,7 @@ function finishBattle(won) {
   if (fresh) { save.gear = fresh.gear; save.bag = fresh.bag; }
   if (won) Object.assign(result, addToBag(save, rollDrops(e.level, e.elite))); // { added, lost }
   if (won) save.wins = (save.wins || 0) + 1; // для обновления прилавка торговца
+  result.quests = questProgress(save, won, e.id, battle.gained.gems); // задания с доски
   result.levelUps = grantXp(save, result.killXp + result.gemXp);
   result.level = save.level;
   saveSlot(battle.slot, save);

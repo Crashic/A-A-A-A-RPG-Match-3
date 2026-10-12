@@ -9,8 +9,10 @@ function setupCharacter() {
   on('mapChar', openCharacter);
   document.getElementById('mapBunker').innerHTML = BUNKER_ICON;
   document.getElementById('mapShop').innerHTML = SHOP_ICON;
+  document.getElementById('mapQuests').innerHTML = BOARD_ICON;
   on('mapBunker', openBunker);
   on('mapShop', openShop);
+  on('mapQuests', openQuests);
   on('mapGlossary', () => openGlossary());
   on('mapLegend', openGemLegend);
   on('mapHome', goHome);

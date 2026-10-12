@@ -51,6 +51,10 @@ function applyMatchEffects(cells) {
       showFloat(side, '+' + add + ' изоленты', 'tape');
     }
   }
+  if (isHero) { // собранные героем фишки — для заданий «Собрать фишки» (questProgress)
+    battle.gained.gems = battle.gained.gems || {};
+    for (const id in count) battle.gained.gems[id] = (battle.gained.gems[id] || 0) + count[id];
+  }
   if (isHero) skillAfterGather(count, run);
   else skillAfterHeroHit();
   if (foe.hp <= 0) battle.over = true;

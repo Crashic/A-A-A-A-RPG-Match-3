@@ -204,6 +204,7 @@
     <nav class="mapMenu">
       <button id="mapBunker" class="btn stone square" type="button" aria-label="Бункер" data-tip="Бункер: торговец и задания"></button>
       <button id="mapShop" class="btn stone square" type="button" aria-label="Торговец" data-tip="Торговец"></button>
+      <button id="mapQuests" class="btn stone square" type="button" aria-label="Задания" data-tip="Доска объявлений: задания"></button>
       <button id="mapChar" class="btn stone square" type="button" aria-label="Персонаж" data-tip="Персонаж">
         <svg viewBox="0 0 32 32" aria-hidden="true">
           <circle cx="16" cy="9" r="5" fill="var(--ui-parchment)" stroke="var(--ui-outline)" stroke-width="2"/>
@@ -270,6 +271,17 @@
   <div class="mapBody">
     <div class="panel charCol shopColLeft"><div id="shopLeft" class="charScroll"></div></div>
     <div class="panel charCol charColRight"><div id="shopRight" class="charScroll"></div></div>
+  </div>
+</section>
+
+<!-- Доска объявлений: слева объявления, справа взятые задания (js/renderQuests.js) -->
+<section id="quests" class="screen">
+  <header class="screenHead">
+    <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
+  </header>
+  <div class="mapBody">
+    <div class="panel charCol shopColLeft"><div id="questsLeft" class="charScroll"></div></div>
+    <div class="panel charCol charColRight"><div id="questsRight" class="charScroll"></div></div>
   </div>
 </section>
 
@@ -688,6 +700,20 @@
 <script src="js/renderShop.js"></script>
 <script src="js/renderBunker.js"></script>
 <script src="js/openBunker.js"></script>
+<script src="js/plural.js"></script>
+<script src="js/gemName.js"></script>
+<script src="js/questConfig.js"></script>
+<script src="js/questEnemies.js"></script>
+<script src="js/rollQuest.js"></script>
+<script src="js/questBoard.js"></script>
+<script src="js/saveQuests.js"></script>
+<script src="js/acceptQuest.js"></script>
+<script src="js/abandonQuest.js"></script>
+<script src="js/turnInQuest.js"></script>
+<script src="js/questProgress.js"></script>
+<script src="js/questCard.js"></script>
+<script src="js/renderQuests.js"></script>
+<script src="js/openQuests.js"></script>
 <script src="js/cheatGiveItem.js"></script>
 <script src="js/slotIcon.js"></script>
 <script src="js/emptySlot.js"></script>

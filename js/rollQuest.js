@@ -1,0 +1,31 @@
+// Новое задание для доски: вид (QUEST_TYPES), цель под уровень героя, текст от случайного жителя бункера
+// и награда. Задание: { uid, type, giver, title, text, goal, zoneId?, enemyId?, gem?, need, have, level,
+// reward: { xp, tape, item } } (item — редкость вещи или null). Если подходящих врагов нет — «победы».
+function rollQuest(hero) {
+  const pick = list => list[Math.floor(Math.random() * list.length)];
+  const L = hero.level;
+  let type = pick(Object.keys(QUEST_TYPES));
+  let target = null;
+  if (type === 'elite') { target = pick(questEnemies(hero, true, 5)); if (!target) type = 'enemy'; }
+  if (type === 'enemy' || type === 'zone') { target = pick(questEnemies(hero, false, 3)); if (!target) type = 'wins'; }
+  const T = QUEST_TYPES[type];
+  const [lo, hi] = T.need;
+  let need = lo + Math.floor(Math.random() * (hi - lo + 1));
+  if (type === 'gems') need = Math.round(need / 10) * 10;
+  const gem = type === 'gems' ? pick(GEM_TYPES).id : null;
+  const giver = pick(QUEST_GIVERS);
+  const [title, text] = pick(T.texts);
+  const fill = s => s.replace('{zone}', target ? target.zone.name.replace(/^.*«|»$/g, '') : '')
+    .replace('{enemy}', target ? target.enemy.name : '').replace('{n}', need)
+    .replace('{times}', need + ' ' + plural(need, 'раз', 'раза', 'раз')).replace('{gem}', gem ? gemName(gem) : '');
+  const xp = Math.round(mobXp(L, L) * T.xp * need);
+  const tape = Math.round(combatStats(L).tapePerGem * 4 * T.xp * need);
+  return {
+    uid: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
+    type, giver: giver.id, title, text: fill(text), goal: fill(T.goal),
+    zoneId: type === 'zone' ? target.zone.id : null,
+    enemyId: type === 'enemy' || type === 'elite' ? target.enemy.id : null,
+    gem, need, have: 0, level: L,
+    reward: { xp, tape, item: type === 'elite' ? 'rare' : (Math.random() < QUEST_ITEM_CHANCE ? 'magic' : null) }
+  };
+}

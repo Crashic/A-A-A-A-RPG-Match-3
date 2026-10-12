@@ -1,5 +1,5 @@
 // Экран «Бункер»: короткое вступление и карточки мест — торговец (openShop) и доска заданий
-// (задания появятся в следующей версии — карточка пока неактивна).
+// (openQuests; если есть выполненные — кнопка «Сдать задания»).
 function renderBunker() {
   const box = document.getElementById('bunkerBody');
   const hero = loadSlot(getActiveSlot());
@@ -20,5 +20,8 @@ function renderBunker() {
     cards.appendChild(c);
   };
   card(SHOP_ICON, SHOP_TRADER.name, 'Купить, продать, сдать хлам. Ассортимент меняется, пока вы на поверхности.', 'Торговать', 'orange', openShop);
-  card(BOARD_ICON, 'Доска объявлений', 'Задания от жителей бункера. Бумагу уже повесили, задания пишут.', 'Скоро', 'stone', null);
+  const q = (hero && hero.quests) || { active: [] };
+  const ready = q.active.filter(x => x.have >= x.need).length;
+  card(BOARD_ICON, 'Доска объявлений', 'Задания от жителей бункера: взяли — выполнили в боях — сдали за опыт, изоленту и вещи.' +
+    (q.active.length ? ' Взято: ' + q.active.length + (ready ? ', готово к сдаче: ' + ready : '') + '.' : ''), ready ? 'Сдать задания' : 'Задания', ready ? 'orange' : 'green', openQuests);
 }
