@@ -14,6 +14,7 @@ function finishBattle(won) {
   const fresh = loadSlot(battle.slot); // снаряжение и сумка — как сейчас в ячейке (могли меняться читами)
   if (fresh) { save.gear = fresh.gear; save.bag = fresh.bag; }
   if (won) Object.assign(result, addToBag(save, rollDrops(e.level, e.elite))); // { added, lost }
+  if (won) save.wins = (save.wins || 0) + 1; // для обновления прилавка торговца
   result.levelUps = grantXp(save, result.killXp + result.gemXp);
   result.level = save.level;
   saveSlot(battle.slot, save);

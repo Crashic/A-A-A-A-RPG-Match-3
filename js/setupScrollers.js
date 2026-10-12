@@ -1,7 +1,7 @@
 // Все прокручиваемые списки и окна игры — без полосы прокрутки, со стрелками (setupScrollArrows):
 // и уже существующие (SCROLLERS), и появляющиеся позже (класс arrowList у созданного элемента).
 const SCROLLERS = ['#zoneList', '#enemyList', '#glossaryTabs', '#glossaryPage', '#slotList', '.settingsList',
-  '#changelogList', '#cheatBody', '#enemyInfoBody', '#itemInfoBody', '#gemLegendList', '#charLeft', '#charRight', '#createLeft'];
+  '#changelogList', '#cheatBody', '#enemyInfoBody', '#itemInfoBody', '#gemLegendList', '#charLeft', '#charRight', '#shopLeft', '#shopRight', '#bunkerBody', '#createLeft'];
 function setupScrollers() {
   for (const sel of SCROLLERS) document.querySelectorAll(sel).forEach(setupScrollArrows);
   document.querySelectorAll('.arrowList').forEach(setupScrollArrows);

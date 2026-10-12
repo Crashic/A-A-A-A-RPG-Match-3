@@ -6,6 +6,8 @@ function renderScreen(id) {
   else if (id === 'map') renderMap();
   else if (id === 'glossary') renderGlossary();
   else if (id === 'character') renderCharacter();
+  else if (id === 'shop') renderShop();
+  else if (id === 'bunker') renderBunker();
   else if (id === 'game') {
     if (battle) renderBattle();
     else setTimeout(() => { const n = getActiveSlot(); const s = loadSlot(n); startBattle(s && s.lastEnemy, loadBattle(n)); });

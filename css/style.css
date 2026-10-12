@@ -1357,3 +1357,43 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 #resultList li.loot b { font: var(--type-small); font-weight: 600; text-align: right; }
 /* Читер: «Выдать предмет» */
 .cheatItems { flex-wrap: wrap; }
+
+/* Меню карты: 8 кнопок в столбец — по 40 px, чтобы поместиться в высоту 360 */
+.mapMenu { gap: 4px; }
+.mapMenu .btn.square { width: 40px; height: 40px; border-radius: 12px; }
+.mapMenu .btn.square svg { width: 26px; height: 26px; }
+#map .mapMenu { margin-top: 46px; }
+/* Бункер */
+#bunker { max-width: 960px; height: var(--app-h); }
+#bunker .screenHead { margin: 0; }
+#bunkerBody { display: flex; flex-direction: column; gap: 8px; min-height: 0; overflow: hidden; }
+.bunkerIntro { padding: 10px 14px; }
+.bunkerIntro h3 { margin: 0; font: var(--type-heading); font-size: 20px; line-height: 24px; color: var(--ui-reward); }
+.bunkerIntro p { margin: 4px 0 0; font: var(--type-small); color: var(--text-secondary); }
+.bunkerCards { display: flex; gap: 8px; align-items: flex-start; }
+.bunkerCard { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px; text-align: center; }
+.bunkerIcon svg { width: 52px; height: 52px; }
+.bunkerCard h4 { margin: 0; font: var(--type-menu); font-weight: 600; color: var(--text-primary); }
+.bunkerCard p { margin: 0; font: var(--type-small); color: var(--text-secondary); }
+.bunkerCard .btn { min-height: 0; height: 40px; padding: 0 22px; font-size: 16px; }
+.bunkerCard .btn:disabled { filter: grayscale(1); opacity: .6; }
+/* Торговец */
+#shop { max-width: 960px; height: var(--app-h); gap: 8px; }
+#shop .screenHead { margin: 0; }
+.shopColLeft { flex: 0 0 50%; }
+.shopHead { display: flex; align-items: center; gap: 10px; }
+.shopFace { flex: none; width: 46px; height: 46px; border-radius: 10px; background: var(--bg-cell); display: flex; align-items: center; justify-content: center; }
+.shopFace svg { width: 34px; height: 34px; }
+.shopHead h3 { margin: 0; font: var(--type-heading); font-size: 20px; line-height: 24px; color: var(--ui-reward); }
+.shopTitle { margin: 0; font: var(--type-caption); color: var(--text-muted); }
+.shopQuote { margin: 0; font: var(--type-small); font-style: italic; color: var(--text-secondary); }
+.shopStock { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px 4px; }
+.shopItem { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.shopItem .invSlot { width: 44px; height: 44px; }
+.shopPrice { font: var(--type-caption); color: var(--text-primary); }
+.shopPrice .tape { gap: 4px; font: var(--type-caption); font-weight: 600; color: inherit; }
+.shopPrice.poor { color: var(--gem-ruby-light); }
+.shopFoot { display: flex; align-items: center; gap: 8px; margin-top: auto; }
+.shopNote { flex: 1; margin: 0; font: var(--type-caption); color: var(--text-muted); }
+.btn.shopReroll { flex: none; min-height: 0; height: 36px; padding: 0 12px; display: inline-flex; align-items: center; gap: 8px; font: var(--type-small); font-weight: 600; }
+.btn.shopJunk { align-self: center; min-height: 0; height: 36px; padding: 0 20px; font: var(--type-small); font-weight: 700; color: var(--ui-outline); }

@@ -202,6 +202,8 @@
     </div>
     <!-- Меню карты: те же пункты, что в меню боя, — вертикальным списком иконок -->
     <nav class="mapMenu">
+      <button id="mapBunker" class="btn stone square" type="button" aria-label="Бункер" data-tip="Бункер: торговец и задания"></button>
+      <button id="mapShop" class="btn stone square" type="button" aria-label="Торговец" data-tip="Торговец"></button>
       <button id="mapChar" class="btn stone square" type="button" aria-label="Персонаж" data-tip="Персонаж">
         <svg viewBox="0 0 32 32" aria-hidden="true">
           <circle cx="16" cy="9" r="5" fill="var(--ui-parchment)" stroke="var(--ui-outline)" stroke-width="2"/>
@@ -249,6 +251,25 @@
   <div class="mapBody">
     <div class="panel charCol charColLeft"><div id="charLeft" class="charScroll"></div></div>
     <div class="panel charCol charColRight"><div id="charRight" class="charScroll"></div></div>
+  </div>
+</section>
+
+<!-- Бункер: вступление и места — торговец, доска заданий (js/renderBunker.js) -->
+<section id="bunker" class="screen">
+  <header class="screenHead">
+    <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
+  </header>
+  <div id="bunkerBody"></div>
+</section>
+
+<!-- Торговец: слева прилавок завхоза, справа сумка героя (js/renderShop.js) -->
+<section id="shop" class="screen">
+  <header class="screenHead">
+    <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
+  </header>
+  <div class="mapBody">
+    <div class="panel charCol shopColLeft"><div id="shopLeft" class="charScroll"></div></div>
+    <div class="panel charCol charColRight"><div id="shopRight" class="charScroll"></div></div>
   </div>
 </section>
 
@@ -598,6 +619,7 @@
 <script src="js/glossaryProgress.js"></script>
 <script src="js/glossaryStats.js"></script>
 <script src="js/glossaryItems.js"></script>
+<script src="js/glossaryBunker.js"></script>
 <script src="js/glossarySections.js"></script>
 <script src="js/renderGlossary.js"></script>
 <script src="js/openGlossary.js"></script>
@@ -648,6 +670,24 @@
 <script src="js/dropItem.js"></script>
 <script src="js/itemSlot.js"></script>
 <script src="js/openItemInfo.js"></script>
+<script src="js/tapeText.js"></script>
+<script src="js/shopConfig.js"></script>
+<script src="js/shopIcon.js"></script>
+<script src="js/bunkerIcon.js"></script>
+<script src="js/boardIcon.js"></script>
+<script src="js/shopRarity.js"></script>
+<script src="js/rollShopStock.js"></script>
+<script src="js/shopStock.js"></script>
+<script src="js/buyPrice.js"></script>
+<script src="js/rerollPrice.js"></script>
+<script src="js/buyItem.js"></script>
+<script src="js/sellItem.js"></script>
+<script src="js/sellJunk.js"></script>
+<script src="js/rerollShop.js"></script>
+<script src="js/openShop.js"></script>
+<script src="js/renderShop.js"></script>
+<script src="js/renderBunker.js"></script>
+<script src="js/openBunker.js"></script>
 <script src="js/cheatGiveItem.js"></script>
 <script src="js/slotIcon.js"></script>
 <script src="js/emptySlot.js"></script>

@@ -1,4 +1,4 @@
-// Переключает экран: menu, characters, create, settings, game, map, glossary, character, bye.
+// Переключает экран: menu, characters, create, settings, game, map, glossary, character, bunker, shop, bye.
 // Уход из меню записывается в историю, чтобы кнопка «Назад» на телефоне возвращала в меню.
 function showScreen(id, push = true) {
   hideTip();

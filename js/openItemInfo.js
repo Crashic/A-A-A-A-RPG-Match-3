@@ -1,11 +1,14 @@
 // Окно предмета: название цветом редкости, редкость, база и слот, уровень и требование, свойства,
-// шутка, сравнение с надетым и цена у торговца. where — { bag: номер в сумке } или { gear: ключ слота }.
-// Кнопки: из сумки — «Выбросить» (с подтверждением) и «Надеть»; надетое — «Снять».
+// шутка, сравнение с надетым и цена. where — { bag: номер в сумке } (у торговца — { bag, sell: true }),
+// { gear: ключ слота } или { shop: номер на прилавке }.
+// Кнопки: из сумки — «Выбросить» (с подтверждением) и «Надеть»; у торговца — «Продать» и «Надеть»;
+// надетое — «Снять»; с прилавка — «Купить».
 function openItemInfo(where) {
   const hero = loadSlot(getActiveSlot());
   if (!hero) return;
   const inBag = where.bag !== undefined;
-  const item = inBag ? (hero.bag || [])[where.bag] : (hero.gear || {})[where.gear];
+  const inShop = where.shop !== undefined;
+  const item = inShop ? ((hero.shop || {}).items || [])[where.shop] : inBag ? (hero.bag || [])[where.bag] : (hero.gear || {})[where.gear];
   if (!item) return;
   const base = findById(ITEM_BASES, item.base) || {};
   const rar = findById(ITEM_RARITIES, item.rarity) || ITEM_RARITIES[0];
@@ -30,7 +33,7 @@ function openItemInfo(where) {
   body.appendChild(mods);
   p(uniq ? uniq.lore : base.lore || '', 'itLore');
   // сравнение с тем, что сейчас в этом слоте
-  if (inBag) {
+  if (inBag || inShop) {
     const key = gearSlotFor(hero, item);
     const worn = key && hero.gear && hero.gear[key];
     if (worn) {
@@ -48,7 +51,7 @@ function openItemInfo(where) {
     }
   }
   const price = p('', 'itPrice');
-  price.innerHTML = '<span>Цена у торговца</span>' + formatTape(itemPrice(item));
+  price.innerHTML = '<span>' + (inShop ? 'Цена' : 'Цена у торговца') + '</span>' + formatTape(inShop ? buyPrice(item) : itemPrice(item));
   // кнопки
   const btns = document.getElementById('itemInfoButtons');
   btns.innerHTML = '';
@@ -63,12 +66,19 @@ function openItemInfo(where) {
     btns.appendChild(b);
   };
   const locked = statsLocked();
-  if (inBag) {
+  if (inShop) {
+    const cost = buyPrice(item);
+    btn((hero.tape || 0) < cost ? 'Не хватает изоленты' : 'Купить', 'orange', () => { if (buyItem(where.shop)) close(); },
+      (hero.tape || 0) < cost || (hero.bag || []).length >= BACKPACK_SLOTS);
+  } else if (inBag && where.sell) {
+    btn('Продать', 'orange', () => { close(); sellItem(where.bag); });
+    btn(hero.level < item.req ? 'Нужен ' + item.req + ' ур.' : 'Надеть', 'green', () => { if (equipItem(where.bag)) close(); }, locked || hero.level < item.req);
+  } else if (inBag) {
     btn('Выбросить', 'red', () => showConfirm('Выбросить «' + item.name + '»? Вернуть не получится.', 'Выбросить', () => { close(); dropItem(where.bag); }));
     btn(hero.level < item.req ? 'Нужен ' + item.req + ' ур.' : 'Надеть', 'green', () => { if (equipItem(where.bag)) close(); }, locked || hero.level < item.req);
   } else {
     btn('Снять', 'stone', () => { if (unequipItem(where.gear)) close(); }, locked);
   }
-  if (locked) p('В бою снаряжение не меняется (кроме режима читов).', 'itReq');
+  if (locked && !inShop) p('В бою снаряжение не меняется (кроме режима читов).', 'itReq');
   box.classList.add('open');
 }

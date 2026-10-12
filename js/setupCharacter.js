@@ -7,6 +7,10 @@ function setupCharacter() {
   on('btnBattleMenu', () => toggleBattleMenu());
   // меню на карте (справа, вертикально)
   on('mapChar', openCharacter);
+  document.getElementById('mapBunker').innerHTML = BUNKER_ICON;
+  document.getElementById('mapShop').innerHTML = SHOP_ICON;
+  on('mapBunker', openBunker);
+  on('mapShop', openShop);
   on('mapGlossary', () => openGlossary());
   on('mapLegend', openGemLegend);
   on('mapHome', goHome);
