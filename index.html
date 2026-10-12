@@ -177,6 +177,14 @@
         </svg>
         <span>Читер</span>
       </button>
+      <button id="btnSurrender" class="menuItem" type="button">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M8 4 L8 29" stroke="var(--ui-metal)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M9.5 5 Q15 3 19 6 Q23 9 27 7 L27 18 Q23 20 19 17 Q15 14 9.5 16 Z" fill="var(--gem-pearl)"/>
+          <path d="M9.5 13 Q15 11 19 14 Q23 17 27 15 L27 18 Q23 20 19 17 Q15 14 9.5 16 Z" fill="var(--gem-pearl-dark)"/>
+        </svg>
+        <span>Сдаться</span>
+      </button>
       <button id="gameToMenu" class="menuItem" type="button" data-back>
         <svg viewBox="0 0 32 32" aria-hidden="true">
           <path d="M4 15 L16 5 L28 15 L25 15 L25 27 L7 27 L7 15 Z" fill="var(--ui-parchment)" stroke="var(--ui-outline)" stroke-width="2" stroke-linejoin="round"/>
@@ -200,47 +208,6 @@
       <div id="zoneInfo"></div>
       <div id="enemyList"></div>
     </div>
-    <!-- Меню карты: те же пункты, что в меню боя, — вертикальным списком иконок -->
-    <nav class="mapMenu">
-      <button id="mapBunker" class="btn stone square" type="button" aria-label="Бункер" data-tip="Бункер: торговец и задания"></button>
-      <button id="mapShop" class="btn stone square" type="button" aria-label="Торговец" data-tip="Торговец"></button>
-      <button id="mapQuests" class="btn stone square" type="button" aria-label="Задания" data-tip="Доска объявлений: задания"></button>
-      <button id="mapChar" class="btn stone square" type="button" aria-label="Персонаж" data-tip="Персонаж">
-        <svg viewBox="0 0 32 32" aria-hidden="true">
-          <circle cx="16" cy="9" r="5" fill="var(--ui-parchment)" stroke="var(--ui-outline)" stroke-width="2"/>
-          <path d="M6 28 Q6 16 16 16 Q26 16 26 28 Z" fill="var(--ui-parchment)" stroke="var(--ui-outline)" stroke-width="2" stroke-linejoin="round"/>
-          <path d="M12 20 L16 24 L20 20" fill="none" stroke="var(--gem-topaz-dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <button id="mapGlossary" class="btn stone square" type="button" aria-label="Глоссарий" data-tip="Глоссарий">
-        <svg viewBox="0 0 32 32" aria-hidden="true">
-          <path d="M5 6 Q10 4 16 7 Q22 4 27 6 L27 26 Q22 24 16 27 Q10 24 5 26 Z" fill="var(--ui-parchment)" stroke="var(--ui-outline)" stroke-width="2" stroke-linejoin="round"/>
-          <path d="M16 7 L16 27" stroke="var(--ui-outline)" stroke-width="2"/>
-          <path d="M8 11 Q11 10 13 11 M8 15 Q11 14 13 15 M19 11 Q21 10 24 11 M19 15 Q21 14 24 15 M19 19 Q21 18 24 19" fill="none" stroke="var(--gem-topaz-dark)" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-      </button>
-      <button id="mapLegend" class="btn stone square" type="button" aria-label="Фишки" data-tip="Фишки: что даёт каждая">
-        <svg viewBox="0 0 32 32" aria-hidden="true">
-          <rect x="3" y="3" width="26" height="26" rx="8" fill="var(--gem-amethyst)"/>
-          <rect x="4.5" y="4.5" width="23" height="23" rx="7" fill="none" stroke="var(--gem-amethyst-light)" stroke-width="1" opacity=".7"/>
-          <path d="M11.5 12.5 Q11.5 7.5 16 7.5 Q20.5 7.5 20.5 11.5 Q20.5 14.5 17.5 15.5 Q16 16.2 16 18.5" fill="none" stroke="var(--text-primary)" stroke-width="3" stroke-linecap="round"/>
-          <circle cx="16" cy="23.5" r="2" fill="var(--text-primary)"/>
-        </svg>
-      </button>
-      <button id="mapCheat" class="btn stone square" type="button" aria-label="Читер" data-tip="Читер">
-        <svg viewBox="0 0 32 32" aria-hidden="true">
-          <rect x="4" y="4" width="24" height="24" rx="7" fill="var(--gem-amethyst)"/>
-          <path d="M18 5 L9 18 L15 18 L13 27 L23 13 L17 13 Z" fill="var(--gem-topaz)" stroke="var(--ui-outline)" stroke-width="1.5" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <button id="mapHome" class="btn stone square" type="button" aria-label="В главное меню" data-tip="В главное меню">
-        <svg viewBox="0 0 32 32" aria-hidden="true">
-          <path d="M4 15 L16 5 L28 15 L25 15 L25 27 L7 27 L7 15 Z" fill="var(--ui-parchment)" stroke="var(--ui-outline)" stroke-width="2" stroke-linejoin="round"/>
-          <path d="M13 27 L13 19 L19 19 L19 27" fill="var(--gem-topaz-dark)" stroke="var(--ui-outline)" stroke-width="2" stroke-linejoin="round"/>
-          <path d="M8 13.5 L16 7 L24 13.5" fill="none" stroke="var(--ui-danger)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-    </nav>
   </div>
 </section>
 
@@ -594,6 +561,7 @@
 <script src="js/showBattleResult.js"></script>
 <script src="js/closeBattleResult.js"></script>
 <script src="js/finishBattle.js"></script>
+<script src="js/surrender.js"></script>
 <script src="js/startBattle.js"></script>
 <script src="js/renderMap.js"></script>
 <script src="js/chooseEnemy.js"></script>
@@ -680,6 +648,7 @@
 <script src="js/equipItem.js"></script>
 <script src="js/unequipItem.js"></script>
 <script src="js/dropItem.js"></script>
+<script src="js/itemTipText.js"></script>
 <script src="js/itemSlot.js"></script>
 <script src="js/openItemInfo.js"></script>
 <script src="js/tapeText.js"></script>
@@ -714,6 +683,10 @@
 <script src="js/questCard.js"></script>
 <script src="js/renderQuests.js"></script>
 <script src="js/openQuests.js"></script>
+<script src="js/mapIcon.js"></script>
+<script src="js/sideMenu.js"></script>
+<script src="js/sideMenuAction.js"></script>
+<script src="js/setupSideMenus.js"></script>
 <script src="js/cheatGiveItem.js"></script>
 <script src="js/slotIcon.js"></script>
 <script src="js/emptySlot.js"></script>

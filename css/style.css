@@ -1271,8 +1271,6 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .screenHead .createRandom svg { width: 28px; height: 28px; }
 .screenHead .btn.round.back::after { background-size: 20px; }
 /* карта: «назад» — вверху своего столбца иконок справа */
-#map { padding-right: calc(env(safe-area-inset-right, 0px) + 4px); }
-#map .mapMenu { margin-top: 52px; }
 
 /* бой: тоже 4 px от краёв */
 #game { padding-left: calc(env(safe-area-inset-left, 0px) + 4px); padding-right: calc(env(safe-area-inset-right, 0px) + 4px); gap: 8px; }
@@ -1362,7 +1360,6 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .mapMenu { gap: 4px; }
 .mapMenu .btn.square { width: 40px; height: 40px; border-radius: 12px; }
 .mapMenu .btn.square svg { width: 26px; height: 26px; }
-#map .mapMenu { margin-top: 46px; }
 /* Бункер */
 #bunker { max-width: 960px; height: var(--app-h); }
 #bunker .screenHead { margin: 0; }
@@ -1426,3 +1423,14 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 #resultList li.questDone { color: var(--ui-reward); }
 #resultList li.questDone b { font: var(--type-small); font-weight: 600; text-align: right; }
 #resultList li.questDone > span { white-space: nowrap; }
+
+/* Столбец иконок меню под «назад» на игровых экранах (setupSideMenus): 7 кнопок по 38 px — влезает в 360 */
+.screenHead { align-items: center; }
+.sideMenu.mapMenu { gap: 4px; }
+.sideMenu.mapMenu .btn.square { width: 38px; height: 38px; border-radius: 11px; }
+.sideMenu.mapMenu .btn.square svg { width: 24px; height: 24px; }
+.sideMenu .btn.square.current { opacity: 1; filter: none; background: var(--glass-top), var(--ui-ribbon); box-shadow: inset 0 0 0 2px var(--ui-reward); }
+#tip span { white-space: pre-line; }
+/* Меню боя: 8 пунктов (с «Сдаться») — компактнее, чтобы влезть в высоту 360 */
+#battleMenu .menuItem { padding-top: 3px; padding-bottom: 3px; }
+#battleMenu .menuItem svg { width: 26px; height: 26px; }

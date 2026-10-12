@@ -12,7 +12,8 @@ function showBattleResult(r) {
     if (html) li.lastChild.innerHTML = value; else li.lastChild.textContent = value;
     list.appendChild(li);
   };
-  if (!r.won) row(r.enemy + ' победил', 'добыча сохранена', 'lost');
+  if (r.surrendered) row('Вы сдались', 'набранное потеряно', 'lost');
+  else if (!r.won) row(r.enemy + ' победил', 'добыча сохранена', 'lost');
   if (r.won) row('Опыт за врага', '+' + r.killXp);
   row('Опыт с документов', '+' + r.gemXp);
   row('Изолента', formatTape(r.tape), '', true);

@@ -17,6 +17,7 @@ function setupMenu() {
 
   // Бой: карта врагов и окно итогов
   on('btnMap', openMap);
+  on('btnSurrender', surrender);
   on('resultMap', closeBattleResult); // окно итогов показано поверх карты — «Закрыть»
   on('resultAgain', () => { closeBattleResult(); enterGame(true); }); // тот же враг (lastEnemy)
 

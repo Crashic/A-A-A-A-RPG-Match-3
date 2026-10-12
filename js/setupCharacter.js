@@ -5,17 +5,8 @@ function setupCharacter() {
   on('btnCharacter', openCharacter);
   on('btnCharGame', openCharacter);
   on('btnBattleMenu', () => toggleBattleMenu());
-  // меню на карте (справа, вертикально)
-  on('mapChar', openCharacter);
-  document.getElementById('mapBunker').innerHTML = BUNKER_ICON;
-  document.getElementById('mapShop').innerHTML = SHOP_ICON;
-  document.getElementById('mapQuests').innerHTML = BOARD_ICON;
-  on('mapBunker', openBunker);
-  on('mapShop', openShop);
-  on('mapQuests', openQuests);
-  on('mapGlossary', () => openGlossary());
-  on('mapLegend', openGemLegend);
-  on('mapHome', goHome);
+  // столбец иконок меню на игровых экранах (карта, персонаж, глоссарий, бункер, торговец, задания)
+  setupSideMenus();
   // окно «Враг»: касание по панели врага в бою; закрыть — крестик или касание мимо
   document.getElementById('enemyPanel').addEventListener('click', e => { e.stopPropagation(); vibrate(); openEnemyInfo(); });
   const info = document.getElementById('enemyInfo');

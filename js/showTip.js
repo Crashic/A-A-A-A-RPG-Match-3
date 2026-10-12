@@ -5,6 +5,7 @@ function showTip(target, title, text) {
   const tip = document.getElementById('tip');
   tip.innerHTML = '<b></b><span></span>';
   tip.firstChild.textContent = title;
+  tip.firstChild.style.color = ''; // цвет заголовка по умолчанию (предметы перекрашивают)
   tip.firstChild.hidden = !title;
   tip.lastChild.textContent = text;
   tip.hidden = false;

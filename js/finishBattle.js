@@ -1,11 +1,11 @@
-// Конец боя. Опыт и изолента, собранные с фишек, остаются и при поражении.
+// Конец боя (surrendered — герой сдался: набранное в бою уже обнулено в surrender). Опыт и изолента, собранные с фишек, остаются и при поражении.
 // Победа добавляет опыт за врага (WoW) и добычу (rollDrops → сумка). Уровни, сохранение; затем — карта врагов и окно итогов поверх неё.
-function finishBattle(won) {
+function finishBattle(won, surrendered = false) {
   clearHint();
   clearBattle(battle.slot);
   const save = battle.save;
   const e = battle.enemyInfo;
-  const result = { won, enemy: e.name, killXp: 0, gemXp: 0, tape: 0, levelUps: 0, level: save.level };
+  const result = { won, surrendered, enemy: e.name, killXp: 0, gemXp: 0, tape: 0, levelUps: 0, level: save.level };
   result.killXp = won ? mobXp(save.level, e.level, e.elite) : 0;
   result.gemXp = save.level >= MAX_LEVEL ? 0 : battle.gained.xp;
   result.tape = battle.gained.tape;

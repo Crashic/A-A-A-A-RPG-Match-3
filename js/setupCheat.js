@@ -2,7 +2,7 @@
 function setupCheat() {
   const box = document.getElementById('cheat');
   const close = () => { box.classList.remove('open'); renderMenu(); };
-  for (const id of ['btnCheat', 'btnCheatGame', 'mapCheat']) // главное меню, меню боя, карта
+  for (const id of ['btnCheat', 'btnCheatGame']) // главное меню, меню боя (на экранах — столбец меню, sideMenuAction)
     document.getElementById(id).addEventListener('click', e => { e.stopPropagation(); vibrate(); closeBattleMenu(); openCheat(); });
   document.getElementById('cheatClose').addEventListener('click', e => { e.stopPropagation(); vibrate(); close(); });
   box.addEventListener('click', e => { if (e.target === box) close(); });
