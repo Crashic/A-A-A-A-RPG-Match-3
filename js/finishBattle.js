@@ -1,5 +1,5 @@
 // Конец боя. Опыт и изолента, собранные с фишек, остаются и при поражении.
-// Победа добавляет опыт за врага (WoW). Уровни, сохранение; затем — карта врагов и окно итогов поверх неё.
+// Победа добавляет опыт за врага (WoW) и добычу (rollDrops → сумка). Уровни, сохранение; затем — карта врагов и окно итогов поверх неё.
 function finishBattle(won) {
   clearHint();
   clearBattle(battle.slot);
@@ -11,6 +11,9 @@ function finishBattle(won) {
   result.tape = battle.gained.tape;
   save.tape = (save.tape || 0) + result.tape;
   if (battle.skill.notes) save.notes = Math.min(5, (save.notes || 0) + battle.skill.notes); // «Пометка на полях»
+  const fresh = loadSlot(battle.slot); // снаряжение и сумка — как сейчас в ячейке (могли меняться читами)
+  if (fresh) { save.gear = fresh.gear; save.bag = fresh.bag; }
+  if (won) Object.assign(result, addToBag(save, rollDrops(e.level, e.elite))); // { added, lost }
   result.levelUps = grantXp(save, result.killXp + result.gemXp);
   result.level = save.level;
   saveSlot(battle.slot, save);

@@ -16,7 +16,7 @@ function renderCharacter() {
     return d;
   });
   renderCharHead(parts[0], hero);
-  renderDoll(parts[1]);
+  renderDoll(parts[1], hero);
   renderStatBlock(parts[2], hero, readOnly);
   renderCharTabs(parts[3], hero);
   left.scrollTop = scroll;

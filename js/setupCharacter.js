@@ -15,6 +15,10 @@ function setupCharacter() {
   const info = document.getElementById('enemyInfo');
   on('enemyInfoClose', () => info.classList.remove('open'));
   info.addEventListener('click', e => { if (e.target === info) info.classList.remove('open'); });
+  // окно предмета: закрыть — крестик или касание мимо
+  const item = document.getElementById('itemInfo');
+  on('itemInfoClose', () => item.classList.remove('open'));
+  item.addEventListener('click', e => { if (e.target === item) item.classList.remove('open'); });
   // пункты меню боя закрывают меню (их действия привязаны в setupMenu и setupGlossary)
   document.querySelectorAll('#battleMenu .menuItem').forEach(b => b.addEventListener('click', () => closeBattleMenu()));
   document.addEventListener('click', e => {

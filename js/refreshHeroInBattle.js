@@ -10,7 +10,7 @@ function refreshHeroInBattle() {
   f.shield = Math.min(f.maxShield, old.shield);
   for (const id of MANA_COLORS) f.mana[id] = Math.min(f.manaMax, old.mana[id] || 0);
   battle.hero = f;
-  battle.save = Object.assign(battle.save, { level: save.level, xp: save.xp, points: save.points, cheat: save.cheat, tape: save.tape });
+  battle.save = Object.assign(battle.save, { level: save.level, xp: save.xp, points: save.points, cheat: save.cheat, tape: save.tape, gear: save.gear, bag: save.bag });
   renderBattle();
   saveBattle();
 }

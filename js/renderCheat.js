@@ -1,5 +1,5 @@
 // Окно «Читер»: переключатель «Активировать читы» (settings.cheatsOn), уровень, изолента (синяя, чёрная, белая) и прибавка к пяти характеристикам
-// текущего героя — каждая строка с кнопками −10, −1, +1, +10.
+// текущего героя — каждая строка с кнопками −10, −1, +1, +10; внизу — «Выдать предмет» по редкостям.
 function renderCheat() {
   const body = document.getElementById('cheatBody');
   const hero = loadSlot(getActiveSlot());
@@ -45,4 +45,18 @@ function renderCheat() {
     }));
     body.appendChild(row);
   }
+  // выдать случайный предмет уровня героя нужной редкости
+  const give = document.createElement('div');
+  give.className = 'cheatRow cheatItems';
+  give.innerHTML = '<span class="cheatIcon"></span><span class="cheatLabel">Выдать предмет</span>';
+  for (const r of ITEM_RARITIES) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'btn stone cheatBtn';
+    b.textContent = r.name;
+    b.style.color = r.color;
+    b.addEventListener('click', e => { e.stopPropagation(); cheatGiveItem(r.id); });
+    give.appendChild(b);
+  }
+  body.appendChild(give);
 }

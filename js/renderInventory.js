@@ -1,5 +1,5 @@
 // Инвентарь в правой колонке «Персонажа»: сверху слот для сумки и «+» (шуточная «оплата» — openPayJoke),
-// ниже — ячейки инвентаря (BACKPACK_SLOTS), внизу — изолента героя. Предметов пока нет.
+// ниже — ячейки инвентаря (BACKPACK_SLOTS) с вещами из hero.bag (по касанию — окно предмета), внизу — изолента героя.
 function renderInventory(box) {
   box.innerHTML = '<p class="invTitle">Инвентарь</p>';
   const bags = document.createElement('div');
@@ -15,11 +15,13 @@ function renderInventory(box) {
   bags.appendChild(plus);
   const grid = document.createElement('div');
   grid.className = 'invGrid';
-  for (let i = 0; i < BACKPACK_SLOTS; i++) grid.appendChild(emptySlot('cell', ''));
+  const hero = loadSlot(getActiveSlot());
+  const bag = (hero && hero.bag) || [];
+  for (let i = 0; i < BACKPACK_SLOTS; i++)
+    grid.appendChild(bag[i] ? itemSlot(bag[i], 'cell', () => openItemInfo({ bag: i })) : emptySlot('cell', ''));
   // внизу — сколько изоленты у героя
   const money = document.createElement('div');
   money.className = 'invTape';
-  const hero = loadSlot(getActiveSlot());
   money.innerHTML = '<span>Изолента</span>' + formatTape(hero ? hero.tape : 0);
   box.append(bags, grid, money);
 }
