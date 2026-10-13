@@ -5,8 +5,8 @@ function abandonQuest(index, onDone) {
   const q = hero && hero.quests && hero.quests.active[index];
   if (!q) return;
   const lock = q.cat === 'errand' || q.cat === 'daily';
-  showConfirm('Отказаться от задания «' + q.title + '»? Прогресс пропадёт.' +
-    (lock ? ' Заказчик обидится: слот будет закрыт на ' + QUEST_ABANDON_LOCK_MIN + ' минут.' : ''), 'Отказаться', () => {
+  showConfirm(tr("ui.Отказаться от задания «") + q.title + tr("ui.»? Прогресс пропадёт.") +
+    (lock ? tr("ui. Заказчик обидится: слот будет закрыт на ") + QUEST_ABANDON_LOCK_MIN + tr("ui. минут.") : ''), tr("ui.Отказаться"), () => {
     const h = loadSlot(getActiveSlot());
     h.quests.active.splice(index, 1);
     if (lock) { questLocks(h); h.quests.locks.push({ cat: q.cat, until: Date.now() + QUEST_ABANDON_LOCK_MIN * 60000 }); }

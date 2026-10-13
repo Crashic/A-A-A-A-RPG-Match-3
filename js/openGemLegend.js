@@ -13,6 +13,6 @@ function openGemLegend() {
     list.appendChild(row);
   }
   document.getElementById('gemLegendNote').textContent =
-    'Фишки срабатывают для того, кто ходит. Ряд из ' + EXTRA_TURN_RUN + '+ или ' + EXTRA_TURN_GROUP + '+ вместе (крестом) — ещё ход.';
+    tr("ui.Фишки срабатывают для того, кто ходит. Ряд из ") + EXTRA_TURN_RUN + tr("ui.+ или ") + EXTRA_TURN_GROUP + tr("ui.+ вместе (крестом) — ещё ход.");
   document.getElementById('gemLegend').classList.add('open');
 }

@@ -30,15 +30,15 @@ function renderClassStep() {
     info.querySelector('h3').textContent = cls.name;
     const side = bonus && race.id === 'press' ? findById(FACTIONS, bonus.side) : null;
     const start = startZoneOf(race.id, cls.id);
-    info.querySelector('.sub').textContent = race.name + (race.id === 'press' ? (side ? ' · ' + side.name : ' · нейтральный') : '') +
-      ': ' + (bonus ? bonus.text : 'класс недоступен') + (bonus ? ' · старт: ' + start.name : '');
+    info.querySelector('.sub').textContent = race.name + (race.id === 'press' ? (side ? ' · ' + side.name : tr("ui. · нейтральный")) : '') +
+      ': ' + (bonus ? bonus.text : tr("ui.класс недоступен")) + (bonus ? tr("ui. · старт: ") + start.name : '');
     info.querySelectorAll('p')[1].textContent = cls.description;
     if (bonus) { // характеристики класса с названиями расы; свободные очки — после создания
       const row = document.createElement('div');
       row.className = 'statChips createStats';
       renderStatChips(row, { raceId: race.id, classId: cls.id, level: 1 });
       const note = document.createElement('small');
-      note.textContent = '+' + STAT_POINTS_PER_LEVEL + ' очков за каждый уровень со 2-го';
+      note.textContent = '+' + STAT_POINTS_PER_LEVEL + tr("ui. очков за каждый уровень со 2-го");
       row.appendChild(note);
       info.appendChild(row);
     }
@@ -48,7 +48,7 @@ function renderClassStep() {
       p.className = 'skill';
       p.innerHTML = '<b></b> <i></i><br><span></span><br><em></em>';
       p.querySelector('b').textContent = sk.name;
-      p.querySelector('i').textContent = sk.type === 'active' ? '· активный, ' + skillCostText(sk) : '· пассивный';
+      p.querySelector('i').textContent = sk.type === 'active' ? tr("ui.· активный, ") + skillCostText(sk) : tr("ui.· пассивный");
       if (sk.classSkill) { // боевой навык класса: значок маны перед названием
         p.classList.add('combat');
         p.querySelector('b').insertAdjacentHTML('beforebegin', gemMiniIcon(Object.keys(sk.cost)[0]));
@@ -60,7 +60,7 @@ function renderClassStep() {
     if (!bonus) {
       const p = document.createElement('p');
       p.className = 'skill';
-      p.textContent = 'Навыки появятся у расы, которой доступен этот класс.';
+      p.textContent = tr("ui.Навыки появятся у расы, которой доступен этот класс.");
       info.appendChild(p);
     }
   }
@@ -74,7 +74,7 @@ function renderClassStep() {
   input.id = 'heroName';
   input.className = 'textInput';
   input.maxLength = NAME_MAX_LENGTH;
-  input.placeholder = 'Имя выжившего';
+  input.placeholder = tr("ui.Имя выжившего");
   input.autocomplete = 'off';
   input.value = d.name;
   if (useGameKeyboard()) {
@@ -98,7 +98,7 @@ function renderClassStep() {
   create.type = 'button';
   create.id = 'createHero';
   create.className = 'btn green';
-  create.textContent = 'Создать персонажа';
+  create.textContent = tr("ui.Создать персонажа");
   create.addEventListener('click', () => {
     if (!canCreateHero(d).ok) return;
     vibrate();

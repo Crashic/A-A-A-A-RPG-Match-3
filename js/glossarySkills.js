@@ -2,7 +2,7 @@
 // Боевые навыки классов (js/classSkills.js) — в начале раздела, по одному на класс.
 // Адаптированные классы Прессы берут навыки расы-источника (PRESS_SKILL_SOURCE).
 function glossarySkills() {
-  const out = [glossaryHeading('Боевые навыки классов')];
+  const out = [glossaryHeading(tr("ui.Боевые навыки классов"))];
   for (const cls of CLASSES) {
     const s = CLASS_SKILLS[cls.id];
     if (s) out.push(glossaryEntry(gemMiniIcon(Object.keys(s.cost)[0]), s.name,
@@ -16,10 +16,10 @@ function glossarySkills() {
       const from = race.id === 'press' && PRESS_SKILL_SOURCE[classId] ? findById(RACES, PRESS_SKILL_SOURCE[classId]) : null;
       for (const s of skills.filter(s => !s.classSkill)) { // боевые навыки классов — в «Классах»
         const type = s.type === 'active'
-          ? 'Активный · ' + skillCostText(s) + (s.once ? ' · раз за бой' : '')
-          : 'Пассивный';
+          ? tr("ui.Активный · ") + skillCostText(s) + (s.once ? tr("ui. · раз за бой") : '')
+          : tr("ui.Пассивный");
         out.push(glossaryEntry(iconTile(cls.icon, cls.color), s.name,
-          cls.name + (from ? ' (навыки: ' + from.name + ')' : '') + ' · ' + type, [s.text, ['lore', s.lore]]));
+          cls.name + (from ? tr("ui. (навыки: ") + from.name + ')' : '') + ' · ' + type, [s.text, ['lore', s.lore]]));
       }
     }
   }

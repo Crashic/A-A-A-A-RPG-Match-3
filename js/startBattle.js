@@ -27,11 +27,11 @@ async function startBattle(enemyId, saved = null) {
   if (!saved) skillBattleStart(); // стартовые навыки: мана, пометки
   const current = battle;
   if (!saved) warnBagFull(save); // сумка полна — добыча упадёт и её разворуют
-  if (!saved) { logBattle('sys', 'Бой: ' + e.name + ', ур. ' + e.level + (e.elite ? ' · элита' : '')); battle.turn = rollFirstTurn(); }
+  if (!saved) { logBattle('sys', tr("ui.Бой: ") + e.name + tr("ui., ур. ") + e.level + (e.elite ? tr("ui. · элита") : '')); battle.turn = rollFirstTurn(); }
   renderBattle();
   renderBattleLog();
   // новый бой — монетка: мечи (ходите вы) или щит (ходит враг)
-  const flip = saved ? null : showCoinFlip(battle.turn, battle.turn === 'hero' ? 'Вы ходите первым!' : e.name + ' ходит первым');
+  const flip = saved ? null : showCoinFlip(battle.turn, battle.turn === 'hero' ? tr("ui.Вы ходите первым!") : e.name + tr("ui. ходит первым"));
   await startMatch3(saved ? saved.grid : null);
   if (flip) await flip;
   if (battle !== current) return;

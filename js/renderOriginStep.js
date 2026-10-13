@@ -26,7 +26,7 @@ function renderOriginStep() {
   const race = findById(RACES, d.raceId);
   const faction = findById(FACTIONS, d.factionId);
   if (!faction) {
-    right.innerHTML = '<p class="hint">Выберите фракцию или расу. Пресса — отдельная нейтральная фракция посередине.</p>';
+    right.innerHTML = tr("ui.<p class=\"hint\">Выберите фракцию или расу. Пресса — отдельная нейтральная фракция посередине.</p>");
     return;
   }
   const info = document.createElement('div');
@@ -41,32 +41,32 @@ function renderOriginStep() {
   add('p', race && race.id !== 'press' ? faction.name : faction.alias, 'sub');
   if (race) {
     if (race.id === 'press') {
-      add('p', 'Начинает игру по фракции класса: Совет — «Учёт и Ржавчина», Союз — «Ветер и Торговля», Хронист — «Учёт и Ржавчина»', 'start');
+      add('p', tr("ui.Начинает игру по фракции класса: Совет — «Учёт и Ржавчина», Союз — «Ветер и Торговля», Хронист — «Учёт и Ржавчина»"), 'start');
     } else {
       const start = startZoneOf(race.id);
-      add('p', 'Начинает игру: ' + start.name + ' (ур. ' + start.min + '–' + start.max + ')', 'start');
+      add('p', tr("ui.Начинает игру: ") + start.name + tr("ui. (ур. ") + start.min + '–' + start.max + ')', 'start');
     }
     add('p', race.note, 'note');
   }
   add('p', faction.motto, 'motto');
   add('p', faction.description);
   const own = ZONES.filter(z => z.factionId === faction.id).map(z => z.name);
-  add('p', own.length ? 'Локации: ' + own.join(', ') + ' и нейтральные'
-    : 'Локации: фракции своего класса и нейтральные (Хронист — все)', 'sub');
+  add('p', own.length ? tr("ui.Локации: ") + own.join(', ') + tr("ui. и нейтральные")
+    : tr("ui.Локации: фракции своего класса и нейтральные (Хронист — все)"), 'sub');
   right.appendChild(info);
 
   // «Доступные классы» фракции: доступные выбранной расе — цветные, остальные — чёрно-белые
   const allowed = race ? raceClasses(race.id) : null;
   const block = document.createElement('div');
   block.className = 'classBlock';
-  block.innerHTML = '<p class="classTitle">Доступные классы</p><div class="classRow"></div>';
+  block.innerHTML = tr("ui.<p class=\"classTitle\">Доступные классы</p><div class=\"classRow\"></div>");
   const row = block.lastChild;
   const mini = c => {
     const tile = document.createElement('span');
     tile.className = 'mini' + (allowed && !allowed[c.id] ? ' dim' : '');
     tile.dataset.tip = c.name;
     tile.innerHTML = iconTile(c.icon, c.color) + '<small></small>';
-    tile.querySelector('small').textContent = c.name.replace('‑Репортёр', '');
+    tile.querySelector('small').textContent = c.name.replace(tr("ui.‑Репортёр"), '');
     return tile;
   };
   // у Прессы — две колонки по фракциям классов, Хронист посередине
@@ -77,7 +77,7 @@ function renderOriginStep() {
   const next = document.createElement('button');
   next.type = 'button';
   next.className = 'btn green';
-  next.textContent = race ? 'Выбрать класс' : 'Выберите расу';
+  next.textContent = race ? tr("ui.Выбрать класс") : tr("ui.Выберите расу");
   next.disabled = !race;
   next.addEventListener('click', () => { vibrate(); openClassStep(); });
   right.appendChild(next);

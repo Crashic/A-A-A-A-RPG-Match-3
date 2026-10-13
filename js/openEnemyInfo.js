@@ -10,7 +10,7 @@ function openEnemyInfo() {
   const body = document.getElementById('enemyInfoBody');
   body.innerHTML = '';
   const p = (text, cls) => { const el = document.createElement('p'); if (cls) el.className = cls; el.textContent = text; body.appendChild(el); return el; };
-  p('Ур. ' + e.level + (e.elite ? ' · Элита' : '') + ' · ' + zone.name, 'eiSub');
+  p(tr("ui.Ур. ") + e.level + (e.elite ? tr("ui. · Элита") : '') + ' · ' + zone.name, 'eiSub');
   const hp = document.createElement('div');
   hp.className = 'statRow';
   hp.innerHTML = heartIcon() + '<div class="bar hp"><i></i><span></span></div>';
@@ -18,17 +18,17 @@ function openEnemyInfo() {
   body.appendChild(hp);
   p(e.description, 'eiLore');
   if (f.stats) {
-    const head = p('Характеристики', 'eiHead');
+    const head = p(tr("ui.Характеристики"), 'eiHead');
     head.dataset.x = '';
     const grid = document.createElement('div');
     grid.className = 'eiStats';
     for (const s of STATS) grid.appendChild(statChip(null, s.id, f.stats[s.id]));
     body.appendChild(grid);
-    p('Атака ' + f.attack + ' · Крит ' + (f.critPct || 0).toFixed(1).replace('.', ',') + ' % · Щит до ' + f.maxShield + ' · Мана до ' + (f.manaMax || MANA_MAX) + ' · Наглость ' + (f.ini || 0), 'eiDerived');
+    p(tr("ui.Атака ") + f.attack + tr("ui. · Крит ") + (f.critPct || 0).toFixed(1).replace('.', ',') + tr("ui. % · Щит до ") + f.maxShield + tr("ui. · Мана до ") + (f.manaMax || MANA_MAX) + tr("ui. · Наглость ") + (f.ini || 0), 'eiDerived');
   }
-  p('Навыки', 'eiHead');
+  p(tr("ui.Навыки"), 'eiHead');
   const skill = ENEMY_SKILLS[e.id];
-  if (skill) p('«' + skill.name + '» — активный, ' + skillCostText(skill) + ': ' + skill.text + ' ' + skill.lore, 'eiSkill');
-  if (e.skill) p('«' + e.skill + '» — пассивный: ' + e.short + ' (в бою пока не работает)', 'eiSkill');
+  if (skill) p('«' + skill.name + tr("ui.» — активный, ") + skillCostText(skill) + ': ' + skill.text + ' ' + skill.lore, 'eiSkill');
+  if (e.skill) p('«' + e.skill + tr("ui.» — пассивный: ") + e.short + tr("ui. (в бою пока не работает)"), 'eiSkill');
   document.getElementById('enemyInfo').classList.add('open');
 }

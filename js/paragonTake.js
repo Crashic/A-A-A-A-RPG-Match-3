@@ -8,6 +8,6 @@ function paragonTake(id) {
   acc.paragon.ranks[id] = (acc.paragon.ranks[id] || 0) + 1;
   saveAccount(acc);
   vibrate([20, 30, 20]);
-  showToast('Компенсация № ' + node.no + ' оформлена');
+  showToast(tr("ui.Компенсация № ") + node.no + tr("ui. оформлена"));
   renderParagon();
 }

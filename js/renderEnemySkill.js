@@ -20,8 +20,8 @@ function renderEnemySkill() {
     card.className = 'enemyActive skillBtn2' + (ready ? ' ready' : '');
     card.innerHTML = '<span class="skCost">' + gemMiniIcon(gem) + '<i>' + skill.cost[gem] + '</i></span><span class="skText"><b></b><small></small></span>';
     card.querySelector('b').textContent = skill.name;
-    card.querySelector('small').textContent = wait ? 'Перезарядка: ещё ' + wait + ' ' + plural(wait, 'ход', 'хода', 'ходов') : skill.text;
-    attachTip(card, skill.name + ' · активный', skill.text + ' ' + skill.lore);
+    card.querySelector('small').textContent = wait ? tr("ui.Перезарядка: ещё ") + wait + ' ' + plural(wait, tr("ui.ход"), tr("ui.хода"), tr("ui.ходов")) : skill.text;
+    attachTip(card, skill.name + tr("ui. · активный"), skill.text + ' ' + skill.lore);
     row.appendChild(card);
   }
   box.appendChild(row);

@@ -5,7 +5,7 @@ function renderShop() {
   const hero = loadSlot(getActiveSlot());
   const left = document.getElementById('shopLeft');
   const right = document.getElementById('shopRight');
-  if (!hero) { left.innerHTML = '<p class="hint">Нет персонажа</p>'; right.innerHTML = ''; return; }
+  if (!hero) { left.innerHTML = tr("ui.<p class=\"hint\">Нет персонажа</p>"); right.innerHTML = ''; return; }
   const stock = (hero.shop && hero.shop.items) || [];
   // завхоз
   left.innerHTML = '<div class="shopHead"><div class="shopFace">' + SHOP_ICON + '</div><div><h3></h3><p class="shopTitle"></p></div></div><p class="shopQuote"></p>';
@@ -31,7 +31,7 @@ function renderShop() {
   // сумки — всегда в продаже (BAG_TYPES), касание — купить
   const bagsTitle = document.createElement('p');
   bagsTitle.className = 'invTitle';
-  bagsTitle.textContent = 'Сумки';
+  bagsTitle.textContent = tr("ui.Сумки");
   const bags = document.createElement('div');
   bags.className = 'shopStock shopBags';
   for (const t of BAG_TYPES.filter(b => b.price > 0)) {
@@ -51,14 +51,14 @@ function renderShop() {
   const foot = document.createElement('div');
   foot.className = 'shopFoot';
   const left2 = Math.max(1, SHOP_REFRESH_WINS - ((hero.wins || 0) - (hero.shop ? hero.shop.wins || 0 : 0)));
-  foot.innerHTML = '<p class="shopNote"></p><button type="button" class="btn stone shopReroll"><span>Завезите новое</span></button>';
-  foot.querySelector('.shopNote').textContent = 'Сам завезёт через ' + left2 + ' ' + (left2 === 1 ? 'победу' : left2 < 5 ? 'победы' : 'побед') + ' или на новом уровне';
+  foot.innerHTML = tr("ui.<p class=\"shopNote\"></p><button type=\"button\" class=\"btn stone shopReroll\"><span>Завезите новое</span></button>");
+  foot.querySelector('.shopNote').textContent = tr("ui.Сам завезёт через ") + left2 + ' ' + (left2 === 1 ? tr("ui.победу") : left2 < 5 ? tr("ui.победы") : tr("ui.побед")) + tr("ui. или на новом уровне");
   const reroll = foot.querySelector('button');
   reroll.insertAdjacentHTML('beforeend', formatTape(rerollPrice(hero)));
   reroll.addEventListener('click', e => { e.stopPropagation(); vibrate(); rerollShop(); });
   left.appendChild(foot);
   // сумка героя
-  right.innerHTML = '<p class="invTitle">Инвентарь</p>';
+  right.innerHTML = tr("ui.<p class=\"invTitle\">Инвентарь</p>");
   const bag = hero.bag || [];
   const bagGrid = document.createElement('div');
   bagGrid.className = 'invGrid';
@@ -67,11 +67,11 @@ function renderShop() {
   const junk = document.createElement('button');
   junk.type = 'button';
   junk.className = 'btn orange shopJunk';
-  junk.textContent = 'Сдать хлам';
-  junk.dataset.tip = 'Продать все обычные вещи';
+  junk.textContent = tr("ui.Сдать хлам");
+  junk.dataset.tip = tr("ui.Продать все обычные вещи");
   junk.addEventListener('click', e => { e.stopPropagation(); vibrate(); sellJunk(); });
   const money = document.createElement('div');
   money.className = 'invTape';
-  money.innerHTML = '<span>Изолента</span>' + formatTape(hero.tape || 0);
+  money.innerHTML = tr("ui.<span>Изолента</span>") + formatTape(hero.tape || 0);
   right.append(bagGrid, junk, money);
 }

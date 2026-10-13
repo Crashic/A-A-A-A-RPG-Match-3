@@ -12,10 +12,10 @@ function openJunkInfo(where) {
   const body = document.getElementById('itemInfoBody');
   body.innerHTML = '';
   const p = (text, cls) => { const el = document.createElement('p'); el.className = cls; el.textContent = text; body.appendChild(el); return el; };
-  p('Хлам · только на продажу', 'itSub');
+  p(tr("ui.Хлам · только на продажу"), 'itSub');
   p(t.lore || '', 'itLore');
   const price = p('', 'itPrice');
-  price.innerHTML = '<span>Цена у торговца</span>' + formatTape(itemPrice(item));
+  price.innerHTML = tr("ui.<span>Цена у торговца</span>") + formatTape(itemPrice(item));
   const btns = document.getElementById('itemInfoButtons');
   btns.innerHTML = '';
   const close = () => box.classList.remove('open');
@@ -27,7 +27,7 @@ function openJunkInfo(where) {
     b.addEventListener('click', e => { e.stopPropagation(); vibrate(); fn(); });
     btns.appendChild(b);
   };
-  btn('Выбросить', 'red', () => { close(); dropItem(where.bag); });
-  btn('Продать', 'orange', () => { close(); sellItem(where.bag); });
+  btn(tr("ui.Выбросить"), 'red', () => { close(); dropItem(where.bag); });
+  btn(tr("ui.Продать"), 'orange', () => { close(); sellItem(where.bag); });
   box.classList.add('open');
 }

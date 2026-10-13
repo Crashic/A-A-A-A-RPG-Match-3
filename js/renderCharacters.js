@@ -16,9 +16,9 @@ function renderCharacters() {
     info.type = 'button';
     info.className = 'slotInfo';
     const title = document.createElement('b');
-    title.textContent = hero ? hero.name : '+ Создать персонажа';
+    title.textContent = hero ? hero.name : tr("ui.+ Создать персонажа");
     const sub = document.createElement('span');
-    sub.textContent = hero ? heroServerText(hero) + ' · Уровень ' + hero.level : countHeroes() + ' / ' + SLOT_COUNT; // только имя и уровень
+    sub.textContent = hero ? heroServerText(hero) + tr("ui. · Уровень ") + hero.level : countHeroes() + ' / ' + SLOT_COUNT; // только имя и уровень
     info.append(title, sub);
     info.addEventListener('click', () => {
       vibrate();
@@ -31,13 +31,13 @@ function renderCharacters() {
       const del = document.createElement('button');
       del.type = 'button';
       del.className = 'btn red round close slotDelete';
-      del.setAttribute('aria-label', 'Удалить персонажа');
+      del.setAttribute('aria-label', tr("ui.Удалить персонажа"));
       del.addEventListener('click', () => {
         vibrate();
-        showConfirm('Удалить персонажа «' + hero.name + '»? Это нельзя отменить.', 'Удалить', () => {
+        showConfirm(tr("ui.Удалить персонажа «") + hero.name + tr("ui.»? Это нельзя отменить."), tr("ui.Удалить"), () => {
           deleteSlot(n);
           renderCharacters();
-          showToast('Персонаж удалён');
+          showToast(tr("ui.Персонаж удалён"));
         });
       });
       card.appendChild(del);

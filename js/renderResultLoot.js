@@ -20,9 +20,9 @@ function renderResultLoot(box, res) {
     const s = document.createElement('span');
     s.className = 'resultRes';
     s.dataset.tipTitle = r.name;
-    s.dataset.tip = 'Ресурс — уже в лагере.';
+    s.dataset.tip = tr("ui.Ресурс — уже в лагере.");
     s.innerHTML = resourceIcon(id) + '<b>×' + res[id] + '</b>';
     box.appendChild(s);
   }
-  if (!box.children.length) box.innerHTML = '<small>всё разобрали</small>';
+  if (!box.children.length) box.innerHTML = tr("ui.<small>всё разобрали</small>");
 }

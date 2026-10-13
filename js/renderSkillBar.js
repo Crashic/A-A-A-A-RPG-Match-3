@@ -25,8 +25,8 @@ function renderSkillBar() {
     if (!cost.children.length) cost.remove();
     b.querySelector('b').textContent = s.name;
     const wait = (battle.skill.cooldowns || {})[s.id];
-    b.querySelector('small').textContent = s.once && battle.skill.used[s.id] ? 'Уже использован в этом бою'
-      : wait ? 'Перезарядка: ещё ' + wait + ' ' + plural(wait, 'ход', 'хода', 'ходов') : s.text;
+    b.querySelector('small').textContent = s.once && battle.skill.used[s.id] ? tr("ui.Уже использован в этом бою")
+      : wait ? tr("ui.Перезарядка: ещё ") + wait + ' ' + plural(wait, tr("ui.ход"), tr("ui.хода"), tr("ui.ходов")) : s.text;
     b.addEventListener('click', () => useSkill(s.id));
     buttons.appendChild(b);
   }
@@ -36,8 +36,8 @@ function renderSkillBar() {
     k.className = 'btn red skillBtn killAll';
     k.disabled = !isHeroTurn() || !match3 || match3.busy || battle.over; // поле может ещё не появиться
     k.dataset.tipTitle = 'KILL ALL';
-    k.dataset.tip = 'Чит: мгновенно убивает текущего врага.';
-    k.innerHTML = '<b>KILL ALL</b><small>чит · ход не нужен</small>';
+    k.dataset.tip = tr("ui.Чит: мгновенно убивает текущего врага.");
+    k.innerHTML = tr("ui.<b>KILL ALL</b><small>чит · ход не нужен</small>");
     k.addEventListener('click', () => killAll());
     buttons.appendChild(k);
   }

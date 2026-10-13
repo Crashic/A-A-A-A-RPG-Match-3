@@ -13,6 +13,6 @@ function skillBattleStart() {
     hero.shield = Math.min(hero.maxShield, hero.shield + notes * hero.shieldPerGem);
     battle.save.notes = 0;
     saveSlot(battle.slot, battle.save);
-    showToast('Пометки на полях: +' + notes * hero.shieldPerGem + ' щита', 2000);
+    showToast(tr("ui.Пометки на полях: +") + notes * hero.shieldPerGem + tr("ui. щита"), 2000);
   }
 }

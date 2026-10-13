@@ -11,7 +11,7 @@ function stashMove(from, index) {
   const dst = from === 'bag' ? stash.items : hero.bag;
   const cap = from === 'bag' ? stashSize(acc) : bagCapacity(hero);
   if (!src[index]) return;
-  if (dst.length >= cap) { showToast(from === 'bag' ? 'Общак забит. Расширьте его («+»).' : 'Сумка полна'); return; }
+  if (dst.length >= cap) { showToast(from === 'bag' ? tr("ui.Общак забит. Расширьте его («+»).") : tr("ui.Сумка полна")); return; }
   dst.push(src.splice(index, 1)[0]);
   saveSlot(slot, hero);
   saveAccount(acc);

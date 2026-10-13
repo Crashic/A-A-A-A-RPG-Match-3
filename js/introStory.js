@@ -5,10 +5,10 @@ function introStory(hero) {
   const cls = findById(CLASSES, hero.classId);
   const source = hero.raceId === 'press' && PRESS_SKILL_SOURCE[hero.classId] ? PRESS_SKILL_SOURCE[hero.classId] : hero.raceId;
   const paragraphs = INTRO_STORIES[source + ':' + hero.classId] ||
-    ['Ещё один выживший вылез из бункера за тушёнкой. Тушёнка, как обычно, против.'];
+    [tr("ui.Ещё один выживший вылез из бункера за тушёнкой. Тушёнка, как обычно, против.")];
   return {
     episode: (race ? race.name : '') + (cls ? ' · ' + cls.name : ''),
-    title: hero.name || 'Выживший',
+    title: hero.name || tr("ui.Выживший"),
     paragraphs
   };
 }

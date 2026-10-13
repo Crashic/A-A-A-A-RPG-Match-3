@@ -4,8 +4,8 @@ function buyItem(index) {
   const item = hero && hero.shop && hero.shop.items[index];
   if (!item) return false;
   const price = buyPrice(item);
-  if ((hero.tape || 0) < price) { showToast('Не хватает изоленты. Семёныч в долг не даёт.'); return false; }
-  if ((hero.bag || []).length >= bagCapacity(hero)) { showToast('Сумка полна'); return false; }
+  if ((hero.tape || 0) < price) { showToast(tr("ui.Не хватает изоленты. Семёныч в долг не даёт.")); return false; }
+  if ((hero.bag || []).length >= bagCapacity(hero)) { showToast(tr("ui.Сумка полна")); return false; }
   hero.tape -= price;
   hero.shop.items.splice(index, 1);
   addToBag(hero, [item]);

@@ -29,10 +29,10 @@ function renderMap() {
   const info = document.getElementById('zoneInfo');
   info.innerHTML = '<p class="zoneTags"></p><p class="zoneDesc"></p>';
   const starters = zone.start.map(id => findById(RACES, id).name);
-  info.firstChild.textContent = (faction ? faction.name : 'Нейтральная — для всех') +
-    (starters.length ? ' · старт: ' + starters.join(', ') : '') + ' · ' + zone.field;
+  info.firstChild.textContent = (faction ? faction.name : tr("ui.Нейтральная — для всех")) +
+    (starters.length ? tr("ui. · старт: ") + starters.join(', ') : '') + ' · ' + zone.field;
   info.lastChild.textContent = open ? zone.description
-    : 'Закрыто: локация фракции «' + faction.name + '». Сюда пускают только своих.';
+    : tr("ui.Закрыто: локация фракции «") + faction.name + tr("ui.». Сюда пускают только своих.");
 
   const list = document.getElementById('enemyList');
   list.innerHTML = '';
@@ -49,9 +49,9 @@ function renderMap() {
     const lvl = b.querySelector('.enemyLvl');
     lvl.textContent = e.level;
     lvl.classList.add('lvl-' + difficultyOf(level, e.level));
-    b.querySelector('b').textContent = e.name + (e.elite ? ' · Элита' : '');
+    b.querySelector('b').textContent = e.name + (e.elite ? tr("ui. · Элита") : '');
     const xp = mobXp(level, e.level, e.elite);
-    b.querySelector('.enemyXp').textContent = xp ? xp + ' опыта' : 'без опыта';
+    b.querySelector('.enemyXp').textContent = xp ? xp + tr("ui. опыта") : tr("ui.без опыта");
     b.addEventListener('click', () => { vibrate(); chooseEnemy(e.id); });
     list.appendChild(b);
   }

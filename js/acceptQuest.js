@@ -7,9 +7,9 @@ function acceptQuest(index, list = 'board') {
   if (!quest) return;
   const max = questLimit(hero, quest.cat);
   if (questSlotsUsed(hero, quest.cat) >= max) {
-    if (questLocks(hero, quest.cat).length) { showToast(QUEST_ABANDON_TEXT + ' Слот откроется через ' + timerText(questLocks(hero, quest.cat)[0].until) + '.', 3000); return; }
+    if (questLocks(hero, quest.cat).length) { showToast(QUEST_ABANDON_TEXT + tr("ui. Слот откроется через ") + timerText(questLocks(hero, quest.cat)[0].until) + '.', 3000); return; }
     const cat = findById(QUEST_CATEGORIES, quest.cat);
-    showToast('Больше ' + max + ' ' + cat.gen + ' не унести. Профсоюз запрещает.');
+    showToast(tr("ui.Больше ") + max + ' ' + cat.gen + tr("ui. не унести. Профсоюз запрещает."));
     return;
   }
   q.active.push(q[list].splice(index, 1)[0]);

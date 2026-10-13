@@ -46,7 +46,7 @@ function setupMenu() {
     tutorialState(hero).off = !e.target.checked;
     saveSlot(slot, hero);
     vibrate();
-    showToast(e.target.checked ? 'Обучение для «' + hero.name + '» включено' : 'Обучение для «' + hero.name + '» выключено');
+    showToast(e.target.checked ? tr("ui.Обучение для «") + hero.name + tr("ui.» включено") : tr("ui.Обучение для «") + hero.name + tr("ui.» выключено"));
   });
   document.querySelector('#tutorial .tutOk').addEventListener('click', e => { e.stopPropagation(); tutorialNext(); });
   document.querySelector('#tutorial .tutHide').addEventListener('click', e => { e.stopPropagation(); tutorialOff(); });
@@ -59,15 +59,15 @@ function setupMenu() {
       saveSettings();
       vibrate();
       if (key === 'fullscreen') setFullscreen(settings.fullscreen);
-      if (key === 'notifications' && settings.notifications) showToast('Оповещения включены');
-      if (key === 'tutorialAll') { showToast(settings.tutorialAll ? 'Обучение включено: увидите то, чего ещё не видели' : 'Обучение выключено для всех'); renderSettings(); }
+      if (key === 'notifications' && settings.notifications) showToast(tr("ui.Оповещения включены"));
+      if (key === 'tutorialAll') { showToast(settings.tutorialAll ? tr("ui.Обучение включено: увидите то, чего ещё не видели") : tr("ui.Обучение выключено для всех")); renderSettings(); }
     });
   }
 
   on('btnResetSaves', () => showConfirm(
-    'Удалить всех персонажей во всех ячейках? Это нельзя отменить.', 'Удалить всё', () => {
+    tr("ui.Удалить всех персонажей во всех ячейках? Это нельзя отменить."), tr("ui.Удалить всё"), () => {
       resetAllSaves();
-      showToast('Все сохранения удалены');
+      showToast(tr("ui.Все сохранения удалены"));
     }));
 
   // Esc на ПК: закрывает окно, иначе возвращает в меню

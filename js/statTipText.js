@@ -2,5 +2,5 @@
 function statTipText(raceId, statId) {
   const n = statName(raceId, statId);
   const stat = findById(STATS, statId);
-  return n.base + '. ' + (n.tip ? n.tip + ' ' : '') + 'В бою: ' + stat.effect + '.';
+  return n.base + '. ' + (n.tip ? n.tip + ' ' : '') + tr("ui.В бою: ") + stat.effect + '.';
 }

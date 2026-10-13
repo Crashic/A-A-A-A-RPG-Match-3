@@ -14,6 +14,6 @@ function chooseEnemy(id) {
   };
   const fromBattle = !!battle;
   if (battle && !battle.over && battle.enemyId === id) { goBack(); return; } // тот же враг — вернуться в бой
-  if (battle && !battle.over) showConfirm('Бросить текущий бой?', 'Бросить', go);
+  if (battle && !battle.over) showConfirm(tr("ui.Бросить текущий бой?"), tr("ui.Бросить"), go);
   else go();
 }

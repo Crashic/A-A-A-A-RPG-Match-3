@@ -6,8 +6,8 @@ const DOLL_SLOTS = {
   right: ['shoulders', 'chest', 'hands', 'legs', 'feet', 'weapon']
 };
 const SLOT_NAMES = {
-  head: 'Голова', shoulders: 'Плечи', amulet: 'Амулет', chest: 'Грудь', belt: 'Пояс', hands: 'Руки',
-  ring: 'Кольцо', legs: 'Ноги', feet: 'Обувь', weapon: 'Оружие', rune: 'Руна', bag: 'Сумка'
+  head: tr("ui.Голова"), shoulders: tr("ui.Плечи"), amulet: tr("ui.Амулет"), chest: tr("ui.Грудь"), belt: tr("ui.Пояс"), hands: tr("ui.Руки"),
+  ring: tr("ui.Кольцо"), legs: tr("ui.Ноги"), feet: tr("ui.Обувь"), weapon: tr("ui.Оружие"), rune: tr("ui.Руна"), bag: tr("ui.Сумка")
 };
 const RUNE_SLOTS = 5;
 // Сумки и гнёзда под них — js/bagConfig.js (место в инвентаре = надетые сумки, bagCapacity).

@@ -8,6 +8,6 @@ function itemWornTip(item) {
   const key = gearSlotFor(hero, item);
   const worn = key && gear[key];
   if (!key) return '';
-  if (!worn) return '— Слот пуст: надевайте смело —';
-  return ['— Надето: ' + worn.name + ' (ур. ' + worn.level + ') —', ...itemMods(worn).map(modText)].join('\n');
+  if (!worn) return tr("ui.— Слот пуст: надевайте смело —");
+  return [tr("ui.— Надето: ") + worn.name + tr("ui. (ур. ") + worn.level + ') —', ...itemMods(worn).map(modText)].join('\n');
 }

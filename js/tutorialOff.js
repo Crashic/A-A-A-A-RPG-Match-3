@@ -9,5 +9,5 @@ function tutorialOff() {
   }
   hideTutorial();
   vibrate();
-  showToast('Обучение скрыто. Включить снова — в Настройках.', 3000);
+  showToast(tr("ui.Обучение скрыто. Включить снова — в Настройках."), 3000);
 }

@@ -15,6 +15,6 @@ function skillAfterHeroHit() {
     if (sk.triggered.shieldBroken || hero.shield > 0) continue;
     sk.triggered.shieldBroken = true;
     hero.shield = Math.min(hero.maxShield, e.gems * hero.shieldPerGem);
-    showFloat('hero', '+' + hero.shield + ' щит', 'shield');
+    showFloat('hero', '+' + hero.shield + tr("ui. щит"), 'shield');
   }
 }

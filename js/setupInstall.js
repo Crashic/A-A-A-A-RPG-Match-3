@@ -9,11 +9,11 @@ function setupInstall() {
     (matchMedia('(display-mode: fullscreen), (display-mode: standalone)').matches && !document.fullscreenElement);
   const update = () => {
     btn.disabled = installed();
-    btn.textContent = installed() ? 'Приложение установлено' : 'Установить приложение';
+    btn.textContent = installed() ? tr("ui.Приложение установлено") : tr("ui.Установить приложение");
   };
   document.addEventListener('fullscreenchange', update);
   window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); installPrompt = e; update(); });
-  window.addEventListener('appinstalled', () => { installPrompt = null; showToast('Готово! Ярлык игры — на главном экране.', 3000); update(); });
+  window.addEventListener('appinstalled', () => { installPrompt = null; showToast(tr("ui.Готово! Ярлык игры — на главном экране."), 3000); update(); });
   btn.addEventListener('click', async e => {
     e.stopPropagation();
     vibrate();
@@ -24,13 +24,13 @@ function setupInstall() {
         installPrompt.prompt();
         const r = await installPrompt.userChoice;
         installPrompt = null;
-        if (r.outcome !== 'accepted') showToast('Ну и ладно. Передумаете — кнопка тут.');
+        if (r.outcome !== 'accepted') showToast(tr("ui.Ну и ладно. Передумаете — кнопка тут."));
         update();
         return;
       } catch (err) { installPrompt = null; } // предложение уже использовано — ниже инструкция
     }
-    showConfirm('Браузер пока не предложил установку. Выйдите из полного экрана, откройте меню браузера (⋮) и выберите «Установить приложение» или «Добавить на главный экран». ' +
-      'Ярлык появится на телефоне, и игра будет запускаться во весь экран, без рамок браузера.', 'Понятно', () => {}, 'green');
+    showConfirm(tr("ui.Браузер пока не предложил установку. Выйдите из полного экрана, откройте меню браузера (⋮) и выберите «Установить приложение» или «Добавить на главный экран». ") +
+      tr("ui.Ярлык появится на телефоне, и игра будет запускаться во весь экран, без рамок браузера."), tr("ui.Понятно"), () => {}, 'green');
   });
   update();
 }

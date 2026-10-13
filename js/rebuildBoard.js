@@ -2,7 +2,7 @@
 // Как в Puzzle Quest, при этом сгорает вся мана у обоих бойцов.
 async function rebuildBoard() {
   const n = BOARD_SIZE;
-  showToast('Ходов нет — новое поле, мана сгорела');
+  showToast(tr("ui.Ходов нет — новое поле, мана сгорела"));
   if (battle) {
     for (const side of ['hero', 'enemy'])
       for (const id of MANA_COLORS) battle[side].mana[id] = 0;

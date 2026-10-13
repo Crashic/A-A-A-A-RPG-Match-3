@@ -2,18 +2,18 @@
 // Всё берётся из файлов данных, поэтому новые фракции, классы, навыки и враги появляются в книге сами.
 // Новый вид данных (предметы, квесты…) — новый раздел здесь и свой файл glossary<Раздел>.js.
 const GLOSSARY_SECTIONS = [
-  { id: 'gems',     name: 'Фишки',          build: glossaryGems },
-  { id: 'battle',   name: 'Бой',            build: glossaryBattle },
-  { id: 'factions', name: 'Фракции',        build: glossaryFactions },
-  { id: 'races',    name: 'Расы',           build: glossaryRaces },
-  { id: 'classes',  name: 'Классы',         build: glossaryClasses },
-  { id: 'stats',    name: 'Характеристики', build: glossaryStats },
-  { id: 'skills',   name: 'Навыки',         build: glossarySkills },
-  { id: 'zones',    name: 'Локации и враги', build: glossaryZones },
-  { id: 'items',    name: 'Предметы',       build: glossaryItems },
-  { id: 'bunker',   name: 'Бункер',         build: glossaryBunker },
-  { id: 'camp',     name: 'Лагерь',         build: glossaryCamp },
-  { id: 'paragon',  name: 'Реестр',         build: glossaryParagon },
-  { id: 'servers',  name: 'Серверы',        build: glossaryServers },
-  { id: 'progress', name: 'Опыт и изолента', build: glossaryProgress }
+  { id: 'gems',     name: tr("ui.Фишки"),          build: glossaryGems },
+  { id: 'battle',   name: tr("ui.Бой"),            build: glossaryBattle },
+  { id: 'factions', name: tr("ui.Фракции"),        build: glossaryFactions },
+  { id: 'races',    name: tr("ui.Расы"),           build: glossaryRaces },
+  { id: 'classes',  name: tr("ui.Классы"),         build: glossaryClasses },
+  { id: 'stats',    name: tr("ui.Характеристики"), build: glossaryStats },
+  { id: 'skills',   name: tr("ui.Навыки"),         build: glossarySkills },
+  { id: 'zones',    name: tr("ui.Локации и враги"), build: glossaryZones },
+  { id: 'items',    name: tr("ui.Предметы"),       build: glossaryItems },
+  { id: 'bunker',   name: tr("ui.Бункер"),         build: glossaryBunker },
+  { id: 'camp',     name: tr("ui.Лагерь"),         build: glossaryCamp },
+  { id: 'paragon',  name: tr("ui.Реестр"),         build: glossaryParagon },
+  { id: 'servers',  name: tr("ui.Серверы"),        build: glossaryServers },
+  { id: 'progress', name: tr("ui.Опыт и изолента"), build: glossaryProgress }
 ];

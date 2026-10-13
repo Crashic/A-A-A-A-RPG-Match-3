@@ -13,7 +13,7 @@ function renderStatBlock(box, hero, readOnly) {
   const head = document.createElement('div');
   head.className = 'statsHead';
   // вкладки: «Характеристики» (очки) и «Подробно» (что они дают в бою)
-  for (const [id, label] of [['base', 'Характеристики'], ['detail', 'Подробно']]) {
+  for (const [id, label] of [['base', tr("ui.Характеристики")], ['detail', tr("ui.Подробно")]]) {
     const t = document.createElement('button');
     t.type = 'button';
     t.className = 'statTab' + (statTab === id ? ' selected' : '');
@@ -28,18 +28,18 @@ function renderStatBlock(box, hero, readOnly) {
   pointsRow.className = 'statsPoints';
   pointsRow.innerHTML = '<span class="freePts"></span>';
   pointsRow.querySelector('.freePts').textContent = statPointsTotal(hero)
-    ? 'Свободно очков: ' + free + ' / ' + statPointsTotal(hero) : 'Очки — со 2-го уровня';
+    ? tr("ui.Свободно очков: ") + free + ' / ' + statPointsTotal(hero) : tr("ui.Очки — со 2-го уровня");
   if (!readOnly) {
     const reset = document.createElement('button');
     reset.type = 'button';
     const spent = free < statPointsTotal(hero);
     reset.className = 'btn round resetStats ' + (spent ? 'orange' : 'stone'); // есть что сбросить — оранжевая
-    reset.setAttribute('aria-label', 'Сбросить очки');
-    reset.dataset.tip = 'Сбросить розданные очки';
+    reset.setAttribute('aria-label', tr("ui.Сбросить очки"));
+    reset.dataset.tip = tr("ui.Сбросить розданные очки");
     reset.innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M24 16 A8 8 0 1 1 16 8 L20 8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>' +
       '<path d="M18 3 L23 8 L18 13" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     reset.disabled = !spent;
-    reset.addEventListener('click', e => { e.stopPropagation(); showConfirm('Сбросить все розданные очки характеристик?', 'Подтвердить', () => resetStats(), 'orange'); });
+    reset.addEventListener('click', e => { e.stopPropagation(); showConfirm(tr("ui.Сбросить все розданные очки характеристик?"), tr("ui.Подтвердить"), () => resetStats(), 'orange'); });
     pointsRow.appendChild(reset);
   }
   box.appendChild(pointsRow);
@@ -48,15 +48,15 @@ function renderStatBlock(box, hero, readOnly) {
     const row = document.createElement('div');
     row.className = 'statRowBig';
     row.innerHTML = iconTile(s.icon, s.color) + '<span class="statLabel"></span>' +
-      (readOnly ? '' : '<button class="btn stone round statBtn" type="button" aria-label="Убрать очко">−</button>') +
+      (readOnly ? '' : tr("ui.<button class=\"btn stone round statBtn\" type=\"button\" aria-label=\"Убрать очко\">−</button>")) +
       '<b class="statVal"></b>' +
-      (readOnly ? '' : '<button class="btn green round statBtn" type="button" aria-label="Добавить очко">+</button>');
+      (readOnly ? '' : tr("ui.<button class=\"btn green round statBtn\" type=\"button\" aria-label=\"Добавить очко\">+</button>"));
     const label = row.querySelector('.statLabel');
     label.textContent = statName(hero.raceId, s.id).name;
     attachTip(label, statName(hero.raceId, s.id).name, statTipText(hero.raceId, s.id));
     const val = row.querySelector('.statVal');
     val.textContent = stats[s.id];
-    val.dataset.tip = 'База класса ' + (base[s.id] || STAT_BASE) + ', ваших очков ' + pts[s.id];
+    val.dataset.tip = tr("ui.База класса ") + (base[s.id] || STAT_BASE) + tr("ui., ваших очков ") + pts[s.id];
     if (!readOnly) {
       const [minus, plus] = row.querySelectorAll('.statBtn');
       minus.disabled = pts[s.id] <= 0;
@@ -70,7 +70,7 @@ function renderStatBlock(box, hero, readOnly) {
   if (readOnly) {
     const note = document.createElement('p');
     note.className = 'statsNote';
-    note.textContent = 'Идёт бой: только просмотр. Очки можно раздать после боя.';
+    note.textContent = tr("ui.Идёт бой: только просмотр. Очки можно раздать после боя.");
     box.appendChild(note);
   }
 }

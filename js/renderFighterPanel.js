@@ -8,17 +8,17 @@ function renderFighterPanel(side) {
   panel.classList.toggle('active', !battle.over && battle.turn === side);
 
   setBar(q('[data-bar="hp"]'), f.hp, f.maxHp);
-  setBar(q('[data-bar="shield"]'), f.shield, f.maxShield, 'Щит ' + f.shield);
+  setBar(q('[data-bar="shield"]'), f.shield, f.maxShield, tr("ui.Щит ") + f.shield);
   for (const id of MANA_COLORS) setBar(q(`[data-bar="${id}"]`), f.mana[id], f.manaMax || MANA_MAX, String(f.mana[id]));
 
   if (side === 'hero') {
     const save = battle.save;
     const cls = findById(CLASSES, save.classId);
-    q('[data-f="info"]').textContent = 'Ур. ' + save.level + (cls ? ' · ' + cls.name : '');
+    q('[data-f="info"]').textContent = tr("ui.Ур. ") + save.level + (cls ? ' · ' + cls.name : '');
   } else {
     const e = battle.enemyInfo;
     const info = q('[data-f="info"]');
-    info.textContent = 'Ур. ' + e.level + (e.elite ? ' · Элита' : '');
+    info.textContent = tr("ui.Ур. ") + e.level + (e.elite ? tr("ui. · Элита") : '');
     info.className = 'lvl-' + difficultyOf(battle.save.level, e.level);
   }
 }

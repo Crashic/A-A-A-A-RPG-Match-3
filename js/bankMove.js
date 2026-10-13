@@ -10,7 +10,7 @@ function bankMove(from, index) {
   const dst = from === 'bag' ? hero.bank.items : hero.bag;
   const cap = from === 'bag' ? bankSize(hero) : bagCapacity(hero);
   if (!src[index]) return;
-  if (dst.length >= cap) { showToast(from === 'bag' ? 'В шкафчике нет места. Купите гнездо у Нины Петровны.' : 'Сумка полна'); return; }
+  if (dst.length >= cap) { showToast(from === 'bag' ? tr("ui.В шкафчике нет места. Купите гнездо у Нины Петровны.") : tr("ui.Сумка полна")); return; }
   dst.push(src.splice(index, 1)[0]);
   saveSlot(slot, hero);
   renderBank();

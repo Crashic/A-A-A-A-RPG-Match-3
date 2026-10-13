@@ -23,15 +23,15 @@ function applyMatchEffects(cells) {
     const kind = GEM_EFFECTS[id].kind;
     if (kind === 'damage') {
       if (isHero && heroTwoHanded(battle.save) && (battle.skill.swingCd || 0) > 0) { // двуручное: замах, удар через ход
-        showFloat(foeSide, 'Замах…', 'shield');
-        logBattle('hero', 'Вы замахиваетесь двуручным — удар в следующий ход');
+        showFloat(foeSide, tr("ui.Замах…"), 'shield');
+        logBattle('hero', tr("ui.Вы замахиваетесь двуручным — удар в следующий ход"));
         continue;
       }
       if (isHero && heroTwoHanded(battle.save)) battle.skill.swingHit = true;
       let amount = Math.round(n * me.attack);
       const c = rollCrit(me, amount); // Ловкость: шанс крита (у героя и врага)
       amount = c.amount;
-      if (c.crit) showFloat(foeSide, 'Крит!', 'damage');
+      if (c.crit) showFloat(foeSide, tr("ui.Крит!"), 'damage');
       if (!isHero) amount = skillReduceHit(amount); // защиты и навыки игрока
       else amount = heroWeakened(amount);           // навык врага ослабил ваши удары
       const hit = dealDamage(foe, amount);
@@ -43,7 +43,7 @@ function applyMatchEffects(cells) {
       const add = Math.min(me.maxShield - me.shield, Math.round(n * me.shieldPerGem));
       me.shield += add;
       gains[id] = add;
-      if (add) showFloat(side, '+' + add + ' щит', 'shield');
+      if (add) showFloat(side, '+' + add + tr("ui. щит"), 'shield');
     } else if (kind === 'heal') {
       const add = Math.min(me.maxHp - me.hp, Math.round(n * me.healPerGem));
       me.hp += add;
@@ -58,12 +58,12 @@ function applyMatchEffects(cells) {
       const add = Math.round(n * me.xpPerGem);
       battle.gained.xp += add;
       gains[id] = add;
-      showFloat(side, '+' + add + ' опыта', 'xp');
+      showFloat(side, '+' + add + tr("ui. опыта"), 'xp');
     } else if (isHero && kind === 'tape') {
       const add = Math.round(n * me.tapePerGem);
       battle.gained.tape += add;
       gains[id] = add;
-      showFloat(side, '+' + add + ' изоленты', 'tape');
+      showFloat(side, '+' + add + tr("ui. изоленты"), 'tape');
     }
   }
   if (isHero) { // собранные героем фишки — для заданий «Собрать фишки» (questProgress)
@@ -73,7 +73,7 @@ function applyMatchEffects(cells) {
   if (isHero) skillAfterGather(count, run);
   else skillAfterHeroHit();
   const parts = Object.keys(count).filter(id => gains[id]).map(id => gainText(id, gains[id]));
-  if (parts.length) logBattle(side, (isHero ? 'Вы' : me.name) + ': ' + parts.join(', '));
+  if (parts.length) logBattle(side, (isHero ? tr("ui.Вы") : me.name) + ': ' + parts.join(', '));
   if (foe.hp <= 0) battle.over = true;
   renderBattle();
   return gains;

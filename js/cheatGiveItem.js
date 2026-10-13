@@ -5,9 +5,9 @@ function cheatGiveItem(rarity) {
   if (!hero) return;
   const item = (rarity === 'junk' ? makeJunk(hero.level) : rollItem(hero.level, rarity));
   const { added } = addToBag(hero, [item]);
-  if (!added.length) { showToast('Сумка полна'); return; }
+  if (!added.length) { showToast(tr("ui.Сумка полна")); return; }
   saveSlot(slot, hero);
   vibrate(8);
-  showToast('В сумке: ' + item.name);
+  showToast(tr("ui.В сумке: ") + item.name);
   if (document.getElementById('character').classList.contains('active')) renderCharacter();
 }

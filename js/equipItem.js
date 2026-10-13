@@ -7,8 +7,8 @@ function equipItem(index, key) {
   const item = hero && hero.bag && hero.bag[index];
   if (!item) return false;
   if (isBagItem(item)) return wearBag(index);
-  if (statsLocked()) { showToast('В бою не переодеваются. Даже в пустошах.'); return false; }
-  if (hero.level < item.req) { showToast('Нужен ' + item.req + '-й уровень'); return false; }
+  if (statsLocked()) { showToast(tr("ui.В бою не переодеваются. Даже в пустошах.")); return false; }
+  if (hero.level < item.req) { showToast(tr("ui.Нужен ") + item.req + tr("ui.-й уровень")); return false; }
   hero.gear = hero.gear || {};
   const gear = hero.gear;
   const base = findById(ITEM_BASES, item.base);
@@ -26,7 +26,7 @@ function equipItem(index, key) {
     off = [gear[key]];
   }
   off = off.filter(Boolean);
-  if (hero.bag.length - 1 + off.length > bagCapacity(hero)) { showToast('В сумке нет места для снятого'); return false; }
+  if (hero.bag.length - 1 + off.length > bagCapacity(hero)) { showToast(tr("ui.В сумке нет места для снятого")); return false; }
   hero.bag.splice(index, 1);
   if (isTwoHanded(item)) { delete gear.weapon1; delete gear.weapon2; }
   gear[key] = item;

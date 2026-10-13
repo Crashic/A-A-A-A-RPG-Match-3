@@ -23,7 +23,7 @@ function openItemInfo(where) {
   body.innerHTML = '';
   const p = (text, cls) => { const el = document.createElement('p'); el.className = cls; el.textContent = text; body.appendChild(el); return el; };
   p(rar.name + ' · ' + (item.rarity === 'common' ? SLOT_NAMES[base.slot] : base.name + ' · ' + SLOT_NAMES[base.slot]), 'itSub').style.color = rar.color;
-  const req = p('Уровень предмета ' + item.level + ' · нужен ' + item.req + '-й уровень', 'itReq');
+  const req = p(tr("ui.Уровень предмета ") + item.level + tr("ui. · нужен ") + item.req + tr("ui.-й уровень"), 'itReq');
   if (hero.level < item.req) req.classList.add('bad');
   const mods = document.createElement('ul');
   mods.className = 'itMods';
@@ -44,8 +44,8 @@ function openItemInfo(where) {
       const sum = list => { const t = {}; for (const m of list) t[m.id] = (t[m.id] || 0) + m.v; return t; };
       const a = sum(itemMods(item)), b = sum(itemMods(worn));
       const diff = ITEM_AFFIXES.map(x => ({ x, d: Math.round(((a[x.id] || 0) - (b[x.id] || 0)) * 2) / 2 })).filter(r => r.d);
-      const cmp = p('Вместо «' + worn.name + '»: ', 'itCmp');
-      if (!diff.length) cmp.append('без разницы');
+      const cmp = p(tr("ui.Вместо «") + worn.name + '»: ', 'itCmp');
+      if (!diff.length) cmp.append(tr("ui.без разницы"));
       diff.forEach((r, i) => {
         const s = document.createElement('span');
         s.className = r.d > 0 ? 'up' : 'down';
@@ -56,18 +56,18 @@ function openItemInfo(where) {
       const wr = findById(ITEM_RARITIES, worn.rarity) || ITEM_RARITIES[0];
       const box2 = document.createElement('div');
       box2.className = 'itWorn';
-      box2.innerHTML = '<p class="itWornHead">Сейчас надето:</p><p class="itWornName"></p><ul class="itMods"></ul>';
+      box2.innerHTML = tr("ui.<p class=\"itWornHead\">Сейчас надето:</p><p class=\"itWornName\"></p><ul class=\"itMods\"></ul>");
       const nm = box2.querySelector('.itWornName');
-      nm.textContent = worn.name + ' · ур. ' + worn.level;
+      nm.textContent = worn.name + tr("ui. · ур. ") + worn.level;
       nm.style.color = wr.color;
       for (const m of itemMods(worn)) { const li = document.createElement('li'); li.textContent = modText(m); box2.querySelector('ul').appendChild(li); }
       body.appendChild(box2);
     } else if (key) {
-      p('Слот «' + SLOT_NAMES[findById(ITEM_BASES, item.base).slot] + '» сейчас пустой — наденьте, хуже не будет.', 'itCmp');
+      p(tr("ui.Слот «") + SLOT_NAMES[findById(ITEM_BASES, item.base).slot] + tr("ui.» сейчас пустой — наденьте, хуже не будет."), 'itCmp');
     }
   }
   const price = p('', 'itPrice');
-  price.innerHTML = '<span>' + (inShop ? 'Цена' : 'Цена у торговца') + '</span>' + formatTape(inShop ? buyPrice(item) : itemPrice(item));
+  price.innerHTML = '<span>' + (inShop ? tr("ui.Цена") : tr("ui.Цена у торговца")) + '</span>' + formatTape(inShop ? buyPrice(item) : itemPrice(item));
   // кнопки
   const btns = document.getElementById('itemInfoButtons');
   btns.innerHTML = '';
@@ -84,21 +84,21 @@ function openItemInfo(where) {
   const locked = statsLocked();
   if (inShop) {
     const cost = buyPrice(item);
-    btn((hero.tape || 0) < cost ? 'Не хватает изоленты' : 'Купить', 'orange', () => { if (buyItem(where.shop)) close(); },
+    btn((hero.tape || 0) < cost ? tr("ui.Не хватает изоленты") : tr("ui.Купить"), 'orange', () => { if (buyItem(where.shop)) close(); },
       (hero.tape || 0) < cost || (hero.bag || []).length >= bagCapacity(hero));
   } else if (inBag && where.sell) {
-    btn('Продать', 'orange', () => { close(); sellItem(where.bag); });
-    btn(hero.level < item.req ? 'Нужен ' + item.req + ' ур.' : 'Надеть', 'green', () => { if (equipItem(where.bag)) close(); }, locked || hero.level < item.req);
+    btn(tr("ui.Продать"), 'orange', () => { close(); sellItem(where.bag); });
+    btn(hero.level < item.req ? tr("ui.Нужен ") + item.req + tr("ui. ур.") : tr("ui.Надеть"), 'green', () => { if (equipItem(where.bag)) close(); }, locked || hero.level < item.req);
   } else if (inBag) {
-    btn('Выбросить', 'red', () => showConfirm('Выбросить «' + item.name + '»? Вернуть не получится.', 'Выбросить', () => { close(); dropItem(where.bag); }));
+    btn(tr("ui.Выбросить"), 'red', () => showConfirm(tr("ui.Выбросить «") + item.name + tr("ui.»? Вернуть не получится."), tr("ui.Выбросить"), () => { close(); dropItem(where.bag); }));
     if (base.slot === 'weapon' && !isTwoHanded(item) && hero.level >= item.req) { // одноручное — выбрать руку
-      btn('В левую', 'green', () => { if (equipItem(where.bag, 'weapon1')) close(); }, locked);
-      btn('В правую', 'green', () => { if (equipItem(where.bag, 'weapon2')) close(); }, locked);
+      btn(tr("ui.В левую"), 'green', () => { if (equipItem(where.bag, 'weapon1')) close(); }, locked);
+      btn(tr("ui.В правую"), 'green', () => { if (equipItem(where.bag, 'weapon2')) close(); }, locked);
     } else
-    btn(hero.level < item.req ? 'Нужен ' + item.req + ' ур.' : 'Надеть', 'green', () => { if (equipItem(where.bag)) close(); }, locked || hero.level < item.req);
+    btn(hero.level < item.req ? tr("ui.Нужен ") + item.req + tr("ui. ур.") : tr("ui.Надеть"), 'green', () => { if (equipItem(where.bag)) close(); }, locked || hero.level < item.req);
   } else {
-    btn('Снять', 'stone', () => { if (unequipItem(where.gear)) close(); }, locked);
+    btn(tr("ui.Снять"), 'stone', () => { if (unequipItem(where.gear)) close(); }, locked);
   }
-  if (locked && !inShop) p('В бою снаряжение не меняется (кроме режима читов).', 'itReq');
+  if (locked && !inShop) p(tr("ui.В бою снаряжение не меняется (кроме режима читов)."), 'itReq');
   box.classList.add('open');
 }

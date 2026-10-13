@@ -4,7 +4,7 @@
 function renderDoll(box, hero) {
   box.innerHTML = '';
   const gear = (hero && hero.gear) || {};
-  const tip = 'Пустой слот. Вещи выпадают с врагов — коснитесь вещи в сумке, чтобы надеть.';
+  const tip = tr("ui.Пустой слот. Вещи выпадают с врагов — коснитесь вещи в сумке, чтобы надеть.");
   const used = {};
   const slot = (kind, emptyTip) => {
     used[kind] = (used[kind] || 0) + 1;
@@ -32,6 +32,6 @@ function renderDoll(box, hero) {
   body.append(left, fig, col('right'));
   const runes = document.createElement('div');
   runes.className = 'runeSlots';
-  for (let i = 0; i < RUNE_SLOTS; i++) runes.appendChild(slot('rune', 'Слот для руны. Руны выбиваются из тех, кто ими не делится.'));
+  for (let i = 0; i < RUNE_SLOTS; i++) runes.appendChild(slot('rune', tr("ui.Слот для руны. Руны выбиваются из тех, кто ими не делится.")));
   box.append(body, runes);
 }

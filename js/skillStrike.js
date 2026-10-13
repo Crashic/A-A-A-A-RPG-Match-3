@@ -11,7 +11,7 @@ function skillStrike(skill, side = 'hero') {
   if (skill.breakShield && foe.shield) { showFloat(foeSide, '−' + foe.shield, 'shield'); foe.shield = 0; }
   const c = rollCrit(me, Math.max(1, Math.round(me.attack * skill.mult)));
   let amount = c.amount;
-  if (c.crit) showFloat(foeSide, 'Крит!', 'damage');
+  if (c.crit) showFloat(foeSide, tr("ui.Крит!"), 'damage');
   if (side === 'hero') amount = heroWeakened(amount);   // враг ослабил ваши удары
   else amount = skillReduceHit(amount);                 // ваши защиты от врага
   let hp, shield = 0;
@@ -30,7 +30,7 @@ function skillStrike(skill, side = 'hero') {
   if (skill.selfShieldPct) {
     const add = Math.min(me.maxShield - me.shield, Math.max(1, Math.round(me.maxShield * skill.selfShieldPct / 100)));
     me.shield += add;
-    if (add) showFloat(side, '+' + add + ' щит', 'shield');
+    if (add) showFloat(side, '+' + add + tr("ui. щит"), 'shield');
   }
   if (skill.lifesteal) {
     const add = Math.min(me.maxHp - me.hp, Math.round(hp * skill.lifesteal / 100 * (1 + (me.healPct || 0) / 100)));

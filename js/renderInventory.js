@@ -8,7 +8,7 @@ function renderInventory(box) {
   const cap = bagCapacity(hero);
   const bag = hero.bag || [];
   box.innerHTML = '<p class="invTitle"></p>';
-  box.firstChild.textContent = 'Инвентарь: ' + bag.length + ' / ' + cap;
+  box.firstChild.textContent = tr("ui.Инвентарь: ") + bag.length + ' / ' + cap;
   box.appendChild(bagNestRow(hero, packs));
   const grid = document.createElement('div');
   grid.className = 'invGrid';
@@ -16,6 +16,6 @@ function renderInventory(box) {
     grid.appendChild(bag[i] ? itemSlot(bag[i], 'cell', () => openItemInfo({ bag: i })) : emptySlot('cell', ''));
   const money = document.createElement('div');
   money.className = 'invTape';
-  money.innerHTML = '<span>Изолента</span>' + formatTape(hero.tape || 0);
+  money.innerHTML = tr("ui.<span>Изолента</span>") + formatTape(hero.tape || 0);
   box.append(grid, money);
 }

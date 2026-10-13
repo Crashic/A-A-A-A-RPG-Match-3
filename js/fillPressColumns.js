@@ -16,7 +16,7 @@ function fillPressColumns(box, makeTile, compact = false) {
     }
     const g = document.createElement('div');
     g.className = 'pressGroup';
-    g.innerHTML = '<p class="colTitle">Нейтральный</p><div class="groupRow"></div>';
+    g.innerHTML = tr("ui.<p class=\"colTitle\">Нейтральный</p><div class=\"groupRow\"></div>");
     neutral.forEach(c => g.lastChild.appendChild(makeTile(c)));
     box.appendChild(g);
     return;

@@ -7,8 +7,8 @@ function takeOffBag(nest, onDone) {
   const packs = heroPacks(hero);
   const bag = packs.worn[nest];
   if (!bag) return;
-  if (statsLocked()) { showToast('В бою сумки не перешивают'); return; }
-  if (packs.worn.filter(Boolean).length <= 1) { showToast('Последнюю сумку не снять: вещи в зубах не носят'); return; }
+  if (statsLocked()) { showToast(tr("ui.В бою сумки не перешивают")); return; }
+  if (packs.worn.filter(Boolean).length <= 1) { showToast(tr("ui.Последнюю сумку не снять: вещи в зубах не носят")); return; }
   const items = (hero.bag || []).length + 1; // + сама сумка
   const cap = bagCapacity(hero) - bag.size;
   const lost = Math.max(0, items - cap);
@@ -21,10 +21,10 @@ function takeOffBag(nest, onDone) {
     h.bag.unshift(b); // сумка — первой, чтобы не выпала сама
     if (lost) h.bag.splice(bagCapacity(h));
     saveGear(h);
-    if (lost) showToast('Вещи выпали. Их уже нет. Даже пыли нет.', 3000);
+    if (lost) showToast(tr("ui.Вещи выпали. Их уже нет. Даже пыли нет."), 3000);
     if (onDone) onDone();
   };
   if (!lost) { apply(); return; }
-  const what = lost === 1 ? '1 вещь не влезет: выпадет на пол, и её' : lost + ' ' + plural(lost, 'вещь', 'вещи', 'вещей') + ' не влезут: выпадут на пол, и их';
-  showConfirm('Вы делаете глупость. ' + what + ' сразу разворуют соседи. Точно снять «' + bag.name + '»?', 'Снять и потерять', apply);
+  const what = lost === 1 ? tr("ui.1 вещь не влезет: выпадет на пол, и её") : lost + ' ' + plural(lost, tr("ui.вещь"), tr("ui.вещи"), tr("ui.вещей")) + tr("ui. не влезут: выпадут на пол, и их");
+  showConfirm(tr("ui.Вы делаете глупость. ") + what + tr("ui. сразу разворуют соседи. Точно снять «") + bag.name + '»?', tr("ui.Снять и потерять"), apply);
 }

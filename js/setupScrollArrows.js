@@ -13,7 +13,7 @@ function setupScrollArrows(inner) {
     b.type = 'button';
     b.className = 'scrollArrow ' + dir;
     b.hidden = true;
-    b.setAttribute('aria-label', dir === 'up' ? 'Листать вверх' : 'Листать вниз');
+    b.setAttribute('aria-label', dir === 'up' ? tr("ui.Листать вверх") : tr("ui.Листать вниз"));
     b.innerHTML = '<svg viewBox="0 0 24 14" aria-hidden="true"><path d="' + (dir === 'up' ? 'M3 12 L12 3 L21 12' : 'M3 2 L12 11 L21 2') +
       '" fill="none" stroke="var(--bg-sky-bottom)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     b.addEventListener('click', e => {

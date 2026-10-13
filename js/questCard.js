@@ -20,20 +20,20 @@ function questCard(q, mode, index) {
     goal.appendChild(bar);
   }
   const reward = c.querySelector('.qReward');
-  reward.innerHTML = (q.reward.xp ? '<span class="qXp">+' + q.reward.xp + ' опыта</span>' : '') + formatTape(q.reward.tape);
+  reward.innerHTML = (q.reward.xp ? '<span class="qXp">+' + q.reward.xp + tr("ui. опыта</span>") : '') + formatTape(q.reward.tape);
   if (q.reward.item) {
     const rar = findById(ITEM_RARITIES, q.reward.item);
     const s = document.createElement('span');
     s.className = 'qItem';
     s.style.color = rar.color;
-    s.textContent = '+ ' + rar.name.toLowerCase().replace(/(ий|ый)$/, 'ая') + ' вещь';
+    s.textContent = '+ ' + rar.name.toLowerCase().replace(/(ий|ый)$/, tr("ui.ая")) + tr("ui. вещь");
     reward.appendChild(s);
   }
   if (mode === 'board' && q.cat === 'errand') { // сколько ещё провисит на доске
     const left = q.left == null ? questLife(q) : q.left;
     const t = document.createElement('span');
     t.className = 'qLeft' + (left <= 1 ? ' last' : '');
-    t.textContent = left <= 1 ? 'Последний бой — заберут!' : 'Висит ещё ' + left + ' ' + plural(left, 'бой', 'боя', 'боёв');
+    t.textContent = left <= 1 ? tr("ui.Последний бой — заберут!") : tr("ui.Висит ещё ") + left + ' ' + plural(left, tr("ui.бой"), tr("ui.боя"), tr("ui.боёв"));
     c.querySelector('.qHead').after(t);
   }
   const foot = c.querySelector('.qFoot');
@@ -45,10 +45,10 @@ function questCard(q, mode, index) {
     b.addEventListener('click', e => { e.stopPropagation(); vibrate(); fn(); });
     foot.appendChild(b);
   };
-  if (mode !== 'active') btn('Взять', 'green', () => acceptQuest(index, mode));
+  if (mode !== 'active') btn(tr("ui.Взять"), 'green', () => acceptQuest(index, mode));
   else {
-    btn('Отказаться', 'stone', () => abandonQuest(index));
-    if (q.have >= q.need) btn('Сдать', 'orange', () => turnInQuest(index));
+    btn(tr("ui.Отказаться"), 'stone', () => abandonQuest(index));
+    if (q.have >= q.need) btn(tr("ui.Сдать"), 'orange', () => turnInQuest(index));
   }
   return c;
 }

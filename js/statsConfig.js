@@ -3,16 +3,16 @@
 // Очков — STAT_POINTS_PER_LEVEL за каждый уровень начиная со 2-го. Перераспределять можно вне боя.
 // Всё считается от 10: при 10 характеристика ничего не меняет, выше — усиливает, ниже — ослабляет.
 const STATS = [
-  { id: 'str', name: 'Сила',         icon: 'fist',    color: 'var(--gem-ruby)',
-    effect: 'урон Топлива и боевых навыков: +1 % за каждое очко сверх 10' },
-  { id: 'agi', name: 'Ловкость',     icon: 'compass', color: 'var(--gem-topaz)',
-    effect: 'шанс критического удара ×2: 0,25 % за очко (не больше 50 %)' },
-  { id: 'sta', name: 'Выносливость', icon: 'shield',  color: 'var(--gem-emerald)',
-    effect: 'здоровье: +3 за каждое очко сверх 10' },
-  { id: 'int', name: 'Интеллект',    icon: 'eye',     color: 'var(--gem-sapphire)',
-    effect: 'запас каждой маны: +1 за 2 очка сверх 10; мана с фишек: +1 % за очко' },
-  { id: 'spi', name: 'Дух',          icon: 'note',    color: 'var(--gem-amethyst)',
-    effect: 'щит за Детали и лечение навыками: +1 % за каждое очко сверх 10' }
+  { id: 'str', name: tr("ui.Сила"),         icon: 'fist',    color: 'var(--gem-ruby)',
+    effect: tr("ui.урон Топлива и боевых навыков: +1 % за каждое очко сверх 10") },
+  { id: 'agi', name: tr("ui.Ловкость"),     icon: 'compass', color: 'var(--gem-topaz)',
+    effect: tr("ui.шанс критического удара ×2: 0,25 % за очко (не больше 50 %)") },
+  { id: 'sta', name: tr("ui.Выносливость"), icon: 'shield',  color: 'var(--gem-emerald)',
+    effect: tr("ui.здоровье: +3 за каждое очко сверх 10") },
+  { id: 'int', name: tr("ui.Интеллект"),    icon: 'eye',     color: 'var(--gem-sapphire)',
+    effect: tr("ui.запас каждой маны: +1 за 2 очка сверх 10; мана с фишек: +1 % за очко") },
+  { id: 'spi', name: tr("ui.Дух"),          icon: 'note',    color: 'var(--gem-amethyst)',
+    effect: tr("ui.щит за Детали и лечение навыками: +1 % за каждое очко сверх 10") }
 ];
 const STAT_POINTS_PER_LEVEL = 5;   // свободных очков за уровень (с 2-го уровня; на 1-м — 0)
 const STAT_BASE = 10;              // от этого значения считаются все бонусы

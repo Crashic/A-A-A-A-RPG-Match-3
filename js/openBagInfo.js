@@ -14,11 +14,11 @@ function openBagInfo(where) {
   const body = document.getElementById('itemInfoBody');
   body.innerHTML = '';
   const p = (text, cls) => { const el = document.createElement('p'); el.className = cls; el.textContent = text; body.appendChild(el); return el; };
-  p('Сумка · ' + item.size + ' ' + plural(item.size, 'ячейка', 'ячейки', 'ячеек') + (inPack ? ' · надета' : ''), 'itSub');
+  p(tr("ui.Сумка · ") + item.size + ' ' + plural(item.size, tr("ui.ячейка"), tr("ui.ячейки"), tr("ui.ячеек")) + (inPack ? tr("ui. · надета") : ''), 'itSub');
   p(t.lore || '', 'itLore');
-  p(inPack ? 'Снятая сумка ляжет в инвентарь и займёт одну ячейку.' : 'Надетая сумка добавляет ячейки в инвентарь.', 'itReq');
+  p(inPack ? tr("ui.Снятая сумка ляжет в инвентарь и займёт одну ячейку.") : tr("ui.Надетая сумка добавляет ячейки в инвентарь."), 'itReq');
   const price = p('', 'itPrice');
-  price.innerHTML = '<span>Цена у торговца</span>' + formatTape(itemPrice(item));
+  price.innerHTML = tr("ui.<span>Цена у торговца</span>") + formatTape(itemPrice(item));
   const btns = document.getElementById('itemInfoButtons');
   btns.innerHTML = '';
   const close = () => box.classList.remove('open');
@@ -30,11 +30,11 @@ function openBagInfo(where) {
     b.addEventListener('click', e => { e.stopPropagation(); vibrate(); fn(); });
     btns.appendChild(b);
   };
-  if (inPack) btn('Снять', 'stone', () => takeOffBag(where.pack, close));
+  if (inPack) btn(tr("ui.Снять"), 'stone', () => takeOffBag(where.pack, close));
   else {
-    if (where.sell) btn('Продать', 'orange', () => { close(); sellItem(where.bag); });
-    else btn('Выбросить', 'red', () => showConfirm('Выбросить «' + item.name + '»? Вернуть не получится.', 'Выбросить', () => { close(); dropItem(where.bag); }));
-    btn('Надеть', 'green', () => { if (wearBag(where.bag)) close(); });
+    if (where.sell) btn(tr("ui.Продать"), 'orange', () => { close(); sellItem(where.bag); });
+    else btn(tr("ui.Выбросить"), 'red', () => showConfirm(tr("ui.Выбросить «") + item.name + tr("ui.»? Вернуть не получится."), tr("ui.Выбросить"), () => { close(); dropItem(where.bag); }));
+    btn(tr("ui.Надеть"), 'green', () => { if (wearBag(where.bag)) close(); });
   }
   box.classList.add('open');
 }

@@ -10,7 +10,7 @@ function registerServiceWorker() {
     if (!hadController) { hadController = true; return; } // первая установка — перезагрузка не нужна
     if (reloading) return;
     reloading = true;
-    showToast('Обновление установлено');
+    showToast(tr("ui.Обновление установлено"));
     setTimeout(() => location.reload(), 600);
   });
 

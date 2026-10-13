@@ -5,8 +5,8 @@ function buyBagNest() {
   const packs = heroPacks(hero);
   if (packs.nests >= BAG_NESTS_MAX) return;
   const price = BAG_NEST_PRICES[packs.nests - BAG_NESTS_START];
-  if ((hero.tape || 0) < price) { showToast('Не хватает изоленты: нужно ' + tapeText(price)); return; }
-  showConfirm('Пришить ещё гнездо для сумки за ' + tapeText(price) + '?', 'Пришить', () => {
+  if ((hero.tape || 0) < price) { showToast(tr("ui.Не хватает изоленты: нужно ") + tapeText(price)); return; }
+  showConfirm(tr("ui.Пришить ещё гнездо для сумки за ") + tapeText(price) + '?', tr("ui.Пришить"), () => {
     const h = loadSlot(getActiveSlot());
     const p = heroPacks(h);
     h.tape -= price;
@@ -14,6 +14,6 @@ function buyBagNest() {
     p.worn.push(null);
     saveGear(h);
     vibrate([30, 40, 30]);
-    showToast('Новое гнездо. Теперь найдите, что в него надеть.');
+    showToast(tr("ui.Новое гнездо. Теперь найдите, что в него надеть."));
   }, 'orange');
 }

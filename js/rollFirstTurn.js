@@ -5,8 +5,8 @@ function rollFirstTurn() {
   const e = battle.enemy.ini || 0;
   const chance = firstTurnChance(h, e);
   const turn = Math.random() * 100 < chance ? 'hero' : 'enemy';
-  const how = h === e ? 'Наглость поровну (' + h + ') — монетка: ' + (turn === 'hero' ? 'орёл' : 'решка')
-    : 'Наглость ' + h + ' против ' + e + ' — жребий (' + chance + ' % на вас)';
-  logBattle('sys', how + '. ' + (turn === 'hero' ? 'Первыми ходите вы.' : 'Первым ходит ' + battle.enemy.name + '.'));
+  const how = h === e ? tr("ui.Наглость поровну (") + h + tr("ui.) — монетка: ") + (turn === 'hero' ? tr("ui.орёл") : tr("ui.решка"))
+    : tr("ui.Наглость ") + h + tr("ui. против ") + e + tr("ui. — жребий (") + chance + tr("ui. % на вас)");
+  logBattle('sys', how + '. ' + (turn === 'hero' ? tr("ui.Первыми ходите вы.") : tr("ui.Первым ходит ") + battle.enemy.name + '.'));
   return turn;
 }

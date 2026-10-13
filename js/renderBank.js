@@ -5,7 +5,7 @@ function renderBank() {
   const hero = loadSlot(getActiveSlot());
   const left = document.getElementById('bankLeft');
   const right = document.getElementById('bankRight');
-  if (!hero) { left.innerHTML = '<p class="hint">Нет персонажа</p>'; right.innerHTML = ''; return; }
+  if (!hero) { left.innerHTML = tr("ui.<p class=\"hint\">Нет персонажа</p>"); right.innerHTML = ''; return; }
   const bank = hero.bank || { items: [], bags: 0 };
   const size = bankSize(hero);
 
@@ -22,12 +22,12 @@ function renderBank() {
     if (i < bank.bags) {
       b.className = 'invSlot bankBag owned';
       b.innerHTML = slotIcon('bag');
-      b.dataset.tip = 'Сумка: +' + BANK_BAG_SIZE + ' ячеек';
+      b.dataset.tip = tr("ui.Сумка: +") + BANK_BAG_SIZE + tr("ui. ячеек");
       b.disabled = true;
     } else if (i === bank.bags) {
       b.className = 'invSlot bankBag next' + ((hero.tape || 0) < BANK_BAG_PRICES[i] ? ' poor' : '');
       b.innerHTML = '<b>+</b>';
-      b.dataset.tip = 'Купить гнездо:';
+      b.dataset.tip = tr("ui.Купить гнездо:");
       b.dataset.tipTape = BANK_BAG_PRICES[i];
       b.addEventListener('click', e => { e.stopPropagation(); vibrate(); buyBankBag(); });
     } else {
@@ -45,7 +45,7 @@ function renderBank() {
     grid.appendChild(bank.items[i] ? itemSlot(bank.items[i], 'cell', () => bankMove('bank', i)) : emptySlot('cell', ''));
   left.append(head, bagRow, grid);
 
-  right.innerHTML = '<p class="invTitle">Инвентарь</p><p class="shopNote">Коснитесь вещи — она переедет в шкафчик и обратно</p>';
+  right.innerHTML = tr("ui.<p class=\"invTitle\">Инвентарь</p><p class=\"shopNote\">Коснитесь вещи — она переедет в шкафчик и обратно</p>");
   const bag = hero.bag || [];
   const bagGrid = document.createElement('div');
   bagGrid.className = 'invGrid';
@@ -53,6 +53,6 @@ function renderBank() {
     bagGrid.appendChild(bag[i] ? itemSlot(bag[i], 'cell', () => bankMove('bag', i)) : emptySlot('cell', ''));
   const money = document.createElement('div');
   money.className = 'invTape';
-  money.innerHTML = '<span>Изолента</span>' + formatTape(hero.tape || 0);
+  money.innerHTML = tr("ui.<span>Изолента</span>") + formatTape(hero.tape || 0);
   right.append(bagGrid, money);
 }

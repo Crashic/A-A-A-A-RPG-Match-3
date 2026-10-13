@@ -10,20 +10,20 @@ function bagNestRow(hero, packs) {
       s.insertAdjacentHTML('beforeend', '<small class="bagSize">' + worn.size + '</small>');
       row.appendChild(s);
     } else if (i < packs.nests) {
-      row.appendChild(emptySlot('bag', 'Пустое гнездо. Наденьте сюда сумку из инвентаря.'));
+      row.appendChild(emptySlot('bag', tr("ui.Пустое гнездо. Наденьте сюда сумку из инвентаря.")));
     } else if (i === packs.nests) {
       const price = BAG_NEST_PRICES[i - BAG_NESTS_START];
       const plus = document.createElement('button');
       plus.type = 'button';
       plus.className = 'invSlot bag plus' + ((hero.tape || 0) < price ? ' poor' : '');
       plus.textContent = '+';
-      plus.setAttribute('aria-label', 'Купить гнездо для сумки');
-      plus.dataset.tip = 'Купить гнездо для сумки:';
+      plus.setAttribute('aria-label', tr("ui.Купить гнездо для сумки"));
+      plus.dataset.tip = tr("ui.Купить гнездо для сумки:");
       plus.dataset.tipTape = price;
       plus.addEventListener('click', e => { e.stopPropagation(); vibrate(); buyBagNest(); });
       row.appendChild(plus);
     } else {
-      const lock = emptySlot('bag', 'Сначала купите предыдущее гнездо');
+      const lock = emptySlot('bag', tr("ui.Сначала купите предыдущее гнездо"));
       lock.classList.add('locked');
       row.appendChild(lock);
     }

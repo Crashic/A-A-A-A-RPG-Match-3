@@ -3,9 +3,9 @@
 function renderBunker() {
   const box = document.getElementById('bunkerBody');
   const hero = loadSlot(getActiveSlot());
-  box.innerHTML = '<div class="panel bunkerIntro"><h3>Бункер</h3><p></p></div><div class="bunkerCards"></div>';
-  box.querySelector('.bunkerIntro p').textContent = (hero ? hero.name + ', вы дома. ' : '') +
-    'Тут тепло, сухо и почти не фонит. Всё ценное — на поверхности, всё нужное — у Семёныча.';
+  box.innerHTML = tr("ui.<div class=\"panel bunkerIntro\"><h3>Бункер</h3><p></p></div><div class=\"bunkerCards\"></div>");
+  box.querySelector('.bunkerIntro p').textContent = (hero ? hero.name + tr("ui., вы дома. ") : '') +
+    tr("ui.Тут тепло, сухо и почти не фонит. Всё ценное — на поверхности, всё нужное — у Семёныча.");
   const cards = box.querySelector('.bunkerCards');
   const card = (icon, title, text, label, cls, fn) => {
     const c = document.createElement('div');
@@ -19,12 +19,12 @@ function renderBunker() {
     else b.disabled = true;
     cards.appendChild(c);
   };
-  card(SHOP_ICON, SHOP_TRADER.name, 'Купить, продать, сдать хлам. Ассортимент меняется, пока вы на поверхности.', 'Торговать', 'orange', openShop);
+  card(SHOP_ICON, SHOP_TRADER.name, tr("ui.Купить, продать, сдать хлам. Ассортимент меняется, пока вы на поверхности."), tr("ui.Торговать"), 'orange', openShop);
   const bank = (hero && hero.bank) || { items: [], bags: 0 };
-  card(BANK_ICON, BANK_NAME, 'Личный шкафчик в раздевалке: сложить вещи, которые жалко продать. Расширяется гнёздами за изоленту.' +
-    ' Занято: ' + bank.items.length + ' / ' + bankSize(hero || {}) + '.', 'Открыть', 'stone', openBank);
+  card(BANK_ICON, BANK_NAME, tr("ui.Личный шкафчик в раздевалке: сложить вещи, которые жалко продать. Расширяется гнёздами за изоленту.") +
+    tr("ui. Занято: ") + bank.items.length + ' / ' + bankSize(hero || {}) + '.', tr("ui.Открыть"), 'stone', openBank);
   const q = (hero && hero.quests) || { active: [] };
   const ready = q.active.filter(x => x.have >= x.need).length;
-  card(BOARD_ICON, 'Доска объявлений', 'Задания от жителей бункера: взяли — выполнили в боях — сдали за опыт, изоленту и вещи.' +
-    (q.active.length ? ' Взято: ' + q.active.length + (ready ? ', готово к сдаче: ' + ready : '') + '.' : ''), ready ? 'Сдать задания' : 'Задания', ready ? 'orange' : 'green', openQuests);
+  card(BOARD_ICON, tr("ui.Доска объявлений"), tr("ui.Задания от жителей бункера: взяли — выполнили в боях — сдали за опыт, изоленту и вещи.") +
+    (q.active.length ? tr("ui. Взято: ") + q.active.length + (ready ? tr("ui., готово к сдаче: ") + ready : '') + '.' : ''), ready ? tr("ui.Сдать задания") : tr("ui.Задания"), ready ? 'orange' : 'green', openQuests);
 }

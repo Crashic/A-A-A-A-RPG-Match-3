@@ -5,7 +5,7 @@ function glossaryFactions() {
     const zones = ZONES.filter(z => z.factionId === f.id).map(z => z.name + ' (' + z.min + '–' + z.max + ')');
     return glossaryEntry(iconTile(f.icon, f.color), f.name, f.alias, [
       ['lore', f.motto], f.description,
-      ['list', 'Расы: ' + races.join(', ')],
-      ['list', 'Локации: ' + (zones.length ? zones.join(', ') : 'фракции своего класса') + ' и общие']]);
+      ['list', tr("ui.Расы: ") + races.join(', ')],
+      ['list', tr("ui.Локации: ") + (zones.length ? zones.join(', ') : tr("ui.фракции своего класса")) + tr("ui. и общие")]]);
   });
 }

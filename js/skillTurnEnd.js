@@ -13,7 +13,7 @@ function skillTurnEnd(side) {
         if (e.give === 'shield') {
           const add = Math.min(battle.hero.maxShield - battle.hero.shield, e.value * battle.hero.shieldPerGem);
           battle.hero.shield += add;
-          if (add) showFloat('hero', '+' + add + ' щит', 'shield');
+          if (add) showFloat('hero', '+' + add + tr("ui. щит"), 'shield');
         } else if (e.give === 'pearl') {
           convertSafeGem(GEM_TYPES.findIndex(g => g.id === 'pearl'));
         }

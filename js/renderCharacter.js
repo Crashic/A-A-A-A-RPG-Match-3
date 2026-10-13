@@ -5,7 +5,7 @@ function renderCharacter() {
   const hero = loadSlot(getActiveSlot());
   const left = document.getElementById('charLeft');
   const right = document.getElementById('charRight');
-  if (!hero) { left.innerHTML = '<p class="hint">Нет персонажа</p>'; right.innerHTML = ''; return; }
+  if (!hero) { left.innerHTML = tr("ui.<p class=\"hint\">Нет персонажа</p>"); right.innerHTML = ''; return; }
   const readOnly = statsLocked(); // в бою — только просмотр, если не включены читы
   const scroll = left.scrollTop;
   left.innerHTML = '';

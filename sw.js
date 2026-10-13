@@ -12,7 +12,7 @@ const FILES = [
   './js/languages.js',
   './locales/ru.js',
   './locales/en.js',
-  './js/t.js',
+  './js/tr.js',
   './js/applyLocale.js',
   './js/bagConfig.js',
   './js/makeBag.js',

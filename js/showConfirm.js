@@ -10,7 +10,7 @@ function showConfirm(text, yesLabel, onYes, yesClass = 'red') {
   yes.innerHTML = CONFIRM_YES_ICON + '<span></span>';
   yes.lastChild.textContent = yesLabel;
   const no = document.getElementById('confirmNo');
-  no.innerHTML = CONFIRM_NO_ICON + '<span>Отмена</span>';
+  no.innerHTML = CONFIRM_NO_ICON + tr("ui.<span>Отмена</span>");
   const close = () => box.classList.remove('open');
   yes.onclick = () => { vibrate(); close(); onYes(); };
   no.onclick = () => { vibrate(); close(); };

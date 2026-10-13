@@ -2,7 +2,7 @@
 // Браузер разрешает это только установленному приложению (или окну, открытому скриптом);
 // если закрыть не удалось, показываем экран прощания с подсказкой закрыть вкладку.
 function exitApp() {
-  showConfirm('Выйти из игры?', 'Выйти', () => {
+  showConfirm(tr("ui.Выйти из игры?"), tr("ui.Выйти"), () => {
     window.close();
     setTimeout(() => {
       if (document.fullscreenElement) setFullscreen(false);

@@ -12,23 +12,23 @@ function skillAfterGather(count, run) {
     if (e.give === 'shieldPctMax') {
       const add = Math.min(hero.maxShield - hero.shield, Math.max(1, Math.round(hero.maxShield * e.value / 100)));
       hero.shield += add;
-      if (add) showFloat('hero', '+' + add + ' щит', 'shield');
+      if (add) showFloat('hero', '+' + add + tr("ui. щит"), 'shield');
     } else if (e.give === 'tape') {
       const add = e.value * hero.tapePerGem;
       battle.gained.tape += add;
-      showFloat('hero', '+' + add + ' изоленты', 'tape');
+      showFloat('hero', '+' + add + tr("ui. изоленты"), 'tape');
     } else if (e.give === 'ward') {
       sk.wards.push({ pct: e.value, hits: 1 });
     } else if (e.give === 'dmgReduce') {
       sk.dmgReduce += e.value;
-      showToast('Урон врага −' + e.value + '% до конца боя', 1500);
+      showToast(tr("ui.Урон врага −") + e.value + tr("ui.% до конца боя"), 1500);
     }
   }
   if (run >= 4 && hasPassive('notes').length) {
     const add = 2 * hero.xpPerGem;
     battle.gained.xp += add;
     if (sk.notes < hasPassive('notes')[0].max) sk.notes++;
-    showFloat('hero', '+' + add + ' опыта', 'xp');
+    showFloat('hero', '+' + add + tr("ui. опыта"), 'xp');
   }
   sk.pendingPct = 0;
 }

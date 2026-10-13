@@ -17,7 +17,7 @@ function rollQuest(hero, cat = 'errand') {
   const [title, text] = pick(T.texts);
   const fill = s => s.replace('{zone}', target ? target.zone.name.replace(/^.*«|»$/g, '') : '')
     .replace('{enemy}', target ? target.enemy.name : '').replace('{n}', need)
-    .replace('{times}', need + ' ' + plural(need, 'раз', 'раза', 'раз')).replace('{gem}', gem ? gemName(gem) : '');
+    .replace('{times}', need + ' ' + plural(need, tr("ui.раз"), tr("ui.раза"), tr("ui.раз"))).replace('{gem}', gem ? gemName(gem) : '');
   const k = type === 'gems' ? 1 : QUEST_REWARD_MULT; // «Собрать фишки» — как было, остальные — вдвое меньше
   const xp = Math.round(mobXp(L, L) * T.xp * need * k);
   const tape = Math.round(combatStats(L).tapePerGem * 4 * T.xp * need * k);

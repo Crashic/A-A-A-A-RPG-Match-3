@@ -6,18 +6,18 @@ const GEM_SQUIRCLE = '97.0,50.0 96.9,64.7 96.5,70.8 96.0,75.3 95.2,79.1 94.1,82.
 const GEM_RIM = '92.3,50.0 92.2,63.2 91.9,68.7 91.4,72.8 90.7,76.2 89.7,79.0 88.6,81.5 87.2,83.7 85.6,85.6 83.7,87.2 81.5,88.6 79.0,89.7 76.2,90.7 72.8,91.4 68.7,91.9 63.2,92.2 50.0,92.3 36.8,92.2 31.3,91.9 27.2,91.4 23.8,90.7 21.0,89.7 18.5,88.6 16.3,87.2 14.4,85.6 12.8,83.7 11.4,81.5 10.3,79.0 9.3,76.2 8.6,72.8 8.1,68.7 7.8,63.2 7.7,50.0 7.8,36.8 8.1,31.3 8.6,27.2 9.3,23.8 10.3,21.0 11.4,18.5 12.8,16.3 14.4,14.4 16.3,12.8 18.5,11.4 21.0,10.3 23.8,9.3 27.2,8.6 31.3,8.1 36.8,7.8 50.0,7.7 63.2,7.8 68.7,8.1 72.8,8.6 76.2,9.3 79.0,10.3 81.5,11.4 83.7,12.8 85.6,14.4 87.2,16.3 88.6,18.5 89.7,21.0 90.7,23.8 91.4,27.2 91.9,31.3 92.2,36.8'; // «Внутренний ободок» — контур на 90 %
 const GEM_ICON_TRANSFORM = 'translate(22 22) scale(0.56)';
 const GEM_TYPES = [
-  { id: 'ruby', name: 'Рубин', resource: 'Топливо / канистры', color: 'var(--gem-ruby)', dark: 'var(--gem-ruby-dark)',
+  { id: 'ruby', name: tr("ui.Рубин"), resource: tr("ui.Топливо / канистры"), color: 'var(--gem-ruby)', dark: 'var(--gem-ruby-dark)',
     icon: 'M18 26 H82 V96 H18 Z M58 26 L62 6 H76 L78 26 Z M28 34 H52 V46 H28 Z' },
-  { id: 'aquamarine', name: 'Аквамарин', resource: 'Детали / шестерёнки', color: 'var(--gem-aquamarine)', dark: 'var(--gem-aquamarine-dark)',
+  { id: 'aquamarine', name: tr("ui.Аквамарин"), resource: tr("ui.Детали / шестерёнки"), color: 'var(--gem-aquamarine)', dark: 'var(--gem-aquamarine-dark)',
     icon: 'M81.9 35.5 L94.6 38.6 L94.6 61.4 L81.9 64.5 L82.8 62.3 L89.6 73.4 L73.4 89.6 L62.3 82.8 L64.5 81.9 L61.4 94.6 L38.6 94.6 L35.5 81.9 L37.7 82.8 L26.6 89.6 L10.4 73.4 L17.2 62.3 L18.1 64.5 L5.4 61.4 L5.4 38.6 L18.1 35.5 L17.2 37.7 L10.4 26.6 L26.6 10.4 L37.7 17.2 L35.5 18.1 L38.6 5.4 L61.4 5.4 L64.5 18.1 L62.3 17.2 L73.4 10.4 L89.6 26.6 L82.8 37.7 Z M63 50 A13 13 0 1 0 37 50 A13 13 0 1 0 63 50 Z' },
-  { id: 'emerald', name: 'Изумруд', resource: 'Травы / листья', color: 'var(--gem-emerald)', dark: 'var(--gem-emerald-dark)',
+  { id: 'emerald', name: tr("ui.Изумруд"), resource: tr("ui.Травы / листья"), color: 'var(--gem-emerald)', dark: 'var(--gem-emerald-dark)',
     icon: 'M50 4 C82 20 92 56 54 92 V100 H46 V92 C8 56 18 20 50 4 Z M48 28 V84 H52 V28 Z' },
-  { id: 'topaz', name: 'Топаз', resource: 'Радиационный маркер', color: 'var(--gem-topaz)', dark: 'var(--gem-topaz-dark)',
+  { id: 'topaz', name: tr("ui.Топаз"), resource: tr("ui.Радиационный маркер"), color: 'var(--gem-topaz)', dark: 'var(--gem-topaz-dark)',
     icon: 'M59 50 A9 9 0 1 0 41 50 A9 9 0 1 0 59 50 Z M42.5 37.0 L27.0 10.2 A46 46 0 0 1 73.0 10.2 L57.5 37.0 A15 15 0 0 0 42.5 37.0 Z M65.0 50.0 L96.0 50.0 A46 46 0 0 1 73.0 89.8 L57.5 63.0 A15 15 0 0 0 65.0 50.0 Z M42.5 63.0 L27.0 89.8 A46 46 0 0 1 4.0 50.0 L35.0 50.0 A15 15 0 0 0 42.5 63.0 Z' },
-  { id: 'sapphire', name: 'Сапфир', resource: 'Металл / арматура', color: 'var(--gem-sapphire)', dark: 'var(--gem-sapphire-dark)',
+  { id: 'sapphire', name: tr("ui.Сапфир"), resource: tr("ui.Металл / арматура"), color: 'var(--gem-sapphire)', dark: 'var(--gem-sapphire-dark)',
     icon: 'M10 12 H90 V30 H60 V70 H90 V88 H10 V70 H40 V30 H10 Z' },
-  { id: 'amethyst', name: 'Аметист', resource: 'Плёнка / кассеты', color: 'var(--gem-amethyst)', dark: 'var(--gem-amethyst-dark)',
+  { id: 'amethyst', name: tr("ui.Аметист"), resource: tr("ui.Плёнка / кассеты"), color: 'var(--gem-amethyst)', dark: 'var(--gem-amethyst-dark)',
     icon: 'M4 18 H96 V82 H4 Z M24 66 L30 54 H70 L76 66 Z M42 36 A10 10 0 1 0 22 36 A10 10 0 1 0 42 36 Z M78 36 A10 10 0 1 0 58 36 A10 10 0 1 0 78 36 Z' },
-  { id: 'pearl', name: 'Жемчуг', resource: 'Документы / талоны', color: 'var(--gem-pearl)', dark: 'var(--gem-pearl-dark)',
+  { id: 'pearl', name: tr("ui.Жемчуг"), resource: tr("ui.Документы / талоны"), color: 'var(--gem-pearl)', dark: 'var(--gem-pearl-dark)',
     icon: 'M4 22 H96 V40 A10 10 0 0 0 96 60 V78 H4 V60 A10 10 0 0 0 4 40 Z M66 28 H70 V36 H66 Z M66 46 H70 V54 H66 Z M66 64 H70 V72 H66 Z' }
 ];

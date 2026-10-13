@@ -31,12 +31,12 @@ function renderKeyboard() {
   });
   const row = document.createElement('div');
   row.className = 'kbRow';
-  addKey(row, 'Случайное', () => { creation.draft.name = randomName(); }, 'wide');
+  addKey(row, tr("ui.Случайное"), () => { creation.draft.name = randomName(); }, 'wide');
   addKey(row, '-', () => type('-'));
-  addKey(row, 'пробел', () => {
+  addKey(row, tr("ui.пробел"), () => {
     const n = creation.draft.name;
     if (n && !/\s$/.test(n) && n.length < NAME_MAX_LENGTH) creation.draft.name = n + ' ';
   }, 'space');
-  addKey(row, 'Готово', closeKeyboard, 'done');
+  addKey(row, tr("ui.Готово"), closeKeyboard, 'done');
   keys.appendChild(row);
 }

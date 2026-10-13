@@ -14,6 +14,6 @@ function skillReduceHit(amount) {
   }
   sk.wards = sk.wards.filter(w => !('hits' in w) || w.hits > 0);
   const result = Math.max(0, Math.round(amount * (1 - Math.min(100, pct) / 100)));
-  if (result < amount) showFloat('hero', 'защита −' + (amount - result), 'shield');
+  if (result < amount) showFloat('hero', tr("ui.защита −") + (amount - result), 'shield');
   return result;
 }

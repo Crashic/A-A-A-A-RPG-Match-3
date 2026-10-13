@@ -8,7 +8,7 @@ function stashTape(dir, amount) {
   const stash = loadStash(acc);
   const have = dir === 'put' ? (hero.tape || 0) : stash.tape;
   const n = Math.min(have, amount === 'all' ? have : amount);
-  if (n <= 0) { showToast(dir === 'put' ? 'В карманах пусто' : 'На складе пусто'); return; }
+  if (n <= 0) { showToast(dir === 'put' ? tr("ui.В карманах пусто") : tr("ui.На складе пусто")); return; }
   if (dir === 'put') { hero.tape -= n; stash.tape += n; }
   else { stash.tape -= n; hero.tape = (hero.tape || 0) + n; }
   saveSlot(slot, hero);

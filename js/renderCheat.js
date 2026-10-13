@@ -4,11 +4,11 @@ function renderCheat() {
   const body = document.getElementById('cheatBody');
   const hero = loadSlot(getActiveSlot());
   body.innerHTML = '';
-  if (!hero) { body.innerHTML = '<p class="hint">Сначала создайте персонажа — читерить не на ком.</p>'; return; }
+  if (!hero) { body.innerHTML = tr("ui.<p class=\"hint\">Сначала создайте персонажа — читерить не на ком.</p>"); return; }
   // переключатель «Активировать читы»
   const toggle = document.createElement('label');
   toggle.className = 'setRow cheatToggle';
-  toggle.innerHTML = '<span><b>Активировать читы</b><small>Очки характеристик можно менять и в бою; в бою появляется навык «KILL ALL».</small></span>' +
+  toggle.innerHTML = tr("ui.<span><b>Активировать читы</b><small>Очки характеристик можно менять и в бою; в бою появляется навык «KILL ALL».</small></span>") +
     '<input type="checkbox" class="switch">';
   const box = toggle.querySelector('input');
   box.checked = !!settings.cheatsOn;
@@ -24,9 +24,9 @@ function renderCheat() {
   let rest = hero.tape || 0;
   for (const k of TAPE_KINDS) { tape[k.id] = Math.floor(rest / k.value); rest -= tape[k.id] * k.value; }
   const rows = [
-    { field: 'level', icon: '', label: 'Уровень', value: hero.level },
-    ...TAPE_KINDS.map(k => ({ field: k.id, icon: '<i class="roll ' + k.id + '"></i>', label: k.name[0].toUpperCase() + k.name.slice(1) + ' изолента', value: tape[k.id] })),
-    ...STATS.map(s => ({ field: s.id, icon: iconTile(s.icon, s.color), label: s.name + ' (прибавка)', value: (bonus[s.id] > 0 ? '+' : '') + bonus[s.id] }))
+    { field: 'level', icon: '', label: tr("ui.Уровень"), value: hero.level },
+    ...TAPE_KINDS.map(k => ({ field: k.id, icon: '<i class="roll ' + k.id + '"></i>', label: k.name[0].toUpperCase() + k.name.slice(1) + tr("ui. изолента"), value: tape[k.id] })),
+    ...STATS.map(s => ({ field: s.id, icon: iconTile(s.icon, s.color), label: s.name + tr("ui. (прибавка)"), value: (bonus[s.id] > 0 ? '+' : '') + bonus[s.id] }))
   ];
   for (const r of rows) {
     const row = document.createElement('div');
@@ -48,7 +48,7 @@ function renderCheat() {
   // выдать случайный предмет уровня героя нужной редкости
   const give = document.createElement('div');
   give.className = 'cheatRow cheatItems';
-  give.innerHTML = '<span class="cheatIcon"></span><span class="cheatLabel">Выдать предмет</span>';
+  give.innerHTML = tr("ui.<span class=\"cheatIcon\"></span><span class=\"cheatLabel\">Выдать предмет</span>");
   for (const r of ITEM_RARITIES) {
     const b = document.createElement('button');
     b.type = 'button';

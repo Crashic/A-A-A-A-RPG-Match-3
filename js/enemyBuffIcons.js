@@ -13,9 +13,9 @@ function enemyBuffIcons() {
     attachTip(el, title, text);
     out.push(el);
   };
-  if (e.skill) add('eye', 'var(--gem-ruby)', e.skill + ' · пассивный', e.short + ' ' + e.description + ' (в бою пока не работает)');
-  if (e.elite) add('fist', 'var(--gem-topaz)', 'Элита · бафф', 'Здоровье ×' + ELITE_HP + ', урон ×' + ELITE_ATK + ', опыт за победу ×2.', 'buff');
+  if (e.skill) add('eye', 'var(--gem-ruby)', e.skill + tr("ui. · пассивный"), e.short + ' ' + e.description + tr("ui. (в бою пока не работает)"));
+  if (e.elite) add('fist', 'var(--gem-topaz)', tr("ui.Элита · бафф"), tr("ui.Здоровье ×") + ELITE_HP + tr("ui., урон ×") + ELITE_ATK + tr("ui., опыт за победу ×2."), 'buff');
   for (const w of battle.skill.wards || [])
-    add('shield', 'var(--gem-sapphire)', 'Ваша защита · дебафф', 'Его удары слабее на ' + w.pct + ' %' + ('turns' in w ? ', ещё его ходов: ' + w.turns : ', ещё ударов: ' + w.hits) + '.', 'debuff');
+    add('shield', 'var(--gem-sapphire)', tr("ui.Ваша защита · дебафф"), tr("ui.Его удары слабее на ") + w.pct + ' %' + ('turns' in w ? tr("ui., ещё его ходов: ") + w.turns : tr("ui., ещё ударов: ") + w.hits) + '.', 'debuff');
   return out;
 }
