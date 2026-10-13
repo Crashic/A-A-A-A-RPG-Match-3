@@ -1,7 +1,7 @@
-// Новое задание для доски: вид (QUEST_TYPES), цель под уровень героя, текст от случайного жителя бункера
+// Новое задание для доски (cat — категория: 'errand' поручение, 'daily' ежедневное): вид (QUEST_TYPES), цель под уровень героя, текст от случайного жителя бункера
 // и награда. Задание: { uid, type, giver, title, text, goal, zoneId?, enemyId?, gem?, need, have, level,
 // reward: { xp, tape, item } } (item — редкость вещи или null). Если подходящих врагов нет — «победы».
-function rollQuest(hero) {
+function rollQuest(hero, cat = 'errand') {
   const pick = list => list[Math.floor(Math.random() * list.length)];
   const L = hero.level;
   let type = pick(Object.keys(QUEST_TYPES));
@@ -22,7 +22,7 @@ function rollQuest(hero) {
   const tape = Math.round(combatStats(L).tapePerGem * 4 * T.xp * need);
   return {
     uid: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
-    type, giver: giver.id, title, text: fill(text), goal: fill(T.goal),
+    cat, type, giver: giver.id, title, text: fill(text), goal: fill(T.goal),
     zoneId: type === 'zone' ? target.zone.id : null,
     enemyId: type === 'enemy' || type === 'elite' ? target.enemy.id : null,
     gem, need, have: 0, level: L,

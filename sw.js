@@ -292,6 +292,8 @@ const FILES = [
   './js/questConfig.js',
   './js/questEnemies.js',
   './js/rollQuest.js',
+  './js/questLimit.js',
+  './js/questDayKey.js',
   './js/questBoard.js',
   './js/saveQuests.js',
   './js/acceptQuest.js',
