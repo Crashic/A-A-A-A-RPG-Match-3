@@ -1,5 +1,5 @@
 // Экран «Торговец»: слева — завхоз (имя, реплика), прилавок с ценами (касание — окно с «Купить»)
-// и «Завезите новое» за изоленту; справа — сумка героя (касание — «Продать» / «Надеть»),
+// сумки (касание — купить, buyBag) и «Завезите новое» за изоленту; справа — сумка героя (касание — «Продать» / «Надеть»),
 // изолента и «Сдать хлам» (все обычные вещи разом).
 function renderShop() {
   const hero = loadSlot(getActiveSlot());
@@ -28,6 +28,25 @@ function renderShop() {
     grid.appendChild(cell);
   }
   left.appendChild(grid);
+  // сумки — всегда в продаже (BAG_TYPES), касание — купить
+  const bagsTitle = document.createElement('p');
+  bagsTitle.className = 'invTitle';
+  bagsTitle.textContent = 'Сумки';
+  const bags = document.createElement('div');
+  bags.className = 'shopStock shopBags';
+  for (const t of BAG_TYPES.filter(b => b.price > 0)) {
+    const cell = document.createElement('div');
+    cell.className = 'shopItem';
+    const s = itemSlot(makeBag(t.id), 'cell', () => buyBag(t.id));
+    s.insertAdjacentHTML('beforeend', '<small class="bagSize">' + t.size + '</small>');
+    cell.appendChild(s);
+    const price = document.createElement('div');
+    price.className = 'shopPrice' + ((hero.tape || 0) < t.price ? ' poor' : '');
+    price.innerHTML = formatTape(t.price);
+    cell.appendChild(price);
+    bags.appendChild(cell);
+  }
+  left.append(bagsTitle, bags);
   // «Завезите новое»
   const foot = document.createElement('div');
   foot.className = 'shopFoot';
@@ -39,11 +58,11 @@ function renderShop() {
   reroll.addEventListener('click', e => { e.stopPropagation(); vibrate(); rerollShop(); });
   left.appendChild(foot);
   // сумка героя
-  right.innerHTML = '<p class="invTitle">Ваша сумка</p>';
+  right.innerHTML = '<p class="invTitle">Инвентарь</p>';
   const bag = hero.bag || [];
   const bagGrid = document.createElement('div');
   bagGrid.className = 'invGrid';
-  for (let i = 0; i < BACKPACK_SLOTS; i++)
+  for (let i = 0, cap = bagCapacity(hero); i < cap; i++)
     bagGrid.appendChild(bag[i] ? itemSlot(bag[i], 'cell', () => openItemInfo({ bag: i, sell: true })) : emptySlot('cell', ''));
   const junk = document.createElement('button');
   junk.type = 'button';

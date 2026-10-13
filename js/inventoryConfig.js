@@ -10,5 +10,4 @@ const SLOT_NAMES = {
   ring: 'Кольцо', legs: 'Ноги', feet: 'Обувь', weapon: 'Оружие', rune: 'Руна', bag: 'Сумка'
 };
 const RUNE_SLOTS = 5;
-const BAG_SLOTS = 1;        // слоты для сумок над инвентарём; в конце — «+» (шуточная «оплата»)
-const BACKPACK_SLOTS = 30;  // ячейки инвентаря
+// Сумки и гнёзда под них — js/bagConfig.js (место в инвентаре = надетые сумки, bagCapacity).

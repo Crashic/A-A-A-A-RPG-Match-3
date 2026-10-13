@@ -1,4 +1,4 @@
-// Экран «Банк»: слева — кассир, гнёзда сумок (купленные, следующее — «+» с ценой, остальные закрыты)
+// Экран «Банк» (в игре — «Шкафчик»): слева — кассир, гнёзда сумок (купленные, следующее — «+» с ценой, остальные закрыты)
 // и ячейки банка; справа — сумка героя и изолента. Касание по вещи перекладывает её (bankMove),
 // на ПК при наведении — подсказка.
 function renderBank() {
@@ -27,7 +27,8 @@ function renderBank() {
     } else if (i === bank.bags) {
       b.className = 'invSlot bankBag next' + ((hero.tape || 0) < BANK_BAG_PRICES[i] ? ' poor' : '');
       b.innerHTML = '<b>+</b>';
-      b.dataset.tip = 'Купить гнездо: ' + tapeText(BANK_BAG_PRICES[i]);
+      b.dataset.tip = 'Купить гнездо:';
+      b.dataset.tipTape = BANK_BAG_PRICES[i];
       b.addEventListener('click', e => { e.stopPropagation(); vibrate(); buyBankBag(); });
     } else {
       b.className = 'invSlot bankBag locked';
@@ -37,21 +38,18 @@ function renderBank() {
   }
   const head = document.createElement('p');
   head.className = 'invTitle';
-  head.textContent = 'Банк: ' + bank.items.length + ' / ' + size;
-  const next = document.createElement('p');
-  next.className = 'shopNote';
-  next.innerHTML = bank.bags < BANK_BAG_SLOTS ? 'Следующая сумка: ' + formatTape(BANK_BAG_PRICES[bank.bags]) : 'Все сумки куплены. Вы олигарх.';
+  head.textContent = BANK_NAME + ': ' + bank.items.length + ' / ' + size;
   const grid = document.createElement('div');
   grid.className = 'invGrid';
   for (let i = 0; i < size; i++)
     grid.appendChild(bank.items[i] ? itemSlot(bank.items[i], 'cell', () => bankMove('bank', i)) : emptySlot('cell', ''));
-  left.append(head, bagRow, next, grid);
+  left.append(head, bagRow, grid);
 
-  right.innerHTML = '<p class="invTitle">Ваша сумка</p><p class="shopNote">Коснитесь вещи — она переедет в банк и обратно</p>';
+  right.innerHTML = '<p class="invTitle">Инвентарь</p><p class="shopNote">Коснитесь вещи — она переедет в шкафчик и обратно</p>';
   const bag = hero.bag || [];
   const bagGrid = document.createElement('div');
   bagGrid.className = 'invGrid';
-  for (let i = 0; i < BACKPACK_SLOTS; i++)
+  for (let i = 0, cap = bagCapacity(hero); i < cap; i++)
     bagGrid.appendChild(bag[i] ? itemSlot(bag[i], 'cell', () => bankMove('bag', i)) : emptySlot('cell', ''));
   const money = document.createElement('div');
   money.className = 'invTape';

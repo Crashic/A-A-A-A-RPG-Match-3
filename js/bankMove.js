@@ -8,9 +8,9 @@ function bankMove(from, index) {
   hero.bank = hero.bank || { items: [], bags: 0 };
   const src = from === 'bag' ? hero.bag : hero.bank.items;
   const dst = from === 'bag' ? hero.bank.items : hero.bag;
-  const cap = from === 'bag' ? bankSize(hero) : BACKPACK_SLOTS;
+  const cap = from === 'bag' ? bankSize(hero) : bagCapacity(hero);
   if (!src[index]) return;
-  if (dst.length >= cap) { showToast(from === 'bag' ? 'В банке нет места. Купите сумку у Нины Петровны.' : 'Сумка полна'); return; }
+  if (dst.length >= cap) { showToast(from === 'bag' ? 'В шкафчике нет места. Купите гнездо у Нины Петровны.' : 'Сумка полна'); return; }
   dst.push(src.splice(index, 1)[0]);
   saveSlot(slot, hero);
   renderBank();

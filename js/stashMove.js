@@ -9,7 +9,7 @@ function stashMove(from, index) {
   hero.bag = hero.bag || [];
   const src = from === 'bag' ? hero.bag : stash.items;
   const dst = from === 'bag' ? stash.items : hero.bag;
-  const cap = from === 'bag' ? STASH_SLOTS : BACKPACK_SLOTS;
+  const cap = from === 'bag' ? STASH_SLOTS : bagCapacity(hero);
   if (!src[index]) return;
   if (dst.length >= cap) { showToast(from === 'bag' ? 'Склад забит под крышу' : 'Сумка полна'); return; }
   dst.push(src.splice(index, 1)[0]);

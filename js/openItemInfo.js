@@ -8,8 +8,9 @@ function openItemInfo(where) {
   if (!hero) return;
   const inBag = where.bag !== undefined;
   const inShop = where.shop !== undefined;
-  const item = inShop ? ((hero.shop || {}).items || [])[where.shop] : inBag ? (hero.bag || [])[where.bag] : (hero.gear || {})[where.gear];
+  const item = where.pack !== undefined ? heroPacks(hero).worn[where.pack] : inShop ? ((hero.shop || {}).items || [])[where.shop] : inBag ? (hero.bag || [])[where.bag] : (hero.gear || {})[where.gear];
   if (!item) return;
+  if (isBagItem(item)) { openBagInfo(where); return; }
   const base = findById(ITEM_BASES, item.base) || {};
   const rar = findById(ITEM_RARITIES, item.rarity) || ITEM_RARITIES[0];
   const uniq = item.unique ? findById(ITEM_UNIQUES, item.unique) : null;
@@ -69,7 +70,7 @@ function openItemInfo(where) {
   if (inShop) {
     const cost = buyPrice(item);
     btn((hero.tape || 0) < cost ? 'Не хватает изоленты' : 'Купить', 'orange', () => { if (buyItem(where.shop)) close(); },
-      (hero.tape || 0) < cost || (hero.bag || []).length >= BACKPACK_SLOTS);
+      (hero.tape || 0) < cost || (hero.bag || []).length >= bagCapacity(hero));
   } else if (inBag && where.sell) {
     btn('Продать', 'orange', () => { close(); sellItem(where.bag); });
     btn(hero.level < item.req ? 'Нужен ' + item.req + ' ур.' : 'Надеть', 'green', () => { if (equipItem(where.bag)) close(); }, locked || hero.level < item.req);

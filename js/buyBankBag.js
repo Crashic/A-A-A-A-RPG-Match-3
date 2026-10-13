@@ -6,14 +6,14 @@ function buyBankBag() {
   if (bags >= BANK_BAG_SLOTS) return;
   const price = BANK_BAG_PRICES[bags];
   if ((hero.tape || 0) < price) { showToast('Не хватает изоленты: нужно ' + tapeText(price)); return; }
-  showConfirm('Купить гнездо для сумки в банке за ' + tapeText(price) + '? +' + BANK_BAG_SIZE + ' ячеек.', 'Купить', () => {
+  showConfirm('Купить гнездо для сумки в шкафчике за ' + tapeText(price) + '? +' + BANK_BAG_SIZE + ' ячеек.', 'Купить', () => {
     const h = loadSlot(getActiveSlot());
     h.bank = h.bank || { items: [], bags: 0 };
     h.tape -= price;
     h.bank.bags = bags + 1;
     saveSlot(getActiveSlot(), h);
     vibrate([30, 40, 30]);
-    showToast('Сумка в банке: +' + BANK_BAG_SIZE + ' ячеек');
+    showToast('Шкафчик: +' + BANK_BAG_SIZE + ' ячеек');
     renderBank();
   });
 }

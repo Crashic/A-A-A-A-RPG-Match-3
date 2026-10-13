@@ -8,6 +8,7 @@ function showTip(target, title, text) {
   tip.firstChild.style.color = ''; // цвет заголовка по умолчанию (предметы перекрашивают)
   tip.firstChild.hidden = !title;
   tip.lastChild.textContent = text;
+  if (target.dataset && target.dataset.tipTape) tip.lastChild.insertAdjacentHTML('beforeend', ' ' + formatTape(+target.dataset.tipTape)); // цена с мотками
   tip.hidden = false;
   const r = appRect(target);
   const appW = isAppRotated() ? window.innerHeight : window.innerWidth;

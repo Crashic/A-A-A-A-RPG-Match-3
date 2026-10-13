@@ -4,6 +4,7 @@ function equipItem(index) {
   const hero = loadSlot(getActiveSlot());
   const item = hero && hero.bag && hero.bag[index];
   if (!item) return false;
+  if (isBagItem(item)) return wearBag(index);
   if (statsLocked()) { showToast('В бою не переодеваются. Даже в пустошах.'); return false; }
   if (hero.level < item.req) { showToast('Нужен ' + item.req + '-й уровень'); return false; }
   const key = gearSlotFor(hero, item);

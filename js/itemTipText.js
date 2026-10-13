@@ -1,6 +1,7 @@
 // Текст всплывающей подсказки предмета (наведение мыши): редкость, база и слот, уровень,
 // свойства по строке и шутка. Строки — через перевод строки (#tip span — white-space: pre-line).
 function itemTipText(item) {
+  if (isBagItem(item)) return 'Сумка · ' + item.size + ' ячеек\n' + ((findById(BAG_TYPES, item.bagType) || {}).lore || '');
   const base = findById(ITEM_BASES, item.base) || {};
   const rar = findById(ITEM_RARITIES, item.rarity) || ITEM_RARITIES[0];
   const uniq = item.unique ? findById(ITEM_UNIQUES, item.unique) : null;

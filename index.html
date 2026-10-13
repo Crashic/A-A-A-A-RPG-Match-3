@@ -114,6 +114,15 @@
     <div id="heroPanel" class="fighter"></div>
     <!-- Навыки: кнопки активных (за ману) и строка пассивных — js/renderSkillBar.js -->
     <div id="skillBar"></div>
+    <!-- «Фишки» — крупная кнопка в левом нижнем углу боя -->
+    <button id="btnLegend" class="btn stone square legendBig" aria-label="Фишки" data-tip="Фишки: что даёт каждая" type="button">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <rect x="3" y="3" width="26" height="26" rx="8" fill="var(--gem-amethyst)"/>
+          <rect x="4.5" y="4.5" width="23" height="23" rx="7" fill="none" stroke="var(--gem-amethyst-light)" stroke-width="1" opacity=".7"/>
+          <path d="M11.5 12.5 Q11.5 7.5 16 7.5 Q20.5 7.5 20.5 11.5 Q20.5 14.5 17.5 15.5 Q16 16.2 16 18.5" fill="none" stroke="var(--text-primary)" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="16" cy="23.5" r="2" fill="var(--text-primary)"/>
+        </svg>
+      </button>
   </aside>
   <div class="boardWrap">
     <div id="board" class="board">
@@ -136,15 +145,6 @@
       </button>
     </div>
     <div id="battleMenu" class="panel" hidden>
-      <button id="btnLegend" class="menuItem" type="button">
-        <svg viewBox="0 0 32 32" aria-hidden="true">
-          <rect x="3" y="3" width="26" height="26" rx="8" fill="var(--gem-amethyst)"/>
-          <rect x="4.5" y="4.5" width="23" height="23" rx="7" fill="none" stroke="var(--gem-amethyst-light)" stroke-width="1" opacity=".7"/>
-          <path d="M11.5 12.5 Q11.5 7.5 16 7.5 Q20.5 7.5 20.5 11.5 Q20.5 14.5 17.5 15.5 Q16 16.2 16 18.5" fill="none" stroke="var(--text-primary)" stroke-width="3" stroke-linecap="round"/>
-          <circle cx="16" cy="23.5" r="2" fill="var(--text-primary)"/>
-        </svg>
-        <span>Фишки</span>
-      </button>
       <button id="btnCharGame" class="menuItem" type="button">
         <svg viewBox="0 0 32 32" aria-hidden="true">
           <circle cx="16" cy="9" r="5" fill="var(--ui-parchment)" stroke="var(--ui-outline)" stroke-width="2"/>
@@ -431,6 +431,18 @@
 
 <div id="toast"></div>
 
+<script src="js/bagConfig.js"></script>
+<script src="js/makeBag.js"></script>
+<script src="js/isBagItem.js"></script>
+<script src="js/heroPacks.js"></script>
+<script src="js/bagCapacity.js"></script>
+<script src="js/wearBag.js"></script>
+<script src="js/takeOffBag.js"></script>
+<script src="js/buyBagNest.js"></script>
+<script src="js/buyBag.js"></script>
+<script src="js/openBagInfo.js"></script>
+<script src="js/bagNestRow.js"></script>
+<script src="js/goHomeBase.js"></script>
 <script src="js/bankConfig.js"></script>
 <script src="js/bankSize.js"></script>
 <script src="js/openBank.js"></script>

@@ -8,7 +8,7 @@ function itemSlot(item, kind, onOpen) {
   s.type = 'button';
   s.className = 'invSlot item ' + kind + ' r-' + rar.id + (DOLL_SLOTS.left.includes(kind) || DOLL_SLOTS.right.includes(kind) ? ' gear' : '');
   s.style.setProperty('--rar', rar.color);
-  s.innerHTML = slotIcon(base ? base.slot : kind).replace(/var\(--text-muted\)/g, 'var(--rar)');
+  s.innerHTML = slotIcon(base ? base.slot : isBagItem(item) ? 'bag' : kind).replace(/var\(--text-muted\)/g, 'var(--rar)');
   s.setAttribute('aria-label', item.name);
   s.addEventListener('click', e => { e.stopPropagation(); vibrate(); hideTip(); onOpen(); });
   // на ПК — подсказка с описанием при наведении (на телефоне касание сразу открывает окно)

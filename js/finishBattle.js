@@ -12,7 +12,7 @@ function finishBattle(won, surrendered = false) {
   save.tape = (save.tape || 0) + result.tape;
   if (battle.skill.notes) save.notes = Math.min(5, (save.notes || 0) + battle.skill.notes); // «Пометка на полях»
   const fresh = loadSlot(battle.slot); // снаряжение и сумка — как сейчас в ячейке (могли меняться читами)
-  if (fresh) { save.gear = fresh.gear; save.bag = fresh.bag; }
+  if (fresh) { save.gear = fresh.gear; save.bag = fresh.bag; save.packs = fresh.packs; }
   if (won) Object.assign(result, addToBag(save, rollDrops(e.level, e.elite))); // { added, lost }
   if (won) save.wins = (save.wins || 0) + 1; // для обновления прилавка торговца
   result.quests = questProgress(save, won, e.id, battle.gained.gems); // задания с доски

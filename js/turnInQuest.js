@@ -5,7 +5,7 @@ function turnInQuest(index) {
   const q = hero && hero.quests && hero.quests.active[index];
   if (!q || q.have < q.need) return;
   const item = q.reward.item ? rollItem(q.level, q.reward.item) : null;
-  if (item && (hero.bag || []).length >= BACKPACK_SLOTS) { showToast('Освободите место в сумке под награду'); return; }
+  if (item && (hero.bag || []).length >= bagCapacity(hero)) { showToast('Освободите место в сумке под награду'); return; }
   if (item) addToBag(hero, [item]);
   hero.tape = (hero.tape || 0) + q.reward.tape;
   const ups = grantXp(hero, q.reward.xp);

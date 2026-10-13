@@ -6,7 +6,6 @@ function sideMenuAction(act) {
   else if (act === 'map') openMap();
   else if (act === 'char') openCharacter();
   else if (act === 'glossary') openGlossary();
-  else if (act === 'legend') openGemLegend();
   else if (act === 'cheat') openCheat();
-  else if (act === 'home') goHome();
+  else if (act === 'home') goHomeBase();
 }

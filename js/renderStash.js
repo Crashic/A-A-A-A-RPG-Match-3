@@ -37,5 +37,5 @@ function renderStash() {
   left.append(tapeRow('take', stash.tape), grid(stash.items, STASH_SLOTS, 'stash'));
   right.innerHTML = '<p class="invTitle"></p>';
   right.firstChild.textContent = 'Сумка: ' + hero.name;
-  right.append(tapeRow('put', hero.tape || 0), grid(hero.bag || [], BACKPACK_SLOTS, 'bag'));
+  right.append(tapeRow('put', hero.tape || 0), grid(hero.bag || [], bagCapacity(hero), 'bag'));
 }
