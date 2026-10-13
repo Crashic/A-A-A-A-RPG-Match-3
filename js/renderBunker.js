@@ -1,4 +1,4 @@
-// Экран «Бункер»: короткое вступление и карточки мест — торговец (openShop) и доска заданий
+// Экран «Бункер»: короткое вступление и карточки мест — торговец (openShop), банк (openBank) и доска заданий
 // (openQuests; если есть выполненные — кнопка «Сдать задания»).
 function renderBunker() {
   const box = document.getElementById('bunkerBody');
@@ -20,6 +20,9 @@ function renderBunker() {
     cards.appendChild(c);
   };
   card(SHOP_ICON, SHOP_TRADER.name, 'Купить, продать, сдать хлам. Ассортимент меняется, пока вы на поверхности.', 'Торговать', 'orange', openShop);
+  const bank = (hero && hero.bank) || { items: [], bags: 0 };
+  card(BANK_ICON, 'Банк', 'Ваша личная ячейка в сберкассе: сложить вещи, которые жалко продать. Расширяется сумками за изоленту.' +
+    ' Занято: ' + bank.items.length + ' / ' + bankSize(hero || {}) + '.', 'В банк', 'stone', openBank);
   const q = (hero && hero.quests) || { active: [] };
   const ready = q.active.filter(x => x.have >= x.need).length;
   card(BOARD_ICON, 'Доска объявлений', 'Задания от жителей бункера: взяли — выполнили в боях — сдали за опыт, изоленту и вещи.' +

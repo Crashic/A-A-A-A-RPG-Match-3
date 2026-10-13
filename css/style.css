@@ -1466,3 +1466,13 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 /* главное меню: 6 кнопок в ряд (с «Лагерем») — подписи не должны вылезать */
 .menuRow { gap: 6px; }
 .menuRow .btn { padding: 10px 2px; font-size: 12px; letter-spacing: 0; }
+
+/* Банк: как торговец; гнёзда сумок в ряд */
+#bank { max-width: 960px; height: var(--app-h); gap: 8px; }
+#bank .screenHead { margin: 0; }
+.bankBags { display: flex; gap: 5px; justify-content: center; flex: none; }
+.bankBag { width: 34px; height: 34px; }
+.bankBag.next { background: var(--glass-top), var(--ui-primary); color: var(--ui-outline); }
+.bankBag.next b { font: var(--type-heading); font-size: 20px; }
+.bankBag.next.poor { filter: grayscale(.7); }
+.bankBag.locked { opacity: .35; }

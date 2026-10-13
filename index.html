@@ -244,6 +244,17 @@
 </section>
 
 <!-- Торговец: слева прилавок завхоза, справа сумка героя (js/renderShop.js) -->
+<!-- Банк персонажа: ячейки банка, гнёзда сумок, сумка героя -->
+<section id="bank" class="screen">
+  <header class="screenHead">
+    <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
+  </header>
+  <div class="mapBody">
+    <div class="panel charCol shopColLeft"><div id="bankLeft" class="charScroll"></div></div>
+    <div class="panel charCol charColRight"><div id="bankRight" class="charScroll"></div></div>
+  </div>
+</section>
+
 <section id="shop" class="screen">
   <header class="screenHead">
     <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
@@ -409,6 +420,12 @@
 
 <div id="toast"></div>
 
+<script src="js/bankConfig.js"></script>
+<script src="js/bankSize.js"></script>
+<script src="js/openBank.js"></script>
+<script src="js/bankMove.js"></script>
+<script src="js/buyBankBag.js"></script>
+<script src="js/renderBank.js"></script>
 <script src="js/campConfig.js"></script>
 <script src="js/loadAccount.js"></script>
 <script src="js/saveAccount.js"></script>
