@@ -4,7 +4,7 @@ function renderFighterPanel(side) {
   if (!panel.dataset.built) buildFighterPanel(panel, side === 'hero');
   const f = battle[side];
   const q = sel => panel.querySelector(sel);
-  q('[data-f="name"]').textContent = f.name;
+  q('[data-f="name"]').textContent = f.name.replace(/\u2011/g, '\u2011\u200B'); // после неразрывного дефиса — можно перенести строку
   panel.classList.toggle('active', !battle.over && battle.turn === side);
 
   setBar(q('[data-bar="hp"]'), f.hp, f.maxHp);

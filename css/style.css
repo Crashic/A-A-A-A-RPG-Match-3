@@ -315,7 +315,7 @@ h1 {
   color: var(--ui-reward);
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; /* длинные имена врагов — в две строки */
 }
-.enemy .fighterHead b { font-size: 15px; line-height: 19px; overflow-wrap: anywhere; }
+.enemy .fighterHead b { font-size: 16px; line-height: 19px; overflow-wrap: break-word; hyphens: manual; }
 .fighterHead span { overflow: hidden; font: var(--type-small); color: var(--text-muted); white-space: nowrap; text-overflow: ellipsis; }
 
 /* Полоса — тёмная «таблетка» в золотом ободке (Panels), заливка — цвет ресурса */
@@ -349,7 +349,7 @@ h1 {
 .bar.hp span { line-height: 22px; font: var(--type-stat); }
 /* щит и опыт — той же высоты, что мана */
 .bar.shield, .bar.xp { height: 14px; }
-.bar.shield span, .bar.xp span { line-height: 14px; font-size: 10px; }
+.bar.shield span, .bar.xp span { line-height: 17px; font-size: 14px; }
 .bar.shield { --fill: var(--gem-aquamarine); }             /* щит — Детали, основной цвет фишки */
 .bar.xp     { --fill: var(--gem-pearl-dark); }             /* опыт — Документы */
 /* Строка полосы: слева фишка, которая её пополняет */
@@ -359,7 +359,7 @@ h1 {
 .gemMini { flex: none; width: 16px; height: 16px; display: block; } /* все значки панели одного размера */
 .manaRow .statRow { flex: 1; min-width: 0; gap: 3px; }
 .bar.mana   { flex: 1; height: 14px; }
-.bar.mana span { line-height: 14px; font-size: 10px; }
+.bar.mana span { line-height: 17px; font-size: 14px; }
 .bar.sapphire   { --fill: var(--gem-sapphire); }
 .bar.amethyst   { --fill: var(--gem-amethyst); }
 .bar.emerald    { --fill: var(--gem-emerald); }
@@ -494,7 +494,7 @@ h1 {
 .classBlock { flex: none; }
 /* Классы Прессы: две колонки по фракциям, Хронист посередине */
 .classGrid.pressCols { grid-template-columns: 1fr 1fr; grid-auto-rows: auto; }
-.pressCols .pick.cls { flex-direction: row; gap: 6px; padding: 5px 6px; font: var(--type-menu); font-size: 13px; }
+.pressCols .pick.cls { flex-direction: row; gap: 6px; padding: 5px 6px; font: var(--type-menu); font-size: 14px; }
 .colTitle { margin: 0; font: var(--type-caption); font-weight: 500; color: var(--ui-reward); text-align: center; }
 .pressCols .neutral { grid-column: 1 / -1; justify-self: center; width: 62%; }
 .classRow.pressGroups { flex-wrap: nowrap; gap: 10px; }
@@ -751,7 +751,7 @@ h1 {
 
 .setRow.range { flex-direction: column; align-items: stretch; gap: 6px; padding: 12px 14px; }
 .setRow.range span { display: flex; justify-content: space-between; }
-.setRow.range b { font: var(--type-stat); font-size: 13px; color: var(--ui-reward); }
+.setRow.range b { font: var(--type-stat); font-size: 14px; color: var(--ui-reward); }
 
 input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui-primary); }
 
@@ -1025,7 +1025,7 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .gIcon svg { width: 34px; height: 34px; }
 .gLvl { font: var(--type-heading); font-size: 18px; color: var(--ui-reward); font-variant-numeric: tabular-nums; }
 .gBody { min-width: 0; }
-.gBody h4 { margin: 0; font: var(--type-small); font-weight: 600; font-size: 13px; color: var(--text-primary); }
+.gBody h4 { margin: 0; font: var(--type-small); font-weight: 600; font-size: 14px; color: var(--text-primary); }
 .gBody p { margin: 2px 0 0; font: var(--type-small); color: var(--text-secondary); }
 .gBody .gSub { font: var(--type-caption); color: var(--ui-reward); }
 .gBody .g-lore { font-style: italic; color: var(--text-muted); }
@@ -1041,7 +1041,7 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 
 /* Выбор класса — кнопки как у Прессы: иконка и название в строку, две колонки */
 .classGrid:not(.pressCols) { grid-template-columns: 1fr 1fr; grid-auto-rows: auto; }
-.classGrid:not(.pressCols) .pick.cls { flex-direction: row; gap: 6px; padding: 5px 6px; font: var(--type-menu); font-size: 13px; }
+.classGrid:not(.pressCols) .pick.cls { flex-direction: row; gap: 6px; padding: 5px 6px; font: var(--type-menu); font-size: 14px; }
 
 /* Заголовок экрана (лента) — по центру экрана, кнопки по краям */
 .screenHead { position: relative; min-height: 48px; }
@@ -1092,7 +1092,7 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .charLevel { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
 .charLevel > span { flex: none; font: var(--type-stat); color: var(--text-primary); }
 .charLevel .bar { flex: 1; height: 14px; }
-.charLevel .bar span { line-height: 14px; font-size: 10px; }
+.charLevel .bar span { line-height: 17px; font-size: 14px; }
 /* слоты: квадрат с пунктиром («Строчка-пунктир»), подпись внутри */
 .invSlot { position: relative; flex: none; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 8px; background: var(--bg-cell); box-shadow: inset 0 0 0 2px var(--ui-metal); color: var(--text-muted); }
 .invSlot::before { content: ''; position: absolute; inset: 5px; border: 1.5px dashed color-mix(in srgb, var(--text-primary) 30%, transparent); border-radius: 5px; pointer-events: none; }
@@ -1117,7 +1117,7 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .statRowBig { display: flex; align-items: center; gap: 8px; padding: 3px 6px; border-radius: 10px; background: var(--bg-cell); }
 .statRowBig .tile { flex: none; width: 24px; height: 24px; }
 .statLabel { flex: 1; min-width: 0; font: var(--type-menu); font-size: 14px; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.statVal { width: 34px; text-align: center; font: var(--type-stat); font-size: 15px; color: var(--text-primary); font-variant-numeric: tabular-nums; }
+.statVal { width: 34px; text-align: center; font: var(--type-stat); font-size: 16px; color: var(--text-primary); font-variant-numeric: tabular-nums; }
 .btn.statBtn { width: 28px; height: 28px; min-height: 0; padding: 0; font: var(--type-button); font-size: 18px; line-height: 1; }
 .btn.statBtn::after { display: none; }
 .statsSummary { margin: 0; font: var(--type-caption); color: var(--text-secondary); }
@@ -1180,7 +1180,7 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 ::-webkit-scrollbar-button:single-button:horizontal { display: none; }
 .enemyStats { flex-wrap: nowrap; gap: 4px; }
 .enemyStats .statChip { gap: 2px; }
-.enemyStats .statChip b { font-size: 11px; }
+.enemyStats .statChip b { font-size: 14px; }
 
 /* Изолента внизу инвентаря */
 .invTape { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; padding: 6px 10px; border-radius: 10px; background: var(--bg-cell); }
@@ -1208,7 +1208,7 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .cheatLabel { flex: 1; min-width: 0; font: var(--type-small); font-weight: 600; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cheatVal { width: 56px; text-align: center; font: var(--type-stat); font-size: 14px; color: var(--ui-reward); font-variant-numeric: tabular-nums; }
 .btn.cheatBtn { min-height: 0; height: 28px; padding: 0 8px; font: var(--type-small); font-weight: 600; }
-.menuRow .btn { font-size: 13px; }
+.menuRow .btn { font-size: 14px; }
 #payJoke .ribbon { max-width: none; white-space: nowrap; font-size: 19px; }
 
 /* Иконки слева от навыков героя: бонус расы, пассивные, баффы и дебаффы */
@@ -1465,7 +1465,7 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .sideMenu.mapMenu .btn.square { width: 35px; height: 35px; }
 /* главное меню: 6 кнопок в ряд (с «Лагерем») — подписи не должны вылезать */
 .menuRow { gap: 6px; }
-.menuRow .btn { padding: 10px 2px; font-size: 12px; letter-spacing: 0; }
+.menuRow .btn { padding: 10px 2px; font-size: 14px; letter-spacing: 0; }
 
 /* Банк: как торговец; гнёзда сумок в ряд */
 #bank { max-width: 960px; height: var(--app-h); gap: 8px; }
@@ -1488,7 +1488,7 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .campOpen { margin-top: 6px; min-height: 30px; padding: 3px 16px; font: var(--type-small); font-weight: 600; }
 
 /* Сумки: размер в углу надетой/продаваемой сумки, закрытые гнёзда, «+» без денег */
-.invSlot .bagSize { position: absolute; right: 2px; bottom: 0; font: var(--type-caption); font-size: 10px; color: var(--text-primary); }
+.invSlot .bagSize { position: absolute; right: 2px; bottom: 0; font: var(--type-caption); font-size: 14px; color: var(--text-primary); }
 .bagSlots .invSlot.locked { opacity: .35; }
 .bagSlots .invSlot.plus.poor { filter: grayscale(.7); }
 .bagSlots { justify-content: center; display: flex; gap: 5px; }
@@ -1519,7 +1519,7 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .gameSide .battleCorner .legendBig svg { width: 30px; height: 30px; }
 .battleLog { height: 69px; overflow-y: auto; padding: 3px 7px; border-radius: 10px; background: var(--bg-cell); box-shadow: inset 0 0 0 1.5px var(--ui-metal); scrollbar-width: none; }
 .battleLog::-webkit-scrollbar { display: none; }
-.battleLog p { margin: 0; font: var(--type-caption); font-size: 11px; line-height: 12.6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-secondary); }
+.battleLog p { margin: 0; font: var(--type-caption); font-size: 14px; line-height: 17px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-secondary); }
 .battleLog p.log-hero { color: var(--text-primary); }
 .battleLog p.log-enemy { color: var(--gem-ruby-light); }
 .battleLog p.log-sys { color: var(--ui-reward); }
@@ -1532,8 +1532,8 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 /* Навыки героя — в две колонки, чтобы под ними поместились «Фишки» и лог боя */
 .heroSkillBtns { display: grid !important; grid-template-columns: 1fr 1fr; gap: 4px; min-width: 0; }
 .heroSkillBtns .btn.skillBtn { min-width: 0; padding: 2px 4px 3px; }
-.heroSkillBtns .skillBtn b { font-size: 12px; line-height: 15px; }
-.heroSkillBtns .skillBtn small { font-size: 10px; max-width: 100%; overflow: hidden; white-space: nowrap; }
+.heroSkillBtns .skillBtn b { font-size: 14px; line-height: 17px; }
+.heroSkillBtns .skillBtn small { font-size: 14px; max-width: 100%; overflow: hidden; white-space: nowrap; }
 .heroSkillBtns .skillBtn.killAll { grid-column: 1 / -1; }
 /* главное меню: всё помещается по высоте 360 */
 #menu .menuButtons { gap: 8px; }
@@ -1607,7 +1607,7 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .pgWeb line.on { stroke: var(--ui-reward); stroke-width: 2.5; }
 .pgNode { position: absolute; transform: translate(-50%, -50%); width: 46px; height: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0;
   border: 0; border-radius: 10px; background: var(--bg-canvas); box-shadow: inset 0 0 0 2px var(--ui-metal); color: var(--text-muted); opacity: .7; }
-.pgNode small { font: var(--type-caption); font-size: 9px; line-height: 11px; }
+.pgNode small { font: var(--type-caption); font-size: 14px; line-height: 17px; }
 .pgNode b { font: var(--type-stat); line-height: 14px; }
 .pgNode.active { border-radius: 50%; width: 42px; height: 42px; }
 .pgNode.can { opacity: 1; box-shadow: inset 0 0 0 2px var(--ui-reward); color: var(--text-primary); }
@@ -1627,7 +1627,7 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .battleCorner { flex: 1 1 auto; min-height: 0; justify-content: flex-end; }
 .battleLog { flex: 0 1 66px; min-height: 28px; }
 .pgBonus { font: var(--type-small); font-weight: 600; }
-.pgBtns .btn { min-height: 36px; padding: 4px 8px; font: var(--type-menu); font-size: 13px; font-weight: 600; white-space: nowrap; }
+.pgBtns .btn { min-height: 36px; padding: 4px 8px; font: var(--type-menu); font-size: 14px; font-weight: 600; white-space: nowrap; }
 #paragonRight { gap: 5px; }
 
 /* Обучение: кружок, стрелка, пузырь с текстом (поверх всего, кроме окон) */
@@ -1655,7 +1655,7 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 /* 0.7.2: значок-уведомление «!» на кнопке (updateNotifyBadges) */
 .sideMenu .btn, .menuItem, .heroCardBtn, #btnBattleMenu { position: relative; }
 .notifyDot { position: absolute; top: -4px; right: -4px; z-index: 2; display: grid; place-items: center; width: 16px; height: 16px; border-radius: 50%;
-  background: var(--ui-reward); color: var(--ui-outline); font: var(--type-stat); font-size: 11px; font-weight: 700; line-height: 1;
+  background: var(--ui-reward); color: var(--ui-outline); font: var(--type-stat); font-size: 14px; font-weight: 700; line-height: 1;
   box-shadow: 0 0 0 1.5px var(--ui-outline); pointer-events: none; animation: notifyPulse 1.4s ease-in-out infinite; }
 .notifyDot[hidden] { display: none; }
 .menuItem .notifyDot { top: 2px; right: 4px; left: auto; }
@@ -1701,4 +1701,8 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 /* кнопка навыка героя — как у врага: 44 px, тот же шрифт */
 .heroSkillBtns .btn.skillBtn { height: 44px; min-height: 44px; padding: 3px 10px 4px; }
 .heroSkillBtns .skillBtn b { font-size: 14px; line-height: 18px; }
-.heroSkillBtns .skillBtn small { font-size: 11px; }
+.heroSkillBtns .skillBtn small { font-size: 14px; }
+/* 0.7.1.d: шрифты крупнее — поправки раскладки */
+.zone span { white-space: nowrap; }
+.setRow { min-height: 50px; padding-top: 6px; padding-bottom: 6px; }
+.fighterHead b { word-break: normal; overflow-wrap: break-word; }

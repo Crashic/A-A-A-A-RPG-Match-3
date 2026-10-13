@@ -65,16 +65,16 @@
   --type-score-ls: -0.01em;
   --type-button: 600 18px/22px var(--font-body);
   --type-button-ls: 0.005em;
-  --type-menu: 500 15px/20px var(--font-body);
+  --type-menu: 500 18px/22px var(--font-body);
   --type-menu-ls: 0.005em;
-  --type-body: 400 15px/22px var(--font-body);
+  --type-body: 400 16px/23px var(--font-body);
   --type-body-ls: 0;
-  --type-body-strong: 600 15px/22px var(--font-body);
+  --type-body-strong: 600 16px/23px var(--font-body);
   --type-body-strong-ls: 0;
-  --type-small: 400 12px/16px var(--font-small);
+  --type-small: 400 14px/18px var(--font-small);
   --type-small-ls: 0;
-  --type-stat: 500 12px/16px var(--font-small);
+  --type-stat: 500 14px/18px var(--font-small);
   --type-stat-ls: 0;
-  --type-caption: 400 10px/14px var(--font-small);
+  --type-caption: 400 14px/18px var(--font-small);
   --type-caption-ls: 0;
 }
