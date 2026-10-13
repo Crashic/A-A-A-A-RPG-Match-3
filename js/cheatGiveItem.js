@@ -3,7 +3,7 @@ function cheatGiveItem(rarity) {
   const slot = getActiveSlot();
   const hero = loadSlot(slot);
   if (!hero) return;
-  const item = rollItem(hero.level, rarity);
+  const item = (rarity === 'junk' ? makeJunk(hero.level) : rollItem(hero.level, rarity));
   const { added } = addToBag(hero, [item]);
   if (!added.length) { showToast('Сумка полна'); return; }
   saveSlot(slot, hero);

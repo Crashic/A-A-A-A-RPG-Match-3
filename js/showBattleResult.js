@@ -1,4 +1,4 @@
-// Окно итогов боя: «Победа»/«Поражение», опыт, изолента, новый уровень, добыча (r.added, r.lost). Кнопки «Карта» и «Ещё раз».
+// Окно итогов боя (добыча — иконками, renderResultLoot): «Победа»/«Поражение», опыт, изолента, новый уровень, добыча (r.added, r.lost). Кнопки «Карта» и «Ещё раз».
 function showBattleResult(r) {
   const box = document.getElementById('battleResult');
   document.getElementById('resultTitle').textContent = r.won ? 'Победа' : 'Поражение';
@@ -18,14 +18,14 @@ function showBattleResult(r) {
   row('Опыт с документов', '+' + r.gemXp);
   row('Изолента', formatTape(r.tape), '', true);
   if (r.levelUps) row('Новый уровень!', String(r.level), 'levelUp');
-  // добыча: название цветом редкости; что не влезло в сумку — осталось в пустошах
-  for (const it of r.added || []) {
+  // добыча — иконками (касание — окно вещи с «Надеть»/«Продать» и сравнением), ресурсы — значками
+  if ((r.added || []).length || (r.resources && Object.keys(r.resources).length)) {
     const li = document.createElement('li');
-    li.className = 'loot';
-    li.innerHTML = '<span>Добыча</span><b></b>';
-    li.lastChild.textContent = it.name;
-    li.lastChild.style.color = (findById(ITEM_RARITIES, it.rarity) || {}).color || '';
+    li.className = 'lootIcons';
+    li.innerHTML = '<span>Добыча</span><div class="resultLoot"></div>';
     list.appendChild(li);
+    resultLoot = r.added || [];
+    renderResultLoot(li.lastChild, r.resources || {});
   }
   if (r.lost && r.lost.length) row('Сумка полна', 'брошено: ' + r.lost.length, 'lost');
   // задания: выполненные — название, иначе — что прогресс есть (сдать — на доске в бункере)

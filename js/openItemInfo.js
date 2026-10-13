@@ -11,6 +11,7 @@ function openItemInfo(where) {
   const item = where.pack !== undefined ? heroPacks(hero).worn[where.pack] : inShop ? ((hero.shop || {}).items || [])[where.shop] : inBag ? (hero.bag || [])[where.bag] : (hero.gear || {})[where.gear];
   if (!item) return;
   if (isBagItem(item)) { openBagInfo(where); return; }
+  if (isJunkItem(item)) { openJunkInfo(where); return; }
   const base = findById(ITEM_BASES, item.base) || {};
   const rar = findById(ITEM_RARITIES, item.rarity) || ITEM_RARITIES[0];
   const uniq = item.unique ? findById(ITEM_UNIQUES, item.unique) : null;

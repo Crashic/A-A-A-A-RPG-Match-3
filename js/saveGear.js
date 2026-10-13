@@ -5,4 +5,5 @@ function saveGear(hero) {
   if (document.getElementById('shop').classList.contains('active')) renderShop();
   else renderCharacter();
   refreshHeroInBattle();
+  if (document.getElementById('battleResult').classList.contains('open')) renderResultLoot(); // иконки добычи в итогах
 }

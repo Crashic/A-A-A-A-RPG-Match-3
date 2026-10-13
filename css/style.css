@@ -1548,3 +1548,22 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 /* иконки героя слева от навыков — в 2 колонки по 22 px, чтобы не залезать на «Фишки» */
 #skillBar .heroBuffs { grid-template-columns: repeat(2, 22px); gap: 3px; }
 #skillBar .heroBuffs .passiveIcon, #skillBar .heroBuffs .passiveIcon .tile { width: 22px; height: 22px; }
+
+/* Персонажи: кнопка «Создать нового» под списком */
+.createNewHero { flex: none; margin-top: 6px; display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; }
+.createNewHero small { font: var(--type-stat); opacity: .8; }
+/* Итоги боя: добыча иконками */
+#resultList li.lootIcons { align-items: center; }
+.resultLoot { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 5px; }
+.resultLoot small { font: var(--type-small); color: var(--text-muted); }
+.resultRes, .campResItem { display: inline-flex; align-items: center; gap: 3px; }
+.resultRes .tile, .campResItem .tile { width: 26px; height: 26px; }
+.resultRes b, .campResItem b { font: var(--type-stat); color: var(--text-primary); }
+/* окно вещи и подтверждение — поверх итогов боя */
+#itemInfo { z-index: 12; }
+#confirm { z-index: 13; }
+/* Лагерь: ресурсы аккаунта */
+.campRes { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+.campResItem.none { opacity: .4; }
+/* Хлам — тёмно-серый */
+.invSlot.r-junk { --rar: var(--ui-metal); }

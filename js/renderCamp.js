@@ -3,6 +3,7 @@ function renderCamp() {
   const box = document.getElementById('campBody');
   box.innerHTML = '<div class="panel bunkerIntro"><h3>Лагерь</h3><p></p></div><div class="campGrid"></div>';
   box.querySelector('.bunkerIntro p').textContent = CAMP_TEXT;
+  box.querySelector('.bunkerIntro').appendChild(campResourceRow());
   const grid = box.querySelector('.campGrid');
   for (const b of CAMP_BUILDINGS) {
     const c = document.createElement('div');

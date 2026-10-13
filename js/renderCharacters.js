@@ -1,13 +1,14 @@
-// Экран «Персонажи»: до SLOT_COUNT персонажей столбиком (с прокруткой) + одна кнопка «Создать», пока есть место, по одной в ряд — имя и уровень. Касание по персонажу делает его текущим,
+// Экран «Персонажи»: персонажи столбиком (с прокруткой), по одной в ряд — имя и уровень; под списком —
+// кнопка «Создать нового персонажа» (#createNewHero, пока есть свободная ячейка, со счётчиком N / SLOT_COUNT). Касание по персонажу делает его текущим,
 // по пустой ячейке — открывает создание персонажа, крестик удаляет персонажа.
 function renderCharacters() {
   const list = document.getElementById('slotList');
   const active = getActiveSlot();
   list.innerHTML = '';
-  let freeShown = false;
+  let free = 0; // первая пустая ячейка — для кнопки «Создать нового персонажа» внизу
   for (let n = 1; n <= SLOT_COUNT; n++) {
     const hero = loadSlot(n);
-    if (!hero) { if (freeShown) continue; freeShown = true; } // пустая ячейка — только одна
+    if (!hero) { free = free || n; continue; }
     const card = document.createElement('div');
     card.className = 'slot' + (hero && n === active ? ' active' : '') + (hero ? '' : ' empty');
 
@@ -43,4 +44,8 @@ function renderCharacters() {
     }
     list.appendChild(card);
   }
+  const btn = document.getElementById('createNewHero');
+  btn.hidden = !free;
+  btn.querySelector('small').textContent = countHeroes() + ' / ' + SLOT_COUNT;
+  btn.onclick = () => { vibrate(); openCharacterCreation(free, 'characters'); };
 }

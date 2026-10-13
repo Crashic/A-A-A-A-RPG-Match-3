@@ -8,8 +8,16 @@ function glossaryItems() {
     'Уровень вещи — уровень врага; надеть можно с уровня на ' + ITEM_REQ_BELOW + ' ниже. Вещи падают в инвентарь (место дают надетые сумки), что не влезло — остаётся в пустошах.',
     'Надеть, снять или выбросить — касанием по вещи на экране «Персонаж». В бою снаряжение не меняется.'])];
   out.push(glossaryHeading('Редкость'));
-  for (const r of ITEM_RARITIES)
-    out.push(glossaryEntry(dot(r.color), r.name, r.affixes ? (r.affixes[1] ? 'Случайных свойств: ' + r.affixes.join('–') : 'Только свойство самой вещи') : 'Своё имя и свои свойства', []));
+  const total = ITEM_RARITIES.reduce((a, r) => a + r.weight, 0);
+  for (const r of ITEM_RARITIES.filter(x => x.id !== 'junk'))
+    out.push(glossaryEntry(dot(r.color), r.name, r.affixes ? (r.affixes[1] ? 'Случайных свойств: ' + r.affixes.join('–') : 'Только свойство самой вещи') : 'Своё имя и свои свойства',
+      [['list', 'Шанс среди добычи: ' + String(Math.round(r.weight / total * 1000) / 10).replace('.', ',') + ' %' + (r.power > 1 ? ' · сила свойств ×' + r.power : '')]]));
+  out.push(glossaryEntry(dot(findById(ITEM_RARITIES, 'junk').color), 'Хлам', 'Только на продажу · шанс ' + Math.round(JUNK_DROP_CHANCE * 100) + ' %',
+    [['list', JUNK_ITEMS.map(j => j.name).join(' · ')], 'Семёныч берёт оптом — кнопкой «Сдать хлам».']));
+  out.push(glossaryHeading('Ресурсы'));
+  out.push(glossaryEntry('', 'Ресурсы лагеря', 'Общие для аккаунта · шанс ' + Math.round(RESOURCE_DROP_CHANCE * 100) + ' %',
+    ['С побеждённых врагов падает 1–3 единицы (с элиты — вдвое больше). Хранятся в лагере, пригодятся для построек и крафта.']));
+  for (const r of RESOURCES) out.push(glossaryEntry(resourceIcon(r.id), r.name, 'Ресурс', []));
   out.push(glossaryHeading('Вещи по слотам'));
   const kinds = [...new Set(ITEM_BASES.map(b => b.slot))];
   for (const k of kinds)

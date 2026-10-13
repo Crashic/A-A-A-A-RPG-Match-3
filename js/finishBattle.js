@@ -14,6 +14,7 @@ function finishBattle(won, surrendered = false) {
   const fresh = loadSlot(battle.slot); // снаряжение и сумка — как сейчас в ячейке (могли меняться читами)
   if (fresh) { save.gear = fresh.gear; save.bag = fresh.bag; save.packs = fresh.packs; }
   if (won) Object.assign(result, addToBag(save, rollDrops(e.level, e.elite))); // { added, lost }
+  if (won) { result.resources = rollResources(e.elite); addResources(result.resources); } // ресурсы — в лагерь
   if (won) save.wins = (save.wins || 0) + 1; // для обновления прилавка торговца
   result.quests = questProgress(save, won, e.id, battle.gained.gems); // задания с доски
   result.levelUps = grantXp(save, result.killXp + result.gemXp);
