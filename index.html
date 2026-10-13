@@ -102,6 +102,8 @@
       <label class="setRow"><span>Вибрация</span><input id="set-vibration" type="checkbox" class="switch"></label>
       <label class="setRow"><span>Полноэкранный режим</span><input id="set-fullscreen" type="checkbox" class="switch"></label>
       <label class="setRow"><span>Оповещения</span><input id="set-notifications" type="checkbox" class="switch"></label>
+      <label class="setRow"><span>Обучение для всех персонажей</span><input id="set-tutorialAll" type="checkbox" class="switch"></label>
+      <label class="setRow" id="rowTutorialHero"><span>Обучение для текущего персонажа</span><input id="set-tutorialHero" type="checkbox" class="switch"></label>
       <div class="setRow"><button id="btnResetSaves" class="btn red" type="button">Удалить всех персонажей</button></div>
     </div>
   </div>
@@ -423,6 +425,12 @@
 
 <!-- Подсказка (showTip / attachTip) -->
 <div id="tip" hidden></div>
+<!-- Обучение: кружок вокруг элемента, стрелка и пояснение (js/showTutorial.js) -->
+<div id="tutorial" hidden>
+  <div class="tutRing"></div>
+  <svg class="tutArrow" aria-hidden="true"><defs><marker id="tutHead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="var(--ui-reward)"/></marker></defs><line marker-end="url(#tutHead)"/></svg>
+  <div class="tutBubble panel"><p></p><div class="tutBtns"><button class="btn stone tutHide" type="button">Скрыть обучение</button><button class="btn green tutOk" type="button">Понятно</button></div></div>
+</div>
 
 <div id="confirm" class="modal">
   <div class="modalBox">
@@ -548,6 +556,13 @@
 <script src="js/showToast.js"></script>
 <script src="js/showConfirm.js"></script>
 <script src="js/navDepth.js"></script>
+<script src="js/tutorialSteps.js"></script>
+<script src="js/tutorialState.js"></script>
+<script src="js/tutorialCheck.js"></script>
+<script src="js/showTutorial.js"></script>
+<script src="js/hideTutorial.js"></script>
+<script src="js/tutorialNext.js"></script>
+<script src="js/tutorialOff.js"></script>
 <script src="js/showScreen.js"></script>
 <script src="js/goBack.js"></script>
 <script src="js/renderScreen.js"></script>

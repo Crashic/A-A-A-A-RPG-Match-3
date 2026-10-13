@@ -5,4 +5,5 @@ function updateCreateButton() {
   const check = canCreateHero(creation.draft);
   btn.disabled = !check.ok;
   document.getElementById('createWhy').textContent = check.reason;
+  tutorialCheck(); // имя введено — подсказка «Создать»
 }

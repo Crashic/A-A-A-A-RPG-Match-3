@@ -32,6 +32,7 @@ async function startBattle(enemyId, saved = null) {
   showFirstLegend(); // в первом бою — подсказка, какая фишка что даёт
   await startMatch3(saved ? saved.grid : null);
   if (battle !== current) return;
+  tutorialCheck(); // обучение в бою
   saveBattle();
   if (battle.turn === 'enemy') await enemyTurn();
 }

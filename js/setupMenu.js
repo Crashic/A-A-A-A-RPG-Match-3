@@ -37,8 +37,21 @@ function setupMenu() {
     input.addEventListener('change', saveSettings);
   }
 
+  // Обучение для текущего персонажа (hero.tutorial.off); кнопки самой подсказки
+  document.getElementById('set-tutorialHero').addEventListener('change', e => {
+    const slot = getActiveSlot();
+    const hero = loadSlot(slot);
+    if (!hero) return;
+    tutorialState(hero).off = !e.target.checked;
+    saveSlot(slot, hero);
+    vibrate();
+    showToast(e.target.checked ? 'Обучение для «' + hero.name + '» включено' : 'Обучение для «' + hero.name + '» выключено');
+  });
+  document.querySelector('#tutorial .tutOk').addEventListener('click', e => { e.stopPropagation(); tutorialNext(); });
+  document.querySelector('#tutorial .tutHide').addEventListener('click', e => { e.stopPropagation(); tutorialOff(); });
+
   // Переключатели
-  for (const key of ['vibration', 'fullscreen', 'notifications']) {
+  for (const key of ['vibration', 'fullscreen', 'notifications', 'tutorialAll']) {
     const input = document.getElementById('set-' + key);
     input.addEventListener('change', () => {
       settings[key] = input.checked;
@@ -46,6 +59,7 @@ function setupMenu() {
       vibrate();
       if (key === 'fullscreen') setFullscreen(settings.fullscreen);
       if (key === 'notifications' && settings.notifications) showToast('Оповещения включены');
+      if (key === 'tutorialAll') { showToast(settings.tutorialAll ? 'Обучение включено: увидите то, чего ещё не видели' : 'Обучение выключено для всех'); renderSettings(); }
     });
   }
 

@@ -5,4 +5,6 @@ function showScreen(id, push = true) {
   document.querySelectorAll('.screen').forEach(s => s.classList.toggle('active', s.id === id));
   if (id !== 'menu' && push) history.pushState({ screen: id, depth: navDepth() + 1 }, ''); // depth — шагов от меню (goHome)
   window.scrollTo(0, 0);
+  hideTutorial();
+  tutorialCheck(); // обучение: подсказка для этого экрана
 }

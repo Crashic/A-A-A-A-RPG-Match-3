@@ -7,7 +7,8 @@ const DEFAULT_SETTINGS = {
   fullscreen: true,
   notifications: true, // всплывающие сообщения игры
   gemLegendSeen: false, // подсказка «Фишки» уже показана в первом бою
-  cheatsOn: false     // режим читов: очки характеристик в бою и кнопка «KILL ALL»
+  cheatsOn: false,    // режим читов: очки характеристик в бою и кнопка «KILL ALL»
+  tutorialAll: true   // обучение (подсказки со стрелкой) для всех персонажей
 };
 let settings = null;  // заполняется в main() через loadSettings()
 

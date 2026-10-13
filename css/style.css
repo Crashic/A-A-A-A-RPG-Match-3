@@ -1629,3 +1629,17 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .pgBonus { font: var(--type-small); font-weight: 600; }
 .pgBtns .btn { min-height: 36px; padding: 4px 8px; font: var(--type-menu); font-size: 13px; font-weight: 600; white-space: nowrap; }
 #paragonRight { gap: 5px; }
+
+/* Обучение: кружок, стрелка, пузырь с текстом (поверх всего, кроме окон) */
+#tutorial { position: fixed; inset: 0; z-index: 25; pointer-events: none; }
+#tutorial[hidden] { display: none; }
+.tutRing { position: fixed; border-radius: 16px; box-shadow: 0 0 0 3px var(--ui-reward), 0 0 0 9999px color-mix(in srgb, var(--ui-outline) 35%, transparent); animation: tutPulse 1.4s ease-in-out infinite; }
+@keyframes tutPulse { 50% { box-shadow: 0 0 0 6px var(--ui-reward), 0 0 0 9999px color-mix(in srgb, var(--ui-outline) 35%, transparent); } }
+.tutArrow { position: fixed; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.tutArrow line { stroke: var(--ui-reward); stroke-width: 3; stroke-linecap: round; }
+.tutBubble { position: fixed; pointer-events: auto; display: flex; flex-direction: column; gap: 6px; padding: 8px 10px; box-shadow: 0 0 0 2px var(--ui-reward); }
+.tutBubble p { margin: 0; font: var(--type-small); color: var(--text-primary); }
+.tutBtns { display: flex; gap: 6px; justify-content: flex-end; }
+.tutBtns .btn { min-height: 30px; padding: 3px 10px; font: var(--type-small); font-weight: 600; }
+.tutBtns .btn[hidden] { display: none; }
+#rowTutorialHero[hidden] { display: none; }

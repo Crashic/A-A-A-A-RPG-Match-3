@@ -8,7 +8,8 @@ function finishCharacterCreation() {
     classId: d.classId,
     genderId: d.genderId,
     raceId: d.raceId,
-    factionId: d.factionId
+    factionId: d.factionId,
+    tutorial: tutorialState(null) // обучение: выключено ли при создании
   };
   createSlot(creation.slot, hero);
   setActiveSlot(creation.slot);
