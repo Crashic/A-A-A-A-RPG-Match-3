@@ -1287,6 +1287,10 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 
 /* Ячейки персонажей: имя слева, уровень справа, в одну строку */
 #characters .panel { width: 100%; max-width: 520px; align-self: center; }
+#characters { height: var(--app-h); }
+#characters .panel { flex: 0 1 auto; min-height: 0; max-height: 100%; display: flex; flex-direction: column; } /* до 12 персонажей — список прокручивается внутри панели */
+#slotList { position: relative; min-height: 0; flex: 0 1 auto; overflow-y: auto; }
+#slotList .slot { flex: none; }
 #slotList .slot { padding: 4px 6px 4px 4px; }
 #slotList .slotInfo { flex-direction: row; align-items: center; justify-content: space-between; gap: 10px; min-height: 0; padding: 8px 10px; }
 #slotList .slotInfo b { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }

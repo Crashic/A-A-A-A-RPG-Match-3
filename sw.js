@@ -53,6 +53,7 @@ const FILES = [
   './js/renderScreen.js',
   './js/renderHeroCard.js',
   './js/renderMenu.js',
+  './js/countHeroes.js',
   './js/renderCharacters.js',
   './js/renderSettings.js',
   './js/raceClasses.js',

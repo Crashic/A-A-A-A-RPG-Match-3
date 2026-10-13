@@ -1,11 +1,13 @@
-// Экран «Персонажи»: три ячейки столбиком, по одной в ряд — имя и уровень. Касание по персонажу делает его текущим,
+// Экран «Персонажи»: до SLOT_COUNT персонажей столбиком (с прокруткой) + одна кнопка «Создать», пока есть место, по одной в ряд — имя и уровень. Касание по персонажу делает его текущим,
 // по пустой ячейке — открывает создание персонажа, крестик удаляет персонажа.
 function renderCharacters() {
   const list = document.getElementById('slotList');
   const active = getActiveSlot();
   list.innerHTML = '';
+  let freeShown = false;
   for (let n = 1; n <= SLOT_COUNT; n++) {
     const hero = loadSlot(n);
+    if (!hero) { if (freeShown) continue; freeShown = true; } // пустая ячейка — только одна
     const card = document.createElement('div');
     card.className = 'slot' + (hero && n === active ? ' active' : '') + (hero ? '' : ' empty');
 
@@ -15,7 +17,7 @@ function renderCharacters() {
     const title = document.createElement('b');
     title.textContent = hero ? hero.name : '+ Создать персонажа';
     const sub = document.createElement('span');
-    sub.textContent = hero ? 'Уровень ' + hero.level : 'Ячейка ' + n; // только имя и уровень
+    sub.textContent = hero ? 'Уровень ' + hero.level : countHeroes() + ' / ' + SLOT_COUNT; // только имя и уровень
     info.append(title, sub);
     info.addEventListener('click', () => {
       vibrate();
