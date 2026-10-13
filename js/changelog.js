@@ -2,6 +2,13 @@
 // Номер версии и текст изменений согласуются с автором игры перед выпуском.
 const CHANGELOG = [
   {
+    version: '0.7.3',
+    date: '13.10.2026',
+    changes: [
+      'Shut up and take my language'
+    ]
+  },
+  {
     version: '0.7.2.a',
     date: '13.10.2026',
     changes: [

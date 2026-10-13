@@ -8,14 +8,14 @@ function renderHeroCard() {
   card.hidden = !hero;
   if (!hero) return;
   document.getElementById('heroCardName').textContent = hero.name;
-  document.getElementById('heroCardSlot').textContent = 'Ячейка ' + n;
+  document.getElementById('heroCardSlot').textContent = t('ui.Ячейка') + ' ' + n;
   const rows = [
-    ['Уровень', { name: hero.level + (hero.level < MAX_LEVEL ? ' (' + hero.xp + ' / ' + xpToNext(hero.level) + ')' : '') }],
-    ['Изолента', { html: formatTape(hero.tape) }],
-    ['Пол', findById(GENDERS, hero.genderId)],
-    ['Раса', findById(RACES, hero.raceId)],
-    ['Класс', findById(CLASSES, hero.classId)],
-    ['Фракция', findById(FACTIONS, hero.factionId)]
+    [t('ui.Уровень'), { name: hero.level + (hero.level < MAX_LEVEL ? ' (' + hero.xp + ' / ' + xpToNext(hero.level) + ')' : '') }],
+    [t('ui.Изолента'), { html: formatTape(hero.tape) }],
+    [t('ui.Пол'), findById(GENDERS, hero.genderId)],
+    [t('ui.Раса'), findById(RACES, hero.raceId)],
+    [t('ui.Класс'), findById(CLASSES, hero.classId)],
+    [t('ui.Фракция'), findById(FACTIONS, hero.factionId)]
   ];
   // характеристики на главном экране не показываем (просьба автора)
   const list = document.getElementById('heroCardStats');

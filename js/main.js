@@ -2,6 +2,8 @@
 function main() {
   settings = loadSettings();
   document.getElementById('gemClipShape').setAttribute('points', GEM_SQUIRCLE); // обрезка «Полос» по фишке
+  applyLocale(); // язык интерфейса (settings.lang)
+  setupLanguage();
   showVersion();
   setupChangelog();
   setupGlossary();

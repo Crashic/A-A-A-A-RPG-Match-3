@@ -41,18 +41,18 @@
   </div>
   <nav class="menuButtons">
     <div id="heroCard" class="heroCard" hidden>
-      <div class="heroCardHead"><b id="heroCardName"></b><span id="heroCardSlot"></span><button id="btnCharacter" class="btn stone heroCardBtn" type="button">Персонаж</button></div>
+      <div class="heroCardHead"><b id="heroCardName"></b><span id="heroCardSlot"></span><button id="btnCharacter" class="btn stone heroCardBtn" type="button" data-i18n="ui.Персонаж">Персонаж</button></div>
       <dl id="heroCardStats"></dl>
     </div>
     <button id="btnStart" class="btn green big" type="button">
-      <span id="btnStartLabel">Начать игру</span>
+      <span id="btnStartLabel" data-i18n="ui.Начать игру">Начать игру</span>
       <small id="btnStartSub"></small>
     </button>
     <div class="menuRow">
-      <button id="btnCharacters" class="btn stone" type="button">Персонажи</button>
-      <button id="btnSettings" class="btn stone" type="button">Настройки</button>
-      <button id="btnCamp" class="btn green" type="button" hidden>Лагерь</button>
-      <button id="btnExit" class="btn red" type="button">Выход</button>
+      <button id="btnCharacters" class="btn stone" type="button" data-i18n="ui.Персонажи">Персонажи</button>
+      <button id="btnSettings" class="btn stone" type="button" data-i18n="ui.Настройки">Настройки</button>
+      <button id="btnCamp" class="btn green" type="button" hidden data-i18n="ui.Лагерь">Лагерь</button>
+      <button id="btnExit" class="btn red" type="button" data-i18n="ui.Выход">Выход</button>
     </div>
   </nav>
   <button id="ver" type="button"></button>
@@ -61,20 +61,20 @@
 <!-- Персонажи: три ячейки -->
 <section id="characters" class="screen">
   <header class="screenHead">
-    <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
+    <button class="btn stone round back" type="button" data-back aria-label="Назад" data-i18n-aria="ui.Назад"></button>
   </header>
   <div class="panel">
-    <p class="hint">Выберите персонажа или создайте нового</p>
+    <p class="hint" data-i18n="ui.Выберите персонажа или создайте нового">Выберите персонажа или создайте нового</p>
     <div id="slotList"></div>
-    <button id="createNewHero" class="btn green createNewHero" type="button"><span>+ Создать нового персонажа</span><small></small></button>
+    <button id="createNewHero" class="btn green createNewHero" type="button"><span data-i18n="ui.+ Создать нового персонажа">+ Создать нового персонажа</span><small></small></button>
   </div>
 </section>
 
 <!-- Создание персонажа: «Происхождение» (фракции, расы, Пресса) → «Класс» (класс, имя, пол) -->
 <section id="create" class="screen">
   <header class="screenHead createHead">
-    <button id="createBack" class="btn stone round back" type="button" aria-label="Назад"></button>
-    <button id="createRandom" class="btn stone square createRandom" type="button" aria-label="Случайно" data-tip="Случайный персонаж">
+    <button id="createBack" class="btn stone round back" type="button" aria-label="Назад" data-i18n-aria="ui.Назад"></button>
+    <button id="createRandom" class="btn stone square createRandom" type="button" aria-label="Случайно" data-i18n-aria="ui.Случайно" data-tip="Случайный персонаж" data-i18n-tip="ui.Случайный персонаж">
       <svg viewBox="0 0 32 32" aria-hidden="true">
         <rect x="5" y="5" width="22" height="22" rx="5" fill="var(--ui-parchment)" stroke="var(--ui-outline)" stroke-width="2"/>
         <circle cx="11" cy="11" r="2.2" fill="var(--ui-outline)"/><circle cx="21" cy="11" r="2.2" fill="var(--ui-outline)"/>
@@ -92,19 +92,20 @@
 <!-- Настройки -->
 <section id="settings" class="screen">
   <header class="screenHead">
-    <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
+    <button class="btn stone round back" type="button" data-back aria-label="Назад" data-i18n-aria="ui.Назад"></button>
   </header>
   <div class="panel">
     <div class="settingsList">
-      <label class="setRow range"><span>Музыка <b id="val-music"></b></span><input id="set-music" type="range" min="0" max="100" step="5"></label>
-      <label class="setRow range"><span>Звуки <b id="val-sound"></b></span><input id="set-sound" type="range" min="0" max="100" step="5"></label>
-      <label class="setRow"><span>Вибрация</span><input id="set-vibration" type="checkbox" class="switch"></label>
-      <label class="setRow"><span>Полноэкранный режим</span><input id="set-fullscreen" type="checkbox" class="switch"></label>
-      <label class="setRow"><span>Оповещения</span><input id="set-notifications" type="checkbox" class="switch"></label>
-      <label class="setRow"><span>Обучение для всех персонажей</span><input id="set-tutorialAll" type="checkbox" class="switch"></label>
-      <label class="setRow" id="rowTutorialHero"><span>Обучение для текущего персонажа</span><input id="set-tutorialHero" type="checkbox" class="switch"></label>
-      <div class="setRow"><button id="btnInstall" class="btn green" type="button">Установить приложение</button></div>
-      <div class="setRow"><button id="btnResetSaves" class="btn red" type="button">Удалить всех персонажей</button></div>
+      <label class="setRow range"><span><span data-i18n="ui.Музыка">Музыка</span> <b id="val-music"></b></span><input id="set-music" type="range" min="0" max="100" step="5"></label>
+      <label class="setRow range"><span><span data-i18n="ui.Звуки">Звуки</span> <b id="val-sound"></b></span><input id="set-sound" type="range" min="0" max="100" step="5"></label>
+      <label class="setRow"><span data-i18n="ui.Вибрация">Вибрация</span><input id="set-vibration" type="checkbox" class="switch"></label>
+      <label class="setRow"><span data-i18n="ui.Полноэкранный режим">Полноэкранный режим</span><input id="set-fullscreen" type="checkbox" class="switch"></label>
+      <label class="setRow"><span data-i18n="ui.Оповещения">Оповещения</span><input id="set-notifications" type="checkbox" class="switch"></label>
+      <label class="setRow"><span data-i18n="ui.Обучение для всех персонажей">Обучение для всех персонажей</span><input id="set-tutorialAll" type="checkbox" class="switch"></label>
+      <label class="setRow" id="rowTutorialHero"><span data-i18n="ui.Обучение для текущего персонажа">Обучение для текущего персонажа</span><input id="set-tutorialHero" type="checkbox" class="switch"></label>
+      <label class="setRow"><span data-i18n="ui.Язык">Язык</span><select id="set-lang" class="langSelect"></select></label>
+      <div class="setRow"><button id="btnInstall" class="btn green" type="button" data-i18n="ui.Установить приложение">Установить приложение</button></div>
+      <div class="setRow"><button id="btnResetSaves" class="btn red" type="button" data-i18n="ui.Удалить всех персонажей">Удалить всех персонажей</button></div>
     </div>
   </div>
 </section>
@@ -117,7 +118,7 @@
     <div id="skillBar"></div>
     <!-- Слева внизу: «Фишки» и под ней чат-лог боя на 5 строк (js/logBattle.js) -->
     <div class="battleCorner">
-    <button id="btnLegend" class="btn stone square legendBig" aria-label="Фишки" data-tip="Фишки: что даёт каждая" type="button">
+    <button id="btnLegend" class="btn stone square legendBig" aria-label="Фишки" data-i18n-aria="ui.Фишки" data-tip="Фишки: что даёт каждая" data-i18n-tip="ui.Фишки: что даёт каждая" type="button">
         <svg viewBox="0 0 32 32" aria-hidden="true">
           <rect x="3" y="3" width="26" height="26" rx="8" fill="var(--gem-amethyst)"/>
           <rect x="4.5" y="4.5" width="23" height="23" rx="7" fill="none" stroke="var(--gem-amethyst-light)" stroke-width="1" opacity=".7"/>
@@ -141,7 +142,7 @@
     <div id="enemySkill"></div>
     <div class="gameButtons">
       <!-- Меню боя: одна кнопка, по нажатию — список с иконками (js/toggleBattleMenu.js) -->
-      <button id="btnBattleMenu" class="btn stone square" type="button" aria-label="Меню" data-tip="Меню" aria-expanded="false">
+      <button id="btnBattleMenu" class="btn stone square" type="button" aria-label="Меню" data-i18n-aria="ui.Меню" data-tip="Меню" data-i18n-tip="ui.Меню" aria-expanded="false">
         <svg viewBox="0 0 32 32" aria-hidden="true">
           <rect x="6" y="7" width="20" height="4" rx="2" fill="var(--ui-parchment)"/>
           <rect x="6" y="14" width="20" height="4" rx="2" fill="var(--ui-parchment)"/>
@@ -156,15 +157,15 @@
           <path d="M6 28 Q6 16 16 16 Q26 16 26 28 Z" fill="var(--ui-parchment)" stroke="var(--ui-outline)" stroke-width="2" stroke-linejoin="round"/>
           <path d="M12 20 L16 24 L20 20" fill="none" stroke="var(--gem-topaz-dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <span>Персонаж</span>
+        <span data-i18n="ui.Персонаж">Персонаж</span>
       </button>
       <button id="btnCampGame" class="menuItem" type="button" hidden>
         <span class="campIco"></span>
-        <span>Лагерь</span>
+        <span data-i18n="ui.Лагерь">Лагерь</span>
       </button>
       <button id="btnJournalGame" class="menuItem" type="button">
         <span class="journalIco"></span>
-        <span>Задания</span>
+        <span data-i18n="ui.Задания">Задания</span>
       </button>
       <button id="btnGlossaryGame" class="menuItem" type="button">
         <svg viewBox="0 0 32 32" aria-hidden="true">
@@ -172,7 +173,7 @@
           <path d="M16 7 L16 27" stroke="var(--ui-outline)" stroke-width="2"/>
           <path d="M8 11 Q11 10 13 11 M8 15 Q11 14 13 15 M19 11 Q21 10 24 11 M19 15 Q21 14 24 15 M19 19 Q21 18 24 19" fill="none" stroke="var(--gem-topaz-dark)" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
-        <span>Глоссарий</span>
+        <span data-i18n="ui.Глоссарий">Глоссарий</span>
       </button>
       <button id="btnMap" class="menuItem" type="button">
         <svg viewBox="0 0 32 32" aria-hidden="true">
@@ -182,14 +183,14 @@
           <path d="M21.5 9.5 L26.5 14.5 M26.5 9.5 L21.5 14.5" stroke="var(--ui-danger)" stroke-width="2.5" stroke-linecap="round"/>
           <path d="M6 9 L10 7.3" stroke="var(--gem-pearl-light)" stroke-width="1.5" stroke-linecap="round" opacity=".8"/>
         </svg>
-        <span>Карта врагов</span>
+        <span data-i18n="ui.Карта врагов">Карта врагов</span>
       </button>
       <button id="btnCheatGame" class="menuItem" type="button">
         <svg viewBox="0 0 32 32" aria-hidden="true">
           <rect x="4" y="4" width="24" height="24" rx="7" fill="var(--gem-amethyst)"/>
           <path d="M18 5 L9 18 L15 18 L13 27 L23 13 L17 13 Z" fill="var(--gem-topaz)" stroke="var(--ui-outline)" stroke-width="1.5" stroke-linejoin="round"/>
         </svg>
-        <span>Читер</span>
+        <span data-i18n="ui.Читер">Читер</span>
       </button>
       <button id="btnSurrender" class="menuItem" type="button">
         <svg viewBox="0 0 32 32" aria-hidden="true">
@@ -197,7 +198,7 @@
           <path d="M9.5 5 Q15 3 19 6 Q23 9 27 7 L27 18 Q23 20 19 17 Q15 14 9.5 16 Z" fill="var(--gem-pearl)"/>
           <path d="M9.5 13 Q15 11 19 14 Q23 17 27 15 L27 18 Q23 20 19 17 Q15 14 9.5 16 Z" fill="var(--gem-pearl-dark)"/>
         </svg>
-        <span>Сдаться</span>
+        <span data-i18n="ui.Сдаться">Сдаться</span>
       </button>
       <button id="gameToMenu" class="menuItem" type="button">
         <svg viewBox="0 0 32 32" aria-hidden="true">
@@ -205,7 +206,7 @@
           <path d="M13 27 L13 19 L19 19 L19 27" fill="var(--gem-topaz-dark)" stroke="var(--ui-outline)" stroke-width="2" stroke-linejoin="round"/>
           <path d="M8 13.5 L16 7 L24 13.5" fill="none" stroke="var(--ui-danger)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <span>В главное меню</span>
+        <span data-i18n="ui.В главное меню">В главное меню</span>
       </button>
     </div>
   </aside>
@@ -214,7 +215,7 @@
 <!-- Карта врагов: 9 локаций — по три у фракций и три нейтральные (данные — js/zones.js) -->
 <section id="map" class="screen">
   <header class="screenHead">
-    <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
+    <button class="btn stone round back" type="button" data-back aria-label="Назад" data-i18n-aria="ui.Назад"></button>
   </header>
   <div class="mapBody">
     <div id="zoneList" class="panel"></div>
@@ -228,7 +229,7 @@
 <!-- Персонаж: слева шапка, кукла, руны, характеристики и вкладки; справа инвентарь (js/renderCharacter.js) -->
 <section id="character" class="screen">
   <header class="screenHead">
-    <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
+    <button class="btn stone round back" type="button" data-back aria-label="Назад" data-i18n-aria="ui.Назад"></button>
   </header>
   <div class="mapBody">
     <div class="panel charCol charColLeft"><div id="charLeft" class="charScroll"></div></div>
@@ -241,7 +242,7 @@
 <!-- Реестр Героев и Пострадавших (парагон аккаунта): паутинка компенсаций и описание -->
 <section id="paragon" class="screen">
   <header class="screenHead">
-    <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
+    <button class="btn stone round back" type="button" data-back aria-label="Назад" data-i18n-aria="ui.Назад"></button>
   </header>
   <div class="mapBody">
     <div class="panel charCol paragonColLeft"><div id="paragonLeft" class="pgLeft"></div></div>
@@ -251,14 +252,14 @@
 
 <section id="camp" class="screen">
   <header class="screenHead">
-    <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
+    <button class="btn stone round back" type="button" data-back aria-label="Назад" data-i18n-aria="ui.Назад"></button>
   </header>
   <div id="campBody"></div>
 </section>
 
 <section id="bunker" class="screen">
   <header class="screenHead">
-    <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
+    <button class="btn stone round back" type="button" data-back aria-label="Назад" data-i18n-aria="ui.Назад"></button>
   </header>
   <div id="bunkerBody"></div>
 </section>
@@ -268,7 +269,7 @@
 <!-- Общий склад лагеря: вещи и изолента для всех персонажей аккаунта -->
 <section id="stash" class="screen">
   <header class="screenHead">
-    <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
+    <button class="btn stone round back" type="button" data-back aria-label="Назад" data-i18n-aria="ui.Назад"></button>
   </header>
   <div class="mapBody">
     <div class="panel charCol shopColLeft"><div id="stashLeft" class="charScroll"></div></div>
@@ -278,7 +279,7 @@
 
 <section id="bank" class="screen">
   <header class="screenHead">
-    <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
+    <button class="btn stone round back" type="button" data-back aria-label="Назад" data-i18n-aria="ui.Назад"></button>
   </header>
   <div class="mapBody">
     <div class="panel charCol shopColLeft"><div id="bankLeft" class="charScroll"></div></div>
@@ -288,7 +289,7 @@
 
 <section id="shop" class="screen">
   <header class="screenHead">
-    <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
+    <button class="btn stone round back" type="button" data-back aria-label="Назад" data-i18n-aria="ui.Назад"></button>
   </header>
   <div class="mapBody">
     <div class="panel charCol shopColLeft"><div id="shopLeft" class="charScroll"></div></div>
@@ -300,7 +301,7 @@
 <!-- Журнал заданий: слева список по категориям, справа выбранное задание -->
 <section id="journal" class="screen">
   <header class="screenHead">
-    <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
+    <button class="btn stone round back" type="button" data-back aria-label="Назад" data-i18n-aria="ui.Назад"></button>
   </header>
   <div class="mapBody">
     <div class="panel charCol journalColLeft"><div id="journalLeft" class="charScroll"></div></div>
@@ -310,7 +311,7 @@
 
 <section id="quests" class="screen">
   <header class="screenHead">
-    <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
+    <button class="btn stone round back" type="button" data-back aria-label="Назад" data-i18n-aria="ui.Назад"></button>
   </header>
   <div class="mapBody">
     <div class="panel charCol shopColLeft"><div id="questsLeft" class="charScroll"></div></div>
@@ -321,7 +322,7 @@
 <!-- Глоссарий-книга: разделы слева, страница справа (разделы — js/glossarySections.js) -->
 <section id="glossary" class="screen">
   <header class="screenHead">
-    <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
+    <button class="btn stone round back" type="button" data-back aria-label="Назад" data-i18n-aria="ui.Назад"></button>
   </header>
   <div class="mapBody">
     <div id="glossaryTabs" class="panel"></div>
@@ -333,7 +334,7 @@
 <section id="intro" class="screen">
   <div id="introStars"></div>
   <div class="introView"><div id="introCrawl"></div></div>
-  <button id="introSkip" class="btn stone" type="button">Пропустить</button>
+  <button id="introSkip" class="btn stone" type="button" data-i18n="ui.Пропустить">Пропустить</button>
 </section>
 
 <!-- Экран после «Выхода», если браузер не дал закрыть вкладку -->
@@ -343,24 +344,24 @@
     <div class="ribbon">Match 3 RPG</div>
   </div>
   <div class="panel">
-    <p class="hint">Игра закрыта. Можно закрыть вкладку.</p>
-    <button id="btnReturn" class="btn green" type="button">Вернуться</button>
+    <p class="hint" data-i18n="ui.Игра закрыта. Можно закрыть вкладку.">Игра закрыта. Можно закрыть вкладку.</p>
+    <button id="btnReturn" class="btn green" type="button" data-i18n="ui.Вернуться">Вернуться</button>
   </div>
 </section>
 
 <!-- Шуточная «оплата»: нарисованная карта без полей ввода, ничего не вводится и не сохраняется (js/openPayJoke.js) -->
 <div id="payJoke" class="modal">
   <div class="modalBox">
-    <div class="ribbon">Шадап эд тейк май мани</div>
+    <div class="ribbon" data-i18n="ui.Шадап эд тейк май мани">Шадап эд тейк май мани</div>
     <div class="panel">
       <div class="jokeCard" aria-hidden="true">
         <span class="jokeChip"></span>
         <span class="jokeNum">••••  ••••  ••••  ••••</span>
-        <span class="jokeRow"><span>ММ/ГГ</span><span>CVC •••</span></span>
-        <span class="jokeBank">Банк «Последний рубль»</span>
+        <span class="jokeRow"><span data-i18n="ui.ММ/ГГ">ММ/ГГ</span><span>CVC •••</span></span>
+        <span class="jokeBank" data-i18n="ui.Банк «Последний рубль»">Банк «Последний рубль»</span>
       </div>
-      <p class="jokeNote">Введите данные карты, и мы ничего не пришлём.</p>
-      <button id="payJokeNo" class="btn red" type="button">Я терпила</button>
+      <p class="jokeNote" data-i18n="ui.Введите данные карты, и мы ничего не пришлём.">Введите данные карты, и мы ничего не пришлём.</p>
+      <button id="payJokeNo" class="btn red" type="button" data-i18n="ui.Я терпила">Я терпила</button>
     </div>
   </div>
 </div>
@@ -368,9 +369,9 @@
 <!-- Читер: уровень, изолента и прибавка к характеристикам текущего героя (js/renderCheat.js) -->
 <div id="cheat" class="modal">
   <div class="modalBox">
-    <div class="ribbon">Читер</div>
+    <div class="ribbon" data-i18n="ui.Читер">Читер</div>
     <div class="panel">
-      <button id="cheatClose" class="btn red round close" type="button" aria-label="Закрыть"></button>
+      <button id="cheatClose" class="btn red round close" type="button" aria-label="Закрыть" data-i18n-aria="ui.Закрыть"></button>
       <div id="cheatBody"></div>
     </div>
   </div>
@@ -381,7 +382,7 @@
   <div class="modalBox">
     <div class="ribbon" id="enemyInfoTitle"></div>
     <div class="panel">
-      <button id="enemyInfoClose" class="btn red round close" type="button" aria-label="Закрыть"></button>
+      <button id="enemyInfoClose" class="btn red round close" type="button" aria-label="Закрыть" data-i18n-aria="ui.Закрыть"></button>
       <div id="enemyInfoBody"></div>
     </div>
   </div>
@@ -392,7 +393,7 @@
   <div class="modalBox">
     <div class="ribbon" id="itemInfoTitle"></div>
     <div class="panel">
-      <button id="itemInfoClose" class="btn red round close" type="button" aria-label="Закрыть"></button>
+      <button id="itemInfoClose" class="btn red round close" type="button" aria-label="Закрыть" data-i18n-aria="ui.Закрыть"></button>
       <div id="itemInfoBody"></div>
       <div id="itemInfoButtons" class="confirmButtons"></div>
     </div>
@@ -401,9 +402,9 @@
 
 <div id="changelog" class="modal">
   <div class="modalBox">
-    <div class="ribbon">Список изменений</div>
+    <div class="ribbon" data-i18n="ui.Список изменений">Список изменений</div>
     <div class="panel">
-      <button id="changelogClose" class="btn red round close" type="button" aria-label="Закрыть"></button>
+      <button id="changelogClose" class="btn red round close" type="button" aria-label="Закрыть" data-i18n-aria="ui.Закрыть"></button>
       <div id="changelogList"></div>
     </div>
   </div>
@@ -412,13 +413,13 @@
 <!-- Подсказка «Фишки»: что даёт каждая фишка в бою -->
 <div id="gemLegend" class="modal">
   <div class="modalBox">
-    <div class="ribbon">Фишки</div>
+    <div class="ribbon" data-i18n="ui.Фишки">Фишки</div>
     <div class="panel">
-      <button id="gemLegendClose" class="btn red round close" type="button" aria-label="Закрыть"></button>
+      <button id="gemLegendClose" class="btn red round close" type="button" aria-label="Закрыть" data-i18n-aria="ui.Закрыть"></button>
       <div id="gemLegendList"></div>
       <div class="legendFoot">
         <p id="gemLegendNote"></p>
-        <button id="gemLegendMore" class="btn stone" type="button">Весь глоссарий</button>
+        <button id="gemLegendMore" class="btn stone" type="button" data-i18n="ui.Весь глоссарий">Весь глоссарий</button>
       </div>
     </div>
   </div>
@@ -430,7 +431,7 @@
 <div id="tutorial" hidden>
   <div class="tutRing"></div>
   <svg class="tutArrow" aria-hidden="true"><defs><marker id="tutHead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="var(--ui-reward)"/></marker></defs><line marker-end="url(#tutHead)"/></svg>
-  <div class="tutBubble panel"><p></p><div class="tutBtns"><button class="btn stone tutHide" type="button">Скрыть обучение</button><button class="btn green tutOk" type="button">Понятно</button></div></div>
+  <div class="tutBubble panel"><p></p><div class="tutBtns"><button class="btn stone tutHide" type="button" data-i18n="ui.Скрыть обучение">Скрыть обучение</button><button class="btn green tutOk" type="button" data-i18n="ui.Понятно">Понятно</button></div></div>
 </div>
 
 <div id="confirm" class="modal">
@@ -438,7 +439,7 @@
     <div class="panel">
       <p id="confirmText"></p>
       <div class="confirmButtons">
-        <button id="confirmNo" class="btn stone" type="button">Отмена</button>
+        <button id="confirmNo" class="btn stone" type="button" data-i18n="ui.Отмена">Отмена</button>
         <button id="confirmYes" class="btn red" type="button"></button>
       </div>
     </div>
@@ -452,7 +453,7 @@
     <div class="panel levelUpPanel">
       <div class="levelUpLeft">
         <p id="levelUpText"></p>
-        <button id="levelUpDone" class="btn stone" type="button">Позже</button>
+        <button id="levelUpDone" class="btn stone" type="button" data-i18n="ui.Позже">Позже</button>
       </div>
       <div id="levelUpStats" class="levelUpStats"></div>
     </div>
@@ -465,8 +466,8 @@
     <div class="panel">
       <ul id="resultList"></ul>
       <div class="confirmButtons">
-        <button id="resultMap" class="btn stone" type="button">Закрыть</button>
-        <button id="resultAgain" class="btn green" type="button">Ещё раз</button>
+        <button id="resultMap" class="btn stone" type="button" data-i18n="ui.Закрыть">Закрыть</button>
+        <button id="resultAgain" class="btn green" type="button" data-i18n="ui.Ещё раз">Ещё раз</button>
       </div>
     </div>
   </div>
@@ -482,6 +483,11 @@
 
 <div id="toast"></div>
 
+<script src="js/languages.js"></script>
+<script src="locales/ru.js"></script>
+<script src="locales/en.js"></script>
+<script src="js/t.js"></script>
+<script src="js/applyLocale.js"></script>
 <script src="js/bagConfig.js"></script>
 <script src="js/makeBag.js"></script>
 <script src="js/isBagItem.js"></script>
@@ -896,6 +902,7 @@
 <script src="js/questBoardTick.js"></script>
 <script src="js/bagFreeSlots.js"></script>
 <script src="js/warnBagFull.js"></script>
+<script src="js/setupLanguage.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
