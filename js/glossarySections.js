@@ -13,6 +13,7 @@ const GLOSSARY_SECTIONS = [
   { id: 'items',    name: 'Предметы',       build: glossaryItems },
   { id: 'bunker',   name: 'Бункер',         build: glossaryBunker },
   { id: 'camp',     name: 'Лагерь',         build: glossaryCamp },
+  { id: 'paragon',  name: 'Реестр',         build: glossaryParagon },
   { id: 'servers',  name: 'Серверы',        build: glossaryServers },
   { id: 'progress', name: 'Опыт и изолента', build: glossaryProgress }
 ];

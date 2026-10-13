@@ -235,6 +235,17 @@
 
 <!-- Бункер: вступление и места — торговец, доска заданий (js/renderBunker.js) -->
 <!-- Лагерь: общий для аккаунта, постройки -->
+<!-- Реестр Героев и Пострадавших (парагон аккаунта): паутинка компенсаций и описание -->
+<section id="paragon" class="screen">
+  <header class="screenHead">
+    <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
+  </header>
+  <div class="mapBody">
+    <div class="panel charCol paragonColLeft"><div id="paragonLeft" class="pgLeft"></div></div>
+    <div class="panel charCol charColRight"><div id="paragonRight" class="charScroll"></div></div>
+  </div>
+</section>
+
 <section id="camp" class="screen">
   <header class="screenHead">
     <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
@@ -466,6 +477,17 @@
 <script src="js/bankMove.js"></script>
 <script src="js/buyBankBag.js"></script>
 <script src="js/renderBank.js"></script>
+<script src="js/paragonConfig.js"></script>
+<script src="js/paragonRanks.js"></script>
+<script src="js/paragonPoints.js"></script>
+<script src="js/paragonCanTake.js"></script>
+<script src="js/paragonTake.js"></script>
+<script src="js/paragonReset.js"></script>
+<script src="js/paragonBonus.js"></script>
+<script src="js/paragonEffectText.js"></script>
+<script src="js/openParagon.js"></script>
+<script src="js/renderParagon.js"></script>
+<script src="js/glossaryParagon.js"></script>
 <script src="js/campConfig.js"></script>
 <script src="js/loadAccount.js"></script>
 <script src="js/saveAccount.js"></script>

@@ -1593,3 +1593,39 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 #menu .menuRow { padding-right: 0; width: 100%; }
 #menu .menuButtons { width: 100%; }
 #menu #ver { bottom: 2px; }
+
+/* Реестр Героев и Пострадавших */
+#paragon { max-width: 960px; height: var(--app-h); gap: 8px; }
+#paragon .screenHead { margin: 0; }
+.paragonColLeft { flex: 0 0 58%; }
+.pgLeft { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 6px; padding: 8px 10px; }
+.pgHead { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font: var(--type-menu); font-weight: 600; color: var(--ui-reward); }
+.pgHead b { font: var(--type-stat); color: var(--text-primary); }
+.pgWeb { position: relative; flex: 1; min-height: 0; border-radius: 12px; background: var(--bg-cell); }
+.pgWeb svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.pgWeb line { stroke: var(--ui-metal); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+.pgWeb line.on { stroke: var(--ui-reward); stroke-width: 2.5; }
+.pgNode { position: absolute; transform: translate(-50%, -50%); width: 46px; height: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0;
+  border: 0; border-radius: 10px; background: var(--bg-canvas); box-shadow: inset 0 0 0 2px var(--ui-metal); color: var(--text-muted); opacity: .7; }
+.pgNode small { font: var(--type-caption); font-size: 9px; line-height: 11px; }
+.pgNode b { font: var(--type-stat); line-height: 14px; }
+.pgNode.active { border-radius: 50%; width: 42px; height: 42px; }
+.pgNode.can { opacity: 1; box-shadow: inset 0 0 0 2px var(--ui-reward); color: var(--text-primary); }
+.pgNode.taken { opacity: 1; background: var(--glass-top), var(--gem-ruby-dark); color: var(--text-primary); box-shadow: inset 0 0 0 2px var(--gem-ruby-light); }
+.pgNode.full { background: var(--glass-top), var(--ui-reward); color: var(--ui-outline); box-shadow: none; }
+.pgNode.selected { outline: 2px solid var(--text-primary); outline-offset: 2px; }
+#paragonRight p { margin: 0; }
+.pgName { font: var(--type-heading); font-size: 18px; line-height: 22px; color: var(--text-primary); }
+.pgBonus { font: var(--type-body-strong); color: var(--ui-reward); }
+.pgReason { font: var(--type-small); font-style: italic; color: var(--text-secondary); }
+.pgRank { font: var(--type-stat); color: var(--text-secondary); }
+.pgBtns { display: flex; gap: 6px; flex: none; }
+.pgBtns .btn { flex: 1; min-height: 40px; }
+.pgWhy { font: var(--type-caption); color: var(--ui-danger); min-height: 14px; }
+.pgNote { font: var(--type-caption); color: var(--text-muted); }
+/* в бою: если навыков больше, лог ужимается, а не вылезает за экран */
+.battleCorner { flex: 1 1 auto; min-height: 0; justify-content: flex-end; }
+.battleLog { flex: 0 1 66px; min-height: 28px; }
+.pgBonus { font: var(--type-small); font-weight: 600; }
+.pgBtns .btn { min-height: 36px; padding: 4px 8px; font: var(--type-menu); font-size: 13px; font-weight: 600; white-space: nowrap; }
+#paragonRight { gap: 5px; }

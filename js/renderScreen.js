@@ -11,6 +11,7 @@ function renderScreen(id) {
   else if (id === 'quests') renderQuests();
   else if (id === 'journal') renderJournal();
   else if (id === 'camp') renderCamp();
+  else if (id === 'paragon') renderParagon();
   else if (id === 'bank') renderBank();
   else if (id === 'stash') renderStash();
   else if (id === 'game') {

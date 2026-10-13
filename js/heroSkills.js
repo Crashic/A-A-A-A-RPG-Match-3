@@ -5,5 +5,6 @@ function heroSkills(hero) {
   const race = hero.raceId === 'press' && PRESS_SKILL_SOURCE[hero.classId] ? PRESS_SKILL_SOURCE[hero.classId] : hero.raceId;
   const own = SKILLS[race + ':' + hero.classId] || [];
   const combat = CLASS_SKILLS[hero.classId];
-  return combat ? [combat, ...own] : own;
+  const list = combat ? [combat, ...own] : own;
+  return list.concat(paragonBonus().skills); // навыки из реестра — у всех персонажей аккаунта
 }
