@@ -350,7 +350,7 @@ h1 {
 /* щит и опыт — той же высоты, что мана */
 .bar.shield, .bar.xp { height: 14px; }
 .bar.shield span, .bar.xp span { line-height: 14px; font-size: 10px; }
-.bar.shield { --fill: var(--gem-aquamarine-dark); }        /* щит — Детали */
+.bar.shield { --fill: var(--gem-aquamarine); }             /* щит — Детали, основной цвет фишки */
 .bar.xp     { --fill: var(--gem-pearl-dark); }             /* опыт — Документы */
 /* Строка полосы: слева фишка, которая её пополняет */
 .statRow { display: flex; align-items: center; gap: 4px; min-width: 0; }
@@ -1647,7 +1647,6 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 /* 0.7.2: на телефоне навыки героя — в одну колонку, кнопки ниже */
 @media (pointer: coarse) {
   .heroSkillBtns { grid-template-columns: 1fr; gap: 3px; }
-  .heroSkillBtns .btn.skillBtn { height: 36px; min-height: 36px; }
 }
 /* 0.7.2: добыча в итогах боя — отдельной заметной плашкой */
 #resultList li.lootIcons { margin: 4px -8px; padding: 6px 8px; border-radius: 10px; background: var(--bg-canvas); box-shadow: inset 0 0 0 2px var(--ui-reward); }
@@ -1685,3 +1684,21 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .levelUpLeft p { margin: 0; font: var(--type-body); color: var(--text-secondary); }
 .levelUpStats { flex: 1.2; min-width: 0; }
 .levelUpStats .statsHead { display: none; }
+/* 0.7.2: навыки героя — одна кнопка на всю ширину блока, как у врага (и на ПК) */
+.heroSkillBtns { grid-template-columns: 1fr; }
+/* 0.7.2: значки здоровья, щита и маны в бою — вдвое крупнее (32 px), цифры +4 пт */
+.fighter .statRow > .gemMini, .fighter .statRow > svg { width: 32px; height: 32px; }
+.fighter .bar.hp { height: 26px; }
+.fighter .bar.hp span { font-size: 16px; line-height: 26px; }
+.fighter .bar.shield { height: 20px; }
+.fighter .bar.shield span { font-size: 14px; line-height: 20px; }
+.fighter .bar.mana { height: 32px; }
+.fighter .bar.mana > span { font-size: 16px; line-height: 32px; }
+/* панель героя выросла — кнопки навыков не сжимаются, ужимается лог боя */
+#skillBar { flex: none; }
+.gameSide .battleCorner { flex: 1 1 auto; min-height: 0; justify-content: flex-end; }
+.gameSide .battleCorner .battleLog { flex: 0 1 66px; height: auto; min-height: 26px; }
+/* кнопка навыка героя — как у врага: 44 px, тот же шрифт */
+.heroSkillBtns .btn.skillBtn { height: 44px; min-height: 44px; padding: 3px 10px 4px; }
+.heroSkillBtns .skillBtn b { font-size: 14px; line-height: 18px; }
+.heroSkillBtns .skillBtn small { font-size: 11px; }
