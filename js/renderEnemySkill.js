@@ -16,10 +16,11 @@ function renderEnemySkill() {
     const wait = battle.skill.enemyCd || 0;
     const ready = !wait && (f.mana[gem] || 0) >= skill.cost[gem];
     const card = document.createElement('div');
-    card.className = 'enemyActive' + (ready ? ' ready' : '');
-    card.innerHTML = '<b></b><small>' + gemMiniIcon(gem) + '<span></span></small>';
+    // та же схема, что у кнопки навыка героя: слева мана (значок и цена), справа название и описание
+    card.className = 'enemyActive skillBtn2' + (ready ? ' ready' : '');
+    card.innerHTML = '<span class="skCost">' + gemMiniIcon(gem) + '<i>' + skill.cost[gem] + '</i></span><span class="skText"><b></b><small></small></span>';
     card.querySelector('b').textContent = skill.name;
-    card.querySelector('small span').textContent = skill.cost[gem] + (wait ? ' · ждать ' + wait : ' · перезарядка ' + skill.cooldown);
+    card.querySelector('small').textContent = wait ? 'Перезарядка: ещё ' + wait + ' ' + plural(wait, 'ход', 'хода', 'ходов') : skill.text;
     attachTip(card, skill.name + ' · активный', skill.text + ' ' + skill.lore);
     row.appendChild(card);
   }
