@@ -12,5 +12,6 @@ const GLOSSARY_SECTIONS = [
   { id: 'zones',    name: 'Локации и враги', build: glossaryZones },
   { id: 'items',    name: 'Предметы',       build: glossaryItems },
   { id: 'bunker',   name: 'Бункер',         build: glossaryBunker },
+  { id: 'servers',  name: 'Серверы',        build: glossaryServers },
   { id: 'progress', name: 'Опыт и изолента', build: glossaryProgress }
 ];

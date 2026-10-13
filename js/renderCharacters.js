@@ -17,7 +17,7 @@ function renderCharacters() {
     const title = document.createElement('b');
     title.textContent = hero ? hero.name : '+ Создать персонажа';
     const sub = document.createElement('span');
-    sub.textContent = hero ? 'Уровень ' + hero.level : countHeroes() + ' / ' + SLOT_COUNT; // только имя и уровень
+    sub.textContent = hero ? heroServerText(hero) + ' · Уровень ' + hero.level : countHeroes() + ' / ' + SLOT_COUNT; // только имя и уровень
     info.append(title, sub);
     info.addEventListener('click', () => {
       vibrate();

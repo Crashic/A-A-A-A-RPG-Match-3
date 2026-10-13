@@ -2,6 +2,7 @@
 function randomCharacter() {
   const pick = list => list[Math.floor(Math.random() * list.length)];
   const race = pick(RACES);
+  if (!creation.draft.modeId) creation.draft.modeId = pick(GAME_MODES).id;
   Object.assign(creation.draft, {
     raceId: race.id,
     factionId: race.factionId,

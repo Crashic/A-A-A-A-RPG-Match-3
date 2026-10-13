@@ -3,6 +3,8 @@ function finishCharacterCreation() {
   const d = creation.draft;
   const hero = {
     name: d.name.trim(),
+    serverId: d.serverId,
+    modeId: d.modeId,
     classId: d.classId,
     genderId: d.genderId,
     raceId: d.raceId,

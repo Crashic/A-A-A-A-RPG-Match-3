@@ -1438,3 +1438,11 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 /* Меню боя: 8 пунктов (с «Сдаться») — компактнее, чтобы влезть в высоту 360 */
 #battleMenu .menuItem { padding-top: 3px; padding-bottom: 3px; }
 #battleMenu .menuItem svg { width: 26px; height: 26px; }
+
+/* Создание: шаг «Сервер» — сервер и три режима столбиком, кнопки по высоте содержимого */
+.serverGrid { display: flex; flex-direction: column; gap: 5px; overflow-y: auto; }
+.serverGrid .classTitle { margin: 2px 0 0; }
+.serverGrid .pick { flex: none; font: var(--type-body-strong); }
+.infoText h3.modeTitle { margin-top: 10px; font-size: 17px; line-height: 21px; }
+/* Карточка персонажа: сервер и режим под именем */
+.charServer { margin: 0; text-align: center; font: var(--type-caption); color: var(--text-muted); }
