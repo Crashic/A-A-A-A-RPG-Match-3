@@ -65,6 +65,11 @@ function setupMenu() {
 
   // Кнопка «Назад» телефона: возврат на предыдущий экран (для создания персонажа — отмена)
   window.addEventListener('popstate', () => {
+    if (homeBound) { // «В главное меню»: листаем назад до самого меню
+      const st = history.state;
+      if (st && st.screen && st.screen !== 'menu') { history.back(); return; }
+      homeBound = false;
+    }
     document.getElementById('confirm').classList.remove('open');
     closeGemLegend();
     document.getElementById('keyboard').classList.remove('open');

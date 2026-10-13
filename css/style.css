@@ -1589,3 +1589,7 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .questCard.locked { opacity: .85; }
 .qTimer { font: var(--type-stat); color: var(--ui-danger); }
 .bankBag.owned b { font: var(--type-caption); color: var(--text-secondary); }
+/* главное меню: нижние кнопки — ровно по ширине «Продолжить», номер версии — под ними, не поверх */
+#menu .menuRow { padding-right: 0; width: 100%; }
+#menu .menuButtons { width: 100%; }
+#menu #ver { bottom: 2px; }
