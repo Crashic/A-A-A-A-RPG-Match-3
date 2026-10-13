@@ -8,5 +8,7 @@ function resetStats() {
   saveSlot(slot, hero);
   vibrate(20);
   renderCharacter();
+  renderLevelUpStats();
+  updateNotifyBadges();
   refreshHeroInBattle();
 }

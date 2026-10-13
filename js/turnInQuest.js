@@ -13,5 +13,7 @@ function turnInQuest(index) {
   hero.quests.done = (hero.quests.done || 0) + 1;
   saveQuests(hero);
   vibrate([30, 40, 30]);
+  updateNotifyBadges();
+  if (ups) showLevelUp(hero.level, ups);
   showToast('Задание сдано' + (item ? ': ' + item.name : '') + (ups ? ' · новый уровень!' : ''), 3000);
 }

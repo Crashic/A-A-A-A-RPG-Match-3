@@ -1643,3 +1643,45 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .tutBtns .btn { min-height: 30px; padding: 3px 10px; font: var(--type-small); font-weight: 600; }
 .tutBtns .btn[hidden] { display: none; }
 #rowTutorialHero[hidden] { display: none; }
+
+/* 0.7.2: на телефоне навыки героя — в одну колонку, кнопки ниже */
+@media (pointer: coarse) {
+  .heroSkillBtns { grid-template-columns: 1fr; gap: 3px; }
+  .heroSkillBtns .btn.skillBtn { height: 36px; min-height: 36px; }
+}
+/* 0.7.2: добыча в итогах боя — отдельной заметной плашкой */
+#resultList li.lootIcons { margin: 4px -8px; padding: 6px 8px; border-radius: 10px; background: var(--bg-canvas); box-shadow: inset 0 0 0 2px var(--ui-reward); }
+#resultList li.lootIcons > span { font: var(--type-body-strong); color: var(--ui-reward); }
+#resultList li.lootIcons .invSlot { box-shadow: 0 0 0 2px var(--ui-reward); }
+/* 0.7.2: значок-уведомление «!» на кнопке (updateNotifyBadges) */
+.sideMenu .btn, .menuItem, .heroCardBtn, #btnBattleMenu { position: relative; }
+.notifyDot { position: absolute; top: -4px; right: -4px; z-index: 2; display: grid; place-items: center; width: 16px; height: 16px; border-radius: 50%;
+  background: var(--ui-reward); color: var(--ui-outline); font: var(--type-stat); font-size: 11px; font-weight: 700; line-height: 1;
+  box-shadow: 0 0 0 1.5px var(--ui-outline); pointer-events: none; animation: notifyPulse 1.4s ease-in-out infinite; }
+.notifyDot[hidden] { display: none; }
+.menuItem .notifyDot { top: 2px; right: 4px; left: auto; }
+@keyframes notifyPulse { 50% { transform: scale(1.18); } }
+/* 0.7.2: жребий первого хода — монета над полем (showCoinFlip) */
+.boardWrap { position: relative; }
+.coinFlip { position: absolute; inset: 0; z-index: 20; display: none; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  perspective: 600px; }
+.coinFlip::before { content: ''; position: absolute; inset: 0; background: var(--ui-outline); opacity: .55; }
+.coin, .coinText { position: relative; }
+.coinFlip.open { display: flex; }
+.coin { width: 96px; height: 96px; transform-style: preserve-3d; }
+.coinFace { position: absolute; inset: 0; display: grid; place-items: center; border-radius: 50%; backface-visibility: hidden;
+  background: radial-gradient(circle at 35% 30%, var(--gem-topaz-light), var(--ui-reward) 55%, var(--ui-gold-shadow));
+  box-shadow: inset 0 0 0 5px var(--ui-gold-shadow), inset 0 0 0 8px var(--gem-topaz-light), 0 6px 14px var(--ui-outline); }
+.coinFace svg { width: 62px; height: 62px; }
+.coinFace.coinEnemy { transform: rotateY(180deg); }
+.coinText { margin: 0; min-height: 24px; padding: 2px 14px; border-radius: 10px; font: var(--type-heading); color: var(--text-primary); background: var(--bg-canvas); }
+.coinText:empty { visibility: hidden; }
+.coinText.hero { box-shadow: inset 0 0 0 2px var(--ui-primary); }
+.coinText.enemy { box-shadow: inset 0 0 0 2px var(--ui-danger); }
+/* 0.7.2: окно «Новый уровень» — слева текст и кнопка, справа характеристики */
+.levelUpBox { max-width: 600px; }
+.levelUpPanel { flex-direction: row !important; gap: 12px; align-items: stretch; }
+.levelUpLeft { flex: 1; display: flex; flex-direction: column; justify-content: space-between; gap: 10px; padding-top: 12px; }
+.levelUpLeft p { margin: 0; font: var(--type-body); color: var(--text-secondary); }
+.levelUpStats { flex: 1.2; min-width: 0; }
+.levelUpStats .statsHead { display: none; }

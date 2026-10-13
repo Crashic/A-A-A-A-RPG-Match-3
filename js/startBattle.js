@@ -29,9 +29,12 @@ async function startBattle(enemyId, saved = null) {
   if (!saved) { logBattle('sys', 'Бой: ' + e.name + ', ур. ' + e.level + (e.elite ? ' · элита' : '')); battle.turn = rollFirstTurn(); }
   renderBattle();
   renderBattleLog();
-  showFirstLegend(); // в первом бою — подсказка, какая фишка что даёт
+  // новый бой — монетка: мечи (ходите вы) или щит (ходит враг)
+  const flip = saved ? null : showCoinFlip(battle.turn, battle.turn === 'hero' ? 'Вы ходите первым!' : e.name + ' ходит первым');
   await startMatch3(saved ? saved.grid : null);
+  if (flip) await flip;
   if (battle !== current) return;
+  showFirstLegend(); // в первом бою — подсказка, какая фишка что даёт
   tutorialCheck(); // обучение в бою
   saveBattle();
   if (battle.turn === 'enemy') await enemyTurn();

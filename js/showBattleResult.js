@@ -1,5 +1,7 @@
 // Окно итогов боя (добыча — иконками, renderResultLoot): «Победа»/«Поражение», опыт, изолента, новый уровень, добыча (r.added, r.lost). Кнопки «Карта» и «Ещё раз».
+let battleLevelUp = null; // { level, ups } — показать окно нового уровня после итогов
 function showBattleResult(r) {
+  battleLevelUp = r.levelUps ? { level: r.level, ups: r.levelUps } : null;
   const box = document.getElementById('battleResult');
   document.getElementById('resultTitle').textContent = r.won ? 'Победа' : 'Поражение';
   const list = document.getElementById('resultList');

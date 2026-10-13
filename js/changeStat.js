@@ -13,5 +13,7 @@ function changeStat(statId, delta) {
   saveSlot(slot, hero);
   vibrate(10);
   renderCharacter();
+  renderLevelUpStats(); // открыто окно нового уровня — обновить
+  updateNotifyBadges();
   refreshHeroInBattle(); // режим читов в бою — сразу в силе
 }

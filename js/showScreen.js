@@ -6,5 +6,6 @@ function showScreen(id, push = true) {
   if (id !== 'menu' && push) history.pushState({ screen: id, depth: navDepth() + 1 }, ''); // depth — шагов от меню (goHome)
   window.scrollTo(0, 0);
   hideTutorial();
+  updateNotifyBadges(); // «!» на Заданиях и Персонаже
   tutorialCheck(); // обучение: подсказка для этого экрана
 }

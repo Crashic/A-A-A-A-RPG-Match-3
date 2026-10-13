@@ -130,6 +130,7 @@
     </div>
   </aside>
   <div class="boardWrap">
+    <div id="coinFlip" class="coinFlip"></div>
     <div id="board" class="board">
       <div id="boardCells"></div>
       <div id="boardGems"></div>
@@ -441,6 +442,20 @@
         <button id="confirmNo" class="btn stone" type="button">Отмена</button>
         <button id="confirmYes" class="btn red" type="button"></button>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- Новый уровень: раздача очков характеристик — js/showLevelUp.js -->
+<div id="levelUp" class="modal">
+  <div class="modalBox levelUpBox">
+    <div class="ribbon" id="levelUpTitle"></div>
+    <div class="panel levelUpPanel">
+      <div class="levelUpLeft">
+        <p id="levelUpText"></p>
+        <button id="levelUpDone" class="btn stone" type="button">Позже</button>
+      </div>
+      <div id="levelUpStats" class="levelUpStats"></div>
     </div>
   </div>
 </div>
@@ -875,6 +890,9 @@
 <script src="js/goHome.js"></script>
 <script src="js/setupMenu.js"></script>
 <script src="js/setupInstall.js"></script>
+<script src="js/updateNotifyBadges.js"></script>
+<script src="js/showLevelUp.js"></script>
+<script src="js/showCoinFlip.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

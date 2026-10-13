@@ -1,5 +1,5 @@
 // Под панелью врага: активный навык за ману (значок маны, цена, перезарядка; подсказка — что делает),
-// справа от него — столбик иконок (enemyBuffIcons): навык из списка автора, элита, ваши дебаффы на нём. Характеристики и подробности — по касанию
+// (иконки бонусов убраны по просьбе автора). Характеристики и подробности — по касанию
 // на панель врага (openEnemyInfo).
 function renderEnemySkill() {
   const box = document.getElementById('enemySkill');
@@ -23,10 +23,5 @@ function renderEnemySkill() {
     attachTip(card, skill.name + ' · активный', skill.text + ' ' + skill.lore);
     row.appendChild(card);
   }
-  // справа от навыка — столбик иконок (зеркально герою): пассивный навык, элита, эффекты на враге
-  const icons = document.createElement('div');
-  icons.className = 'heroBuffs enemyBuffs';
-  icons.append(...enemyBuffIcons());
-  if (icons.children.length) row.appendChild(icons);
   box.appendChild(row);
 }

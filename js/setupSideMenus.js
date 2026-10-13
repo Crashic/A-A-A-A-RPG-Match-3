@@ -12,6 +12,7 @@ function setupSideMenus() {
       b.className = 'btn stone square' + (it.screens.includes(id) ? ' current' : '');
       b.setAttribute('aria-label', it.label);
       b.dataset.tip = it.tip;
+      b.dataset.act = it.act;
       b.innerHTML = it.icon();
       if (it.screens.includes(id)) b.disabled = true;
       else b.addEventListener('click', e => { e.stopPropagation(); vibrate(); sideMenuAction(it.act); });

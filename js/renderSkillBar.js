@@ -1,5 +1,5 @@
-// Навыки под панелью игрока: слева столбик иконок (бонус расы, пассивные, баффы и дебаффы — heroBuffIcons,
-// у каждой подсказка), справа кнопки активных навыков (название и цена; у боевого навыка класса — значок маны
+// Навыки под панелью игрока: кнопки активных навыков (иконки бонусов убраны по просьбе автора;
+// на телефоне — в одну колонку, CSS) (название и цена; у боевого навыка класса — значок маны
 // и перезарядка; недоступные — серые). Как у врага: иконки рядом с навыком.
 function renderSkillBar() {
   const bar = document.getElementById('skillBar');
@@ -8,9 +8,6 @@ function renderSkillBar() {
   bar.innerHTML = '';
   const row = document.createElement('div');
   row.className = 'heroSkillRow';
-  const icons = document.createElement('div');
-  icons.className = 'heroBuffs';
-  icons.append(...heroBuffIcons());
   const buttons = document.createElement('div');
   buttons.className = 'heroSkillBtns';
   for (const s of skills.filter(s => s.type === 'active')) {
@@ -44,7 +41,6 @@ function renderSkillBar() {
     k.addEventListener('click', () => killAll());
     buttons.appendChild(k);
   }
-  if (icons.children.length) row.appendChild(icons);
   row.appendChild(buttons);
   bar.appendChild(row);
 }

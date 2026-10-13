@@ -3,7 +3,7 @@
 // power — множитель силы свойств: с редкого и выше каждая следующая редкость ×2 к предыдущей,
 // а выпадает в разы реже (weight). junk — хлам: только на продажу (не выпадает через rollRarity).
 const ITEM_RARITIES = [
-  { id: 'common', name: 'Обычный',    color: 'var(--text-muted)',          affixes: [0, 0], weight: 66,  power: 1, price: 1 },
+  { id: 'common', name: 'Обычный',    color: 'var(--text-primary)',          affixes: [0, 0], weight: 66,  power: 1, price: 1 },
   { id: 'magic',  name: 'Магический', color: 'var(--gem-sapphire-light)',  affixes: [1, 2], weight: 28,  power: 1, price: 3 },
   { id: 'rare',   name: 'Редкий',     color: 'var(--gem-topaz)',           affixes: [3, 4], weight: 5,   power: 2, price: 10 },
   { id: 'unique', name: 'Уникальный', color: 'var(--gem-ruby-light)',      affixes: null,   weight: 0.6, power: 4, price: 40 },
