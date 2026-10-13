@@ -3,6 +3,11 @@
 function skillTurnEnd(side) {
   const sk = battle.skill;
   if (side === 'hero') {
+    if (heroTwoHanded(battle.save)) { // двуручное: после удара ход «замаха», затем снова можно бить
+      if (sk.swingCd > 0) sk.swingCd--;
+      else if (sk.swingHit) sk.swingCd = 1;
+      sk.swingHit = false;
+    }
     if (sk.steps === 1) {
       for (const e of hasPassive('single')) {
         if (e.give === 'shield') {

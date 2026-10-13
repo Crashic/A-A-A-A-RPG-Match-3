@@ -6,9 +6,10 @@ function itemTipText(item) {
   const rar = findById(ITEM_RARITIES, item.rarity) || ITEM_RARITIES[0];
   const uniq = item.unique ? findById(ITEM_UNIQUES, item.unique) : null;
   return [
-    rar.name + ' · ' + (item.rarity === 'common' ? '' : base.name + ' · ') + SLOT_NAMES[base.slot],
+    rar.name + ' · ' + (item.rarity === 'common' ? '' : base.name + ' · ') + SLOT_NAMES[base.slot] + (base.hands === 2 ? ' (двуручное)' : ''),
     'Уровень ' + item.level + ', нужен ' + item.req + '-й',
     ...itemMods(item).map(modText),
+    weaponKindText(item),
     uniq ? uniq.lore : base.lore || '',
     itemWornTip(item)
   ].filter(Boolean).join('\n');

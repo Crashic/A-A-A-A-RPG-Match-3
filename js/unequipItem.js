@@ -1,6 +1,7 @@
 // Снять предмет из слота снаряжения key в сумку. Нельзя, если сумка полна или идёт бой (кроме читов).
 function unequipItem(key) {
   const hero = loadSlot(getActiveSlot());
+  if (key === 'weapon2' && hero && heroTwoHanded(hero)) key = 'weapon1'; // двуручное видно в обеих руках
   const item = hero && hero.gear && hero.gear[key];
   if (!item) return false;
   if (statsLocked()) { showToast('В бою не переодеваются. Даже в пустошах.'); return false; }

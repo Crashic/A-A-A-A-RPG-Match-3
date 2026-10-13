@@ -1,6 +1,7 @@
 // Базы предметов: что это за вещь. slot — вид слота (DOLL_SLOTS, руна), g — род для прилагательных
 // (m — мужской, f — женский, n — средний, p — множественное), main — характеристика самой вещи
 // (str, agi, sta, int, spi — как в js/statsConfig.js), lore — короткая шутка для окна предмета.
+// hands: 2 — двуручное оружие (TWO_HAND_MULT ×3 к свойствам, бьёт через ход; занимает обе руки).
 const ITEM_BASES = [
   { id: 'ushanka',   slot: 'head',      g: 'f', main: 'sta', name: 'Ушанка',                  lore: 'Уши в тепле — голова в порядке.' },
   { id: 'helmet',    slot: 'head',      g: 'f', main: 'str', name: 'Каска шахтёра',           lore: 'Фонарик сел ещё при Брежневе.' },
@@ -35,7 +36,11 @@ const ITEM_BASES = [
   { id: 'rebar',     slot: 'weapon',    g: 'f', main: 'str', name: 'Арматура',                lore: 'Универсальный инструмент диалога.' },
   { id: 'wrench',    slot: 'weapon',    g: 'm', main: 'str', name: 'Разводной ключ',          lore: 'Разводит гайки и спорщиков.' },
   { id: 'shovel',    slot: 'weapon',    g: 'f', main: 'str', name: 'Сапёрная лопатка',        lore: 'Копать, рубить, жарить яичницу.' },
-  { id: 'shotgun',   slot: 'weapon',    g: 'f', main: 'agi', name: 'Двустволка',              lore: 'Два ствола — два аргумента.' },
+  { id: 'shotgun',   slot: 'weapon',    g: 'f', main: 'agi', name: 'Двустволка',              lore: 'Два ствола — два аргумента. И две руки.', hands: 2 },
+  { id: 'sledge',    slot: 'weapon',    g: 'f', main: 'str', name: 'Кувалда',                 lore: 'Замахнулся — пошёл пить чай. Вернулся — ударил.', hands: 2 },
+  { id: 'crossbow',  slot: 'weapon',    g: 'm', main: 'agi', name: 'Арбалет из панцирной кровати', lore: 'Пружина помнит, как на ней спал дед.', hands: 2 },
+  { id: 'binder',    slot: 'weapon',    g: 'f', main: 'int', name: 'Подшивка «Правды» за 1986 год', lore: 'Тяжёлая, как правда. Бьёт фактами по голове.', hands: 2 },
+  { id: 'banner',    slot: 'weapon',    g: 'f', main: 'spi', name: 'Хоругвь из швабры',       lore: 'Поднимает боевой дух и пыль.', hands: 2 },
   { id: 'zipgun',    slot: 'weapon',    g: 'm', main: 'agi', name: 'Самопал',                 lore: 'Стреляет. Иногда вперёд.' },
   { id: 'manual',    slot: 'weapon',    g: 'm', main: 'int', name: 'Справочник слесаря',      lore: 'Тысяча страниц. Бьёт знаниями и углом.' },
   { id: 'censer',    slot: 'weapon',    g: 'n', main: 'spi', name: 'Кадило из консервной банки', lore: 'Пахнет ладаном и килькой в томате.' },

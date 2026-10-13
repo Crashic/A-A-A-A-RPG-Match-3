@@ -22,6 +22,12 @@ function applyMatchEffects(cells) {
     const n = count[id] * mult;
     const kind = GEM_EFFECTS[id].kind;
     if (kind === 'damage') {
+      if (isHero && heroTwoHanded(battle.save) && (battle.skill.swingCd || 0) > 0) { // двуручное: замах, удар через ход
+        showFloat(foeSide, 'Замах…', 'shield');
+        logBattle('hero', 'Вы замахиваетесь двуручным — удар в следующий ход');
+        continue;
+      }
+      if (isHero && heroTwoHanded(battle.save)) battle.skill.swingHit = true;
       let amount = Math.round(n * me.attack);
       const c = rollCrit(me, amount); // Ловкость: шанс крита (у героя и врага)
       amount = c.amount;

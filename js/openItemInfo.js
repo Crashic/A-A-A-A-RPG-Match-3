@@ -32,6 +32,8 @@ function openItemInfo(where) {
     mods.appendChild(li);
   }
   body.appendChild(mods);
+  const wk = weaponKindText(item);
+  if (wk) p(wk, 'itHands');
   p(uniq ? uniq.lore : base.lore || '', 'itLore');
   // сравнение с тем, что сейчас в этом слоте
   if (inBag || inShop) {
@@ -88,6 +90,10 @@ function openItemInfo(where) {
     btn(hero.level < item.req ? 'Нужен ' + item.req + ' ур.' : 'Надеть', 'green', () => { if (equipItem(where.bag)) close(); }, locked || hero.level < item.req);
   } else if (inBag) {
     btn('Выбросить', 'red', () => showConfirm('Выбросить «' + item.name + '»? Вернуть не получится.', 'Выбросить', () => { close(); dropItem(where.bag); }));
+    if (base.slot === 'weapon' && !isTwoHanded(item) && hero.level >= item.req) { // одноручное — выбрать руку
+      btn('В левую', 'green', () => { if (equipItem(where.bag, 'weapon1')) close(); }, locked);
+      btn('В правую', 'green', () => { if (equipItem(where.bag, 'weapon2')) close(); }, locked);
+    } else
     btn(hero.level < item.req ? 'Нужен ' + item.req + ' ур.' : 'Надеть', 'green', () => { if (equipItem(where.bag)) close(); }, locked || hero.level < item.req);
   } else {
     btn('Снять', 'stone', () => { if (unequipItem(where.gear)) close(); }, locked);

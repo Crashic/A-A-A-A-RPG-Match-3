@@ -7,5 +7,5 @@ function sideMenuAction(act) {
   else if (act === 'char') openCharacter();
   else if (act === 'glossary') openGlossary();
   else if (act === 'cheat') openCheat();
-  else if (act === 'home') goHomeBase();
+  else if (act === 'home') goHome();
 }

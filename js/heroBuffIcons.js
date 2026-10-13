@@ -25,6 +25,11 @@ function heroBuffIcons() {
     add('fist', 'var(--gem-ruby)', 'Усиление · бафф', 'Ваши серии сильнее на ' + sk.buff.pct + ' %, ещё ходов: ' + sk.buff.turns + '.', 'buff');
   if (sk.pendingPct)
     add('fist', 'var(--gem-topaz)', 'Следующая серия · бафф', 'Следующая серия сильнее на ' + sk.pendingPct + ' %.', 'buff');
+  if (heroTwoHanded(save)) add('fist', sk.swingCd > 0 ? 'var(--ui-metal)' : 'var(--gem-ruby)',
+    sk.swingCd > 0 ? 'Замах · перезарядка удара' : 'Двуручное · готово',
+    sk.swingCd > 0 ? 'Вы уже ударили двуручным: в этот ход Топливо урона не даёт. Следующий ход — снова удар.'
+      : 'Двуручное оружие готово: Топливо бьёт в полную силу (×' + TWO_HAND_MULT + ' свойств). После удара — ход на замах.',
+    sk.swingCd > 0 ? 'debuff swingCd' : 'buff');
   if (sk.weaken && sk.weaken.turns > 0)
     add('fist', 'var(--gem-amethyst)', 'Ослабление · дебафф', 'Враг ослабил ваши удары на ' + sk.weaken.pct + ' %, ещё ваших ходов: ' + sk.weaken.turns + '.', 'debuff');
   return out;

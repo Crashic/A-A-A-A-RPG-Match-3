@@ -9,7 +9,9 @@ function renderDoll(box, hero) {
   const slot = (kind, emptyTip) => {
     used[kind] = (used[kind] || 0) + 1;
     const key = GEAR_KEYS.includes(kind) ? kind : kind + used[kind]; // ring1, ring2, weapon1…
-    const item = gear[key];
+    const two = key === 'weapon2' && isTwoHanded(gear.weapon1); // двуручное — в обеих руках
+    const item = two ? gear.weapon1 : gear[key];
+    if (two) { const s = itemSlot(item, kind, () => openItemInfo({ gear: 'weapon1' })); s.classList.add('twoHandEcho'); return s; }
     return item ? itemSlot(item, kind, () => openItemInfo({ gear: key })) : emptySlot(kind, emptyTip);
   };
   const col = side => {

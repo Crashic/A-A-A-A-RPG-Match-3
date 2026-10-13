@@ -14,3 +14,6 @@ const ITEM_REQ_BELOW = 2;          // требуемый уровень = уро
 const GEAR_KEYS = ['head', 'shoulders', 'amulet', 'chest', 'belt', 'hands', 'ring1', 'ring2', 'legs', 'feet',
   'weapon1', 'weapon2', 'rune1', 'rune2', 'rune3', 'rune4', 'rune5'];
 
+
+// Двуручное оружие: свойства ×TWO_HAND_MULT, урон Топливом — только каждый второй ваш ход (battle.skill.swingCd).
+const TWO_HAND_MULT = 3;
