@@ -5,6 +5,8 @@ function main() {
   showVersion();
   setupChangelog();
   setupGlossary();
+  setupCampButtons();
+  document.querySelectorAll('.campIco').forEach(e => { e.outerHTML = CAMP_ICON; });
   setupCharacter();
   setupTips();
   setupCheat();

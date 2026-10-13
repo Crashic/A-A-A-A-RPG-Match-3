@@ -1,9 +1,10 @@
 // Столбец иконок меню (как было на карте) — на всех игровых экранах со стрелкой «назад»:
 // под «назад» в правом верхнем углу. act — действие (sideMenuAction), screen — на каком экране
 // пункт подсвечен как текущий.
-const SIDE_MENU_SCREENS = ['map', 'character', 'glossary', 'bunker', 'shop', 'quests'];
+const SIDE_MENU_SCREENS = ['map', 'character', 'glossary', 'bunker', 'shop', 'quests', 'camp'];
 const SIDE_MENU = [
   { act: 'bunker',   label: 'Бункер',          tip: 'Бункер: торговец и задания', screens: ['bunker'], icon: () => BUNKER_ICON },
+  { act: 'camp',     label: 'Лагерь',          tip: 'Лагерь (общий для аккаунта)', screens: ['camp'], icon: () => CAMP_ICON },
   { act: 'map',      label: 'Карта врагов',    tip: 'Карта врагов',                screens: ['map'], icon: () => MAP_ICON },
   { act: 'char',     label: 'Персонаж',        tip: 'Персонаж',                    screens: ['character'], icon: () => '<svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="9" r="5" fill="var(--ui-parchment)" stroke="var(--ui-outline)" stroke-width="2"/><path d="M6 28 Q6 16 16 16 Q26 16 26 28 Z" fill="var(--ui-parchment)" stroke="var(--ui-outline)" stroke-width="2" stroke-linejoin="round"/><path d="M12 20 L16 24 L20 20" fill="none" stroke="var(--gem-topaz-dark)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' },
   { act: 'glossary', label: 'Глоссарий',       tip: 'Глоссарий',                   screens: ['glossary'], icon: () => '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 6 Q10 4 16 7 Q22 4 27 6 L27 26 Q22 24 16 27 Q10 24 5 26 Z" fill="var(--ui-parchment)" stroke="var(--ui-outline)" stroke-width="2" stroke-linejoin="round"/><path d="M16 7 L16 27" stroke="var(--ui-outline)" stroke-width="2"/><path d="M8 11 Q11 10 13 11 M8 15 Q11 14 13 15 M19 11 Q21 10 24 11 M19 15 Q21 14 24 15 M19 19 Q21 18 24 19" fill="none" stroke="var(--gem-topaz-dark)" stroke-width="1.5" stroke-linecap="round"/></svg>' },

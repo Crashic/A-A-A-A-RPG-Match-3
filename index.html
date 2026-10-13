@@ -53,6 +53,7 @@
       <button id="btnCharacters" class="btn stone" type="button">Персонажи</button>
       <button id="btnSettings" class="btn stone" type="button">Настройки</button>
       <button id="btnGlossary" class="btn stone" type="button">Глоссарий</button>
+      <button id="btnCamp" class="btn green" type="button" hidden>Лагерь</button>
       <button id="btnCheat" class="btn purple" type="button">Читер</button>
       <button id="btnExit" class="btn red" type="button">Выход</button>
     </div>
@@ -152,6 +153,10 @@
         </svg>
         <span>Персонаж</span>
       </button>
+      <button id="btnCampGame" class="menuItem" type="button" hidden>
+        <span class="campIco"></span>
+        <span>Лагерь</span>
+      </button>
       <button id="btnGlossaryGame" class="menuItem" type="button">
         <svg viewBox="0 0 32 32" aria-hidden="true">
           <path d="M5 6 Q10 4 16 7 Q22 4 27 6 L27 26 Q22 24 16 27 Q10 24 5 26 Z" fill="var(--ui-parchment)" stroke="var(--ui-outline)" stroke-width="2" stroke-linejoin="round"/>
@@ -223,6 +228,14 @@
 </section>
 
 <!-- Бункер: вступление и места — торговец, доска заданий (js/renderBunker.js) -->
+<!-- Лагерь: общий для аккаунта, постройки -->
+<section id="camp" class="screen">
+  <header class="screenHead">
+    <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
+  </header>
+  <div id="campBody"></div>
+</section>
+
 <section id="bunker" class="screen">
   <header class="screenHead">
     <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
@@ -396,6 +409,15 @@
 
 <div id="toast"></div>
 
+<script src="js/campConfig.js"></script>
+<script src="js/loadAccount.js"></script>
+<script src="js/saveAccount.js"></script>
+<script src="js/campUnlocked.js"></script>
+<script src="js/unlockCamp.js"></script>
+<script src="js/setupCampButtons.js"></script>
+<script src="js/openCamp.js"></script>
+<script src="js/renderCamp.js"></script>
+<script src="js/glossaryCamp.js"></script>
 <script src="js/serverConfig.js"></script>
 <script src="js/heroServerText.js"></script>
 <script src="js/version.js"></script>

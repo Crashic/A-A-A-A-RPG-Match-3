@@ -2,6 +2,7 @@
 function sideMenuAction(act) {
   closeBattleMenu();
   if (act === 'bunker') openBunker();
+  else if (act === 'camp') openCamp();
   else if (act === 'map') openMap();
   else if (act === 'char') openCharacter();
   else if (act === 'glossary') openGlossary();

@@ -1449,3 +1449,20 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 /* Доска объявлений: вкладки категорий заданий */
 .qTabs { display: flex; gap: 4px; flex: none; }
 .qTabs .charTab { flex: 1 1 auto; padding: 5px 6px; white-space: nowrap; }
+
+/* Лагерь (общий для аккаунта): вступление и сетка построек-заглушек */
+#camp { max-width: 960px; height: var(--app-h); }
+#camp .screenHead { margin: 0; }
+#campBody { display: flex; flex-direction: column; gap: 8px; min-height: 0; flex: 1; }
+.campGrid { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; align-content: start; min-height: 0; overflow-y: auto; }
+.campCard { position: relative; display: flex; align-items: flex-start; gap: 8px; padding: 8px 10px; border-radius: 12px; background: var(--bg-canvas); box-shadow: inset 0 0 0 2px var(--ui-metal); }
+.campCard .tile { flex: none; width: 40px; height: 40px; filter: grayscale(.6); opacity: .8; }
+.campCard h4 { margin: 0; font: var(--type-menu); font-weight: 600; color: var(--text-primary); }
+.campCard p { margin: 2px 0 0; font: var(--type-small); color: var(--text-secondary); }
+.campSoon { position: absolute; top: 6px; right: 8px; font: var(--type-caption); color: var(--ui-reward); }
+/* столбец меню: 8 пунктов должны влезть в высоту 360 */
+.sideMenu.mapMenu { gap: 3px; }
+.sideMenu.mapMenu .btn.square { width: 35px; height: 35px; }
+/* главное меню: 6 кнопок в ряд (с «Лагерем») — подписи не должны вылезать */
+.menuRow { gap: 6px; }
+.menuRow .btn { padding: 10px 2px; font-size: 12px; letter-spacing: 0; }
