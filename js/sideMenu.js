@@ -1,7 +1,7 @@
 // Столбец иконок меню (как было на карте) — на всех игровых экранах со стрелкой «назад»:
 // под «назад» в правом верхнем углу. act — действие (sideMenuAction), screen — на каком экране
 // пункт подсвечен как текущий.
-const SIDE_MENU_SCREENS = ['map', 'character', 'glossary', 'bunker', 'shop', 'quests', 'camp', 'bank'];
+const SIDE_MENU_SCREENS = ['map', 'character', 'glossary', 'bunker', 'shop', 'quests', 'camp', 'bank', 'stash'];
 const SIDE_MENU = [
   { act: 'bunker',   label: 'Бункер',          tip: 'Бункер: торговец и задания', screens: ['bunker'], icon: () => BUNKER_ICON },
   { act: 'camp',     label: 'Лагерь',          tip: 'Лагерь (общий для аккаунта)', screens: ['camp'], icon: () => CAMP_ICON },

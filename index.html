@@ -245,6 +245,17 @@
 
 <!-- Торговец: слева прилавок завхоза, справа сумка героя (js/renderShop.js) -->
 <!-- Банк персонажа: ячейки банка, гнёзда сумок, сумка героя -->
+<!-- Общий склад лагеря: вещи и изолента для всех персонажей аккаунта -->
+<section id="stash" class="screen">
+  <header class="screenHead">
+    <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
+  </header>
+  <div class="mapBody">
+    <div class="panel charCol shopColLeft"><div id="stashLeft" class="charScroll"></div></div>
+    <div class="panel charCol charColRight"><div id="stashRight" class="charScroll"></div></div>
+  </div>
+</section>
+
 <section id="bank" class="screen">
   <header class="screenHead">
     <button class="btn stone round back" type="button" data-back aria-label="Назад"></button>
@@ -430,6 +441,13 @@
 <script src="js/loadAccount.js"></script>
 <script src="js/saveAccount.js"></script>
 <script src="js/campUnlocked.js"></script>
+<script src="js/stashUnlocked.js"></script>
+<script src="js/unlockStash.js"></script>
+<script src="js/loadStash.js"></script>
+<script src="js/openStash.js"></script>
+<script src="js/stashMove.js"></script>
+<script src="js/stashTape.js"></script>
+<script src="js/renderStash.js"></script>
 <script src="js/unlockCamp.js"></script>
 <script src="js/setupCampButtons.js"></script>
 <script src="js/openCamp.js"></script>

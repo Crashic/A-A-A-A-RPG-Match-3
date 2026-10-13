@@ -1476,3 +1476,13 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .bankBag.next b { font: var(--type-heading); font-size: 20px; }
 .bankBag.next.poor { filter: grayscale(.7); }
 .bankBag.locked { opacity: .35; }
+
+/* Общий склад лагеря */
+#stash { max-width: 960px; height: var(--app-h); gap: 8px; }
+#stash .screenHead { margin: 0; }
+.stashTape { display: flex; flex-direction: column; gap: 4px; flex: none; }
+.stashTapeBtns { display: flex; gap: 4px; }
+.stashTapeBtn { flex: 1; min-width: 0; min-height: 30px; padding: 3px 4px; font: var(--type-small); font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 2px; }
+.campCard.open { box-shadow: inset 0 0 0 2px var(--ui-reward); }
+.campCard.open .tile { filter: none; opacity: 1; }
+.campOpen { margin-top: 6px; min-height: 30px; padding: 3px 16px; font: var(--type-small); font-weight: 600; }
