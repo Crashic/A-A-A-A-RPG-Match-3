@@ -29,7 +29,7 @@ function showBattleResult(r) {
     resultLoot = r.added || [];
     renderResultLoot(li.lastChild, r.resources || {});
   }
-  if (r.lost && r.lost.length) row('Сумка полна', 'брошено: ' + r.lost.length, 'lost');
+  if (r.lost && r.lost.length) row('Сумка полна!', r.lost.length + ' ' + plural(r.lost.length, 'вещь упала', 'вещи упали', 'вещей упало') + ' — уже разворовали', 'lost');
   // задания: выполненные — название, иначе — что прогресс есть (сдать — на доске в бункере)
   if (r.quests && r.quests.done.length) row(r.quests.done.length > 1 ? 'Выполнено заданий' : 'Задание выполнено', r.quests.done.length > 1 ? String(r.quests.done.length) : r.quests.done[0], 'questDone');
   else if (r.quests && r.quests.moved) row('Задания', 'прогресс засчитан');

@@ -16,6 +16,7 @@ function finishBattle(won, surrendered = false) {
   if (won) Object.assign(result, addToBag(save, rollDrops(e.level, e.elite))); // { added, lost }
   if (won) { result.resources = rollResources(e.elite); addResources(result.resources); } // ресурсы — в лагерь
   if (won) save.wins = (save.wins || 0) + 1; // для обновления прилавка торговца
+  questBoardTick(save); // поручения на доске стареют
   result.quests = questProgress(save, won, e.id, battle.gained.gems); // задания с доски
   result.levelUps = grantXp(save, result.killXp + result.gemXp);
   result.level = save.level;

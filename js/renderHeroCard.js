@@ -1,5 +1,5 @@
 // Блок над кнопкой «Продолжить»: текущий выбранный персонаж — имя, уровень, изолента, пол, раса, класс, фракция,
-// характеристики (значки с подсказками) и кнопка «Персонаж».
+// и кнопка «Персонаж» (значков характеристик здесь нет — автор убрал).
 // Если в выбранной ячейке персонажа нет, блок скрыт.
 function renderHeroCard() {
   const n = getActiveSlot();
@@ -17,7 +17,7 @@ function renderHeroCard() {
     ['Класс', findById(CLASSES, hero.classId)],
     ['Фракция', findById(FACTIONS, hero.factionId)]
   ];
-  renderStatChips(document.getElementById('heroCardChars'), hero); // характеристики
+  // характеристики на главном экране не показываем (просьба автора)
   const list = document.getElementById('heroCardStats');
   list.innerHTML = '';
   for (const [label, item] of rows) {

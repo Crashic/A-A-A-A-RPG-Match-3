@@ -29,6 +29,13 @@ function questCard(q, mode, index) {
     s.textContent = '+ ' + rar.name.toLowerCase().replace(/(ий|ый)$/, 'ая') + ' вещь';
     reward.appendChild(s);
   }
+  if (mode === 'board' && q.cat === 'errand') { // сколько ещё провисит на доске
+    const left = q.left == null ? questLife(q) : q.left;
+    const t = document.createElement('span');
+    t.className = 'qLeft' + (left <= 1 ? ' last' : '');
+    t.textContent = left <= 1 ? 'Последний бой — заберут!' : 'Висит ещё ' + left + ' ' + plural(left, 'бой', 'боя', 'боёв');
+    c.querySelector('.qHead').after(t);
+  }
   const foot = c.querySelector('.qFoot');
   const btn = (label, cls, fn) => {
     const b = document.createElement('button');

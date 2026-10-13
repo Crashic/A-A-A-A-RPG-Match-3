@@ -26,6 +26,7 @@ async function startBattle(enemyId, saved = null) {
     for (const id of MANA_COLORS) if (battle[side].mana[id] === undefined) battle[side].mana[id] = 0;
   if (!saved) skillBattleStart(); // стартовые навыки: мана, пометки
   const current = battle;
+  if (!saved) warnBagFull(save); // сумка полна — добыча упадёт и её разворуют
   if (!saved) { logBattle('sys', 'Бой: ' + e.name + ', ур. ' + e.level + (e.elite ? ' · элита' : '')); battle.turn = rollFirstTurn(); }
   renderBattle();
   renderBattleLog();

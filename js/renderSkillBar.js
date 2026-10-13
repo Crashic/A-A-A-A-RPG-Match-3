@@ -17,16 +17,16 @@ function renderSkillBar() {
     b.disabled = !canUseSkill(s);
     b.dataset.tipTitle = s.name;
     b.dataset.tip = s.text;
-    b.innerHTML = '<b></b><small></small>';
-    b.firstChild.textContent = s.name;
+    // слева — мана: значок и сколько нужно; справа в две строки — название и описание
+    b.classList.add('skillBtn2');
+    b.innerHTML = '<span class="skCost"></span><span class="skText"><b></b><small></small></span>';
+    const cost = b.querySelector('.skCost');
+    for (const g of Object.keys(s.cost || {})) cost.insertAdjacentHTML('beforeend', gemMiniIcon(g) + '<i>' + s.cost[g] + '</i>');
+    if (!cost.children.length) cost.remove();
+    b.querySelector('b').textContent = s.name;
     const wait = (battle.skill.cooldowns || {})[s.id];
-    const gems = Object.keys(s.cost || {});
-    if (s.classSkill && gems.length === 1) {
-      b.lastChild.innerHTML = gemMiniIcon(gems[0]) + '<span></span>';
-      b.lastChild.lastChild.textContent = s.cost[gems[0]] + (wait ? ' · ждать ' + wait : ' · пер. ' + s.cooldown);
-    } else {
-      b.lastChild.textContent = s.once && battle.skill.used[s.id] ? 'использован' : skillCostText(s) + (s.once ? ' · 1 раз' : '');
-    }
+    b.querySelector('small').textContent = s.once && battle.skill.used[s.id] ? 'Уже использован в этом бою'
+      : wait ? 'Перезарядка: ещё ' + wait + ' ' + plural(wait, 'ход', 'хода', 'ходов') : s.text;
     b.addEventListener('click', () => useSkill(s.id));
     buttons.appendChild(b);
   }

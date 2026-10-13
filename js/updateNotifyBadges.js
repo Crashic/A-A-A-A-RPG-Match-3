@@ -1,10 +1,11 @@
 // Значки-уведомления «!» на кнопках: «Задания» — есть выполненное задание (можно сдать),
-// «Персонаж» — есть нераспределённые очки характеристик. Кнопки: столбец меню экранов (data-act),
+// «Персонаж» — есть нераспределённые очки характеристик или в сумках ≤ 1 свободной ячейки. Кнопки: столбец меню экранов (data-act),
 // меню боя, кнопка меню боя (видно, пока список закрыт) и «Персонаж» на карточке героя в главном меню.
 function updateNotifyBadges() {
   const hero = loadSlot(getActiveSlot());
   const quest = !!(hero && hero.quests && (hero.quests.active || []).some(q => q.have >= q.need));
-  const stats = !!(hero && statPointsFree(hero) > 0);
+  // «Персонаж»: свободные очки или в сумках осталось не больше одной ячейки
+  const stats = !!(hero && (statPointsFree(hero) > 0 || bagFreeSlots(hero) <= 1));
   const mark = (el, on, tip) => {
     if (!el) return;
     let dot = el.querySelector(':scope > .notifyDot');

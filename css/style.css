@@ -1706,3 +1706,15 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .zone span { white-space: nowrap; }
 .setRow { min-height: 50px; padding-top: 6px; padding-bottom: 6px; }
 .fighterHead b { word-break: normal; overflow-wrap: break-word; }
+/* 0.7.1.e: кнопка навыка героя — слева мана (значок ×1,5 и цена), справа название и описание */
+.heroSkillBtns .btn.skillBtn.skillBtn2 { flex-direction: row; align-items: center; justify-content: flex-start; gap: 8px; padding: 3px 10px 3px 8px; text-align: left; }
+.skillBtn2 .skCost { flex: none; display: flex; align-items: center; gap: 3px; }
+.skillBtn2 .skCost .gemMini { width: 18px; height: 18px; }
+.skillBtn2 .skCost i { font: var(--type-stat); font-style: normal; font-weight: 600; color: var(--text-primary); }
+.skillBtn2 .skText { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.heroSkillBtns .skillBtn2 b, .heroSkillBtns .skillBtn2 small { display: block; max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; text-align: left; }
+.heroSkillBtns .skillBtn2 small { font: var(--type-small); line-height: 17px; color: var(--text-secondary); }
+.heroSkillBtns .skillBtn2:disabled .skCost i { color: var(--text-muted); }
+/* срок поручения на доске */
+.qLeft { display: block; margin: 2px 0 0; font: var(--type-small); color: var(--text-muted); }
+.qLeft.last { color: var(--ui-danger); font-weight: 600; }

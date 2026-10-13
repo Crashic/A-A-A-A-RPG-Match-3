@@ -50,3 +50,6 @@ const QUEST_TYPES = {
 const JOURNAL_ICON = '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7 4 L23 4 L27 8 L27 28 L7 28 Z" fill="var(--ui-parchment)" stroke="var(--ui-outline)" stroke-width="2" stroke-linejoin="round"/>' +
   '<path d="M11 11 L22 11 M11 16 L22 16 M11 21 L17 21" stroke="var(--gem-topaz-dark)" stroke-width="2" stroke-linecap="round"/>' +
   '<path d="M18 22 L21 25 L27 17" fill="none" stroke="var(--gem-emerald-dark)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+// Сколько боёв поручение висит на доске (не взятое): чем лучше награда, тем быстрее его забирают другие.
+// Ключ — редкость вещи в награде (none — без вещи). После каждого боя срок убывает (questBoardTick).
+const QUEST_BOARD_LIFE = { none: 5, common: 4, magic: 3, rare: 2, unique: 1 };
