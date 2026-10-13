@@ -5,6 +5,7 @@ function sideMenuAction(act) {
   else if (act === 'camp') openCamp();
   else if (act === 'map') openMap();
   else if (act === 'char') openCharacter();
+  else if (act === 'journal') openJournal();
   else if (act === 'glossary') openGlossary();
   else if (act === 'cheat') openCheat();
   else if (act === 'home') goHome();

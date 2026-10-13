@@ -31,11 +31,12 @@ function renderQuests() {
   q[list].forEach((x, i) => left.appendChild(questCard(x, list, i)));
   if (!q[list].length) note(left, questBoardTab === 'daily' ? 'На сегодня всё разобрали. Новые — завтра в 6:00.' : 'Объявлений нет. Бумага кончилась.');
 
-  const count = c => q.active.filter(x => x.cat === c.id).length;
+  const count = c => questSlotsUsed(hero, c.id);
   const max = c => { const m = questLimit(hero, c.id); return m === Infinity ? '' : ' ' + count(c) + '/' + m; };
   right.innerHTML = '<p class="invTitle">Мои задания</p>';
   tabs(right, QUEST_CATEGORIES, questTab, c => c.tab + max(c), id => { questTab = id; });
   const cat = findById(QUEST_CATEGORIES, questTab);
   q.active.forEach((x, i) => { if (x.cat === questTab) right.appendChild(questCard(x, 'active', i)); });
-  if (!count(cat)) note(right, cat.note);
+  for (const l of questLocks(hero, questTab)) right.appendChild(questLockCard(l));
+  if (!count(cat) && !questLocks(hero, questTab).length) note(right, cat.note);
 }

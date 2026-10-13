@@ -1,5 +1,5 @@
 // Создаёт содержимое панели бойца (один раз): имя, строка уровня, полосы.
-// У игрока ещё опыт и изолента (одной строкой, без полос — только значки и цифры). Слева у каждой полосы — значок одного размера: сердце у здоровья,
+// Опыт и изоленту в бою не показываем (итог — в окне после боя). Слева у каждой полосы — значок одного размера: сердце у здоровья,
 // у остальных — фишка, которая полосу пополняет (щит — Детали, мана — Металл, Травы и Плёнка,
 // опыт — Документы, изолента — Радиация).
 function buildFighterPanel(panel, isHero) {
@@ -11,9 +11,6 @@ function buildFighterPanel(panel, isHero) {
     row(heartIcon(), '<div class="bar hp" data-bar="hp" data-tip-title="Здоровье" data-tip="Кончится — бой проигран. Фишки не лечат, лечат только навыки."><i></i><span></span></div>') +
     row(gemMiniIcon('aquamarine'), '<div class="bar shield" data-bar="shield" data-tip-title="Щит" data-tip="Принимает урон первым. Копится от Деталей, не больше четверти здоровья."><i></i><span></span></div>') +
     `<div class="manaRow">${manaBars}</div>` +
-    (isHero
-      ? '<div class="statRow xpTapeRow">' + gemMiniIcon('pearl') + '<div class="bar xp" data-bar="xp" data-tip-title="Опыт" data-tip="Дают Документы на поле и победа над врагом. Остаётся даже при поражении."><i></i><span></span></div>' +
-        gemMiniIcon('topaz') + '<div class="fighterTape" data-f="tape" data-tip-title="Изолента" data-tip="Деньги пустошей: синяя, чёрная и белая. Даёт Радиация на поле."></div></div>'
-      : '');
+    '';
   panel.dataset.built = '1';
 }

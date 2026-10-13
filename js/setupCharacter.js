@@ -4,6 +4,7 @@ function setupCharacter() {
   const on = (id, fn) => document.getElementById(id).addEventListener('click', e => { e.stopPropagation(); vibrate(); fn(); });
   on('btnCharacter', openCharacter);
   on('btnCharGame', openCharacter);
+  on('btnJournalGame', openJournal);
   on('btnBattleMenu', () => toggleBattleMenu());
   // столбец иконок меню на игровых экранах (карта, персонаж, глоссарий, бункер, торговец, задания)
   setupSideMenus();

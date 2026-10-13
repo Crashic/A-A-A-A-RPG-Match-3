@@ -15,10 +15,6 @@ function renderFighterPanel(side) {
     const save = battle.save;
     const cls = findById(CLASSES, save.classId);
     q('[data-f="info"]').textContent = 'Ур. ' + save.level + (cls ? ' · ' + cls.name : '');
-    const need = xpToNext(save.level);
-    const xp = Math.min(need, save.xp + battle.gained.xp);
-    setBar(q('[data-bar="xp"]'), xp, need, need ? 'Опыт ' + xp + ' / ' + need : 'Макс. уровень');
-    q('[data-f="tape"]').innerHTML = formatTape(save.tape + battle.gained.tape);
   } else {
     const e = battle.enemyInfo;
     const info = q('[data-f="info"]');

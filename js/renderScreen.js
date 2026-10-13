@@ -9,6 +9,10 @@ function renderScreen(id) {
   else if (id === 'shop') renderShop();
   else if (id === 'bunker') renderBunker();
   else if (id === 'quests') renderQuests();
+  else if (id === 'journal') renderJournal();
+  else if (id === 'camp') renderCamp();
+  else if (id === 'bank') renderBank();
+  else if (id === 'stash') renderStash();
   else if (id === 'game') {
     if (battle) renderBattle();
     else setTimeout(() => { const n = getActiveSlot(); const s = loadSlot(n); startBattle(s && s.lastEnemy, loadBattle(n)); });

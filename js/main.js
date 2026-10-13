@@ -6,7 +6,9 @@ function main() {
   setupChangelog();
   setupGlossary();
   setupCampButtons();
+  tickQuestTimers();
   document.querySelectorAll('.campIco').forEach(e => { e.outerHTML = CAMP_ICON; });
+  document.querySelectorAll('.journalIco').forEach(e => { e.outerHTML = JOURNAL_ICON; });
   setupCharacter();
   setupTips();
   setupCheat();

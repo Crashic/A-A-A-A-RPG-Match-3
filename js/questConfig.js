@@ -14,8 +14,10 @@ const QUEST_CATEGORIES = [
   { id: 'daily',  name: 'Ежедневные', short: 'Ежедневные', tab: 'Ежедн.', gen: 'ежедневных', max: 5, board: true,
     note: 'С доски, новые каждый день в 6:00, невыполненные сгорают. Взять: 3, с 10 ур. — 4, с 20 ур. — 5.' }
 ];
+const QUEST_ABANDON_LOCK_MIN = 10; // отказ от поручения/ежедневного — слот этой категории закрыт на столько минут
+const QUEST_ABANDON_TEXT = 'Прошлый клиент разочарован и распугал всех, кто хотел дать поручение.';
+const QUEST_REWARD_MULT = 0.5;      // награды (опыт и изолента) — вдвое меньше прежних; «Собрать фишки» — без изменений
 const QUEST_DAILY_LIMITS = [[20, 5], [10, 4], [1, 3]]; // [с уровня, сколько ежедневных можно держать]
-const QUEST_ITEM_CHANCE = 0.35; // шанс, что за обычное задание дадут магическую вещь (за элиту — всегда редкую)
 // Кто вешает объявления.
 const QUEST_GIVERS = [
   { id: 'zina',    name: 'Бабка Зина',          who: 'вахтёр гермодвери' },
@@ -44,3 +46,7 @@ const QUEST_TYPES = {
     ['Боевой листок', 'Для стенгазеты нужны подвиги. Одержите {n} побед — нарисуем вас в профиль.'],
     ['Соцсоревнование', 'Соседний бункер хвастается. Обгоните их: {n} побед, и красное знамя наше.']] }
 };
+// Значок «Задания» (журнал): листок со списком и галочкой.
+const JOURNAL_ICON = '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7 4 L23 4 L27 8 L27 28 L7 28 Z" fill="var(--ui-parchment)" stroke="var(--ui-outline)" stroke-width="2" stroke-linejoin="round"/>' +
+  '<path d="M11 11 L22 11 M11 16 L22 16 M11 21 L17 21" stroke="var(--gem-topaz-dark)" stroke-width="2" stroke-linecap="round"/>' +
+  '<path d="M18 22 L21 25 L27 17" fill="none" stroke="var(--gem-emerald-dark)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';

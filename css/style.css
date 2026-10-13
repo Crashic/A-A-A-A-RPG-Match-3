@@ -1567,3 +1567,24 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .campResItem.none { opacity: .4; }
 /* Хлам — тёмно-серый */
 .invSlot.r-junk { --rar: var(--ui-metal); }
+
+/* Журнал заданий */
+#journal { max-width: 960px; height: var(--app-h); gap: 8px; }
+#journal .screenHead { margin: 0; }
+.journalColLeft { flex: 0 0 42%; }
+#journalLeft, #journalRight { gap: 4px; }
+.jCat { flex: none; display: flex; align-items: center; gap: 6px; padding: 6px 8px; border: 0; border-radius: 10px; background: var(--bg-cell-alt); color: var(--ui-reward); font: var(--type-menu); font-weight: 600; text-align: left; }
+.jCat span { flex: 1; }
+.jCat small { font: var(--type-stat); color: var(--text-secondary); }
+.jArrow { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 7px solid var(--ui-reward); transition: transform .2s; }
+.jCat.collapsed .jArrow { transform: rotate(-90deg); }
+.jReady { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: var(--ui-reward); color: var(--ui-outline); font: var(--type-stat); font-weight: 700; }
+.jQuest { flex: none; display: flex; align-items: center; gap: 8px; margin-left: 12px; padding: 5px 8px; border: 0; border-radius: 8px; background: var(--bg-cell); color: var(--text-primary); font: var(--type-small); text-align: left; }
+.jQuest span { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.jQuest small { flex: none; font: var(--type-stat); color: var(--text-muted); }
+.jQuest.selected { box-shadow: inset 0 0 0 2px var(--text-primary); }
+.jQuest.ready small { color: var(--ui-reward); }
+.jQuest.locked { color: var(--text-muted); }
+.jEmpty { margin: 0 0 0 14px; font: var(--type-caption); color: var(--text-muted); }
+.questCard.locked { opacity: .85; }
+.qTimer { font: var(--type-stat); color: var(--ui-danger); }

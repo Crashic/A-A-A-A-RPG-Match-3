@@ -18,14 +18,16 @@ function rollQuest(hero, cat = 'errand') {
   const fill = s => s.replace('{zone}', target ? target.zone.name.replace(/^.*«|»$/g, '') : '')
     .replace('{enemy}', target ? target.enemy.name : '').replace('{n}', need)
     .replace('{times}', need + ' ' + plural(need, 'раз', 'раза', 'раз')).replace('{gem}', gem ? gemName(gem) : '');
-  const xp = Math.round(mobXp(L, L) * T.xp * need);
-  const tape = Math.round(combatStats(L).tapePerGem * 4 * T.xp * need);
+  const k = type === 'gems' ? 1 : QUEST_REWARD_MULT; // «Собрать фишки» — как было, остальные — вдвое меньше
+  const xp = Math.round(mobXp(L, L) * T.xp * need * k);
+  const tape = Math.round(combatStats(L).tapePerGem * 4 * T.xp * need * k);
   return {
     uid: Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
     cat, type, giver: giver.id, title, text: fill(text), goal: fill(T.goal),
     zoneId: type === 'zone' ? target.zone.id : null,
     enemyId: type === 'enemy' || type === 'elite' ? target.enemy.id : null,
     gem, need, have: 0, level: L,
-    reward: { xp, tape, item: type === 'elite' ? 'rare' : (Math.random() < QUEST_ITEM_CHANCE ? 'magic' : null) }
+    // вещь — как с врагов: шанс ITEM_DROP_CHANCE (элита — всегда), редкость случайная (rollRarity)
+    reward: { xp, tape, item: type === 'elite' || Math.random() < ITEM_DROP_CHANCE ? rollRarity(type === 'elite') : null }
   };
 }
