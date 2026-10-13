@@ -415,6 +415,7 @@ const FILES = [
   './js/setupScrollers.js',
   './js/goHome.js',
   './js/setupMenu.js',
+  './js/setupInstall.js',
   './js/main.js',
   './fonts/ibm-plex-sans-cyrillic-400-normal.woff2',
   './fonts/ibm-plex-sans-cyrillic-500-normal.woff2',

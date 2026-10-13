@@ -32,4 +32,5 @@ function showBattleResult(r) {
   if (r.quests && r.quests.done.length) row(r.quests.done.length > 1 ? 'Выполнено заданий' : 'Задание выполнено', r.quests.done.length > 1 ? String(r.quests.done.length) : r.quests.done[0], 'questDone');
   else if (r.quests && r.quests.moved) row('Задания', 'прогресс засчитан');
   box.classList.add('open');
+  tutorialCheck(); // обучение: итоги боя
 }
