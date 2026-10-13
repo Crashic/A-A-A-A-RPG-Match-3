@@ -8,5 +8,9 @@ function glossaryStats() {
     const names = styles.map(([id, who]) => who + ': ' + STAT_NAMES[id][s.id].name);
     out.push(glossaryEntry(iconTile(s.icon, s.color), s.name, 'В бою: ' + s.effect, [['list', names.join(' · ')]]));
   }
+  out.push(glossaryEntry(iconTile('fist', 'var(--gem-ruby)'), INI_NAME, 'Инициатива · второстепенная, только со снаряжения', [
+    'Решает, кто ходит первым. Поровну с врагом — орёл или решка. Иначе шанс первого хода 50 % ±' + INI_STEP_PCT + ' % за каждую единицу разницы (от ' + INI_MIN_PCT + ' до ' + INI_MAX_PCT + ' %).',
+    'У врагов — +1 за каждые ' + INI_ENEMY_PER_LEVELS + ' уровня, у элиты ещё +' + INI_ELITE_BONUS + '.',
+    ['lore', 'Кто первым сказал «я тут стоял» — тот и стоял.']]));
   return out;
 }

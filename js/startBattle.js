@@ -1,4 +1,4 @@
-// Начинает бой с врагом enemyId: бойцы с полным здоровьем, новое поле, первый ход — игрока.
+// Начинает бой с врагом enemyId: бойцы с полным здоровьем, новое поле, первый ход — по жребию наглости (rollFirstTurn).
 // saved — сохранённый незаконченный бой (loadBattle): продолжить его с того же места.
 async function startBattle(enemyId, saved = null) {
   const slot = getActiveSlot();
@@ -16,7 +16,7 @@ async function startBattle(enemyId, saved = null) {
     enemyInfo: e,
     hero: saved ? saved.hero : createHeroFighter(save), // с характеристиками героя
     enemy: saved ? saved.enemy : createEnemyFighter(e), // с характеристиками врага
-    turn: saved ? saved.turn : 'hero',
+    turn: saved ? saved.turn : 'hero', // новый бой — жребий по наглости (rollFirstTurn) ниже
     over: false,
     gained: saved ? Object.assign({ xp: 0, tape: 0 }, saved.gained) : { xp: 0, tape: 0 },
     skill: saved && saved.skill ? Object.assign(createSkillState(), saved.skill) : createSkillState(),
@@ -26,7 +26,7 @@ async function startBattle(enemyId, saved = null) {
     for (const id of MANA_COLORS) if (battle[side].mana[id] === undefined) battle[side].mana[id] = 0;
   if (!saved) skillBattleStart(); // стартовые навыки: мана, пометки
   const current = battle;
-  if (!saved) logBattle('sys', 'Бой: ' + e.name + ', ур. ' + e.level + (e.elite ? ' · элита' : ''));
+  if (!saved) { logBattle('sys', 'Бой: ' + e.name + ', ур. ' + e.level + (e.elite ? ' · элита' : '')); battle.turn = rollFirstTurn(); }
   renderBattle();
   renderBattleLog();
   showFirstLegend(); // в первом бою — подсказка, какая фишка что даёт

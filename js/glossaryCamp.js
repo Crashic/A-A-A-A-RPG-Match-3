@@ -4,6 +4,6 @@ function glossaryCamp() {
     glossaryEntry(CAMP_ICON, 'Лагерь', 'Общий для всех персонажей аккаунта',
       [CAMP_TEXT, 'Откроется после цепочки заданий; пока выдаётся сразу. Кнопка — в меню.']),
     ...CAMP_BUILDINGS.map(b => glossaryEntry(iconTile(b.icon, b.color), b.name, 'Постройка лагеря' + (b.open ? '' : ' · скоро'), [b.text,
-      b.id === 'storage' ? ['list', STASH_SLOTS + ' ячеек и изолента, общие для всех персонажей. Откроется после задания (пока — сразу).'] : '']))
+      b.id === 'storage' ? ['list', STASH_BASE_SLOTS + ' ячеек (расширяется за изоленту до ' + (STASH_BASE_SLOTS + STASH_NEST_SIZE * STASH_NEST_PRICES.length) + ': ' + STASH_NEST_PRICES.map(tapeText).join(' → ') + ') и изолента, общие для всех персонажей. Откроется после задания (пока — сразу).'] : '']))
   ];
 }

@@ -24,7 +24,7 @@ function openEnemyInfo() {
     grid.className = 'eiStats';
     for (const s of STATS) grid.appendChild(statChip(null, s.id, f.stats[s.id]));
     body.appendChild(grid);
-    p('Атака ' + f.attack + ' · Крит ' + (f.critPct || 0).toFixed(1).replace('.', ',') + ' % · Щит до ' + f.maxShield + ' · Мана до ' + (f.manaMax || MANA_MAX), 'eiDerived');
+    p('Атака ' + f.attack + ' · Крит ' + (f.critPct || 0).toFixed(1).replace('.', ',') + ' % · Щит до ' + f.maxShield + ' · Мана до ' + (f.manaMax || MANA_MAX) + ' · Наглость ' + (f.ini || 0), 'eiDerived');
   }
   p('Навыки', 'eiHead');
   const skill = ENEMY_SKILLS[e.id];

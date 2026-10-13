@@ -8,5 +8,6 @@ function createHeroFighter(save) {
   f.critPct = Math.min(STAT_CRIT_MAX, f.critPct + g.crit);
   f.tapePerGem = Math.round(f.tapePerGem * (1 + g.tape / 100));
   f.xpPerGem = Math.max(1, Math.round(f.xpPerGem * (1 + g.xp / 100)));
+  f.ini = Math.round(g.ini || 0); // «Ресурс личной наглости» — только со снаряжения
   return f;
 }

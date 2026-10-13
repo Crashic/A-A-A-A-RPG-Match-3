@@ -10,7 +10,8 @@ function renderStatDetails(box, hero) {
     [gemMiniIcon('sapphire'), 'Запас каждой маны', f.manaMax, 'Интеллект: +1 за ' + STAT_INT_MANA_EVERY + ' очка сверх ' + STAT_BASE + '.'],
     [gemMiniIcon('amethyst'), 'Мана с фишек', pct(f.manaPct), 'Интеллект: +' + STAT_INT_PCT + ' % за очко сверх ' + STAT_BASE + '.'],
     [gemMiniIcon('aquamarine'), 'Щит за Деталь', f.shieldPerGem + ' (до ' + f.maxShield + ')', 'Дух усиливает щит за Детали; щит — не больше четверти здоровья.'],
-    [gemMiniIcon('emerald'), 'Лечение навыками', pct(f.healPct), 'Дух: +' + STAT_SPI_PCT + ' % за очко сверх ' + STAT_BASE + '.']
+    [gemMiniIcon('emerald'), 'Лечение навыками', pct(f.healPct), 'Дух: +' + STAT_SPI_PCT + ' % за очко сверх ' + STAT_BASE + '.'],
+    [iconTile('fist', 'var(--gem-ruby)'), INI_NAME, f.ini, 'Инициатива: кто ходит первым. Только со снаряжения. Поровну с врагом — монетка, иначе ±' + INI_STEP_PCT + ' % к шансу первого хода за единицу разницы.']
   ];
   for (const [icon, label, value, tip] of rows) {
     const row = document.createElement('div');

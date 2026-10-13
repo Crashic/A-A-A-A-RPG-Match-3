@@ -1,4 +1,4 @@
-// Экран «Общий склад» (лагерь, общий для аккаунта): слева — вещи склада и изолента склада с кнопкой «Взять»,
+// Экран «Общак» (общий склад (лагерь, общий для аккаунта): слева — вещи склада и изолента склада с кнопкой «Взять»,
 // справа — сумка текущего персонажа и его изолента с кнопкой «Положить». Касание по вещи перекладывает её
 // (stashMove); кнопки изоленты — по одной синей / чёрной / белой или всё (stashTape).
 function renderStash() {
@@ -32,9 +32,27 @@ function renderStash() {
       g.appendChild(items[i] ? itemSlot(items[i], 'cell', () => stashMove(from, i)) : emptySlot('cell', ''));
     return g;
   };
+  const size = stashSize();
   left.innerHTML = '<p class="invTitle"></p><p class="shopNote">Общий для всех ваших персонажей. Коснитесь вещи — она переедет.</p>';
-  left.firstChild.textContent = 'Общий склад: ' + stash.items.length + ' / ' + STASH_SLOTS;
-  left.append(tapeRow('take', stash.tape), grid(stash.items, STASH_SLOTS, 'stash'));
+  left.firstChild.textContent = STASH_NAME + ': ' + stash.items.length + ' / ' + size;
+  // места общака: купленные, следующее «+» (подсказка с ценой), закрытые — как гнёзда шкафчика
+  const nests = document.createElement('div');
+  nests.className = 'bankBags';
+  for (let i = 0; i < STASH_NEST_PRICES.length; i++) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    const n = stash.nests || 0;
+    if (i < n) { b.className = 'invSlot bankBag owned'; b.innerHTML = '<b>+' + STASH_NEST_SIZE + '</b>'; b.disabled = true; }
+    else if (i === n) {
+      b.className = 'invSlot bankBag next' + ((hero.tape || 0) < STASH_NEST_PRICES[i] ? ' poor' : '');
+      b.innerHTML = '<b>+</b>';
+      b.dataset.tip = 'Расширить общак на ' + STASH_NEST_SIZE + ' ячеек:';
+      b.dataset.tipTape = STASH_NEST_PRICES[i];
+      b.addEventListener('click', e => { e.stopPropagation(); vibrate(); buyStashNest(); });
+    } else { b.className = 'invSlot bankBag locked'; b.disabled = true; }
+    nests.appendChild(b);
+  }
+  left.append(nests, tapeRow('take', stash.tape), grid(stash.items, Math.max(size, stash.items.length), 'stash'));
   right.innerHTML = '<p class="invTitle"></p>';
   right.firstChild.textContent = 'Сумка: ' + hero.name;
   right.append(tapeRow('put', hero.tape || 0), grid(hero.bag || [], bagCapacity(hero), 'bag'));
