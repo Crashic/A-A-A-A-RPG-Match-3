@@ -19,13 +19,16 @@ async function startBattle(enemyId, saved = null) {
     turn: saved ? saved.turn : 'hero',
     over: false,
     gained: saved ? Object.assign({ xp: 0, tape: 0 }, saved.gained) : { xp: 0, tape: 0 },
-    skill: saved && saved.skill ? Object.assign(createSkillState(), saved.skill) : createSkillState()
+    skill: saved && saved.skill ? Object.assign(createSkillState(), saved.skill) : createSkillState(),
+    log: saved && saved.log ? saved.log : []
   };
   for (const side of ['hero', 'enemy']) // бой, сохранённый до новой маны, — добавить её с нуля
     for (const id of MANA_COLORS) if (battle[side].mana[id] === undefined) battle[side].mana[id] = 0;
   if (!saved) skillBattleStart(); // стартовые навыки: мана, пометки
   const current = battle;
+  if (!saved) logBattle('sys', 'Бой: ' + e.name + ', ур. ' + e.level + (e.elite ? ' · элита' : ''));
   renderBattle();
+  renderBattleLog();
   showFirstLegend(); // в первом бою — подсказка, какая фишка что даёт
   await startMatch3(saved ? saved.grid : null);
   if (battle !== current) return;

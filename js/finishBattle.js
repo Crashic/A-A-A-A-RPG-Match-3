@@ -27,7 +27,7 @@ function finishBattle(won, surrendered = false) {
   closeBattleMenu();
   mapZoneId = null;
   renderMap();
-  history.replaceState({ screen: 'map' }, '');
+  history.replaceState({ screen: 'map', depth: navDepth() }, '');
   showScreen('map', false);
   showBattleResult(result);
 }

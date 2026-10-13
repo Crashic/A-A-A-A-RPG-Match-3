@@ -7,8 +7,8 @@ async function resolveBoard() {
     const cells = findMatches(match3.grid);
     if (!cells.length) break;
     if (earnsExtraTurn(match3.grid, cells)) extra = true;
-    if (battle) showGemLabels(cells); // подписи «Урон», «Щит»… над рядом
-    applyMatchEffects(cells);
+    const gains = applyMatchEffects(cells);
+    if (battle) showGemLabels(cells, gains); // подписи «Урон 24», «+3 маны»… над рядом
     vibrate(15);
     await clearGems(cells);
     await collapseAndRefill();

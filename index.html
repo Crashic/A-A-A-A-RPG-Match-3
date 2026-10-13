@@ -52,9 +52,7 @@
     <div class="menuRow">
       <button id="btnCharacters" class="btn stone" type="button">Персонажи</button>
       <button id="btnSettings" class="btn stone" type="button">Настройки</button>
-      <button id="btnGlossary" class="btn stone" type="button">Глоссарий</button>
       <button id="btnCamp" class="btn green" type="button" hidden>Лагерь</button>
-      <button id="btnCheat" class="btn purple" type="button">Читер</button>
       <button id="btnExit" class="btn red" type="button">Выход</button>
     </div>
   </nav>
@@ -114,7 +112,8 @@
     <div id="heroPanel" class="fighter"></div>
     <!-- Навыки: кнопки активных (за ману) и строка пассивных — js/renderSkillBar.js -->
     <div id="skillBar"></div>
-    <!-- «Фишки» — крупная кнопка в левом нижнем углу боя -->
+    <!-- Слева внизу: «Фишки» и под ней чат-лог боя на 5 строк (js/logBattle.js) -->
+    <div class="battleCorner">
     <button id="btnLegend" class="btn stone square legendBig" aria-label="Фишки" data-tip="Фишки: что даёт каждая" type="button">
         <svg viewBox="0 0 32 32" aria-hidden="true">
           <rect x="3" y="3" width="26" height="26" rx="8" fill="var(--gem-amethyst)"/>
@@ -123,6 +122,8 @@
           <circle cx="16" cy="23.5" r="2" fill="var(--text-primary)"/>
         </svg>
       </button>
+      <div id="battleLog" class="battleLog"></div>
+    </div>
   </aside>
   <div class="boardWrap">
     <div id="board" class="board">
@@ -190,7 +191,7 @@
         </svg>
         <span>Сдаться</span>
       </button>
-      <button id="gameToMenu" class="menuItem" type="button" data-back>
+      <button id="gameToMenu" class="menuItem" type="button">
         <svg viewBox="0 0 32 32" aria-hidden="true">
           <path d="M4 15 L16 5 L28 15 L25 15 L25 27 L7 27 L7 15 Z" fill="var(--ui-parchment)" stroke="var(--ui-outline)" stroke-width="2" stroke-linejoin="round"/>
           <path d="M13 27 L13 19 L19 19 L19 27" fill="var(--gem-topaz-dark)" stroke="var(--ui-outline)" stroke-width="2" stroke-linejoin="round"/>
@@ -506,6 +507,7 @@
 <script src="js/showVersion.js"></script>
 <script src="js/showToast.js"></script>
 <script src="js/showConfirm.js"></script>
+<script src="js/navDepth.js"></script>
 <script src="js/showScreen.js"></script>
 <script src="js/goBack.js"></script>
 <script src="js/renderScreen.js"></script>
@@ -616,6 +618,9 @@
 <script src="js/useSkill.js"></script>
 <script src="js/heroBuffIcons.js"></script>
 <script src="js/renderSkillBar.js"></script>
+<script src="js/logBattle.js"></script>
+<script src="js/renderBattleLog.js"></script>
+<script src="js/gainText.js"></script>
 <script src="js/applyMatchEffects.js"></script>
 <script src="js/setBar.js"></script>
 <script src="js/buildFighterPanel.js"></script>
@@ -722,6 +727,7 @@
 <script src="js/equipItem.js"></script>
 <script src="js/unequipItem.js"></script>
 <script src="js/dropItem.js"></script>
+<script src="js/itemWornTip.js"></script>
 <script src="js/itemTipText.js"></script>
 <script src="js/itemSlot.js"></script>
 <script src="js/openItemInfo.js"></script>

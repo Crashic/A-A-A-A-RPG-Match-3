@@ -9,6 +9,7 @@ function itemTipText(item) {
     rar.name + ' · ' + (item.rarity === 'common' ? '' : base.name + ' · ') + SLOT_NAMES[base.slot],
     'Уровень ' + item.level + ', нужен ' + item.req + '-й',
     ...itemMods(item).map(modText),
-    uniq ? uniq.lore : base.lore || ''
+    uniq ? uniq.lore : base.lore || '',
+    itemWornTip(item)
   ].filter(Boolean).join('\n');
 }

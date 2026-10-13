@@ -2,7 +2,7 @@
 // replace — заменить текущий экран в истории (после создания/заставки), а не добавлять новый.
 function enterGame(replace = false) {
   if (replace) {
-    history.replaceState({ screen: 'game' }, '');
+    history.replaceState({ screen: 'game', depth: navDepth() }, '');
     showScreen('game', false);
   } else {
     showScreen('game');

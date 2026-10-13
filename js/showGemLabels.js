@@ -1,6 +1,6 @@
-// Подписи над собранными фишками: «Урон», «Щит», «Мана»… — по одной на вид фишки,
+// Подписи над собранными фишками: что дал ряд — «Урон 24», «+5 щит», «+3 маны»… (gains — из applyMatchEffects) — по одной на вид фишки,
 // в центре собранных клеток этого вида, цветом фишки. Вызывается до того, как фишки исчезнут.
-function showGemLabels(cells) {
+function showGemLabels(cells, gains = {}) {
   const board = document.getElementById('board');
   const groups = {};
   for (const [r, c] of cells) {
@@ -16,10 +16,10 @@ function showGemLabels(cells) {
     const x = list.reduce((s, [, c]) => s + cellOffset(c), 0) / list.length + half;
     const el = document.createElement('span');
     el.className = 'gemLabel ' + id;
-    el.textContent = GEM_EFFECTS[id].short;
+    el.textContent = gainText(id, gains[id]);
     el.style.left = x + 'px';
     el.style.top = y + 'px';
     board.appendChild(el);
-    setTimeout(() => el.remove(), 1100);
+    setTimeout(() => el.remove(), 1400);
   }
 }

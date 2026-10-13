@@ -9,6 +9,7 @@ async function enemyUseSkill() {
   for (const [gem, n] of Object.entries(skill.cost)) me.mana[gem] -= n;
   sk.enemyCd = skill.cooldown;
   showToast(me.name + ': «' + skill.name + '»', 1400);
+  logBattle('enemy', me.name + ': «' + skill.name + '»');
   vibrate(30);
   skillStrike(skill, 'enemy');
   skillAfterHeroHit();

@@ -49,6 +49,18 @@ function openItemInfo(where) {
         s.textContent = (i ? ', ' : '') + (r.d > 0 ? '+' : '−') + String(Math.abs(r.d)).replace('.', ',') + r.x.unit + ' ' + r.x.text;
         cmp.appendChild(s);
       });
+      // само надетое: название цветом редкости и свойства
+      const wr = findById(ITEM_RARITIES, worn.rarity) || ITEM_RARITIES[0];
+      const box2 = document.createElement('div');
+      box2.className = 'itWorn';
+      box2.innerHTML = '<p class="itWornHead">Сейчас надето:</p><p class="itWornName"></p><ul class="itMods"></ul>';
+      const nm = box2.querySelector('.itWornName');
+      nm.textContent = worn.name + ' · ур. ' + worn.level;
+      nm.style.color = wr.color;
+      for (const m of itemMods(worn)) { const li = document.createElement('li'); li.textContent = modText(m); box2.querySelector('ul').appendChild(li); }
+      body.appendChild(box2);
+    } else if (key) {
+      p('Слот «' + SLOT_NAMES[findById(ITEM_BASES, item.base).slot] + '» сейчас пустой — наденьте, хуже не будет.', 'itCmp');
     }
   }
   const price = p('', 'itPrice');

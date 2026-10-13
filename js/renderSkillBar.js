@@ -26,9 +26,9 @@ function renderSkillBar() {
     const gems = Object.keys(s.cost || {});
     if (s.classSkill && gems.length === 1) {
       b.lastChild.innerHTML = gemMiniIcon(gems[0]) + '<span></span>';
-      b.lastChild.lastChild.textContent = s.cost[gems[0]] + (wait ? ' · ждать ' + wait : ' · перезарядка ' + s.cooldown);
+      b.lastChild.lastChild.textContent = s.cost[gems[0]] + (wait ? ' · ждать ' + wait : ' · пер. ' + s.cooldown);
     } else {
-      b.lastChild.textContent = s.once && battle.skill.used[s.id] ? 'использован' : skillCostText(s) + (s.once ? ' · раз за бой' : '');
+      b.lastChild.textContent = s.once && battle.skill.used[s.id] ? 'использован' : skillCostText(s) + (s.once ? ' · 1 раз' : '');
     }
     b.addEventListener('click', () => useSkill(s.id));
     buttons.appendChild(b);

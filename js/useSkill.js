@@ -13,6 +13,7 @@ async function useSkill(id) {
   for (const e of hasPassive('afterActive')) sk.pendingPct = Math.max(sk.pendingPct, e.pct);
   vibrate(20);
   showToast(skill.name, 1200);
+  logBattle('hero', 'Вы: «' + skill.name + '»');
 
   if (skill.act === 'strike') {
     skillStrike(skill);

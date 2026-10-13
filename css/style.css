@@ -1497,3 +1497,46 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .gameSide .legendBig svg { width: 36px; height: 36px; }
 #tip .tape { display: inline-flex; vertical-align: -3px; }
 .charScroll > .shopNote { flex: none; }
+
+/* Окно предмета: блок «Сейчас надето» для сравнения */
+.itWorn { margin-top: 6px; padding: 6px 8px; border-radius: 10px; background: var(--bg-cell); }
+.itWorn p { margin: 0; }
+.itWornHead { font: var(--type-caption); color: var(--text-muted); }
+.itWornName { font: var(--type-menu); font-weight: 600; }
+/* Главное меню: кнопки в две колонки */
+.menuRow { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.menuRow .btn { min-height: 44px; padding: 8px 6px; font: var(--type-menu); font-weight: 600; font-size: 14px; }
+
+/* Бой: мана и опыт — без полос, только значок фишки и цифры */
+.fighter .bar.mana, .fighter .bar.xp { background: none; box-shadow: none; border-radius: 0; height: 18px; }
+.fighter .bar.mana > i, .fighter .bar.xp > i { display: none; }
+.fighter .bar.mana > span, .fighter .bar.xp > span { text-align: left; font: var(--type-stat); line-height: 18px; }
+/* Подписи над рядом — крупнее, с цифрами */
+.gemLabel { padding: 3px 12px; font: var(--type-heading); font-size: 17px; line-height: 20px; box-shadow: 0 2px 6px var(--ui-outline); }
+/* Слева внизу боя: «Фишки» и чат-лог на 5 строк */
+.battleCorner { margin-top: auto; display: flex; flex-direction: column; gap: 4px; min-width: 0; flex: none; }
+.gameSide .battleCorner .legendBig { margin-top: 0; width: 42px; height: 42px; border-radius: 12px; }
+.gameSide .battleCorner .legendBig svg { width: 30px; height: 30px; }
+.battleLog { height: 69px; overflow-y: auto; padding: 3px 7px; border-radius: 10px; background: var(--bg-cell); box-shadow: inset 0 0 0 1.5px var(--ui-metal); scrollbar-width: none; }
+.battleLog::-webkit-scrollbar { display: none; }
+.battleLog p { margin: 0; font: var(--type-caption); font-size: 11px; line-height: 12.6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-secondary); }
+.battleLog p.log-hero { color: var(--text-primary); }
+.battleLog p.log-enemy { color: var(--gem-ruby-light); }
+.battleLog p.log-sys { color: var(--ui-reward); }
+.xpTapeRow > .bar.xp { flex: 1; }
+.xpTapeRow > .fighterTape { flex: none; }
+.gameSide .battleCorner .legendBig { width: 36px; height: 36px; border-radius: 11px; }
+.gameSide .battleCorner .legendBig svg { width: 26px; height: 26px; }
+.battleLog { height: 66px; padding: 3px 7px; }
+.battleLog p { line-height: 12px; }
+/* Навыки героя — в две колонки, чтобы под ними поместились «Фишки» и лог боя */
+.heroSkillBtns { display: grid !important; grid-template-columns: 1fr 1fr; gap: 4px; min-width: 0; }
+.heroSkillBtns .btn.skillBtn { min-width: 0; padding: 2px 4px 3px; }
+.heroSkillBtns .skillBtn b { font-size: 12px; line-height: 15px; }
+.heroSkillBtns .skillBtn small { font-size: 10px; max-width: 100%; overflow: hidden; white-space: nowrap; }
+.heroSkillBtns .skillBtn.killAll { grid-column: 1 / -1; }
+/* главное меню: всё помещается по высоте 360 */
+#menu .menuButtons { gap: 8px; }
+#menu #btnStart { min-height: 50px; padding-top: 6px; padding-bottom: 6px; }
+#menu .menuRow { gap: 6px; padding-right: 64px; } /* справа внизу — номер версии */
+#menu .menuRow .btn { min-height: 38px; padding: 6px; }

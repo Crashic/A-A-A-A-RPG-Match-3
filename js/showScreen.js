@@ -3,6 +3,6 @@
 function showScreen(id, push = true) {
   hideTip();
   document.querySelectorAll('.screen').forEach(s => s.classList.toggle('active', s.id === id));
-  if (id !== 'menu' && push) history.pushState({ screen: id }, '');
+  if (id !== 'menu' && push) history.pushState({ screen: id, depth: navDepth() + 1 }, ''); // depth — шагов от меню (goHome)
   window.scrollTo(0, 0);
 }

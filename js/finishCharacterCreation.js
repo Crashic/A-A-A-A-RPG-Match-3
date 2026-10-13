@@ -14,7 +14,7 @@ function finishCharacterCreation() {
   setActiveSlot(creation.slot);
   creation = null;
   // экран создания заменяется заставкой: «Назад» с неё ведёт туда, откуда начали создание
-  history.replaceState({ screen: 'intro' }, '');
+  history.replaceState({ screen: 'intro', depth: navDepth() }, '');
   showScreen('intro', false);
   playIntro(hero, () => enterGame(true));
 }
