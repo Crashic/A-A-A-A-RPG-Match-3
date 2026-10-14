@@ -61,8 +61,8 @@ function renderStatBlock(box, hero, readOnly) {
       const [minus, plus] = row.querySelectorAll('.statBtn');
       minus.disabled = pts[s.id] <= 0;
       plus.disabled = free <= 0;
-      minus.addEventListener('click', () => changeStat(s.id, -1));
-      plus.addEventListener('click', () => changeStat(s.id, 1));
+      holdStatButton(minus, s.id, -1); // удержание — по очку каждые 0,3 с, Shift — по 10
+      holdStatButton(plus, s.id, 1);
     }
     box.appendChild(row);
   }

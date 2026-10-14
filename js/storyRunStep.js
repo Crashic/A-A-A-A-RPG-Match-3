@@ -17,6 +17,8 @@ function storyRunStep(hero, slot, screen, hide) {
     hideTutorial();
     storyCheck();
   };
+  // «Пропустить обучение»: шаги-подсказки по интерфейсу (skipNoGuide) не ждём, уже сделанное (done) — пропускаем
+  if (st.noGuide && step.type !== 'dialog' && step.type !== 'reward' && (step.skipNoGuide || (step.done && step.done(hero)))) { advance(); return; }
   const cardScreen = step.cardScreen || 'bunker'; // карточка — в бункере или в лагере
   const nav = () => { // стрелка туда, где шаг выполняется
     if (step.card && id === cardScreen) {

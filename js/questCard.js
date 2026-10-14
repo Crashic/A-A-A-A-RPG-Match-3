@@ -1,4 +1,4 @@
-// Карточка задания: название, кто дал, текст, цель (у взятого — полоса прогресса), награда и кнопки.
+// Карточка задания: название, кто дал, текст, «Что делать» (questTodo), цель (у взятого — полоса прогресса), награда и кнопки.
 // mode — 'board' / 'daily' (доска, кнопка «Взять») или 'active' («Сдать», когда выполнено, и «Отказаться»); index — номер в списке.
 function questCard(q, mode, index) {
   const giver = q.giverName ? { name: q.giverName, who: q.giverWho } : findById(QUEST_GIVERS, q.giver) || { name: '', who: '' };
@@ -10,6 +10,15 @@ function questCard(q, mode, index) {
   c.querySelector('b').textContent = q.title;
   c.querySelector('.qGiver').textContent = giver.name + ', ' + giver.who;
   c.querySelector('.qText').textContent = q.text;
+  const todo = questTodo(q, loadSlot(getActiveSlot())); // коротко, что сделать — перед строкой прогресса
+  if (todo) {
+    const p = document.createElement('p');
+    p.className = 'qTodo';
+    p.innerHTML = '<b></b> ';
+    p.firstChild.textContent = tr("ui.Что делать:");
+    p.append(todo);
+    c.querySelector('.qText').after(p);
+  }
   const goal = c.querySelector('.qGoal');
   goal.firstChild.textContent = q.goal + ': ' + (mode === 'active' ? q.have + ' / ' : '') + q.need;
   if (q.gem) goal.insertAdjacentHTML('afterbegin', gemMiniIcon(q.gem));

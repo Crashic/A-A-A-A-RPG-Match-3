@@ -15,6 +15,14 @@ function storyEvent(name, data) {
     const nx = storyPeekNext(hero);
     if (nx && nx.type === 'event' && nx.event === name) { st.stage++; cur = storyCurrentStep(hero, true); }
   }
+  // «Пропустить обучение»: стрелок нет, игрок мог сделать нужное раньше, чем сюжет до этого дошёл — ищем шаг впереди
+  if (cur && st.noGuide && !(cur.step.type === 'event' && cur.step.event === name && (!cur.step.test || cur.step.test(hero, data)))) {
+    const steps = cur.act.steps;
+    for (let i = st.stage + 1; i < steps.length; i++) {
+      const s2 = steps[i];
+      if (s2.type === 'event' && s2.event === name && (!s2.test || s2.test(hero, data))) { st.stage = i; cur = storyCurrentStep(hero, true); break; }
+    }
+  }
   const s = cur && cur.step;
   if (!s || s.type !== 'event' || s.event !== name || (s.test && !s.test(hero, data)) ||
     (name === 'battle' && s.mapTarget && s.mapTarget(hero).enemy.id !== data)) { saveSlot(slot, hero); return; }
