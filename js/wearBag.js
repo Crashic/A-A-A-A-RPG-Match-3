@@ -9,5 +9,6 @@ function wearBag(index) {
   if (nest < 0) { showToast(tr("ui.Нет свободного гнезда. Снимите сумку или купите гнездо («+»).")); return false; }
   packs.worn[nest] = hero.bag.splice(index, 1)[0];
   saveGear(hero);
+  storyEvent('wearBag'); // сюжет, акт «Тара»
   return true;
 }

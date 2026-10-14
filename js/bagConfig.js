@@ -5,6 +5,9 @@
 const BAG_NESTS_START = 2;
 const BAG_NESTS_MAX = 5;
 const BAG_NEST_PRICES = [100, 1000, 10000]; // 1 чёрная → 10 чёрной → 1 синяя
+// Новый герой начинает без гнёзд и сумок (акт «Тара»): первые BAG_NESTS_START гнёзд — по этим ценам (первое бесплатно).
+const BAG_NEST_EARLY_PRICES = [0, 50];
+const HANDS_SIZE = 4; // без надетой сумки вещи несут «в руках»: столько штук, остальное падает и его разворовывают
 const BAG_TYPES = [
   { id: 'string',   name: tr("ui.Авоська"),                 size: 8,  price: 0,
     lore: tr("ui.Сетка с дырками. Дырки — тоже ячейки, просто для невидимых вещей.") },

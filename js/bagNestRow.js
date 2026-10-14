@@ -12,7 +12,7 @@ function bagNestRow(hero, packs) {
     } else if (i < packs.nests) {
       row.appendChild(emptySlot('bag', tr("ui.Пустое гнездо. Наденьте сюда сумку из инвентаря.")));
     } else if (i === packs.nests) {
-      const price = BAG_NEST_PRICES[i - BAG_NESTS_START];
+      const price = bagNestPrice(i);
       const plus = document.createElement('button');
       plus.type = 'button';
       plus.className = 'invSlot bag plus' + ((hero.tape || 0) < price ? ' poor' : '');

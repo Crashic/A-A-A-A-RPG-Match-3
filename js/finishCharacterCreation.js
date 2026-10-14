@@ -9,7 +9,9 @@ function finishCharacterCreation() {
     genderId: d.genderId,
     raceId: d.raceId,
     factionId: d.factionId,
-    tutorial: tutorialState(null) // обучение: выключено ли при создании
+    tutorial: tutorialState(null), // обучение: выключено ли при создании
+    packs: { nests: 0, worn: [] }, // ни гнёзд, ни сумок: всё «в руках» (HANDS_SIZE), до акта «Тара»
+    story: { act: 1, stage: 'intro', done: 0, v: STORY_VERSION }
   };
   createSlot(creation.slot, hero);
   setActiveSlot(creation.slot);

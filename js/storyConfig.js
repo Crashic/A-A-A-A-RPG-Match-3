@@ -17,12 +17,12 @@ const STORY_FEATURES = {
   map: 1,
   journal: 1,
   char: 2,
-  bunker: 3,
-  board: 4,
-  bank: 5,
-  camp: 7,
-  stash: 7,     // карточка «Общак» в лагере
-  registry: 8   // карточка «Реестр» в лагере
+  bunker: 4,
+  board: 5,
+  bank: 6,
+  camp: 8,
+  stash: 8,     // карточка «Общак» в лагере
+  registry: 9   // карточка «Реестр» в лагере
 };
 const STORY_FEATURE_NAMES = { char: tr("ui.Персонаж"), bunker: tr("ui.Бункер"), camp: tr("ui.Лагерь"), map: tr("ui.Карта врагов"), journal: tr("ui.Задания"), board: tr("ui.Доска объявлений"), bank: tr("ui.Шкафчик"), stash: tr("ui.Общак"), registry: tr("ui.Реестр") };
 
@@ -139,6 +139,54 @@ const TUTORIAL_HP_FLOOR = { enemy: 0.35, hero: 0.5 }; // пока идёт сц�
 // sel — селектор или список по приоритету; when(hero) — шаг только если условие верно; reward — награда и конец акта. prepare(hero) — в начале акта.
 // оружие в сумке героя (для стрелок акта 2)
 const WEAPON_IN_BAG = '#character .invGrid .invSlot.item[data-slot="weapon"]';
+// Акт «Тара» (сразу после первого боя): у нового героя нет ни гнёзд, ни сумок — всё «в руках» (HANDS_SIZE).
+// Пришить первое гнездо (бесплатно) → Семёныч выдаёт авоську → надеть → продать хлам из боя.
+// Герой, у которого сумка уже надета (старые сохранения), акт пропускает (skip).
+const BAG_IN_INV = '#character .invGrid .invSlot.item[data-slot="bag"]';
+const JUNK_IN_INV = '#character .invGrid .invSlot.item[data-slot="junk"]';
+const STORY_ACT_BAG = {
+  id: 'actBag', title: tr("ui.Тара"), reward: { tape: 10 },
+  todo: tr("ui.Персонаж: пришить гнездо «+», надеть авоську от Семёныча, продать хлам"),
+  skip: hero => heroPacks(hero).worn.some(b => b),
+  steps: [
+    { type: 'dialog', lines: {
+      council: [tr("ui.Боец {name}, вы с задания вернулись с полными руками и пустыми карманами. Карманов, впрочем, тоже нет."), tr("ui.Сумки вам не выдали — сумки выдаются под роспись, а расписываться вам нечем: руки заняты хламом."), tr("ui.В руках унесёте четыре вещи. Пятую уронят и разворуют ещё до того, как она коснётся земли. Исправить. Немедленно.")],
+      union: [tr("ui.Смотрю — идёшь, обнимаешь хлам, как родного. Мешка нет, сумки нет, совести — тоже, но это потом."), tr("ui.В руках больше четырёх вещей не унесёшь. Остальное подберут соседи — у нас коллективизм."), tr("ui.Иди к себе, пришей гнездо под сумку. Сумку Семёныч даст — он сегодня добрый, у него зуб не болит.")],
+      press: [tr("ui.Сенсация: герой бункера таскает хлам в руках, как студент — конспекты на экзамен."), tr("ui.Без сумки ты унесёшь четыре вещи, пятую — только на фото. Читатель такое не простит."), tr("ui.Иди в «Персонажа»: пришей гнездо, получи тару, а хлам — продай. Это называется журналистская этика.")] },
+      ok: { council: tr("ui.Есть!"), union: tr("ui.Иду"), press: tr("ui.Бегу") } },
+    { type: 'goto', screen: 'character', via: 'char',
+      text: tr("ui.Твоё личное дело и всё, что ты несёшь. Жми.") },
+    { type: 'ok', screen: 'character', sel: '#character .invGrid', skipNoGuide: true,
+      text: tr("ui.Это твои руки. Четыре вещи — больше без сумки не унести: пятую уронишь, и её тут же разворуют. Хлам из боя — здесь же: выбросить жалко, нести неудобно, классика.") },
+    { type: 'event', event: 'nest', screen: 'character', via: 'char', sel: '#character .bagSlots .plus',
+      done: hero => heroPacks(hero).nests > 0,
+      text: tr("ui.Сверху — гнёзда под сумки. Пока ни одного. Первое пришивают бесплатно: акция «Последний гвоздь». Жми «+».") },
+    { type: 'dialog', who: 'semenych', give: hero => { hero.bag = (hero.bag || []).concat([makeBag(BAG_START_TYPE)]); },
+      lines: [tr("ui.Гнездо пришил? Ну хоть что-то пришил. Держи авоську. Казённая, б/у, в дырочку — для вентиляции."), tr("ui.Авоська — на восемь вещей. Девятую в неё тоже можно положить, но она выпадет. Это не баг, это физика.")],
+      ok: tr("ui.Спасибо, Семёныч") },
+    { type: 'event', event: 'openItem', screen: 'character', via: 'char', sel: BAG_IN_INV, skipNoGuide: true,
+      when: hero => (hero.bag || []).some(i => isBagItem(i)),
+      text: tr("ui.Авоська пока тоже в руках. Нажми на неё.") },
+    { type: 'event', event: 'wearBag', modal: 'itemInfo', screen: 'character', backSel: BAG_IN_INV, sel: '#itemInfoButtons [data-role="equip"]',
+      done: hero => heroPacks(hero).worn.some(b => b),
+      text: tr("ui.«Надеть» — сумка встанет в гнездо и даст ячейки. Сама при этом места не занимает. Магия? Нет, советская лёгкая промышленность.") },
+    { type: 'ok', screen: 'character', sel: '#character .bagSlots', skipNoGuide: true,
+      text: tr("ui.Готово: авоська в гнезде, восемь ячеек. Всё, что было в руках, уже в ней. Руки свободны — можно снова махать оружием. Больше гнёзд — за изоленту, сумки побольше — у Семёныча.") },
+    { type: 'event', event: 'openItem', screen: 'character', via: 'char', sel: JUNK_IN_INV, skipNoGuide: true,
+      when: hero => (hero.bag || []).some(i => isJunkItem(i)),
+      text: tr("ui.Теперь хлам. Серое — это хлам: носить можно, пользы ноль. Нажми на него.") },
+    { type: 'event', event: 'sell', modal: 'itemInfo', screen: 'character', backSel: JUNK_IN_INV, sel: '#itemInfoButtons [data-role="sell"]',
+      when: hero => (hero.bag || []).some(i => isJunkItem(i)),
+      text: tr("ui.Хлам только продают — Семёныч берёт всё, даже то, что стыдно показать. Жми «Продать».") },
+    { type: 'dialog', lines: {
+      council: [tr("ui.Тара получена, хлам сдан. Внесу в личное дело: «Способен носить вещи». Это уже карьерный рост.")],
+      union: [tr("ui.С авоськой ты почти зажиточный. Не зазнавайся: у Кумыса их три.")],
+      press: [tr("ui.Отлично. Заголовок: «Герой обзавёлся тарой». Читатель заплачет от гордости.")] },
+      ok: { council: tr("ui.Служу бункеру!"), union: tr("ui.Спасибо, старейшина"), press: tr("ui.Служу правде!") } },
+    { type: 'reward' }
+  ]
+};
+
 const STORY_ACT2 = {
   id: 'act2', title: tr("ui.Опись имущества"), reward: { tape: 20 },
   todo: tr("ui.Персонаж: надеть оружие из сумки и вложить очко в характеристику"), // коротко, что сделать (questTodo)
@@ -406,4 +454,4 @@ const STORY_ACT8 = {
 };
 
 // Готовые акты по порядку (номер акта = индекс + 1). Следующие акты добавляются сюда.
-const STORY_ACTS = [STORY_ACT1, STORY_ACT2, STORY_ACT3, STORY_ACT4, STORY_ACT5, STORY_ACT6, STORY_ACT7, STORY_ACT8];
+const STORY_ACTS = [STORY_ACT1, STORY_ACT_BAG, STORY_ACT2, STORY_ACT3, STORY_ACT4, STORY_ACT5, STORY_ACT6, STORY_ACT7, STORY_ACT8];

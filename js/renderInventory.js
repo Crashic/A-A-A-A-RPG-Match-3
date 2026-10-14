@@ -11,7 +11,7 @@ function renderInventory(box) {
   // вкладки: сумки / квестовые предметы
   box.innerHTML = '<div class="invTabs"><button type="button" class="statTab" data-tab="bag"></button><button type="button" class="statTab" data-tab="quest"></button></div>';
   const [tBag, tQuest] = box.querySelectorAll('.statTab');
-  tBag.textContent = tr("ui.Инвентарь: ") + bag.length + ' / ' + cap;
+  tBag.textContent = (heroHasBag(hero) ? tr("ui.Инвентарь: ") : tr("ui.В руках: ")) + bag.length + ' / ' + cap; // без сумки — «в руках»
   tQuest.textContent = tr("ui.Квестовое") + ((hero.questItems || []).length ? ' · ' + hero.questItems.length : '');
   for (const t of [tBag, tQuest]) {
     t.classList.toggle('selected', t.dataset.tab === invTab);

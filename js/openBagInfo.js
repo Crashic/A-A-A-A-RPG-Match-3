@@ -27,6 +27,7 @@ function openBagInfo(where) {
     b.type = 'button';
     b.className = 'btn ' + cls;
     b.textContent = label;
+    b.dataset.role = itemButtonRole(label); // на кнопки наводятся стрелки сюжета
     b.addEventListener('click', e => { e.stopPropagation(); vibrate(); fn(); });
     btns.appendChild(b);
   };
@@ -37,4 +38,5 @@ function openBagInfo(where) {
     btn(tr("ui.Надеть"), 'green', () => { if (wearBag(where.bag)) close(); });
   }
   box.classList.add('open');
+  storyEvent('openItem'); // сюжет: открыто окно сумки (акт «Тара»)
 }

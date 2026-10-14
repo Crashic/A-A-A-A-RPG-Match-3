@@ -16,7 +16,7 @@ function finishBattle(won, surrendered = false) {
   if (won) Object.assign(result, addToBag(save, rollDrops(e.level, e.elite))); // { added, lost }
   if (won && save.story && !save.story.junk) { // сюжет: после первой победы — урок про хлам
     const got = addToBag(save, [makeJunk(e.level)]).added;
-    if (got.length) { result.added = (result.added || []).concat(got); save.story.junk = save.story.noGuide ? 'done' : 'loot'; }
+    if (got.length) { result.added = (result.added || []).concat(got); save.story.junk = 'done'; } // хлам — в руки; про него и продажу учит акт «Тара»
   }
   if (won) { result.resources = rollResources(e.elite); addResources(result.resources); } // ресурсы — в лагерь
   if (won) save.wins = (save.wins || 0) + 1; // для обновления прилавка торговца

@@ -14,7 +14,7 @@ function glossaryBunker() {
       ['lore', BANK_QUOTES[0]]]),
     glossaryEntry(slotIcon('bag'), tr("ui.Сумки"), tr("ui.Место в инвентаре"), [
       tr("ui.Ячейки инвентаря дают только надетые сумки. Сумка в инвентаре занимает одну ячейку; надеть и снять — касанием по ней."),
-      tr("ui.Гнёзд для сумок сначала ") + BAG_NESTS_START + tr("ui., докупаются до ") + BAG_NESTS_MAX + ': ' + BAG_NEST_PRICES.map(tapeText).join(' → ') + tr("ui.. Хотя бы одна сумка всегда надета."),
+      tr("ui.Без сумки вещи несут в руках — не больше ") + HANDS_SIZE + tr("ui.. Гнёзда для сумок пришивают до ") + BAG_NESTS_MAX + ': ' + BAG_NEST_EARLY_PRICES.concat(BAG_NEST_PRICES).map(p => p ? tapeText(p) : tr("ui.бесплатно")).join(' → ') + tr("ui.. Хотя бы одна сумка всегда надета."),
       tr("ui.Если снять сумку, а вещи не влезут, — лишнее выпадет на пол, и его тут же разворуют."),
       ['list', tr("ui.У Семёныча: ") + BAG_TYPES.filter(b => b.price > 0).map(b => b.name + ' (' + b.size + ', ' + tapeText(b.price) + ')').join(', ')],
       ['list', tr("ui.Стартовая: ") + findById(BAG_TYPES, BAG_START_TYPE).name + ' (' + findById(BAG_TYPES, BAG_START_TYPE).size + ').']]),

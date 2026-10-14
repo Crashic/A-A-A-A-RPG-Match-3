@@ -41,6 +41,7 @@ function storyRunStep(hero, slot, screen, hide) {
     const first = st.stage === 0;
     showDialog(npc, lines, ok, () => {
       if (first) { const h = loadSlot(slot); storyAddActQuest(h, act); saveSlot(slot, h); }
+      if (step.give) { const h = loadSlot(slot); step.give(h); saveSlot(slot, h); if (id && id !== 'game') renderScreen(id); } // NPC что-то вручает (акт «Тара» — авоська)
       advance();
     });
     return;
