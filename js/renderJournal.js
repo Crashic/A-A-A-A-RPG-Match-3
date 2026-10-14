@@ -22,7 +22,7 @@ function renderJournal() {
     head.className = 'jCat' + (journalCollapsed[c.id] ? ' collapsed' : '');
     head.innerHTML = '<i class="jArrow"></i><span></span>' + (ready ? tr("ui.<b class=\"jReady\" data-tip=\"Есть задание, которое можно сдать\">!</b>") : '') + '<small></small>';
     head.querySelector('span').textContent = c.name;
-    head.querySelector('small').textContent = max === Infinity ? list.length : list.length + locks.length + ' / ' + max;
+    head.querySelector('small').textContent = max === Infinity ? list.length : questSlotsUsed(hero, c.id) + ' / ' + max;
     head.addEventListener('click', e => { e.stopPropagation(); vibrate(); journalCollapsed[c.id] = !journalCollapsed[c.id]; renderJournal(); });
     left.appendChild(head);
     if (journalCollapsed[c.id]) continue;

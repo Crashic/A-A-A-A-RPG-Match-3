@@ -30,12 +30,10 @@ function finishBattle(won, surrendered = false) {
   battle.gained = { xp: 0, tape: 0 }; // уже начислено в сохранение
   vibrate(won ? [30, 40, 30] : 80);
   renderBattle();
-  // экран боя убирается: вместо него в истории — карта, поверх неё окно итогов
+  // экран боя убирается: под окном итогов — игровое меню (в истории — его запись под боем)
   battle = null;
   closeBattleMenu();
   mapZoneId = null;
-  renderMap();
-  history.replaceState({ screen: 'map', depth: navDepth() }, '');
-  showScreen('map', false);
+  openHub();
   showBattleResult(result);
 }

@@ -4,7 +4,7 @@ function showScreen(id, push = true) {
   hideTip();
   if (bagSel && bagSel.screen !== id) bagSel = null; // выделение в сумке — только на своём экране
   document.querySelectorAll('.screen').forEach(s => s.classList.toggle('active', s.id === id));
-  if (id !== 'menu' && push) history.pushState({ screen: id, depth: navDepth() + 1 }, ''); // depth — шагов от меню (goHome)
+  if (id !== 'menu' && push) navPush(id); // история: игровые экраны — поверх игрового меню (navPush)
   window.scrollTo(0, 0);
   hideTutorial();
   updateNotifyBadges(); // «!» на Заданиях и Персонаже

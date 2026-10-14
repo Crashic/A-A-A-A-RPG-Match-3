@@ -41,7 +41,7 @@ const STORY_ACT1 = {
   id: 'act1',
   title: tr("ui.Явка с опозданием"),
   todo: tr("ui.Карта врагов → «{zone}» → победить «{enemy}»"), // коротко, что сделать (questTodo)
-  reward: { tape: 50, item: 'common' }, // изолента (в белых) и обычное оружие
+  reward: { tape: 25, item: 'common' }, // изолента (в белых) и обычное оружие
   loot: {
     council: tr("ui.журнал выдачи противогазов"),
     union: tr("ui.мешок общей соли"),
@@ -140,7 +140,7 @@ const TUTORIAL_HP_FLOOR = { enemy: 0.35, hero: 0.5 }; // пока идёт сц�
 // оружие в сумке героя (для стрелок акта 2)
 const WEAPON_IN_BAG = '#character .invGrid .invSlot.item[data-slot="weapon"]';
 const STORY_ACT2 = {
-  id: 'act2', title: tr("ui.Опись имущества"), reward: { tape: 40 },
+  id: 'act2', title: tr("ui.Опись имущества"), reward: { tape: 20 },
   todo: tr("ui.Персонаж: надеть оружие из сумки и вложить очко в характеристику"), // коротко, что сделать (questTodo)
   // нечего надеть (награда акта 1 потерялась или уже надета) — выдать оружие
   prepare: hero => { if (!(hero.bag || []).some(i => (findById(ITEM_BASES, i.base) || {}).slot === 'weapon')) addToBag(hero, [storyWeapon(hero.level)]); },
@@ -174,7 +174,7 @@ const STORY_ACT2 = {
   ]
 };
 const STORY_ACT3 = {
-  id: 'act3', title: tr("ui.Товарообмен"), reward: { tape: 60 },
+  id: 'act3', title: tr("ui.Товарообмен"), reward: { tape: 30 },
   todo: tr("ui.Бункер → Завхоз Семёныч: продать вещь из сумки и купить «Особый заказ»"), // коротко, что сделать (questTodo)
   prepare: hero => addToBag(hero, [makeJunk(hero.level)]), // чтобы было что продать
   steps: [
@@ -211,7 +211,7 @@ const STORY_ACT3 = {
   ]
 };
 const STORY_ACT4 = {
-  id: 'act4', title: tr("ui.Общественная нагрузка"), reward: { tape: 80 },
+  id: 'act4', title: tr("ui.Общественная нагрузка"), reward: { tape: 40 },
   todo: tr("ui.Бункер → Доска объявлений: взять «Каску для прораба», потом Задания → «Сдать»"), // коротко, что сделать (questTodo)
   // на доске — сюжетное поручение: отнести каску прорабу (выполнено сразу — каска уже у героя)
   prepare: hero => {
@@ -223,7 +223,7 @@ const STORY_ACT4 = {
       title: tr("ui.Каска для прораба"),
       text: tr("ui.Прораб Кувалдыч третий день работает без каски. Говорит, не страшно: голова у него тоже бетонная. Профсоюз не согласен. Отнесите каску, пока не упал кирпич. Или сам Кувалдыч."),
       goal: tr("ui.Отнести каску «Прораб»"), need: 1, have: 1, level: hero.level,
-      reward: { xp: Math.round(mobXp(hero.level, hero.level) * 0.5), tape: 20, item: null }
+      reward: { xp: Math.round(mobXp(hero.level, hero.level) * 0.5), tape: 10, item: null }
     });
   },
   steps: [
@@ -261,7 +261,7 @@ const STORY_ACT4 = {
   ]
 };
 const STORY_ACT5 = {
-  id: 'act5', title: tr("ui.Личный шкафчик"), reward: { tape: 100, item: 'magic' },
+  id: 'act5', title: tr("ui.Личный шкафчик"), reward: { tape: 50, item: 'common' },
   todo: tr("ui.Бункер → Шкафчик: нажать на вещь в сумке, чтобы убрать её в шкафчик"), // коротко, что сделать (questTodo)
   prepare: hero => { if (!(hero.bag || []).length) addToBag(hero, [makeJunk(hero.level)]); },
   steps: [
@@ -290,7 +290,7 @@ const STORY_ACT5 = {
 };
 
 const STORY_ACT6 = {
-  id: 'act6', title: tr("ui.Не по уставу"), reward: { tape: 100, item: 'magic' },
+  id: 'act6', title: tr("ui.Не по уставу"), reward: { tape: 50, item: 'common' },
   todo: tr("ui.Карта врагов → «{zone5}» → победить «{enemy5}» (5-й уровень)"), // коротко, что сделать (questTodo)
   steps: [
     { type: 'dialog', lines: {
@@ -316,7 +316,7 @@ const STORY_ACT6 = {
   ]
 };
 const STORY_ACT7 = {
-  id: 'act7', title: tr("ui.Свой угол"), reward: { xpPct: 0.5 },
+  id: 'act7', title: tr("ui.Свой угол"), reward: { xpPct: 0.25 },
   todo: tr("ui.Лагерь → Общак: нажать на вещь в сумке, чтобы убрать её на склад"), // коротко, что сделать (questTodo)
   prepare: hero => { if (!(hero.bag || []).length) addToBag(hero, [makeJunk(hero.level)]); }, // чтобы было что положить в общак
   steps: [

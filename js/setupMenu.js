@@ -90,10 +90,14 @@ function setupMenu() {
       homeBound = false;
       clearTimeout(homeFallback.t);
     }
-    document.getElementById('confirm').classList.remove('open');
-    closeGemLegend();
-    document.getElementById('keyboard').classList.remove('open');
-    if (history.state && history.state.screen !== 'game') closeBattleResult();
+    const keep = navPush.keepModal; // переход в игровое меню из кода (итоги боя и др. окна остаются открытыми)
+    navPush.keepModal = false;
+    if (!keep) {
+      document.getElementById('confirm').classList.remove('open');
+      closeGemLegend();
+      document.getElementById('keyboard').classList.remove('open');
+      if (history.state && history.state.screen !== 'game') closeBattleResult();
+    }
     let id = (history.state && history.state.screen) || 'menu';
     if (id === 'create' && !creation) id = 'menu';
     if (id === 'intro') id = 'menu';

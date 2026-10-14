@@ -6,7 +6,7 @@ function acceptQuest(index, list = 'board') {
   const quest = q && q[list] && q[list][index];
   if (!quest) return;
   const max = questLimit(hero, quest.cat);
-  if (questSlotsUsed(hero, quest.cat) >= max) {
+  if (!quest.story && questSlotsUsed(hero, quest.cat) >= max) { // сюжетные — без лимита
     if (questLocks(hero, quest.cat).length) { showToast(QUEST_ABANDON_TEXT + tr("ui. Слот откроется через ") + timerText(questLocks(hero, quest.cat)[0].until) + '.', 3000); return; }
     const cat = findById(QUEST_CATEGORIES, quest.cat);
     showToast(tr("ui.Больше ") + max + ' ' + cat.gen + tr("ui. не унести. Профсоюз запрещает."));
