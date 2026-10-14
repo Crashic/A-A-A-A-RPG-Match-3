@@ -3,6 +3,7 @@ async function collapseAndRefill() {
   const n = BOARD_SIZE;
   const layer = document.getElementById('boardGems');
   const moves = []; // [el, row, col, distance]
+  const fresh = []; // новые фишки: [row, col, сколько клеток падать]
   for (let c = 0; c < n; c++) {
     let write = n - 1;
     for (let r = n - 1; r >= 0; r--) {
@@ -19,14 +20,26 @@ async function collapseAndRefill() {
     // новые фишки над полем: столько, сколько пустых клеток сверху
     const empty = write + 1;
     for (let r = write; r >= 0; r--) {
-      const type = randomGemType();
-      const el = createGemElement(type);
-      layer.appendChild(el);
-      placeGem(el, r - empty, c);
-      match3.grid[r][c] = type;
-      match3.els[r][c] = el;
-      moves.push([el, r, c, empty]);
+      match3.grid[r][c] = randomGemType();
+      fresh.push([r, c, empty]);
     }
+  }
+  // учебный бой: новые фишки не должны сами сложиться в ряд — иначе собьётся сценарий
+  if (tutorialActive()) {
+    const isFresh = new Set(fresh.map(([r, c]) => r * n + c));
+    for (let k = 0; k < 200; k++) {
+      const bad = findMatches(match3.grid).filter(([r, c]) => isFresh.has(r * n + c));
+      if (!bad.length) break;
+      const [r, c] = bad[Math.floor(Math.random() * bad.length)];
+      match3.grid[r][c] = Math.floor(Math.random() * GEM_TYPES.length);
+    }
+  }
+  for (const [r, c, empty] of fresh) {
+    const el = createGemElement(match3.grid[r][c]);
+    layer.appendChild(el);
+    placeGem(el, r - empty, c);
+    match3.els[r][c] = el;
+    moves.push([el, r, c, empty]);
   }
   layer.getBoundingClientRect();
   let longest = 0;

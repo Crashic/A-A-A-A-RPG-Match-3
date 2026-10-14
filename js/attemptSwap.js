@@ -1,6 +1,7 @@
 // Ход игрока: меняет две соседние фишки. Если ряда не получилось — фишки возвращаются, ход не тратится.
 async function attemptSwap(a, b) {
   if (match3.busy || !isAdjacent(a, b) || !isHeroTurn()) return;
+  if (!tutorialSwapAllowed(a, b)) return; // учебный бой: только обмен из рамки
   match3.busy = true;
   renderSkillBar();
   clearHint();

@@ -27,7 +27,15 @@ async function startBattle(enemyId, saved = null) {
   if (!saved) skillBattleStart(); // стартовые навыки: мана, пометки
   const current = battle;
   if (!saved) warnBagFull(save); // сумка полна — добыча упадёт и её разворуют
-  if (!saved) { logBattle('sys', tr("ui.Бой: ") + e.name + tr("ui., ур. ") + e.level + (e.elite ? tr("ui. · элита") : '')); battle.turn = rollFirstTurn(); }
+  if (!saved && storyTutorialBattle(save, e.id)) { // сюжет: учебный бой на заготовленном поле, враг слабее, первым ходит герой
+    battle.tutorial = { phase: 0 };
+    battle.enemy.attack = Math.max(1, Math.round(battle.enemy.attack * TUTORIAL_ENEMY_ATK));
+  }
+  if (!saved) {
+    logBattle('sys', tr("ui.Бой: ") + e.name + tr("ui., ур. ") + e.level + (e.elite ? tr("ui. · элита") : ''));
+    if (battle.tutorial) { battle.turn = 'hero'; logBattle('sys', tr("ui.Учебный бой: первыми ходите вы.")); }
+    else battle.turn = rollFirstTurn();
+  }
   renderBattle();
   renderBattleLog();
   // новый бой — монетка: мечи (ходите вы) или щит (ходит враг)
@@ -35,8 +43,9 @@ async function startBattle(enemyId, saved = null) {
   await startMatch3(saved ? saved.grid : null);
   if (flip) await flip;
   if (battle !== current) return;
-  showFirstLegend(); // в первом бою — подсказка, какая фишка что даёт
-  tutorialCheck(); // обучение в бою
+  if (battle.tutorial) tutorialStep(); // учебный бой: первая фаза
+  else showFirstLegend(); // в первом бою — подсказка, какая фишка что даёт
+  tutorialCheck(); // подсказки сюжета
   saveBattle();
   if (battle.turn === 'enemy') await enemyTurn();
 }

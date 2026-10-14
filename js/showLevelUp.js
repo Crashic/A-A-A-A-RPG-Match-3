@@ -34,4 +34,5 @@ function closeLevelUp() {
   const then = levelUpThen;
   levelUpThen = null;
   if (then) then();
+  tutorialCheck(); // сюжет: разговор после боя
 }

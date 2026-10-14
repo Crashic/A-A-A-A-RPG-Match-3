@@ -1,7 +1,7 @@
 // Карточка задания: название, кто дал, текст, цель (у взятого — полоса прогресса), награда и кнопки.
 // mode — 'board' / 'daily' (доска, кнопка «Взять») или 'active' («Сдать», когда выполнено, и «Отказаться»); index — номер в списке.
 function questCard(q, mode, index) {
-  const giver = findById(QUEST_GIVERS, q.giver) || { name: '', who: '' };
+  const giver = q.giverName ? { name: q.giverName, who: q.giverWho } : findById(QUEST_GIVERS, q.giver) || { name: '', who: '' };
   const c = document.createElement('div');
   c.className = 'questCard' + (mode === 'active' && q.have >= q.need ? ' ready' : '');
   c.innerHTML = '<div class="qHead"><b></b><span class="qGiver"></span></div><p class="qText"></p>' +
@@ -45,6 +45,7 @@ function questCard(q, mode, index) {
     b.addEventListener('click', e => { e.stopPropagation(); vibrate(); fn(); });
     foot.appendChild(b);
   };
+  if (q.cat === 'story') return c; // сюжетное: без кнопок, сдаётся в разговоре с NPC
   if (mode !== 'active') btn(tr("ui.Взять"), 'green', () => acceptQuest(index, mode));
   else {
     btn(tr("ui.Отказаться"), 'stone', () => abandonQuest(index));

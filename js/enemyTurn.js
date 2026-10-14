@@ -6,10 +6,11 @@ async function enemyTurn() {
   battle.skill.lastEnemyLoss = { hp: 0, shield: 0 }; // для «Разрыва хронологии»
   await sleep(ENEMY_THINK_MS);
   if (battle !== current) return;
-  await enemyUseSkill(); // навык врага за ману — ход не тратит
+  if (!tutorialActive()) await enemyUseSkill(); // навык врага за ману — ход не тратит (не в сценарии учебного боя)
   if (battle !== current) return;
   if (battle.over) { await endTurn(false); return; }
-  const move = chooseEnemyMove(match3.grid);
+  const move = (await tutorialEnemyMove()) || chooseEnemyMove(match3.grid); // учебный бой — заготовленный ход
+  if (battle !== current) return;
   if (!move) { await rebuildBoard(); if (battle === current) await endTurn(false); return; }
   selectGem(move.a);
   await sleep(ENEMY_SHOW_MS);

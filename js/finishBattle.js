@@ -18,6 +18,7 @@ function finishBattle(won, surrendered = false) {
   if (won) save.wins = (save.wins || 0) + 1; // для обновления прилавка торговца
   questBoardTick(save); // поручения на доске стареют
   result.quests = questProgress(save, won, e.id, battle.gained.gems); // задания с доски
+  storyBattleEnd(save, won, e.id); // сюжет: бой с целью задания (победа или поражение)
   result.levelUps = grantXp(save, result.killXp + result.gemXp);
   result.level = save.level;
   saveSlot(battle.slot, save);

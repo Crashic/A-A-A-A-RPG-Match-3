@@ -23,4 +23,5 @@ function updateNotifyBadges() {
   mark(document.getElementById('btnCharGame'), stats);
   mark(document.getElementById('btnCharacter'), stats);
   mark(document.getElementById('btnBattleMenu'), quest || stats);
+  updateFeatureLocks(hero); // замки функций по сюжету
 }

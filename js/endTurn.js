@@ -12,4 +12,5 @@ async function endTurn(extra) {
   match3.busy = false;
   renderSkillBar();
   scheduleHint();
+  if (tutorialActive()) tutorialStep(); // учебный бой: следующая фаза
 }

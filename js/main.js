@@ -17,6 +17,7 @@ function main() {
   setupCheat();
   setupScrollers();
   setupMenu();
+  setupFeatureLocks(); // замки функций по сюжету
   setupBoardInput();
   renderMenu();
   updateNotifyBadges();

@@ -1,5 +1,6 @@
 // «Понятно»: шаг обучения просмотрен (больше не показывается этому персонажу) — дальше следующий.
 function tutorialNext() {
+  if (document.getElementById('tutorial').dataset.story) { storyGuideOk(); return; } // подсказка сюжета
   const id = document.getElementById('tutorial').dataset.step;
   const slot = getActiveSlot();
   const hero = loadSlot(slot);

@@ -14,12 +14,13 @@ function renderMap() {
     const open = zoneAllowed(save, zone);
     const b = document.createElement('button');
     b.type = 'button';
+    b.dataset.zone = zone.id;
     b.className = 'zone' + (zone.id === mapZoneId ? ' selected' : '') + (open ? '' : ' locked');
     b.innerHTML = '<b></b><span></span>';
     b.firstChild.textContent = (zone.id === start.id ? '★ ' : '') + zone.name;
     b.lastChild.textContent = zone.min + '–' + zone.max;
     b.lastChild.className = 'lvl-' + difficultyOf(level, Math.round((zone.min + zone.max) / 2));
-    b.addEventListener('click', () => { vibrate(); mapZoneId = zone.id; renderMap(); });
+    b.addEventListener('click', () => { vibrate(); mapZoneId = zone.id; storyOnZone(zone.id); renderMap(); tutorialCheck(); });
     zoneList.appendChild(b);
   }
 
@@ -39,6 +40,7 @@ function renderMap() {
   for (const e of zone.enemies) {
     const b = document.createElement('button');
     b.type = 'button';
+    b.dataset.enemy = e.id;
     b.className = 'enemyCard' + (save && save.lastEnemy === e.id ? ' current' : '') + (open ? '' : ' locked');
     b.disabled = !open;
     b.innerHTML = '<span class="enemyHead"><span class="enemyLvl"></span><b></b></span>' +

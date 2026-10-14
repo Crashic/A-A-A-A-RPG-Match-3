@@ -15,7 +15,7 @@ function skillStrike(skill, side = 'hero') {
   if (side === 'hero') amount = heroWeakened(amount);   // враг ослабил ваши удары
   else amount = skillReduceHit(amount);                 // ваши защиты от врага
   let hp, shield = 0;
-  if (skill.pierce) { hp = Math.min(foe.hp, amount); foe.hp -= hp; }
+  if (skill.pierce) { hp = Math.min(foe.hp, amount); foe.hp -= hp; tutorialHpFloor(foe); }
   else {
     const hit = dealDamage(foe, amount);
     hp = hit.hp;

@@ -101,8 +101,8 @@
       <label class="setRow"><span data-i18n="ui.Вибрация">Вибрация</span><input id="set-vibration" type="checkbox" class="switch"></label>
       <label class="setRow"><span data-i18n="ui.Полноэкранный режим">Полноэкранный режим</span><input id="set-fullscreen" type="checkbox" class="switch"></label>
       <label class="setRow"><span data-i18n="ui.Оповещения">Оповещения</span><input id="set-notifications" type="checkbox" class="switch"></label>
-      <label class="setRow"><span data-i18n="ui.Обучение для всех персонажей">Обучение для всех персонажей</span><input id="set-tutorialAll" type="checkbox" class="switch"></label>
-      <label class="setRow" id="rowTutorialHero"><span data-i18n="ui.Обучение для текущего персонажа">Обучение для текущего персонажа</span><input id="set-tutorialHero" type="checkbox" class="switch"></label>
+      <label class="setRow tutRowOld"><span data-i18n="ui.Обучение для всех персонажей">Обучение для всех персонажей</span><input id="set-tutorialAll" type="checkbox" class="switch"></label>
+      <label class="setRow tutRowOld" id="rowTutorialHero"><span data-i18n="ui.Обучение для текущего персонажа">Обучение для текущего персонажа</span><input id="set-tutorialHero" type="checkbox" class="switch"></label>
       <label class="setRow"><span data-i18n="ui.Язык">Язык</span><select id="set-lang" class="langSelect"></select></label>
       <div class="setRow"><button id="btnInstall" class="btn green" type="button" data-i18n="ui.Установить приложение">Установить приложение</button></div>
       <div class="setRow"><button id="btnResetSaves" class="btn red" type="button" data-i18n="ui.Удалить всех персонажей">Удалить всех персонажей</button></div>
@@ -456,6 +456,17 @@
         <button id="levelUpDone" class="btn stone" type="button" data-i18n="ui.Позже">Позже</button>
       </div>
       <div id="levelUpStats" class="levelUpStats"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Диалог сюжета: портрет NPC, имя, реплика, «Далее» — js/showDialog.js -->
+<div id="storyDialog" class="modal">
+  <div class="modalBox dialogBox">
+    <div class="panel dialogPanel">
+      <div class="dialogHead"><span class="dialogPortrait"></span><span class="dialogWho"><b id="dialogName"></b><small id="dialogRole"></small></span></div>
+      <p id="dialogText"></p>
+      <div class="dialogFoot"><span id="dialogPage"></span><button id="dialogNext" class="btn green" type="button"></button></div>
     </div>
   </div>
 </div>
@@ -903,6 +914,37 @@
 <script src="js/bagFreeSlots.js"></script>
 <script src="js/warnBagFull.js"></script>
 <script src="js/setupLanguage.js"></script>
+<script src="js/storyConfig.js"></script>
+<script src="js/storyState.js"></script>
+<script src="js/storyFeatureOpen.js"></script>
+<script src="js/storyFaction.js"></script>
+<script src="js/storyTarget.js"></script>
+<script src="js/storyFill.js"></script>
+<script src="js/showDialog.js"></script>
+<script src="js/storyGuide.js"></script>
+<script src="js/storyGuideOk.js"></script>
+<script src="js/tutorialManaGem.js"></script>
+<script src="js/tutorialActive.js"></script>
+<script src="js/tutorialPhase.js"></script>
+<script src="js/tutorialHpFloor.js"></script>
+<script src="js/tutorialPlant.js"></script>
+<script src="js/tutorialFrame.js"></script>
+<script src="js/tutorialFrameHide.js"></script>
+<script src="js/tutorialStep.js"></script>
+<script src="js/tutorialEnemyMove.js"></script>
+<script src="js/tutorialSwapAllowed.js"></script>
+<script src="js/storyTutorialBattle.js"></script>
+<script src="js/storyCheck.js"></script>
+<script src="js/storyResume.js"></script>
+<script src="js/storyAddQuest.js"></script>
+<script src="js/storyFinishAct1.js"></script>
+<script src="js/storyWeapon.js"></script>
+<script src="js/storyBattleEnd.js"></script>
+<script src="js/storyAfterPending.js"></script>
+<script src="js/storyOnZone.js"></script>
+<script src="js/storyAllowEnemy.js"></script>
+<script src="js/updateFeatureLocks.js"></script>
+<script src="js/setupFeatureLocks.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

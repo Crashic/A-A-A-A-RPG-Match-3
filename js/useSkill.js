@@ -56,4 +56,5 @@ async function useSkill(id) {
   }
   renderBattle();
   saveBattle();
+  if (tutorialPhase() && tutorialPhase().id === 'skill') { battle.tutorial.phase++; tutorialStep(); } // учебный бой: дальше Топливо
 }

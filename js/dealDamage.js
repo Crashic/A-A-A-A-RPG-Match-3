@@ -4,5 +4,6 @@ function dealDamage(target, amount) {
   target.shield -= toShield;
   const toHp = Math.min(target.hp, amount - toShield);
   target.hp -= toHp;
+  tutorialHpFloor(target);
   return { shield: toShield, hp: toHp };
 }
