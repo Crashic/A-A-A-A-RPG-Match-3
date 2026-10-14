@@ -1561,7 +1561,7 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .resultRes b, .campResItem b { font: var(--type-stat); color: var(--text-primary); }
 /* окно вещи и подтверждение — поверх итогов боя */
 #itemInfo { z-index: 12; }
-#confirm { z-index: 13; }
+#confirm { z-index: 30; }
 /* Лагерь: ресурсы аккаунта */
 .campRes { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
 .campResItem.none { opacity: .4; }

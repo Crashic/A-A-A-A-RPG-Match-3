@@ -2,5 +2,5 @@
 function storyTutorialBattle(hero, enemyId) {
   const st = storyState(hero);
   const target = storyTarget(hero);
-  return st.act === 1 && st.stage === 'battle' && !!target && target.enemy.id === enemyId;
+  return !st.noGuide && st.act === 1 && st.stage === 'battle' && !!target && target.enemy.id === enemyId;
 }

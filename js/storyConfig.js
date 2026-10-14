@@ -124,7 +124,8 @@ const TUTORIAL_PHASES = [
     text: tr("ui.Ещё ход! Четыре в ряд — и ходишь снова. А пять — тем более. Собери пять.") },
   { id: 'skill',
     text: tr("ui.Маны хватает. «{skill}»: {skillText} Навык не тратит ход, но потом перезаряжается. Жми!") },
-  { id: 'p6', gem: 'ruby', plant: [[4, 4], [4, 5], [3, 6]], swap: [[3, 6], [4, 6]], frame: [3, 4, 4, 6],
+  // две канистры в ряд и по одной сверху с каждой стороны: ряд можно собрать и слева, и справа (swaps — любой из обменов)
+  { id: 'p6', gem: 'ruby', core: [[4, 4], [4, 5]], plant: [[4, 4], [4, 5], [3, 3], [3, 6]], swap: [[3, 6], [4, 6]], swaps: [[[3, 6], [4, 6]], [[3, 3], [4, 3]]], frame: [3, 3, 4, 6],
     text: tr("ui.Теперь Топливо — красные канистры. Это урон: сначала по щиту врага, потом по здоровью. Собери ряд.") },
   { id: 'free',
     text: tr("ui.Дальше сам. Добей его — и не позорь {faction}.") }
@@ -353,7 +354,7 @@ const STORY_ACT8 = {
       acc.paragon.bonus = (acc.paragon.bonus || 0) + 1;
       saveAccount(acc);
     }
-    const fresh = acc.paragon.storyGiven === me;
+    const fresh = acc.paragon.storyGiven === me && !acc.paragon.storyTaken; // уже оформил — повтор акта без очка
     storyState(hero).paragonFresh = fresh;
   },
   steps: [

@@ -26,7 +26,9 @@ function storyRunStep(hero, slot, screen, hide) {
       return;
     }
     const via = step.via || (step.card ? cardScreen : null);
-    const btn = via && screen.querySelector('.sideMenu [data-act="' + via + '"]');
+    const find = () => via && [...screen.querySelectorAll('.sideMenu [data-act="' + via + '"]')].find(b => b.offsetParent !== null);
+    let btn = find();
+    if (via && !btn) { updateFeatureLocks(); btn = find(); } // кнопку могли ещё не открыть
     if (btn) storyGuide(btn, step.type === 'goto' ? storyFill(step.text, hero) : tr("ui.Нам сюда."));
     else hide();
   };

@@ -10,6 +10,11 @@ function storyEvent(name, data) {
   let cur = storyCurrentStep(hero, true);
   // пояснение внутри боя ещё висит, а бой уже кончился — пропустить его
   if (cur && cur.step.type === 'ok' && cur.step.screen === 'game' && name !== 'battle') { st.stage++; cur = storyCurrentStep(hero, true); }
+  // нажали на цель пояснения «Понятно» (врага, «Открыть»…) — пояснение пропускается, если следующий шаг ждёт именно это
+  if (cur && cur.step.type === 'ok') {
+    const nx = storyPeekNext(hero);
+    if (nx && nx.type === 'event' && nx.event === name) { st.stage++; cur = storyCurrentStep(hero, true); }
+  }
   const s = cur && cur.step;
   if (!s || s.type !== 'event' || s.event !== name || (s.test && !s.test(hero, data)) ||
     (name === 'battle' && s.mapTarget && s.mapTarget(hero).enemy.id !== data)) { saveSlot(slot, hero); return; }

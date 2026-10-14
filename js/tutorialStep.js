@@ -32,6 +32,6 @@ function tutorialStep() {
     return;
   }
   if (!tutorialPlant(ph)) { battle.tutorial.free = true; return; } // не вышло рассадить — пусть играет сам
-  battle.tutorial.expect = ph.swap;
+  battle.tutorial.expect = ph.swaps || [ph.swap]; // список разрешённых обменов
   setTimeout(() => storyGuide(tutorialFrame(ph.frame), text), 80);
 }

@@ -44,13 +44,16 @@ function setupMenu() {
     const slot = getActiveSlot();
     const hero = loadSlot(slot);
     if (!hero) return;
-    tutorialState(hero).off = !e.target.checked;
+    storyState(hero).noGuide = !e.target.checked; // подсказки сюжета (стрелки)
     saveSlot(slot, hero);
     vibrate();
     showToast(e.target.checked ? tr("ui.Обучение для «") + hero.name + tr("ui.» включено") : tr("ui.Обучение для «") + hero.name + tr("ui.» выключено"));
   });
   document.querySelector('#tutorial .tutOk').addEventListener('click', e => { e.stopPropagation(); tutorialNext(); });
-  document.querySelector('#tutorial .tutHide').addEventListener('click', e => { e.stopPropagation(); tutorialOff(); });
+  document.querySelector('#tutorial .tutHide').addEventListener('click', e => {
+    e.stopPropagation();
+    if (document.getElementById('tutorial').dataset.story) storySkipGuide(); else tutorialOff();
+  });
 
   // Переключатели
   for (const key of ['vibration', 'fullscreen', 'notifications', 'tutorialAll']) {
@@ -83,8 +86,9 @@ function setupMenu() {
   window.addEventListener('popstate', () => {
     if (homeBound) { // «В главное меню»: листаем назад до самого меню
       const st = history.state;
-      if (st && st.screen && st.screen !== 'menu') { history.back(); return; }
+      if (st && st.screen && st.screen !== 'menu') { homeFallback(); history.back(); return; }
       homeBound = false;
+      clearTimeout(homeFallback.t);
     }
     document.getElementById('confirm').classList.remove('open');
     closeGemLegend();
