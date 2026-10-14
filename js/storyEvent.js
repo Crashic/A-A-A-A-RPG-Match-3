@@ -1,13 +1,17 @@
-// Действие игрока для сюжета (надел, продал, взял задание…): если текущий шаг его ждёт — сюжет идёт дальше.
+// Действие игрока для сюжета (надел, продал, взял задание, начал бой / победил — data: id врага…): если текущий шаг его ждёт — сюжет идёт дальше.
 // Вызывать после того, как функция сохранила героя.
-function storyEvent(name) {
+function storyEvent(name, data) {
   const slot = getActiveSlot();
   const hero = loadSlot(slot);
   if (!hero) return;
   const st = storyState(hero);
   if (st.act < 2) return;
-  const cur = storyCurrentStep(hero);
-  if (!cur || cur.step.type !== 'event' || cur.step.event !== name) { saveSlot(slot, hero); return; }
+  let cur = storyCurrentStep(hero);
+  // пояснение внутри боя ещё висит, а бой уже кончился — пропустить его
+  if (cur && cur.step.type === 'ok' && cur.step.screen === 'game' && name !== 'battle') { st.stage++; cur = storyCurrentStep(hero); }
+  const s = cur && cur.step;
+  if (!s || s.type !== 'event' || s.event !== name || (s.test && !s.test(hero, data)) ||
+    (name === 'battle' && s.mapTarget && s.mapTarget(hero).enemy.id !== data)) { saveSlot(slot, hero); return; }
   st.stage++;
   saveSlot(slot, hero);
   hideTutorial();

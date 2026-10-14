@@ -10,6 +10,7 @@ function renderCamp() {
     c.className = 'campCard';
     const works = b.open && b.unlocked();
     c.className = 'campCard' + (works ? ' open' : '');
+    c.dataset.card = b.id;
     c.innerHTML = iconTile(b.icon, b.color) + '<div><h4></h4><p></p></div>' +
       (works ? '' : '<span class="campSoon">' + (b.open ? tr("ui.Закрыто") : tr("ui.Скоро")) + '</span>');
     c.querySelector('h4').textContent = b.name;
@@ -24,4 +25,5 @@ function renderCamp() {
     }
     grid.appendChild(c);
   }
+  updateFeatureLocks();
 }

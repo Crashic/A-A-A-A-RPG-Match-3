@@ -5,7 +5,8 @@ function storyRunStep(hero, slot, screen, hide) {
   const id = screen && screen.id;
   const cur = storyCurrentStep(hero);
   saveSlot(slot, hero); // when/prepare могли сдвинуть сюжет
-  if (!cur || id === 'game') { hide(); return; }
+  if (!cur) { hide(); return; }
+  if (id === 'game' && cur.step.screen !== 'game') { hide(); return; } // в бою — только шаги боя
   const { act, step } = cur;
   const st = storyState(hero);
   const f = storyFaction(hero);
@@ -16,13 +17,15 @@ function storyRunStep(hero, slot, screen, hide) {
     hideTutorial();
     storyCheck();
   };
+  const cardScreen = step.cardScreen || 'bunker'; // карточка — в бункере или в лагере
   const nav = () => { // стрелка туда, где шаг выполняется
-    if (step.card && id === 'bunker') {
-      storyGuide(document.querySelector('#bunkerBody .bunkerCard[data-card="' + step.card + '"] button'),
-        step.type === 'goto' ? storyFill(step.text, hero) : tr("ui.Нам сюда."));
+    if (step.card && id === cardScreen) {
+      const sel = cardScreen === 'camp' ? '#campBody .campCard[data-card="' + step.card + '"] .campOpen'
+        : '#bunkerBody .bunkerCard[data-card="' + step.card + '"] button';
+      storyGuide(document.querySelector(sel), step.type === 'goto' ? storyFill(step.text, hero) : tr("ui.Нам сюда."));
       return;
     }
-    const via = step.via || (step.card ? 'bunker' : null);
+    const via = step.via || (step.card ? cardScreen : null);
     const btn = via && screen.querySelector('.sideMenu [data-act="' + via + '"]');
     if (btn) storyGuide(btn, step.type === 'goto' ? storyFill(step.text, hero) : tr("ui.Нам сюда."));
     else hide();
@@ -39,12 +42,20 @@ function storyRunStep(hero, slot, screen, hide) {
     return;
   }
   if (step.type === 'reward') { storyFinishAct(); return; }
+  if (step.type === 'ok' && step.screen === 'game' && id !== 'game') { advance(); return; } // пояснение боя — бой уже кончился
   if (step.type === 'goto') {
     if (id === step.screen) { advance(); return; }
     nav();
     return;
   }
   if (id !== step.screen) { nav(); return; }
+  if (step.mapTarget && id === 'map') { // цель на карте: сначала локация, потом враг
+    const t = step.mapTarget(hero);
+    const el = mapZoneId !== t.zone.id ? document.querySelector('#zoneList [data-zone="' + t.zone.id + '"]')
+      : document.querySelector('#enemyList [data-enemy="' + t.enemy.id + '"]');
+    if (el) { el.scrollIntoView({ block: 'nearest' }); storyGuide(el, storyFill(step.text, hero)); } else hide();
+    return;
+  }
   // sel — селектор или список селекторов по приоритету: берётся первый видимый элемент
   const sels = Array.isArray(step.sel) ? step.sel : [step.sel];
   let el = null;

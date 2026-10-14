@@ -13,7 +13,7 @@ function storyCheck() {
     if (!hero || ['menu', 'create', 'intro', 'characters', 'settings', 'bye'].includes(id)) { hide(); return; }
     if (tutorialActive()) return;
     const modal = document.querySelector('.modal.open');
-    if (modal) { hide(); return; }
+    if (modal) { hide(); clearTimeout(storyCheck.wait); storyCheck.wait = setTimeout(storyCheck, 1000); return; } // окно закроют — проверим снова
     const st = storyState(hero);
     if (st.act !== 1 || st.done >= 1) { storyRunStep(hero, slot, screen, hide); return; } // акты 2+
     if (st.stage === 'intro' || st.stage === 'after') { if (id !== 'game') storyResume(); return; }

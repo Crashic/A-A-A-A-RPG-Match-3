@@ -16,4 +16,5 @@ function stashMove(from, index) {
   saveSlot(slot, hero);
   saveAccount(acc);
   renderStash();
+  if (from === 'bag') storyEvent('stash'); // сюжет, акт 7
 }

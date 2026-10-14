@@ -10,5 +10,7 @@ function updateFeatureLocks(hero) {
   };
   document.querySelectorAll('.sideMenu [data-act]').forEach(b => mark(b, b.dataset.act));
   for (const id in FEATURE_BUTTONS) mark(document.getElementById(id), FEATURE_BUTTONS[id]);
+  for (const [f, card] of [['stash', 'storage'], ['registry', 'registry']]) // карточки лагеря
+    mark(document.querySelector('#campBody .campCard[data-card="' + card + '"] .campOpen'), f);
   for (const f of ['board', 'bank']) mark(document.querySelector('#bunkerBody .bunkerCard[data-card="' + f + '"] button'), f); // карточки бункера
 }

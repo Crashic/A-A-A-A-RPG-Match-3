@@ -12,7 +12,7 @@ function finishBattle(won, surrendered = false) {
   save.tape = (save.tape || 0) + result.tape;
   if (battle.skill.notes) save.notes = Math.min(5, (save.notes || 0) + battle.skill.notes); // «Пометка на полях»
   const fresh = loadSlot(battle.slot); // снаряжение и сумка — как сейчас в ячейке (могли меняться читами)
-  if (fresh) { save.gear = fresh.gear; save.bag = fresh.bag; save.packs = fresh.packs; save.tutorial = fresh.tutorial; }
+  if (fresh) { save.gear = fresh.gear; save.bag = fresh.bag; save.packs = fresh.packs; save.tutorial = fresh.tutorial; save.story = fresh.story; }
   if (won) Object.assign(result, addToBag(save, rollDrops(e.level, e.elite))); // { added, lost }
   if (won) { result.resources = rollResources(e.elite); addResources(result.resources); } // ресурсы — в лагерь
   if (won) save.wins = (save.wins || 0) + 1; // для обновления прилавка торговца
@@ -22,6 +22,7 @@ function finishBattle(won, surrendered = false) {
   result.levelUps = grantXp(save, result.killXp + result.gemXp);
   result.level = save.level;
   saveSlot(battle.slot, save);
+  if (won) storyEvent('win', e.id); // сюжет: победа над целью (акт 6)
   battle.gained = { xp: 0, tape: 0 }; // уже начислено в сохранение
   vibrate(won ? [30, 40, 30] : 80);
   renderBattle();

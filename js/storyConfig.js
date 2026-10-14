@@ -20,15 +20,19 @@ const STORY_FEATURES = {
   bunker: 3,
   board: 4,
   bank: 5,
-  camp: 7
+  camp: 7,
+  stash: 7,     // карточка «Общак» в лагере
+  registry: 8   // карточка «Реестр» в лагере
 };
-const STORY_FEATURE_NAMES = { char: tr("ui.Персонаж"), bunker: tr("ui.Бункер"), camp: tr("ui.Лагерь"), map: tr("ui.Карта врагов"), journal: tr("ui.Задания"), board: tr("ui.Доска объявлений"), bank: tr("ui.Шкафчик") };
+const STORY_FEATURE_NAMES = { char: tr("ui.Персонаж"), bunker: tr("ui.Бункер"), camp: tr("ui.Лагерь"), map: tr("ui.Карта врагов"), journal: tr("ui.Задания"), board: tr("ui.Доска объявлений"), bank: tr("ui.Шкафчик"), stash: tr("ui.Общак"), registry: tr("ui.Реестр") };
 
 // Жители бункера, которые говорят в актах 3–5 (svg — значок вместо плитки).
 const STORY_LOCALS = {
   semenych: { name: tr("ui.Завхоз Семёныч"), who: tr("ui.склад бункера"), svg: () => SHOP_ICON },
   lyusya:   { name: tr("ui.Профорг Люся"), who: tr("ui.профсоюз бункера"), svg: () => BOARD_ICON },
-  nina:     { name: tr("ui.Нина Петровна"), who: tr("ui.вахта, шкафчики"), svg: () => BANK_ICON }
+  nina:     { name: tr("ui.Нина Петровна"), who: tr("ui.вахта, шкафчики"), svg: () => BANK_ICON },
+  kuzmich:  { name: tr("ui.Смотрящий Кузьмич"), who: tr("ui.общак лагеря"), icon: 'key', color: 'var(--gem-sapphire)' },
+  spravkina: { name: tr("ui.Делопроизводитель Справкина"), who: tr("ui.Реестр Героев и Пострадавших"), icon: 'note', color: 'var(--gem-ruby)' }
 };
 
 // Акт 1 «Явка с опозданием»: NPC ругает за опоздание, посылает к первому врагу стартовой локации,
@@ -247,5 +251,87 @@ const STORY_ACT5 = {
   ]
 };
 
+const STORY_ACT6 = {
+  id: 'act6', title: tr("ui.Не по уставу"), reward: { tape: 100, item: 'magic' },
+  steps: [
+    { type: 'dialog', lines: {
+      council: [tr("ui.Боец, в «{zone5}» объявился {enemy5}. Пятого уровня, без пропуска и без совести."), tr("ui.Кто ходит первым — решает монетка. А монетку подкручивает наглость. Ликвидировать. Не по уставу — по-быстрому.")],
+      union: [tr("ui.{enemy5} из «{zone5}» обидел наших. Пятый уровень — уже не мальчик."), tr("ui.Кто первым бьёт — решает монетка, а монетку подкручивает наглость. Разберись. Не по уставу — по совести.")],
+      press: [tr("ui.Слыхал про «{enemy5}»? «{zone5}», пятый уровень, наглый, как передовица."), tr("ui.Кто первым ходит — решает монетка, а монетку подкручивает наглость. Мне нужен репортаж с места драки. С твоей победой.")] },
+      ok: { council: tr("ui.Есть!"), union: tr("ui.Иду"), press: tr("ui.Бегу") } },
+    { type: 'event', event: 'battle', screen: 'map', via: 'map', mapTarget: hero => storyTarget5(hero),
+      text: tr("ui.Цель — {enemy5}. Жми.") },
+    { type: 'ok', screen: 'game', sel: '#battleLog',
+      text: tr("ui.Кто ходит первым — решает монетка: мечи — ты, щит — враг. Шансы подкручивает «Ресурс личной наглости» — он бывает только на вещах. У врагов наглость растёт с уровнем, у элиты — ещё больше. Итог жребия — в логе.") },
+    { type: 'event', event: 'win', screen: 'map', via: 'map', mapTarget: hero => storyTarget5(hero),
+      test: (hero, id) => id === storyTarget5(hero).enemy.id,
+      text: tr("ui.Задание не выполнено: {enemy5} ещё бегает. Попробуй снова.") },
+    { type: 'dialog', lines: {
+      council: [tr("ui.Ликвидировали? Выношу благодарность. Неуставную, зато от души.")],
+      union: [tr("ui.Вот это по-нашему. Держи — заслужил честно, редкость по нынешним временам.")],
+      press: [tr("ui.Репортаж — огонь! Заголовок: «Пятый уровень — не приговор». Держи гонорар.")] },
+      ok: { council: tr("ui.Служу бункеру!"), union: tr("ui.Спасибо, старейшина"), press: tr("ui.Служу правде!") } },
+    { type: 'reward' }
+  ]
+};
+const STORY_ACT7 = {
+  id: 'act7', title: tr("ui.Свой угол"), reward: { xpPct: 0.5 },
+  prepare: hero => { if (!(hero.bag || []).length) addToBag(hero, [makeJunk(hero.level)]); }, // чтобы было что положить в общак
+  steps: [
+    { type: 'dialog', lines: {
+      council: [tr("ui.Боец, вам выделена жилплощадь. На поверхности. Без окон, без стен, зато с видом."), tr("ui.Обустройте лагерь. Это приказ и, как ни странно, забота.")],
+      union: [tr("ui.Каждому вольному — свой угол под небом. Тебе тоже, хоть ты и опаздываешь."), tr("ui.Ставь лагерь. Общее — в общак, своё — при себе.")],
+      press: [tr("ui.Редакции нужен корпункт на поверхности. Корпункт — это ты."), tr("ui.Обживайся. И не забудь про общак — там у нас всё ценное на всякий случай.")] },
+      ok: { council: tr("ui.Есть!"), union: tr("ui.Иду"), press: tr("ui.Бегу") } },
+    { type: 'goto', screen: 'camp', via: 'camp',
+      text: tr("ui.Лагерь — палатка в столбце меню. Он общий на всех твоих персонажей.") },
+    { type: 'ok', screen: 'camp', sel: '#campBody .campGrid',
+      text: tr("ui.Постройки лагеря. Работают пока не все — остальные отстроим по ходу дела.") },
+    { type: 'goto', screen: 'stash', card: 'storage', cardScreen: 'camp',
+      text: tr("ui.Общак — склад на всех твоих персонажей. Жми «Открыть».") },
+    { type: 'dialog', who: 'kuzmich', lines: [
+      tr("ui.Кузьмич. Смотрю за общаком. Общак — он на всех твоих: что положил один — достанет другой."),
+      tr("ui.Нажал на вещь в сумке — легла в общак. Нажал в общаке — вернулась. Места мало — докупается за изоленту.")],
+      ok: tr("ui.Понял") },
+    { type: 'event', event: 'stash', screen: 'stash', via: 'camp', card: 'storage', cardScreen: 'camp',
+      sel: ['#stashRight .invGrid .invSlot.item', '#stash .invGrid .invSlot.item'],
+      text: tr("ui.Положи вещь в общак — нажми на неё в сумке.") },
+    { type: 'ok', screen: 'stash', sel: '#stash .stashTape',
+      text: tr("ui.Изоленту тоже можно сдать — и забрать другим персонажем. Общак не ворует. В отличие от Кузьмича. Шучу.") },
+    { type: 'dialog', lines: {
+      council: [tr("ui.Обжились? Вот и хорошо. Жилплощадь не приватизировать — она государственная, просто государства нет.")],
+      union: [tr("ui.Свой угол — это уже полдела. Вторая половина — не дать его спалить.")],
+      press: [tr("ui.Корпункт открыт! Опыт — лучший гонорар. Особенно когда другого нет.")] },
+      ok: { council: tr("ui.Служу бункеру!"), union: tr("ui.Спасибо, старейшина"), press: tr("ui.Служу правде!") } },
+    { type: 'reward' }
+  ]
+};
+const STORY_ACT8 = {
+  id: 'act8', title: tr("ui.Справка о пострадавшем"), reward: { paragon: 1 },
+  steps: [
+    { type: 'dialog', lines: {
+      council: [tr("ui.Боец, за ранения в ходе службы положена компенсация. По справке. Справки выдаёт Реестр.")],
+      union: [tr("ui.Шрамы у вольных — не позор, а повод. Иди в Реестр, там за них что-то дают.")],
+      press: [tr("ui.Слышал? Реестр раздаёт компенсации пострадавшим. Иди пострадай официально — и напиши, как оно.")] },
+      ok: { council: tr("ui.Есть!"), union: tr("ui.Иду"), press: tr("ui.Бегу") } },
+    { type: 'goto', screen: 'camp', via: 'camp',
+      text: tr("ui.Реестр — в лагере.") },
+    { type: 'goto', screen: 'paragon', card: 'registry', cardScreen: 'camp',
+      text: tr("ui.Реестр Героев и Пострадавших. Жми «Открыть».") },
+    { type: 'dialog', who: 'spravkina', lines: [
+      tr("ui.Справкина, делопроизводство. Вы пострадали? Все пострадали. Но оформлены не все."),
+      tr("ui.За каждые пять уровней любого вашего персонажа — очко компенсации. Оформлять можно рядом с уже оформленным, начиная с корня. Реестр общий на всех.")],
+      ok: tr("ui.Оформляйте") },
+    { type: 'ok', screen: 'paragon', sel: '#paragonLeft',
+      text: tr("ui.Это паутина компенсаций. Выбери узел и жми «Оформить». Бонусы маленькие, зато навсегда и на всех персонажей.") },
+    { type: 'dialog', lines: {
+      council: [tr("ui.Оформили? Теперь вы официально пострадавший. Это почти орден. Держите внеочередную справку.")],
+      union: [tr("ui.Справку получил? Повесь над костром, пусть все видят. И держи ещё одну — от схода.")],
+      press: [tr("ui.Отличный материал: «Наш репортёр получил компенсацию. Редакция — нет». Держи ещё одну — от редакции.")] },
+      ok: { council: tr("ui.Служу бункеру!"), union: tr("ui.Спасибо, старейшина"), press: tr("ui.Служу правде!") } },
+    { type: 'reward' }
+  ]
+};
+
 // Готовые акты по порядку (номер акта = индекс + 1). Следующие акты добавляются сюда.
-const STORY_ACTS = [STORY_ACT1, STORY_ACT2, STORY_ACT3, STORY_ACT4, STORY_ACT5];
+const STORY_ACTS = [STORY_ACT1, STORY_ACT2, STORY_ACT3, STORY_ACT4, STORY_ACT5, STORY_ACT6, STORY_ACT7, STORY_ACT8];

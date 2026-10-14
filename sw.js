@@ -434,6 +434,7 @@ const FILES = [
   './js/storyFeatureOpen.js',
   './js/storyFaction.js',
   './js/storyTarget.js',
+  './js/storyTarget5.js',
   './js/storyFill.js',
   './js/showDialog.js',
   './js/storyGuide.js',

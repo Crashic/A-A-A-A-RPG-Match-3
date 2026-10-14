@@ -43,6 +43,7 @@ async function startBattle(enemyId, saved = null) {
   await startMatch3(saved ? saved.grid : null);
   if (flip) await flip;
   if (battle !== current) return;
+  if (!saved) storyEvent('battle', e.id); // сюжет: начат бой с целью (акт 6)
   if (battle.tutorial) tutorialStep(); // учебный бой: первая фаза
   else showFirstLegend(); // в первом бою — подсказка, какая фишка что даёт
   tutorialCheck(); // подсказки сюжета
