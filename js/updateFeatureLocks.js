@@ -6,7 +6,7 @@ function updateFeatureLocks(hero) {
   const mark = (el, feature) => {
     if (!el) return;
     el.dataset.feature = feature;
-    el.classList.toggle('featureLocked', !!hero && !storyFeatureOpen(feature, hero));
+    el.classList.toggle('featureLocked', !hero || !storyFeatureOpen(feature, hero)); // нет героя (вайп, пустая ячейка) — всё по сюжету закрыто, игра с начала
   };
   document.querySelectorAll('.sideMenu [data-act]').forEach(b => mark(b, b.dataset.act));
   for (const id in FEATURE_BUTTONS) mark(document.getElementById(id), FEATURE_BUTTONS[id]);
