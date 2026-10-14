@@ -42,6 +42,12 @@ function storyRunStep(hero, slot, screen, hide) {
     return;
   }
   if (step.type === 'reward') { storyFinishAct(); return; }
+  if (step.type === 'open') { // открыть экран самим (например, журнал после взятия задания)
+    const h = loadSlot(slot); storyState(h).stage++; saveSlot(slot, h);
+    if (step.screen === 'journal') openJournal();
+    return;
+  }
+  if (step.silent) { hide(); return; } // ждём события без подсказок (например, «приходи, когда победишь»)
   if (step.type === 'ok' && step.screen === 'game' && id !== 'game') { advance(); return; } // пояснение боя — бой уже кончился
   if (step.type === 'goto') {
     if (id === step.screen) { advance(); return; }
@@ -49,11 +55,16 @@ function storyRunStep(hero, slot, screen, hide) {
     return;
   }
   if (id !== step.screen) { nav(); return; }
+  if (step.modal && !document.getElementById(step.modal).classList.contains('open')) { // окно закрыли — открыть снова
+    const back = [...document.querySelectorAll(step.backSel || 'none')].find(e => e.offsetParent !== null);
+    if (back) storyGuide(back, tr("ui.Нажми ещё раз — окно закрылось.")); else hide();
+    return;
+  }
   if (step.mapTarget && id === 'map') { // цель на карте: сначала локация, потом враг
     const t = step.mapTarget(hero);
     const el = mapZoneId !== t.zone.id ? document.querySelector('#zoneList [data-zone="' + t.zone.id + '"]')
       : document.querySelector('#enemyList [data-enemy="' + t.enemy.id + '"]');
-    if (el) { el.scrollIntoView({ block: 'nearest' }); storyGuide(el, storyFill(step.text, hero)); } else hide();
+    if (el) { el.scrollIntoView({ block: 'nearest' }); storyGuide(el, storyFill(step.text, hero), step.type === 'ok' ? advance : null); } else hide();
     return;
   }
   // sel — селектор или список селекторов по приоритету: берётся первый видимый элемент

@@ -4,6 +4,7 @@ function storyGuide(el, text, onOk) {
   const box = document.getElementById('tutorial');
   if (!el) { hideTutorial(); return; }
   box.dataset.story = '1';
+  storyGuide.el = el; // цель: только на неё можно нажать (setupStoryBlock)
   storyGuide.onOk = onOk || null;
   box.querySelector('.tutHide').hidden = true;
   showTutorial({ id: 'story', text, auto: !onOk }, el);

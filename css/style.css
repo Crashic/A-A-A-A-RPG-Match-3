@@ -1751,12 +1751,20 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 #tutFrame[hidden] { display: none; }
 .gem.tutPop { animation: tutPop .45s ease-out; }
 @keyframes tutPop { 40% { filter: brightness(1.5); } }
-/* закрытые по сюжету функции (updateFeatureLocks): серые, с замком в углу */
-.featureLocked { position: relative; filter: grayscale(1); opacity: .5; }
-.featureLocked::after { content: ''; position: absolute; right: 2px; bottom: 2px; width: 12px; height: 12px; z-index: 2;
-  background: var(--ui-parchment); border-radius: 2px;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Crect x='1.5' y='5' width='9' height='7' rx='1.5'/%3E%3Cpath d='M3.5 5V3.5a2.5 2.5 0 0 1 5 0V5' fill='none' stroke='%23000' stroke-width='1.6'/%3E%3C/svg%3E") center / contain no-repeat;
-          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Crect x='1.5' y='5' width='9' height='7' rx='1.5'/%3E%3Cpath d='M3.5 5V3.5a2.5 2.5 0 0 1 5 0V5' fill='none' stroke='%23000' stroke-width='1.6'/%3E%3C/svg%3E") center / contain no-repeat; }
+/* закрытые по сюжету функции (updateFeatureLocks) — скрыты, пока сюжет их не откроет */
+.featureLocked { display: none !important; }
 /* старые переключатели обучения больше не нужны — обучение ведёт сюжет */
 #settings .setRow.tutRowOld { display: none; }
 .dialogPortrait > svg { width: 52px; height: 52px; display: block; }
+/* Инвентарь: вкладки «Инвентарь» / «Квестовое»; квестовые предметы — список без ячеек */
+.invTabs { display: flex; gap: 6px; }
+.invTabs .statTab { flex: 1; }
+.questPocketNote { margin: 6px 0; font: var(--type-small); color: var(--text-muted); font-style: italic; }
+.questPocketRow { display: flex; gap: 10px; align-items: flex-start; padding: 6px; border-radius: 10px; background: var(--bg-cell); margin-bottom: 6px; }
+.questPocketRow b { display: block; font: var(--type-body-strong); color: var(--ui-reward); }
+.questPocketRow small { display: block; font: var(--type-small); color: var(--text-secondary); }
+.invSlot.questItem { flex: none; box-shadow: inset 0 0 0 2px var(--ui-reward); background: var(--bg-canvas); color: var(--ui-reward); }
+.invSlot.questItem .slotIcon { opacity: 1; }
+.tutRing.nudge { animation: tutNudge .35s ease-in-out 2, tutPulse 1.4s ease-in-out .7s infinite; }
+@keyframes tutNudge { 50% { box-shadow: 0 0 0 6px var(--ui-danger), 0 0 0 9999px color-mix(in srgb, var(--ui-outline) 35%, transparent); } }
+.btn[hidden] { display: none !important; }

@@ -18,6 +18,7 @@ function main() {
   setupScrollers();
   setupMenu();
   setupFeatureLocks(); // замки функций по сюжету
+  setupStoryBlock(); // пока сюжет показывает, что нажать, — только туда
   setupBoardInput();
   renderMenu();
   updateNotifyBadges();

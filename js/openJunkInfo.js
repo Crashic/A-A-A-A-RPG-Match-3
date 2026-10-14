@@ -24,10 +24,13 @@ function openJunkInfo(where) {
     b.type = 'button';
     b.className = 'btn ' + cls;
     b.textContent = label;
+    b.dataset.role = itemButtonRole(label);
     b.addEventListener('click', e => { e.stopPropagation(); vibrate(); fn(); });
     btns.appendChild(b);
   };
   btn(tr("ui.Выбросить"), 'red', () => { close(); dropItem(where.bag); });
   btn(tr("ui.Продать"), 'orange', () => { close(); sellItem(where.bag); });
   box.classList.add('open');
+  storyEvent('openItem'); // сюжет: открыто окно вещи
+  storyJunkStep(); // урок про хлам после первой победы
 }

@@ -5,6 +5,7 @@ function storyEvent(name, data) {
   const hero = loadSlot(slot);
   if (!hero) return;
   const st = storyState(hero);
+  if (name === 'sell' && st.junk === 'loot') { st.junk = 'cont'; saveSlot(slot, hero); setTimeout(storyJunkStep, 300); return; } // урок про хлам
   if (st.act < 2) return;
   let cur = storyCurrentStep(hero);
   // пояснение внутри боя ещё висит, а бой уже кончился — пропустить его

@@ -12,7 +12,8 @@ function acceptQuest(index, list = 'board') {
     showToast(tr("ui.Больше ") + max + ' ' + cat.gen + tr("ui. не унести. Профсоюз запрещает."));
     return;
   }
-  q.active.push(q[list].splice(index, 1)[0]);
+  const took = q[list].splice(index, 1)[0];
+  q.active.push(took);
   saveQuests(hero);
-  storyEvent('accept'); // сюжет, акт 4
+  storyEvent('accept', took.uid); // сюжет, акт 4
 }

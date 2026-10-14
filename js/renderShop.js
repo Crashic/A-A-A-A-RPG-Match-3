@@ -47,6 +47,28 @@ function renderShop() {
     bags.appendChild(cell);
   }
   left.append(bagsTitle, bags);
+  // особый заказ сюжета: квестовые предметы, которые герой должен купить (storyShopOffer)
+  const offer = storyShopOffer(hero);
+  if (offer.length) {
+    const t = document.createElement('p');
+    t.className = 'invTitle';
+    t.textContent = tr("ui.Особый заказ");
+    const g = document.createElement('div');
+    g.className = 'shopStock shopQuest';
+    for (const q of offer) {
+      const cell = document.createElement('div');
+      cell.className = 'shopItem';
+      const s = questItemCell(q);
+      s.addEventListener('click', e => { e.stopPropagation(); vibrate(); buyQuestItem(q.id); });
+      cell.appendChild(s);
+      const price = document.createElement('div');
+      price.className = 'shopPrice' + ((hero.tape || 0) < q.price ? ' poor' : '');
+      price.innerHTML = formatTape(q.price);
+      cell.appendChild(price);
+      g.appendChild(cell);
+    }
+    left.append(t, g);
+  }
   // «Завезите новое»
   const foot = document.createElement('div');
   foot.className = 'shopFoot';

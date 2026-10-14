@@ -77,6 +77,7 @@ function openItemInfo(where) {
     b.type = 'button';
     b.className = 'btn ' + cls;
     b.textContent = label;
+    b.dataset.role = itemButtonRole(label);
     b.disabled = !!disabled;
     b.addEventListener('click', e => { e.stopPropagation(); vibrate(); fn(); });
     btns.appendChild(b);
@@ -101,4 +102,5 @@ function openItemInfo(where) {
   }
   if (locked && !inShop) p(tr("ui.В бою снаряжение не меняется (кроме режима читов)."), 'itReq');
   box.classList.add('open');
+  storyEvent('openItem'); // сюжет: открыто окно вещи
 }

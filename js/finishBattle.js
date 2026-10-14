@@ -14,6 +14,10 @@ function finishBattle(won, surrendered = false) {
   const fresh = loadSlot(battle.slot); // снаряжение и сумка — как сейчас в ячейке (могли меняться читами)
   if (fresh) { save.gear = fresh.gear; save.bag = fresh.bag; save.packs = fresh.packs; save.tutorial = fresh.tutorial; save.story = fresh.story; }
   if (won) Object.assign(result, addToBag(save, rollDrops(e.level, e.elite))); // { added, lost }
+  if (won && save.story && !save.story.junk) { // сюжет: после первой победы — урок про хлам
+    const got = addToBag(save, [makeJunk(e.level)]).added;
+    if (got.length) { result.added = (result.added || []).concat(got); save.story.junk = 'loot'; }
+  }
   if (won) { result.resources = rollResources(e.elite); addResources(result.resources); } // ресурсы — в лагерь
   if (won) save.wins = (save.wins || 0) + 1; // для обновления прилавка торговца
   questBoardTick(save); // поручения на доске стареют

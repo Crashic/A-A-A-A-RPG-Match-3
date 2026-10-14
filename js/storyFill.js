@@ -13,6 +13,7 @@ function storyFill(text, hero) {
     skillText: skill.text || '',
     gem: gem ? gemName(gem) : '',
     faction: faction.name || '',
+    level: hero.level,
     enemy5: (storyTarget5(hero) || { enemy: {} }).enemy.name || '',
     zone5: storyTarget5(hero) ? storyTarget5(hero).zone.name.replace(/^.*«|»$/g, '') : ''
   };

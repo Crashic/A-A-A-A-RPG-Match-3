@@ -1,6 +1,7 @@
 // Сюжет: что показать на открытом экране по текущему шагу (hero.story.stage). Диалоги (начало и конец акта) —
 // storyResume, стрелки до боя — здесь: журнал → «Карта врагов» → локация → враг. В учебном бою подсказки
 // ведёт сам бой (tutorialStep). Ничего не подходит — подсказка сюжета прячется.
+const st0 = hero => { const s = storyState(hero); return s.act >= 2 && s.done >= 1; }; // идут акты 2+
 function storyCheck() {
   clearTimeout(storyCheck.t);
   storyCheck.t = setTimeout(() => {
@@ -13,6 +14,9 @@ function storyCheck() {
     if (!hero || ['menu', 'create', 'intro', 'characters', 'settings', 'bye'].includes(id)) { hide(); return; }
     if (tutorialActive()) return;
     const modal = document.querySelector('.modal.open');
+    if (storyJunkActive()) { storyJunkStep(); return; } // урок про хлам в окне итогов
+    const waitsModal = modal && st0(hero) && storyCurrentStep(hero) && storyCurrentStep(hero).step.modal === modal.id;
+    if (modal && waitsModal) { storyRunStep(hero, slot, screen, hide); return; } // шаг внутри окна вещи
     if (modal) { hide(); clearTimeout(storyCheck.wait); storyCheck.wait = setTimeout(storyCheck, 1000); return; } // окно закроют — проверим снова
     const st = storyState(hero);
     if (st.act !== 1 || st.done >= 1) { storyRunStep(hero, slot, screen, hide); return; } // акты 2+

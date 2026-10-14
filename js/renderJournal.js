@@ -33,7 +33,8 @@ function renderJournal() {
       b.innerHTML = '<span></span><small></small>';
       b.firstChild.textContent = x.title;
       b.lastChild.textContent = x.have >= x.need ? tr("ui.готово") : x.have + ' / ' + x.need;
-      b.addEventListener('click', e => { e.stopPropagation(); vibrate(); journalSel = x.uid; renderJournal(); });
+      b.dataset.uid = x.uid;
+      b.addEventListener('click', e => { e.stopPropagation(); vibrate(); journalSel = x.uid; renderJournal(); storyEvent('journalSel', x.uid); });
       left.appendChild(b);
     }
     for (const l of locks) {

@@ -3,6 +3,7 @@
 function questCard(q, mode, index) {
   const giver = q.giverName ? { name: q.giverName, who: q.giverWho } : findById(QUEST_GIVERS, q.giver) || { name: '', who: '' };
   const c = document.createElement('div');
+  c.dataset.uid = q.uid;
   c.className = 'questCard' + (mode === 'active' && q.have >= q.need ? ' ready' : '');
   c.innerHTML = '<div class="qHead"><b></b><span class="qGiver"></span></div><p class="qText"></p>' +
     '<div class="qGoal"><span></span></div><div class="qFoot"><span class="qReward"></span></div>';
@@ -29,7 +30,7 @@ function questCard(q, mode, index) {
     s.textContent = '+ ' + rar.name.toLowerCase().replace(/(ий|ый)$/, tr("ui.ая")) + tr("ui. вещь");
     reward.appendChild(s);
   }
-  if (mode === 'board' && q.cat === 'errand') { // сколько ещё провисит на доске
+  if (mode === 'board' && q.cat === 'errand' && !q.story) { // сколько ещё провисит на доске
     const left = q.left == null ? questLife(q) : q.left;
     const t = document.createElement('span');
     t.className = 'qLeft' + (left <= 1 ? ' last' : '');

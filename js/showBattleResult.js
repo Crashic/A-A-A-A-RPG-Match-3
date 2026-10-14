@@ -34,5 +34,10 @@ function showBattleResult(r) {
   if (r.quests && r.quests.done.length) row(r.quests.done.length > 1 ? tr("ui.Выполнено заданий") : tr("ui.Задание выполнено"), r.quests.done.length > 1 ? String(r.quests.done.length) : r.quests.done[0], 'questDone');
   else if (r.quests && r.quests.moved) row(tr("ui.Задания"), tr("ui.прогресс засчитан"));
   box.classList.add('open');
+  // сюжет: идёт разговор после боя или урок про хлам — вместо «Закрыть» «Продолжить», «Ещё раз» не показываем
+  const story = storyAfterPending() || storyJunkActive();
+  document.getElementById('resultMap').textContent = story ? tr("ui.Продолжить") : tr("ui.Закрыть");
+  document.getElementById('resultAgain').hidden = story;
   tutorialCheck(); // обучение: итоги боя
+  setTimeout(storyJunkStep, 400);
 }
