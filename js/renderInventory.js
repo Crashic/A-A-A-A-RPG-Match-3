@@ -29,9 +29,9 @@ function renderInventory(box) {
   const grid = document.createElement('div');
   grid.className = 'invGrid';
   for (let i = 0; i < Math.max(cap, bag.length); i++)
-    grid.appendChild(bag[i] ? itemSlot(bag[i], 'cell', () => openItemInfo({ bag: i })) : emptySlot('cell', ''));
+    grid.appendChild(bag[i] ? bagSlotFor(bag[i], 'character', () => openItemInfo({ bag: i }), () => renderInventory(box)) : emptySlot('cell', ''));
   const money = document.createElement('div');
   money.className = 'invTape';
   money.innerHTML = tr("ui.<span>Изолента</span>") + formatTape(hero.tape || 0);
-  box.append(grid, money);
+  box.append(grid, bagSelectBar(hero, 'character', 'drop', () => renderInventory(box)), money);
 }

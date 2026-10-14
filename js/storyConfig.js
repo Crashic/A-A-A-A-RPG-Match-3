@@ -239,7 +239,8 @@ const STORY_ACT4 = {
     { type: 'event', event: 'accept', screen: 'quests', via: 'bunker', card: 'board', sel: '#quests .questCard[data-uid="story-helmet"] .btn.green',
       test: (hero, uid) => uid === 'story-helmet',
       text: tr("ui.Возьми «Каску для прораба». Больше трёх поручений сразу не дадут — профсоюз.") },
-    { type: 'open', screen: 'journal' },
+    { type: 'goto', screen: 'journal', via: 'journal',
+      text: tr("ui.Взятое задание лежит в «Заданиях». Вот этот значок — жми.") },
     { type: 'event', event: 'journalSel', screen: 'journal', via: 'journal', sel: '#journalLeft .jQuest[data-uid="story-helmet"]',
       test: (hero, uid) => uid === 'story-helmet',
       text: tr("ui.Это журнал. Взятые задания — слева, по разделам. Выбери «Каску для прораба».") },
@@ -340,7 +341,21 @@ const STORY_ACT7 = {
   ]
 };
 const STORY_ACT8 = {
-  id: 'act8', title: tr("ui.Справка о пострадавшем"), reward: { paragon: 1 },
+  id: 'act8', title: tr("ui.Справка о пострадавшем"), reward: {},
+  // очко Реестра за этот акт — одно на аккаунт: первый герой получает его в начале акта и сам оформляет;
+  // следующим Справкина отказывает (st.paragonFresh = false)
+  prepare: hero => {
+    const acc = loadAccount();
+    acc.paragon = acc.paragon || { ranks: {} };
+    const me = String(hero.created || hero.name);
+    if (acc.paragon.storyGiven === undefined && !acc.paragon.bonus) { // ещё никто не получал (bonus без отметки — выдала прошлая версия)
+      acc.paragon.storyGiven = me;
+      acc.paragon.bonus = (acc.paragon.bonus || 0) + 1;
+      saveAccount(acc);
+    }
+    const fresh = acc.paragon.storyGiven === me;
+    storyState(hero).paragonFresh = fresh;
+  },
   steps: [
     { type: 'dialog', lines: {
       council: [tr("ui.Боец, за ранения в ходе службы положена компенсация. По справке. Справки выдаёт Реестр.")],
@@ -351,16 +366,28 @@ const STORY_ACT8 = {
       text: tr("ui.Реестр — в лагере.") },
     { type: 'goto', screen: 'paragon', card: 'registry', cardScreen: 'camp',
       text: tr("ui.Реестр Героев и Пострадавших. Жми «Открыть».") },
-    { type: 'dialog', who: 'spravkina', lines: [
+    { type: 'dialog', who: 'spravkina', when: hero => storyState(hero).paragonFresh, lines: [
       tr("ui.Справкина, делопроизводство. Вы пострадали? Все пострадали. Но оформлены не все."),
-      tr("ui.За каждые пять уровней любого вашего персонажа — очко компенсации. Оформлять можно рядом с уже оформленным, начиная с корня. Реестр общий на всех.")],
+      tr("ui.За каждые пять уровней любого вашего персонажа — очко компенсации. Оформлять можно рядом с уже оформленным, начиная с корня. Реестр общий на всех."),
+      tr("ui.Вам по справке положено одно очко. Уже начислено. Выбирайте.")],
       ok: tr("ui.Оформляйте") },
-    { type: 'ok', screen: 'paragon', sel: '#paragonLeft',
-      text: tr("ui.Это паутина компенсаций. Выбери узел и жми «Оформить». Бонусы маленькие, зато навсегда и на всех персонажей.") },
+    { type: 'dialog', who: 'spravkina', when: hero => !storyState(hero).paragonFresh, lines: [
+      tr("ui.Так. Вас я уже видела. Компенсацию за это задание вы получали — у меня всё записано."),
+      tr("ui.Так не пойдёт: по одной справке дважды не платим. Иди своей дорогой, путник.")],
+      ok: tr("ui.Иду своей дорогой") },
+    { type: 'event', event: 'paragonSel', screen: 'paragon', via: 'camp', card: 'registry', cardScreen: 'camp', sel: '#paragonLeft .pgNode.can',
+      when: hero => storyState(hero).paragonFresh,
+      text: tr("ui.Это паутина компенсаций. Доступная — подсвечена. Нажми на неё.") },
+    { type: 'ok', screen: 'paragon', sel: '#paragonRight .pgBonus',
+      when: hero => storyState(hero).paragonFresh,
+      text: tr("ui.Вот что она даёт за каждый ранг. Бонусы маленькие, зато навсегда и на всех персонажей.") },
+    { type: 'event', event: 'paragonTake', screen: 'paragon', via: 'camp', card: 'registry', cardScreen: 'camp', sel: '#paragonRight .pgBtns [data-role="take"]',
+      when: hero => storyState(hero).paragonFresh,
+      text: tr("ui.Жми «Получить». Справкина поставит печать.") },
     { type: 'dialog', lines: {
-      council: [tr("ui.Оформили? Теперь вы официально пострадавший. Это почти орден. Держите внеочередную справку.")],
-      union: [tr("ui.Справку получил? Повесь над костром, пусть все видят. И держи ещё одну — от схода.")],
-      press: [tr("ui.Отличный материал: «Наш репортёр получил компенсацию. Редакция — нет». Держи ещё одну — от редакции.")] },
+      council: [tr("ui.Оформили? Теперь вы официально пострадавший. Это почти орден.")],
+      union: [tr("ui.Справку получил? Повесь над костром, пусть все видят.")],
+      press: [tr("ui.Отличный материал: «Наш репортёр получил компенсацию. Редакция — нет».")] },
       ok: { council: tr("ui.Служу бункеру!"), union: tr("ui.Спасибо, старейшина"), press: tr("ui.Служу правде!") } },
     { type: 'reward' }
   ]

@@ -9,4 +9,5 @@ function sideMenuAction(act) {
   else if (act === 'glossary') openGlossary();
   else if (act === 'cheat') openCheat();
   else if (act === 'home') goHome();
+  else if (act === 'settings') { renderSettings(); showScreen('settings'); } // «Щиток»: настройки и выход в главное меню
 }

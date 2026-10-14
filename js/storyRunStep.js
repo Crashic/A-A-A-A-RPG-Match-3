@@ -3,7 +3,7 @@
 // ok — пояснение с «Понятно»; event — стрелка на нужное действие, дальше — по storyEvent; reward — конец акта.
 function storyRunStep(hero, slot, screen, hide) {
   const id = screen && screen.id;
-  const cur = storyCurrentStep(hero);
+  const cur = storyCurrentStep(hero, true);
   saveSlot(slot, hero); // when/prepare могли сдвинуть сюжет
   if (!cur) { hide(); return; }
   if (id === 'game' && cur.step.screen !== 'game') { hide(); return; } // в бою — только шаги боя

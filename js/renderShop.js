@@ -85,7 +85,7 @@ function renderShop() {
   const bagGrid = document.createElement('div');
   bagGrid.className = 'invGrid';
   for (let i = 0, cap = bagCapacity(hero); i < cap; i++)
-    bagGrid.appendChild(bag[i] ? itemSlot(bag[i], 'cell', () => openItemInfo({ bag: i, sell: true })) : emptySlot('cell', ''));
+    bagGrid.appendChild(bag[i] ? bagSlotFor(bag[i], 'shop', () => openItemInfo({ bag: i, sell: true }), renderShop) : emptySlot('cell', ''));
   const junk = document.createElement('button');
   junk.type = 'button';
   junk.className = 'btn orange shopJunk';
@@ -95,5 +95,5 @@ function renderShop() {
   const money = document.createElement('div');
   money.className = 'invTape';
   money.innerHTML = tr("ui.<span>Изолента</span>") + formatTape(hero.tape || 0);
-  right.append(bagGrid, junk, money);
+  right.append(bagGrid, bagSelectBar(hero, 'shop', 'sell', renderShop), junk, money);
 }

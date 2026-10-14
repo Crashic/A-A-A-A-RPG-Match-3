@@ -1768,3 +1768,11 @@ input[type=range] { width: 100%; height: 28px; margin: 0; accent-color: var(--ui
 .tutRing.nudge { animation: tutNudge .35s ease-in-out 2, tutPulse 1.4s ease-in-out .7s infinite; }
 @keyframes tutNudge { 50% { box-shadow: 0 0 0 6px var(--ui-danger), 0 0 0 9999px color-mix(in srgb, var(--ui-outline) 35%, transparent); } }
 .btn[hidden] { display: none !important; }
+/* Выделение вещей в сумке: галочка в углу, полоса «Выделить всё» / «Продать (выбросить): N» / «Отмена» */
+.bagSelBar { display: flex; gap: 6px; margin-top: 6px; }
+.bagSelBar .btn { flex: 1; min-height: 36px; padding: 4px 8px; font: var(--type-small); font-weight: 600; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+.invSlot.checked { box-shadow: inset 0 0 0 2px var(--ui-reward); }
+.invSlot.checked::after { content: '✓'; position: absolute; right: 1px; top: -1px; width: 16px; height: 16px; border-radius: 50%;
+  display: grid; place-items: center; background: var(--ui-reward); color: var(--ui-outline); font: var(--type-stat); font-size: 14px; line-height: 1; font-weight: 700; }
+.invSlot.unselectable { opacity: .45; }
+.invSlot.item { position: relative; }

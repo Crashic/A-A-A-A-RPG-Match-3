@@ -6,11 +6,16 @@ function storyCheck() {
   clearTimeout(storyCheck.t);
   storyCheck.t = setTimeout(() => {
     const box = document.getElementById('tutorial');
-    const hide = () => { if (box.dataset.story && !tutorialActive()) hideTutorial(); };
+    let hero0 = null;
+    const hide = () => { // сюжету показывать нечего — может, есть подсказка «увидел новое»
+      if (box.dataset.story && !tutorialActive()) hideTutorial();
+      if (hero0 && !document.querySelector('.modal.open')) hintCheck(id, hero0);
+    };
     const screen = document.querySelector('.screen.active');
     const id = screen && screen.id;
     const slot = getActiveSlot();
     const hero = loadSlot(slot);
+    hero0 = hero;
     if (!hero || ['menu', 'create', 'intro', 'characters', 'settings', 'bye'].includes(id)) { hide(); return; }
     if (tutorialActive()) return;
     const modal = document.querySelector('.modal.open');

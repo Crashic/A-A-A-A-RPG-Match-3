@@ -5,6 +5,7 @@ function setupMenu() {
   on('btnStart', startGame);
   on('btnCharacters', () => { renderCharacters(); showScreen('characters'); });
   on('btnSettings', () => { renderSettings(); showScreen('settings'); });
+  on('btnSettingsHome', goHome); // «Щиток» → «В главное меню»
   on('btnExit', exitApp);
   on('btnReturn', () => { renderMenu(); showScreen('menu', false); });
   // Создание персонажа: «Назад» (к происхождению / выход) и «Случайно»

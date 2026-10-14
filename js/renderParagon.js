@@ -35,7 +35,7 @@ function renderParagon() {
     b.innerHTML = '<small>№' + n.no + '</small><b>' + r + '/' + n.max + '</b>';
     b.dataset.tipTitle = tr("ui.Компенсация № ") + n.no;
     b.dataset.tip = paragonEffectText(n);
-    b.addEventListener('click', e => { e.stopPropagation(); vibrate(); paragonSel = n.id; renderParagon(); });
+    b.addEventListener('click', e => { e.stopPropagation(); vibrate(); paragonSel = n.id; renderParagon(); storyEvent('paragonSel', n.id); });
     web.appendChild(b);
   }
   const n = findById(PARAGON_NODES, paragonSel) || PARAGON_NODES[0];
@@ -52,7 +52,8 @@ function renderParagon() {
   const take = document.createElement('button');
   take.type = 'button';
   take.className = 'btn green';
-  take.textContent = r >= n.max ? tr("ui.Выплачено") : tr("ui.Оформить");
+  take.dataset.role = 'take';
+  take.textContent = r >= n.max ? tr("ui.Выплачено") : tr("ui.Получить");
   take.disabled = !check.ok;
   take.addEventListener('click', e => { e.stopPropagation(); paragonTake(n.id); });
   const reset = document.createElement('button');

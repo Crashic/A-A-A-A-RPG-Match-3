@@ -2,6 +2,7 @@
 // Уход из меню записывается в историю, чтобы кнопка «Назад» на телефоне возвращала в меню.
 function showScreen(id, push = true) {
   hideTip();
+  if (bagSel && bagSel.screen !== id) bagSel = null; // выделение в сумке — только на своём экране
   document.querySelectorAll('.screen').forEach(s => s.classList.toggle('active', s.id === id));
   if (id !== 'menu' && push) history.pushState({ screen: id, depth: navDepth() + 1 }, ''); // depth — шагов от меню (goHome)
   window.scrollTo(0, 0);

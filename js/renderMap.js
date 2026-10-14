@@ -18,8 +18,9 @@ function renderMap() {
     b.className = 'zone' + (zone.id === mapZoneId ? ' selected' : '') + (open ? '' : ' locked');
     b.innerHTML = '<b></b><span></span>';
     b.firstChild.textContent = (zone.id === start.id ? '★ ' : '') + zone.name;
-    b.lastChild.textContent = zone.min + '–' + zone.max;
-    b.lastChild.className = 'lvl-' + difficultyOf(level, Math.round((zone.min + zone.max) / 2));
+    const range = zoneRange(zone); // уровни обычных врагов, без элиты
+    b.lastChild.textContent = range.min + '–' + range.max;
+    b.lastChild.className = 'lvl-' + zoneColor(level, zone);
     b.addEventListener('click', () => { vibrate(); mapZoneId = zone.id; storyOnZone(zone.id); renderMap(); tutorialCheck(); });
     zoneList.appendChild(b);
   }

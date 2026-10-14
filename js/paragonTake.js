@@ -10,4 +10,5 @@ function paragonTake(id) {
   vibrate([20, 30, 20]);
   showToast(tr("ui.Компенсация № ") + node.no + tr("ui. оформлена"));
   renderParagon();
+  storyEvent('paragonTake', id); // сюжет, акт 8
 }
