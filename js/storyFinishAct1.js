@@ -21,5 +21,5 @@ function storyFinishAct1() {
   hideTutorial();
   const cur = (document.querySelector('.screen.active') || {}).id;
   if (cur && cur !== 'game') renderScreen(cur);
-  setTimeout(tutorialCheck, 500); // следующий акт — через полсекунды
+  setTimeout(tutorialCheck, 0); // следующий акт — сразу
 }

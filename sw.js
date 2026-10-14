@@ -366,6 +366,7 @@ const FILES = [
   './js/sellJunk.js',
   './js/rerollShop.js',
   './js/openShop.js',
+  './js/openQuestItemInfo.js',
   './js/renderShop.js',
   './js/renderBunker.js',
   './js/openBunker.js',

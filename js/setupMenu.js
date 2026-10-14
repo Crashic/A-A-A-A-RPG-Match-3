@@ -71,6 +71,7 @@ function setupMenu() {
   on('btnResetSaves', () => showConfirm(
     tr("ui.Удалить всех персонажей во всех ячейках? Это нельзя отменить."), tr("ui.Удалить всё"), () => {
       resetAllSaves();
+      goHome(); // в главное меню — игра начинается заново
       showToast(tr("ui.Все сохранения удалены"));
     }));
 

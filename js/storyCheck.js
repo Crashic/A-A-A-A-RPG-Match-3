@@ -22,7 +22,7 @@ function storyCheck() {
     if (storyJunkActive()) { storyJunkStep(); return; } // урок про хлам в окне итогов
     const waitsModal = modal && st0(hero) && storyCurrentStep(hero) && storyCurrentStep(hero).step.modal === modal.id;
     if (modal && waitsModal) { storyRunStep(hero, slot, screen, hide); return; } // шаг внутри окна вещи
-    if (modal) { hide(); clearTimeout(storyCheck.wait); storyCheck.wait = setTimeout(storyCheck, 1000); return; } // окно закроют — проверим снова
+    if (modal) { hide(); clearTimeout(storyCheck.wait); storyCheck.wait = setTimeout(storyCheck, 150); return; } // окно закроют — проверим снова (часто, чтобы без паузы)
     const st = storyState(hero);
     if (st.act !== 1 || st.done >= 1) { storyRunStep(hero, slot, screen, hide); return; } // акты 2+
     if (st.stage === 'intro' || st.stage === 'after') { if (id !== 'game') storyResume(); return; }
@@ -50,5 +50,5 @@ function storyCheck() {
       return;
     }
     hide();
-  }, 250);
+  }, 30); // без заметной паузы: только дать экрану дорисоваться
 }

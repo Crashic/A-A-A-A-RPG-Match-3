@@ -29,5 +29,5 @@ function storyEvent(name, data) {
   st.stage++;
   saveSlot(slot, hero);
   hideTutorial();
-  setTimeout(tutorialCheck, 300); // окно вещи успеет закрыться
+  setTimeout(tutorialCheck, 60); // окно вещи успеет закрыться
 }

@@ -59,7 +59,7 @@ function renderShop() {
       const cell = document.createElement('div');
       cell.className = 'shopItem';
       const s = questItemCell(q);
-      s.addEventListener('click', e => { e.stopPropagation(); vibrate(); buyQuestItem(q.id); });
+      s.addEventListener('click', e => { e.stopPropagation(); vibrate(); openQuestItemInfo(q.id); }); // окно с описанием и «Купить», как у любой покупки
       cell.appendChild(s);
       const price = document.createElement('div');
       price.className = 'shopPrice' + ((hero.tape || 0) < q.price ? ' poor' : '');

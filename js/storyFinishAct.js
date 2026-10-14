@@ -39,5 +39,5 @@ function storyFinishAct() {
   const cur = (document.querySelector('.screen.active') || {}).id;
   if (cur && cur !== 'game') renderScreen(cur);
   if (ups) showLevelUp(hero.level, ups); // новый уровень за опыт
-  setTimeout(tutorialCheck, 500); // следующий акт — через полсекунды
+  setTimeout(tutorialCheck, 0); // следующий акт — сразу
 }

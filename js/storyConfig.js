@@ -198,8 +198,11 @@ const STORY_ACT3 = {
       text: tr("ui.Жми «Продать». Деньги — сразу, сдачи — никогда.") },
     { type: 'ok', screen: 'shop', sel: '#shopLeft .shopStock',
       text: tr("ui.Слева — прилавок. Товар меняется с новым уровнем и раз в несколько побед. Сумки — там же: больше сумок — больше влезет добычи.") },
-    { type: 'event', event: 'buyQuest', screen: 'shop', via: 'bunker', card: 'shop', sel: '#shopLeft .shopQuest .questItem',
-      text: tr("ui.Каска «Прораб». Без неё по бункеру ходить опасно: сверху всё время что-то падает — штукатурка, настроение, Петренко. Купи.") },
+    { type: 'event', event: 'openItem', screen: 'shop', via: 'bunker', card: 'shop', sel: '#shopLeft .shopQuest .questItem',
+      test: (hero, data) => data === 'quest:helmet',
+      text: tr("ui.Каска «Прораб». Без неё по бункеру ходить опасно: сверху всё время что-то падает — штукатурка, настроение, Петренко. Нажми на неё.") },
+    { type: 'event', event: 'buyQuest', modal: 'itemInfo', screen: 'shop', backSel: '#shopLeft .shopQuest .questItem', sel: '#itemInfoButtons [data-role="buy"]',
+      text: tr("ui.Перед покупкой Семёныч всегда показывает товар: что это, куда ляжет и почём. Устраивает — жми «Купить».") },
     { type: 'ok', screen: 'shop', sel: '#shopRight .invTitle, #shopRight',
       text: tr("ui.Каска легла в «Квестовое» — вкладку инвентаря у «Персонажа». Это бездонный карман для казённого: место не занимает, продать нельзя.") },
     { type: 'dialog', lines: {
