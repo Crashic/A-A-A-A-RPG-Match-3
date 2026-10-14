@@ -14,4 +14,5 @@ function bankMove(from, index) {
   dst.push(src.splice(index, 1)[0]);
   saveSlot(slot, hero);
   renderBank();
+  if (from === 'bag') storyEvent('bank'); // сюжет, акт 5
 }

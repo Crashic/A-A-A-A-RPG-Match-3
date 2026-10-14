@@ -6,4 +6,5 @@ function sellItem(index) {
   hero.tape = (hero.tape || 0) + itemPrice(item);
   hero.bag.splice(index, 1);
   saveGear(hero);
+  storyEvent('sell'); // сюжет, акт 3
 }

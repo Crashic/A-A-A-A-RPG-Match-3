@@ -14,6 +14,7 @@ function changeStat(statId, delta) {
   vibrate(10);
   renderCharacter();
   renderLevelUpStats(); // открыто окно нового уровня — обновить
+  if (delta > 0) storyEvent('stat'); // сюжет, акт 2
   updateNotifyBadges();
   refreshHeroInBattle(); // режим читов в бою — сразу в силе
 }

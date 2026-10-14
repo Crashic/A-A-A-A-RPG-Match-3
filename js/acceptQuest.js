@@ -14,4 +14,5 @@ function acceptQuest(index, list = 'board') {
   }
   q.active.push(q[list].splice(index, 1)[0]);
   saveQuests(hero);
+  storyEvent('accept'); // сюжет, акт 4
 }

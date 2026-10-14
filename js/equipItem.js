@@ -32,5 +32,6 @@ function equipItem(index, key) {
   gear[key] = item;
   hero.bag.push(...off);
   saveGear(hero);
+  storyEvent('equip'); // сюжет, акт 2
   return true;
 }

@@ -12,7 +12,7 @@ function storyFinishAct1() {
   hero.quests.done = (hero.quests.done || 0) + 1;
   st.done = 1;
   st.act = 2;
-  st.stage = 'wait'; // следующий акт ещё не готов
+  st.stage = 0; // акт 2 начнётся сам, через пару секунд
   saveSlot(slot, hero);
   const opened = lockedBefore.filter(k => storyFeatureOpen(k, hero)).map(k => STORY_FEATURE_NAMES[k]);
   vibrate([30, 40, 30]);
@@ -21,4 +21,5 @@ function storyFinishAct1() {
   hideTutorial();
   const cur = (document.querySelector('.screen.active') || {}).id;
   if (cur && cur !== 'game') renderScreen(cur);
+  setTimeout(tutorialCheck, 1800); // следующий акт
 }

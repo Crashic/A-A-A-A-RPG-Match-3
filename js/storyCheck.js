@@ -15,7 +15,7 @@ function storyCheck() {
     const modal = document.querySelector('.modal.open');
     if (modal) { hide(); return; }
     const st = storyState(hero);
-    if (st.act !== 1 || st.done >= 1) { hide(); return; }
+    if (st.act !== 1 || st.done >= 1) { storyRunStep(hero, slot, screen, hide); return; } // акты 2+
     if (st.stage === 'intro' || st.stage === 'after') { if (id !== 'game') storyResume(); return; }
     const g = STORY_ACT1.guide;
     const target = storyTarget(hero);

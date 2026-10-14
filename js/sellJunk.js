@@ -9,5 +9,6 @@ function sellJunk() {
     h.tape = (h.tape || 0) + h.bag.filter(i => (i.rarity === 'common' || isJunkItem(i)) && !isBagItem(i)).reduce((a, i) => a + itemPrice(i), 0);
     h.bag = h.bag.filter(i => !(i.rarity === 'common' || isJunkItem(i)) || isBagItem(i));
     saveGear(h);
+    storyEvent('sell'); // сюжет, акт 3
   }, 'orange');
 }

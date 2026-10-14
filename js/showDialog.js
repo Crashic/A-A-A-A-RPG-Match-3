@@ -2,7 +2,7 @@
 // Окно закрывается только кнопкой. По последней кнопке — onDone.
 function showDialog(npc, lines, okLabel, onDone) {
   const box = document.getElementById('storyDialog');
-  box.querySelector('.dialogPortrait').innerHTML = iconTile(npc.icon, npc.color);
+  box.querySelector('.dialogPortrait').innerHTML = npc.svg ? npc.svg() : iconTile(npc.icon, npc.color);
   document.getElementById('dialogName').textContent = npc.name;
   document.getElementById('dialogRole').textContent = npc.who;
   const text = document.getElementById('dialogText');

@@ -9,17 +9,27 @@ const STORY_NPCS = {
   press:   { name: tr("ui.Пётр Абзацев"), who: tr("ui.главный редактор"), icon: 'mic', color: 'var(--gem-amethyst)' }
 };
 
-// Функции игры и акт, после которого они открываются (до этого — замок). Не указанные — открыты всегда
-// (глоссарий, читер, домой). Карта и журнал нужны уже в первом акте.
-// Если акта с таким номером ещё нет в STORY_ACTS — функция откроется после последнего готового акта.
+// Функции игры и акт, С НАЧАЛА которого они открываются (до этого — замок): map/journal — с акта 1,
+// Персонаж — с акта 2, Бункер (торговец) — 3, доска объявлений — 4, шкафчик — 5, Лагерь — 7.
+// Не указанные — открыты всегда (глоссарий, читер, домой). Если акта с таким номером ещё нет в STORY_ACTS —
+// функция откроется, когда пройдены все готовые акты.
 const STORY_FEATURES = {
-  map: 0,
-  journal: 0,
+  map: 1,
+  journal: 1,
   char: 2,
   bunker: 3,
+  board: 4,
+  bank: 5,
   camp: 7
 };
-const STORY_FEATURE_NAMES = { char: tr("ui.Персонаж"), bunker: tr("ui.Бункер"), camp: tr("ui.Лагерь"), map: tr("ui.Карта врагов"), journal: tr("ui.Задания") };
+const STORY_FEATURE_NAMES = { char: tr("ui.Персонаж"), bunker: tr("ui.Бункер"), camp: tr("ui.Лагерь"), map: tr("ui.Карта врагов"), journal: tr("ui.Задания"), board: tr("ui.Доска объявлений"), bank: tr("ui.Шкафчик") };
+
+// Жители бункера, которые говорят в актах 3–5 (svg — значок вместо плитки).
+const STORY_LOCALS = {
+  semenych: { name: tr("ui.Завхоз Семёныч"), who: tr("ui.склад бункера"), svg: () => SHOP_ICON },
+  lyusya:   { name: tr("ui.Профорг Люся"), who: tr("ui.профсоюз бункера"), svg: () => BOARD_ICON },
+  nina:     { name: tr("ui.Нина Петровна"), who: tr("ui.вахта, шкафчики"), svg: () => BANK_ICON }
+};
 
 // Акт 1 «Явка с опозданием»: NPC ругает за опоздание, посылает к первому врагу стартовой локации,
 // учебный бой на заготовленном поле, после боя — похвала или утешение и награда.
@@ -117,5 +127,125 @@ const TUTORIAL_PHASES = [
 ];
 const TUTORIAL_ENEMY_ATK = 0.5;   // в учебном бою враг бьёт вдвое слабее
 const TUTORIAL_HP_FLOOR = { enemy: 0.35, hero: 0.5 }; // пока идёт сценарий, здоровье не падает ниже этой доли
+// Акты 2–5 — шаги (storyStep): dialog — разговор (lines по фракциям или общие, who — житель бункера);
+// goto — перейти на экран screen (стрелка на кнопку в столбце меню via или на карточку бункера card);
+// event — дождаться действия игрока (storyEvent), стрелка на sel; ok — пояснение с «Понятно»;
+// sel — селектор или список по приоритету; when(hero) — шаг только если условие верно; reward — награда и конец акта. prepare(hero) — в начале акта.
+const STORY_ACT2 = {
+  id: 'act2', title: tr("ui.Опись имущества"), reward: { tape: 40 },
+  // нечего надеть (награда акта 1 потерялась или уже надета) — выдать оружие
+  prepare: hero => { if (!(hero.bag || []).some(i => (findById(ITEM_BASES, i.base) || {}).slot === 'weapon')) addToBag(hero, [storyWeapon(hero.level)]); },
+  steps: [
+    { type: 'dialog', lines: {
+      council: [tr("ui.Боец {name}! Арматуру получили — а носите в авоське. Это не оружие, это хозяйственный инвентарь."), tr("ui.Открыть личное дело, надеть по форме, доложить.")],
+      union: [tr("ui.Палку тебе дали — а ты её в мешке носишь. Палка в мешке — это дрова."), tr("ui.Иди надень как положено. Старейшины смотрят.")],
+      press: [tr("ui.Репортёр с пустыми руками — это не репортёр, это читатель."), tr("ui.Надень, что выдали, и улыбнись. Для обложки.")] },
+      ok: { council: tr("ui.Есть!"), union: tr("ui.Иду"), press: tr("ui.Бегу") } },
+    { type: 'goto', screen: 'character', via: 'char',
+      text: tr("ui.Это «Персонаж»: личное дело, снаряжение и сумки. Жми.") },
+    { type: 'event', event: 'equip', screen: 'character', via: 'char', sel: '#character .invGrid .invSlot.item.weapon, #character .invGrid .invSlot.item',
+      text: tr("ui.Справа — сумка. Нажми на оружие и выбери, в какую руку взять.") },
+    { type: 'ok', screen: 'character', sel: '#character .dollBody, #character .dollFigure',
+      text: tr("ui.Надетое видно на кукле. Свойства вещей работают в бою сразу. Двуручное бьёт втрое сильнее, но через ход.") },
+    { type: 'event', event: 'stat', screen: 'character', via: 'char', sel: '#character .statRowBig .statBtn.green:not(:disabled)',
+      when: hero => statPointsFree(hero) > 0,
+      text: tr("ui.Есть свободные очки характеристик — по пять за уровень, начиная со второго. Жми «+».") },
+    { type: 'ok', screen: 'character', sel: '#character .statsHead',
+      text: tr("ui.Вкладка «Подробно» покажет, что очки дают в бою: здоровье, урон, ману, щит. Сбросить можно круглой стрелкой — вне боя.") },
+    { type: 'dialog', lines: {
+      council: [tr("ui.Надели? Вид почти уставной. Почти — потому что устав мы потеряли в девяносто первом.")],
+      union: [tr("ui.Вот, теперь похож на человека. Издалека. В сумерках.")],
+      press: [tr("ui.Отлично! Беру на обложку. Подпишем «Герой бункера, предположительно».")] },
+      ok: { council: tr("ui.Служу бункеру!"), union: tr("ui.Спасибо, старейшина"), press: tr("ui.Служу правде!") } },
+    { type: 'reward' }
+  ]
+};
+const STORY_ACT3 = {
+  id: 'act3', title: tr("ui.Товарообмен"), reward: { tape: 60 },
+  prepare: hero => addToBag(hero, [makeJunk(hero.level)]), // чтобы было что продать
+  steps: [
+    { type: 'dialog', lines: {
+      council: [tr("ui.Боец, ваш вещмешок гремит на весь сектор. Лишнее сдать завхозу. По описи.")],
+      union: [tr("ui.Мешок у тебя гремит, как телега кочевника. Отнеси лишнее Семёнычу — он всё берёт.")],
+      press: [tr("ui.В сумке у тебя барахло. Сдай Семёнычу, а на вырученное купи блокнот. Ну или что там продают.")] },
+      ok: { council: tr("ui.Есть!"), union: tr("ui.Иду"), press: tr("ui.Бегу") } },
+    { type: 'goto', screen: 'bunker', via: 'bunker',
+      text: tr("ui.Бункер — люк в столбце меню. Тут торговец, доска объявлений и шкафчик.") },
+    { type: 'goto', screen: 'shop', card: 'shop',
+      text: tr("ui.Завхоз Семёныч — торговец. Жми «Торговать».") },
+    { type: 'dialog', who: 'semenych', lines: [
+      tr("ui.А, новенький. Я Семёныч, завхоз. Покупаю всё, продаю дорого. Это не жадность, это рыночная экономика."),
+      tr("ui.Продашь — получишь изоленту. Хлам и обычные вещи можно сдать разом, кнопкой «Сдать хлам».")],
+      ok: tr("ui.Понял") },
+    { type: 'event', event: 'sell', screen: 'shop', via: 'bunker', card: 'shop', sel: '#shopRight .invGrid .invSlot.item',
+      text: tr("ui.Нажми на вещь в сумке и выбери «Продать». Или жми «Сдать хлам» внизу.") },
+    { type: 'ok', screen: 'shop', sel: '#shopLeft .shopStock',
+      text: tr("ui.Слева — прилавок. Товар меняется с новым уровнем и раз в несколько побед. Сумки — там же: больше сумок — больше влезет добычи.") },
+    { type: 'dialog', lines: {
+      council: [tr("ui.Сдали? Вот и порядок. Изолента — не деньги, но и деньги у нас не деньги.")],
+      union: [tr("ui.Выторговал? Молодец. Семёныча ещё никто не обсчитал — значит, и тебя обсчитали по-честному.")],
+      press: [tr("ui.Продал? Отлично, гонорар за этот месяц можно не платить. Шучу. Почти.")] },
+      ok: { council: tr("ui.Служу бункеру!"), union: tr("ui.Спасибо, старейшина"), press: tr("ui.Служу правде!") } },
+    { type: 'reward' }
+  ]
+};
+const STORY_ACT4 = {
+  id: 'act4', title: tr("ui.Общественная нагрузка"), reward: { tape: 80 },
+  steps: [
+    { type: 'dialog', lines: {
+      council: [tr("ui.В бункере каждый несёт общественную нагрузку. Кто не несёт — того несут. Профорг Люся распределит.")],
+      union: [tr("ui.Сход решил: молодые помогают. Иди к доске объявлений, там Люся всем работу раздаёт.")],
+      press: [tr("ui.Хочешь сюжетов — читай доску объявлений. Половина новостей бункера — там, вторая половина — враньё.")] },
+      ok: { council: tr("ui.Есть!"), union: tr("ui.Иду"), press: tr("ui.Бегу") } },
+    { type: 'goto', screen: 'bunker', via: 'bunker',
+      text: tr("ui.Доска объявлений — в Бункере.") },
+    { type: 'goto', screen: 'quests', card: 'board',
+      text: tr("ui.Вот она, доска. Жми.") },
+    { type: 'dialog', who: 'lyusya', lines: [
+      tr("ui.Профорг Люся. Записываю всех, кто не успел убежать."),
+      tr("ui.Поручения висят на доске несколько боёв — хорошие разбирают быстрее. Ежедневные — новые каждый день в шесть утра.")],
+      ok: tr("ui.Записывайте") },
+    { type: 'event', event: 'accept', screen: 'quests', via: 'bunker', card: 'board', sel: '#quests .questCard .btn.green',
+      text: tr("ui.Выбери поручение и жми «Взять». Больше трёх сразу не дадут — профсоюз.") },
+    { type: 'ok', screen: 'quests', sel: '.screen.active .sideMenu [data-act="journal"]',
+      text: tr("ui.Взятое — в «Заданиях». Выполни в боях и сдай там же. Готовое отмечено «!».") },
+    { type: 'event', event: 'turnin', screen: 'journal', via: 'journal', sel: ['#journalRight .questCard .btn.orange', '#journalLeft .jQuest.ready'],
+      text: tr("ui.Задание выполнено — открой его и жми «Сдать».") },
+    { type: 'dialog', lines: {
+      council: [tr("ui.Нагрузку выполнили? Занесу в характеристику. Положительную — для разнообразия.")],
+      union: [tr("ui.Люся тебя хвалила. Люся никого не хвалит. Я волнуюсь.")],
+      press: [tr("ui.Видишь, доска — это кормилица. Я с неё полгода передовицы делаю.")] },
+      ok: { council: tr("ui.Служу бункеру!"), union: tr("ui.Спасибо, старейшина"), press: tr("ui.Служу правде!") } },
+    { type: 'reward' }
+  ]
+};
+const STORY_ACT5 = {
+  id: 'act5', title: tr("ui.Личный шкафчик"), reward: { tape: 100, item: 'magic' },
+  prepare: hero => { if (!(hero.bag || []).length) addToBag(hero, [makeJunk(hero.level)]); },
+  steps: [
+    { type: 'dialog', lines: {
+      council: [tr("ui.Ценное имущество в сумке не носят — сопрут. Положено в шкафчик. Под роспись.")],
+      union: [tr("ui.Что в мешке — то и потеряешь. Отнеси самое дорогое Нине Петровне.")],
+      press: [tr("ui.Архив редакции хранится в шкафчике. Заведи и ты свой, пока не обокрали.")] },
+      ok: { council: tr("ui.Есть!"), union: tr("ui.Иду"), press: tr("ui.Бегу") } },
+    { type: 'goto', screen: 'bunker', via: 'bunker',
+      text: tr("ui.Шкафчики — в Бункере.") },
+    { type: 'goto', screen: 'bank', card: 'bank',
+      text: tr("ui.Шкафчик. Жми «Открыть».") },
+    { type: 'dialog', who: 'nina', lines: [
+      tr("ui.Нина Петровна, вахта. Шкафчик личный, ключ один, дубликат — у меня. Всё по-честному."),
+      tr("ui.Нажмёшь на вещь в сумке — уедет в шкафчик. Нажмёшь в шкафчике — вернётся. Места мало — гнёзда докупаются.")],
+      ok: tr("ui.Понятно") },
+    { type: 'event', event: 'bank', screen: 'bank', via: 'bunker', card: 'bank', sel: '#bankRight .invGrid .invSlot.item',
+      text: tr("ui.Нажми на вещь в сумке — она уедет в шкафчик.") },
+    { type: 'dialog', lines: {
+      council: [tr("ui.Сдали на хранение? Отлично. Теперь, если сопрут, — то уже по документам.")],
+      union: [tr("ui.Нина Петровна — кремень. Через неё даже сквозняк не проходит.")],
+      press: [tr("ui.Молодец. Держи премию — и не смотри так, это не взятка, это поощрение.")] },
+      ok: { council: tr("ui.Служу бункеру!"), union: tr("ui.Спасибо, старейшина"), press: tr("ui.Служу правде!") } },
+    { type: 'reward' }
+  ]
+};
+
 // Готовые акты по порядку (номер акта = индекс + 1). Следующие акты добавляются сюда.
-const STORY_ACTS = [STORY_ACT1];
+const STORY_ACTS = [STORY_ACT1, STORY_ACT2, STORY_ACT3, STORY_ACT4, STORY_ACT5];
