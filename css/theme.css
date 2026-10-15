@@ -138,3 +138,35 @@ h1 {
 .btn:disabled { --hi: #5a4a50; --fill: #3a2a30; --edge: #1a1220; color: var(--text-muted); filter: saturate(.4); }
 .btn.round, .btn.square { border-radius: 14px; }
 .btn:active { transform: translateY(2px); filter: brightness(.95); }
+
+/* ---------- Главное меню (макет «Главное меню») ---------- */
+#menu { flex-direction: row; align-items: center; justify-content: center; gap: 24px; }
+#menu .menuLeft { flex: none; width: 380px; display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
+#menu .logo { margin: 0; }
+#menu h1 { font-size: 46px; }
+#menu .logo .ribbon { margin-top: 2px; font-size: 15px; line-height: 18px; }
+#menu .heroCard { padding: 8px 10px; border-radius: 14px; text-align: left; display: flex; flex-direction: column; gap: 6px; }
+#menu .heroCard[hidden] { display: none; }
+.hcTop { display: flex; gap: 10px; align-items: center; }
+.hcAvatar { position: relative; flex: none; width: 76px; height: 76px; padding: 0; border-radius: 14px; background: #c8221a;
+  box-shadow: inset 0 0 0 3px var(--ui-reward), 0 3px 0 rgba(0,0,0,.5); display: grid; place-items: center; }
+.hcAvatar #hcAvatar .tile { width: 62px; height: 62px; display: block; }
+.hcBadge { position: absolute; left: 50%; bottom: -10px; transform: translateX(-50%); width: 26px; height: 26px; border-radius: 50%;
+  background: var(--gold-frame); box-shadow: 0 0 0 2px #1a1008; display: grid; place-items: center; }
+.hcBadge .tile { width: 20px; height: 20px; display: block; }
+.hcInfo { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+#heroCardName { font-family: var(--font-logo); font-size: 16px; line-height: 20px; color: var(--gold-ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hcBottom, .hcRes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding-top: 6px; border-top: 2px dashed rgba(224,168,64,.35); }
+.hcRow { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.hcRow .tile { flex: none; width: 30px; height: 30px; display: block; }
+.hcRow > span { display: flex; flex-direction: column; min-width: 0; }
+.hcRow small { font: var(--type-caption); font-size: 14px; line-height: 15px; letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase; }
+.hcRow b { font: var(--type-menu); font-size: 15px; line-height: 18px; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hcRow .tape { font: var(--type-menu); font-size: 15px; }
+#menu .menuButtons { width: 360px; max-width: 360px; margin: 0; gap: 10px; }
+#menu #btnStart { min-height: 70px; font-size: 26px; line-height: 30px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+#menu #btnStart small { font: var(--type-small); font-size: 14px; -webkit-text-stroke: 3px var(--edge); }
+#menu .menuRow { display: flex; gap: 10px; padding: 0; }
+#menu .menuRow .btn { flex: 1; min-height: 50px; padding: 6px; font: var(--type-menu); font-size: 18px; }
+#menu .menuRow .btn[hidden] { display: none !important; }
+.hcAvatarBtn { position: absolute; inset: 0; padding: 0; border-radius: 14px; background: none; }

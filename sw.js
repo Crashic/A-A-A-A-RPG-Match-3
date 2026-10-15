@@ -120,6 +120,7 @@ const FILES = [
   './js/showScreen.js',
   './js/goBack.js',
   './js/renderScreen.js',
+  './js/heroCardRow.js',
   './js/renderHeroCard.js',
   './js/renderMenu.js',
   './js/countHeroes.js',

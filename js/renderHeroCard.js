@@ -1,31 +1,22 @@
-// Блок над кнопкой «Продолжить»: текущий выбранный персонаж — имя, уровень, изолента, пол, раса, класс, фракция,
-// и кнопка «Персонаж» (значков характеристик здесь нет — автор убрал).
-// Если в выбранной ячейке персонажа нет, блок скрыт.
+// Карточка текущего персонажа в главном меню (макет «Агитпроп»): плитка-аватар (раса) со значком пола,
+// имя, фракция и раса столбиком; ниже уровень и класс в строку; внизу изолента и очки Реестра (парагон).
+// Нажатие на аватар — экран «Персонаж» (btnCharacter). Если в выбранной ячейке персонажа нет, блок скрыт.
 function renderHeroCard() {
-  const n = getActiveSlot();
-  const hero = loadSlot(n);
+  const hero = loadSlot(getActiveSlot());
   const card = document.getElementById('heroCard');
   card.hidden = !hero;
   if (!hero) return;
+  const race = findById(RACES, hero.raceId);
+  const gender = findById(GENDERS, hero.genderId);
   document.getElementById('heroCardName').textContent = hero.name;
-  document.getElementById('heroCardSlot').textContent = tr('ui.Ячейка') + ' ' + n;
-  const rows = [
-    [tr('ui.Уровень'), { name: hero.level + (hero.level < MAX_LEVEL ? ' (' + hero.xp + ' / ' + xpToNext(hero.level) + ')' : '') }],
-    [tr('ui.Изолента'), { html: formatTape(hero.tape) }],
-    [tr('ui.Пол'), findById(GENDERS, hero.genderId)],
-    [tr('ui.Раса'), findById(RACES, hero.raceId)],
-    [tr('ui.Класс'), findById(CLASSES, hero.classId)],
-    [tr('ui.Фракция'), findById(FACTIONS, hero.factionId)]
-  ];
-  // характеристики на главном экране не показываем (просьба автора)
-  const list = document.getElementById('heroCardStats');
-  list.innerHTML = '';
-  for (const [label, item] of rows) {
-    const dt = document.createElement('dt');
-    dt.textContent = label;
-    const dd = document.createElement('dd');
-    if (item && item.html) dd.innerHTML = item.html;
-    else dd.textContent = item ? item.name : '—';
-    list.append(dt, dd);
-  }
+  document.getElementById('hcAvatar').innerHTML = race ? iconTile(race.icon, race.color) : '';
+  document.getElementById('hcGender').innerHTML = gender ? iconTile(gender.icon, gender.color || 'var(--gem-topaz)') : '';
+  heroCardRow('hcFaction', findById(FACTIONS, hero.factionId), tr('ui.Фракция'));
+  heroCardRow('hcRace', race, tr('ui.Раса'));
+  heroCardRow('hcClass', findById(CLASSES, hero.classId), tr('ui.Класс'));
+  const lvl = hero.level + (hero.level < MAX_LEVEL ? ' (' + hero.xp + ' / ' + xpToNext(hero.level) + ')' : '');
+  heroCardRow('hcLevel', { icon: 'stamp', color: 'var(--gem-topaz)', name: lvl }, tr('ui.Уровень'));
+  heroCardRow('hcTape', { icon: 'girder', color: 'var(--gem-sapphire)', html: formatTape(hero.tape) }, tr('ui.Изолента'));
+  const pp = paragonPoints();
+  heroCardRow('hcParagon', { icon: 'cassette', color: 'var(--gem-amethyst)', name: pp.free + ' / ' + pp.total }, tr('ui.Реестр'));
 }

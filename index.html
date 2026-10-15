@@ -36,23 +36,41 @@
 
 <!-- Главное меню -->
 <section id="menu" class="screen active">
-  <div class="logo">
-    <h1>A-A-A-A</h1>
-    <div class="ribbon">Match 3 RPG</div>
+  <div class="menuLeft">
+    <div class="logo">
+      <h1>A-A-A-A</h1>
+      <div class="ribbon">Match 3 RPG</div>
+    </div>
+    <div id="heroCard" class="heroCard panel" hidden>
+      <div class="hcTop">
+        <div class="hcAvatar"><span id="hcAvatar"></span><span id="hcGender" class="hcBadge"></span><button id="btnCharacter" class="hcAvatarBtn" type="button" aria-label="Персонаж" data-i18n-aria="ui.Персонаж" data-tip="Персонаж" data-i18n-tip="ui.Персонаж"></button></div>
+        <div class="hcInfo">
+          <b id="heroCardName"></b>
+          <div id="hcFaction" class="hcRow"></div>
+          <div id="hcRace" class="hcRow"></div>
+        </div>
+      </div>
+      <div class="hcBottom">
+        <div id="hcLevel" class="hcRow"></div>
+        <div id="hcClass" class="hcRow"></div>
+      </div>
+      <div class="hcRes">
+        <div id="hcTape" class="hcRow"></div>
+        <div id="hcParagon" class="hcRow"></div>
+      </div>
+    </div>
   </div>
   <nav class="menuButtons">
-    <div id="heroCard" class="heroCard" hidden>
-      <div class="heroCardHead"><b id="heroCardName"></b><span id="heroCardSlot"></span><button id="btnCharacter" class="btn stone heroCardBtn" type="button" data-i18n="ui.Персонаж">Персонаж</button></div>
-      <dl id="heroCardStats"></dl>
-    </div>
     <button id="btnStart" class="btn green big" type="button">
       <span id="btnStartLabel" data-i18n="ui.Начать игру">Начать игру</span>
       <small id="btnStartSub"></small>
     </button>
+    <div class="menuRow menuRowWide">
+      <button id="btnCharacters" class="btn blue" type="button" data-i18n="ui.Персонажи">Персонажи</button>
+      <button id="btnCamp" class="btn orange" type="button" hidden data-i18n="ui.Лагерь">Лагерь</button>
+    </div>
     <div class="menuRow">
-      <button id="btnCharacters" class="btn stone" type="button" data-i18n="ui.Персонажи">Персонажи</button>
-      <button id="btnSettings" class="btn stone" type="button" data-i18n="ui.Настройки">Настройки</button>
-      <button id="btnCamp" class="btn green" type="button" hidden data-i18n="ui.Лагерь">Лагерь</button>
+      <button id="btnSettings" class="btn purple" type="button" data-i18n="ui.Настройки">Настройки</button>
       <button id="btnExit" class="btn red" type="button" data-i18n="ui.Выход">Выход</button>
     </div>
   </nav>
@@ -613,6 +631,7 @@
 <script src="js/showScreen.js"></script>
 <script src="js/goBack.js"></script>
 <script src="js/renderScreen.js"></script>
+<script src="js/heroCardRow.js"></script>
 <script src="js/renderHeroCard.js"></script>
 <script src="js/renderMenu.js"></script>
 <script src="js/countHeroes.js"></script>
