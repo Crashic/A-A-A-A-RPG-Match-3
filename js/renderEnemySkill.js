@@ -18,9 +18,11 @@ function renderEnemySkill() {
     const card = document.createElement('div');
     // та же схема, что у кнопки навыка героя: слева мана (значок и цена), справа название и описание
     card.className = 'enemyActive skillBtn2' + (ready ? ' ready' : '');
-    card.innerHTML = '<span class="skCost">' + gemMiniIcon(gem) + '<i>' + skill.cost[gem] + '</i></span><span class="skText"><b></b><small></small></span>';
-    card.querySelector('b').textContent = skill.name;
-    card.querySelector('small').textContent = wait ? tr("ui.Перезарядка: ещё ") + wait + ' ' + plural(wait, tr("ui.ход"), tr("ui.хода"), tr("ui.ходов")) : skill.text;
+    const stub = skillGauge(skill.cost, f.mana); // корешок талона: мана наливается снизу
+    card.innerHTML = stub.html + '<span class="skText"><b></b><small></small></span>';
+    card.style.setProperty('--stub', stub.width + 'px');
+    card.querySelector('.skText b').textContent = skill.name;
+    card.querySelector('.skText small').textContent = wait ? tr("ui.Перезарядка: ещё ") + wait + ' ' + plural(wait, tr("ui.ход"), tr("ui.хода"), tr("ui.ходов")) : skill.text;
     attachTip(card, skill.name + tr("ui. · активный"), skill.text + ' ' + skill.lore);
     row.appendChild(card);
   }

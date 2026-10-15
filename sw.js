@@ -230,6 +230,7 @@ const FILES = [
   './js/enemyUseSkill.js',
   './js/useSkill.js',
   './js/heroBuffIcons.js',
+  './js/skillGauge.js',
   './js/renderSkillBar.js',
   './js/logBattle.js',
   './js/renderBattleLog.js',

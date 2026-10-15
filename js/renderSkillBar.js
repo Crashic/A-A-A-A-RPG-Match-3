@@ -19,13 +19,13 @@ function renderSkillBar() {
     b.dataset.tip = s.text;
     // слева — мана: значок и сколько нужно; справа в две строки — название и описание
     b.classList.add('skillBtn2');
-    b.innerHTML = '<span class="skCost"></span><span class="skText"><b></b><small></small></span>';
-    const cost = b.querySelector('.skCost');
-    for (const g of Object.keys(s.cost || {})) cost.insertAdjacentHTML('beforeend', gemMiniIcon(g) + '<i>' + s.cost[g] + '</i>');
-    if (!cost.children.length) cost.remove();
-    b.querySelector('b').textContent = s.name;
+    const stub = skillGauge(s.cost, battle.hero.mana); // корешок талона: мана наливается снизу
+    b.innerHTML = stub.html + '<span class="skText"><b></b><small></small></span>';
+    b.style.setProperty('--stub', stub.width + 'px');
+    if (!stub.width) b.querySelector('.skCost').remove();
+    b.querySelector('.skText b').textContent = s.name;
     const wait = (battle.skill.cooldowns || {})[s.id];
-    b.querySelector('small').textContent = s.once && battle.skill.used[s.id] ? tr("ui.Уже использован в этом бою")
+    b.querySelector('.skText small').textContent = s.once && battle.skill.used[s.id] ? tr("ui.Уже использован в этом бою")
       : wait ? tr("ui.Перезарядка: ещё ") + wait + ' ' + plural(wait, tr("ui.ход"), tr("ui.хода"), tr("ui.ходов")) : s.text;
     b.addEventListener('click', () => useSkill(s.id));
     buttons.appendChild(b);
