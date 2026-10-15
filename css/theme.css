@@ -750,3 +750,79 @@ h1 {
   #stash .stashAll { min-height: 48px; }
 }
 @media (min-width: 1000px) and (min-height: 560px) { #stash .mapBody { align-items: flex-start; } #stash .panel.charCol { max-height: 100%; } }
+
+/* ---------- Реестр (0.8.w, макет «Реестр») ---------- */
+#paragon { max-width: none; width: 100%; }
+#paragon .mapBody { gap: 10px; padding-right: 54px; }
+#paragon .paragonColLeft { flex: 0 0 56%; padding: 0; overflow: hidden; }
+#paragon .pgLeft { padding: 0; }
+#paragon .pgWeb { background: none; border-radius: 12px; margin: 4px 26px; }
+#paragon .pgWeb line { stroke: #5a4048; stroke-width: 4; }
+#paragon .pgWeb line.on { stroke: var(--ui-reward); stroke-width: 4; }
+#paragon .pgNode { width: 44px; height: 44px; border-radius: 50%; opacity: 1; box-sizing: border-box; border: 3px solid #5a4048; background: #2a1a22; color: #6a5a5a;
+  box-shadow: 0 4px 0 rgba(0,0,0,.5); font-family: var(--font-head); outline: 0; }
+#paragon .pgNode small { font: 400 14px/1 var(--font-head); }
+#paragon .pgNode b { font: 400 10px/1.2 var(--font-head); }
+#paragon .pgNode.can { border-color: var(--gold-ink); background: linear-gradient(180deg, #4a3040, #2a1620); color: var(--gold-ink); box-shadow: 0 4px 0 rgba(0,0,0,.5); }
+#paragon .pgNode.taken, #paragon .pgNode.full { border-color: #6c3806; background: radial-gradient(circle at 50% 35%, #ffe08a, #c8892a); color: #1a1008; box-shadow: 0 4px 0 rgba(0,0,0,.5); }
+#paragon .pgNode.selected { box-shadow: 0 0 0 4px #fff4a0, 0 0 24px 6px rgba(255,216,106,.7), 0 4px 0 rgba(0,0,0,.5); }
+#paragon .charColRight { background: none; border: 0; box-shadow: none; padding: 0; }
+#paragonRight { gap: 8px; padding: 0 2px 10px; }
+.pgPts { flex: none; display: flex; gap: 10px; }
+.pgPts > div { display: flex; flex-direction: column; padding: 4px 14px; border-radius: 12px; background: linear-gradient(180deg, #3d1d2c, #2b1420); box-shadow: inset 0 0 0 3px #9a48e6, 0 4px 0 rgba(0,0,0,.5); }
+.pgPts small { font: var(--type-caption); letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase; }
+.pgPts b { font: 400 22px/24px var(--font-head); color: #dcaaff; }
+.pgForm { flex: none; padding: 8px 12px; border-radius: 8px; background: var(--paper-fill); border: 3px solid #3a2a18; box-shadow: inset 0 0 20px rgba(140,100,40,.3); color: #2b2024; }
+#paragonRight .pgFormNo { font: var(--type-caption); text-transform: uppercase; border-bottom: 2px dashed #8a6a42; padding-bottom: 4px; color: #2b2024; }
+#paragonRight .pgName { font: 400 20px/24px var(--font-head); color: #5a1a9e; margin: 4px 0 2px; }
+#paragonRight .pgBonus { font: 400 17px/21px var(--font-body); color: #2b2024; }
+#paragonRight .pgBonus b { font-weight: 700; }
+#paragonRight .pgReason { font: italic 400 15px/18px var(--font-body); color: #2b2024; margin-top: 4px; }
+#paragonRight .pgRank { font: 400 15px/18px var(--font-head); color: #2b2024; margin-top: 4px; }
+#paragon .pgBtns { flex-direction: column; gap: 8px; }
+#paragon .pgBtns .btn { min-height: 40px; font: 400 18px/22px var(--font-head); }
+#paragon .pgBtns .btn.red { min-height: 36px; font-size: 16px; }
+#paragon .pgWhy { color: #ff8a72; min-height: 0; }
+@media (min-width: 1000px) and (min-height: 560px) {
+  #paragon .mapBody { padding: 100px 90px 30px 30px; max-height: 760px; }
+  #paragon .pgNode { width: 64px; height: 64px; }
+  #paragon .pgNode small { font-size: 18px; } #paragon .pgNode b { font-size: 12px; }
+  #paragon .pgWeb { margin: 30px 50px; }
+  .pgPts b { font-size: 26px; line-height: 30px; } .pgPts > div { padding: 10px 18px; }
+  .pgForm { padding: 14px 16px; }
+  #paragonRight .pgName { font-size: 26px; line-height: 30px; margin: 10px 0 6px; }
+  #paragonRight .pgBonus { font-size: 20px; line-height: 24px; }
+  #paragon .pgBtns .btn { min-height: 60px; font-size: 22px; } #paragon .pgBtns .btn.red { min-height: 48px; font-size: 17px; }
+}
+
+/* ---------- Глоссарий (0.8.w, макет «Глоссарий») ---------- */
+#glossary { max-width: none; width: 100%; }
+#glossary .mapBody { gap: 12px; padding-right: 54px; }
+#glossaryTabs { flex: 0 0 24%; gap: 8px; padding: 10px; }
+#glossaryTabs .zone { flex: none; min-height: 38px; padding: 0 14px; border-radius: 10px; background: linear-gradient(180deg, #4a3040, #2a1620); box-shadow: inset 0 0 0 2px #8a6a58, 0 4px 0 rgba(0,0,0,.5); }
+#glossaryTabs .zone b { font: 400 16px/20px var(--font-head); color: var(--text-primary); }
+#glossaryTabs .zone.selected { background: linear-gradient(180deg, #f2c25a, #c8892a); box-shadow: inset 0 0 0 2px #6c3806, 0 4px 0 rgba(0,0,0,.5); }
+#glossaryTabs .zone.selected b { color: #1a1008; }
+#glossaryPage { padding: 12px 16px; gap: 0; color: #2b2024; border: 4px solid transparent;
+  background: linear-gradient(90deg, #e2d2aa, #f6ecd2 6%, #f6ecd2 94%, #e2d2aa) padding-box, var(--gold-frame) border-box;
+  box-shadow: inset 0 0 0 3px #3a2a18, inset 0 0 40px rgba(140,100,40,.35), 0 0 0 2px var(--ui-gold-shadow), var(--hard-shadow); }
+.gPageHead { flex: none; display: flex; justify-content: space-between; align-items: baseline; gap: 10px; border-bottom: 3px double #8a6a42; padding-bottom: 6px; }
+.gPageHead span { font: 400 24px/28px var(--font-head); color: #2b2024; }
+.gPageHead small { font: var(--type-caption); color: #2b2024; text-transform: uppercase; white-space: nowrap; }
+#glossaryPage .gHead { margin: 10px 0 0; font: 400 18px/22px var(--font-head); color: #6a4a2a; }
+#glossaryPage .gEntry { flex: none; gap: 14px; padding: 10px 0; border-radius: 0; background: none; border-bottom: 2px dashed #8a6a42; }
+#glossaryPage .gIcon { width: 48px; height: 48px; border-radius: 12px; background: radial-gradient(circle at 50% 35%, #ffe08a, #c8892a); box-shadow: inset 0 0 0 3px #6c3806; }
+#glossaryPage .gIcon svg, #glossaryPage .gIcon .tile { width: 36px; height: 36px; }
+#glossaryPage .gBody h4 { font: 400 19px/23px var(--font-head); color: #5a1a9e; }
+#glossaryPage .gBody .gSub { font: var(--type-caption); color: #6a4a2a; text-transform: uppercase; }
+#glossaryPage .gBody p { font: 400 16px/21px var(--font-body); color: #2b2024; }
+#glossaryPage .gBody .g-lore { font-style: italic; color: #6a4a2a; }
+#glossaryPage .gBody .g-list { font: var(--type-caption); color: #6a4a2a; }
+#glossaryPage .gLvl { color: #1a1008; }
+@media (min-width: 1000px) and (min-height: 560px) {
+  #glossary .mapBody { padding: 100px 90px 30px 30px; max-height: 760px; }
+  #glossaryTabs { flex-basis: 250px; padding: 16px; } #glossaryTabs .zone { min-height: 46px; } #glossaryTabs .zone b { font-size: 17px; }
+  #glossaryPage { padding: 22px 28px; } .gPageHead span { font-size: 28px; }
+  #glossaryPage .gIcon { width: 64px; height: 64px; } #glossaryPage .gBody h4 { font-size: 21px; } #glossaryPage .gBody p { font-size: 17px; }
+}
+.pgPts small { white-space: nowrap; } .pgPts > div { flex-direction: row; align-items: baseline; gap: 8px; } @media (min-width: 1000px) and (min-height: 560px) { .pgPts > div { flex-direction: column; gap: 0; } }

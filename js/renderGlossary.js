@@ -13,7 +13,9 @@ function renderGlossary() {
   }
   const section = GLOSSARY_SECTIONS.find(s => s.id === glossaryTab) || GLOSSARY_SECTIONS[0];
   const page = document.getElementById('glossaryPage');
-  page.innerHTML = '';
+  page.innerHTML = '<div class="gPageHead"><span></span><small></small></div>'; // шапка страницы книги (макет «Глоссарий»)
+  page.querySelector('.gPageHead span').textContent = section.name;
+  page.querySelector('.gPageHead small').textContent = tr("ui.Стр. ") + (GLOSSARY_SECTIONS.indexOf(section) + 1) + tr("ui. · издание исправленное");
   page.append(...section.build());
   page.scrollTop = 0;
 }
