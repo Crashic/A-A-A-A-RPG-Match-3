@@ -420,3 +420,38 @@ h1 {
 .fighter .manaRow .statRow { gap: 4px; padding: 2px 6px 2px 2px; border-radius: 9px; background: #0a060c; box-shadow: inset 0 0 0 1px rgba(242,194,90,.25); }
 .fighter .manaRow .statRow > .gemMini { width: 26px !important; height: 26px !important; }
 .fighter .bar.mana > span { font: 400 16px/26px var(--font-head) !important; color: #fff; text-align: right !important; }
+
+/* ---------- Персонаж (макет «Персонаж») ---------- */
+#character .charHead h3 { font-family: var(--font-logo); font-size: 18px; line-height: 22px; color: var(--gold-ink); }
+#character .charServer { font: var(--type-caption); font-size: 14px; color: var(--text-muted); }
+#character .charLevel > span { font: var(--type-menu); font-size: 14px; color: var(--text-primary); }
+.charLevel .bar.xp, .bar.xp { background: #0a060c; box-shadow: inset 0 2px 4px #000; }
+.charLevel .bar.xp > i { background: linear-gradient(180deg, #fff4a0, #fbd02a 55%, #d8960a); }
+.charLevel .bar.xp span { color: #fff; -webkit-text-stroke: 3px #1a0e14; paint-order: stroke fill; font-family: var(--font-head); }
+/* кукла: силуэт в красной рамке-портрете */
+#character .dollFigure { margin: 0 4px; border-radius: 14px; background: radial-gradient(circle at 50% 35%, #c8221a, #5a0a08); box-shadow: inset 0 0 0 3px var(--ui-reward), 0 4px 0 rgba(0,0,0,.5); overflow: hidden; }
+#character .dollFigure svg { opacity: .95; }
+#character .dollFigure svg * { fill: #1a1412; }
+/* характеристики: строки с пунктиром, «+/−» — маленькие бруски */
+#character .statsHead > b { font: var(--type-menu); font-size: 14px; letter-spacing: 3px; color: var(--gold-ink); text-transform: uppercase; }
+#character .freePts { font: var(--type-menu); font-size: 14px; color: #a8ec6a; }
+#character .statRowBig { padding: 4px 6px; border-radius: 0; background: none; border-bottom: 1px solid rgba(224,168,64,.2); }
+#character .statLabel { font: var(--type-body); font-size: 16px; color: var(--text-secondary); }
+#character .statVal { font: var(--type-menu); font-size: 16px; color: var(--text-primary); }
+#character .btn.statBtn { border-radius: 8px; font-size: 18px; }
+#character .statsSummary { font: var(--type-caption); font-size: 14px; color: var(--text-muted); }
+.statTab { border: 0; border-radius: 9px; background: linear-gradient(180deg, #4a3040, #2a1620); box-shadow: inset 0 0 0 2px var(--ui-metal); color: var(--text-primary); font: var(--type-menu); font-size: 15px; }
+.statTab.selected { background: var(--gold-frame); box-shadow: inset 0 0 0 2px var(--ui-gold-shadow); color: #1a1008; }
+/* страница вкладки класса/фракции/расы — бумага */
+.charTabPage { background: var(--paper-fill); box-shadow: inset 0 0 0 2px #3a2a18, inset 0 0 14px rgba(140,100,40,.3); border-radius: 8px; }
+.charTabPage p { color: #2b2024; font: var(--type-body); font-size: 15px; line-height: 18px; }
+.charTabPage .tabTitle { color: #5a1a9e; font: var(--type-menu); font-size: 16px; }
+.charTabPage .tabLore { color: #2b2024; }
+.charTabPage .tabSkill, .charTabPage .tabNote { color: #6a4a2a; font: var(--type-caption); font-size: 14px; }
+/* инвентарь */
+#character .invTitle { font: var(--type-menu); font-size: 14px; letter-spacing: 3px; color: var(--gold-ink); text-transform: uppercase; }
+#character .invTape, #stash .invTape { background: var(--bg-cell); box-shadow: inset 0 0 0 2px var(--ui-metal); }
+.invSlot.plus { background: linear-gradient(180deg, #5cc83a, #2a7a14); box-shadow: inset 0 0 0 2px #14420a, inset 0 3px 0 rgba(255,255,255,.25); color: #fff; }
+.invSlot.plus::before { display: none; }
+#character .invTabs .statTab { font-size: 14px; padding: 4px 6px; white-space: nowrap; }
+.charTabPage .tabSkill, .charTabPage .tabNote { font: var(--type-body); font-size: 14px; line-height: 17px; }
