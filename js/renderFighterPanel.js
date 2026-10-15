@@ -6,7 +6,19 @@ function renderFighterPanel(side) {
   const q = sel => panel.querySelector(sel);
   q('[data-f="name"]').textContent = f.name.replace(/\u2011/g, '\u2011\u200B'); // после неразрывного дефиса — можно перенести строку
   panel.classList.toggle('active', !battle.over && battle.turn === side);
-  panel.dataset.stamp = side === 'hero' ? tr("ui.ВАШ ХОД!") : tr("ui.ХОД ВРАГА"); // штамп хода (макет «Агитпроп»), виден у активной панели
+  q('[data-f="stamp"]').textContent = side === 'hero' ? tr("ui.ВАШ ХОД!") : tr("ui.ХОД ВРАГА"); // штамп хода поперёк аватара, виден у активной панели
+  const key = side === 'hero' ? battle.save.raceId + battle.save.classId : battle.enemyId; // аватар и значок — при смене бойца
+  if (panel.dataset.ava !== key) {
+    panel.dataset.ava = key;
+    if (side === 'hero') {
+      const race = findById(RACES, battle.save.raceId), cls = findById(CLASSES, battle.save.classId);
+      q('[data-f="portrait"]').innerHTML = race ? iconTile(race.icon, race.color) : '';
+      q('[data-f="badge"]').innerHTML = cls ? iconTile(cls.icon, cls.color) : '';
+    } else {
+      q('[data-f="portrait"]').innerHTML = ENEMY_PORTRAIT;
+      q('[data-f="badge"]').textContent = battle.enemyInfo.level;
+    }
+  }
 
   setBar(q('[data-bar="hp"]'), f.hp, f.maxHp);
   setBar(q('[data-bar="shield"]'), f.shield, f.maxShield, tr("ui.Щит ") + f.shield);

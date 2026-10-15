@@ -237,6 +237,7 @@ const FILES = [
   './js/gainText.js',
   './js/applyMatchEffects.js',
   './js/setBar.js',
+  './js/enemyPortrait.js',
   './js/buildFighterPanel.js',
   './js/renderFighterPanel.js',
   './js/enemyBuffIcons.js',

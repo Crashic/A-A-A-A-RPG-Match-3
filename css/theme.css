@@ -455,3 +455,41 @@ h1 {
 .invSlot.plus::before { display: none; }
 #character .invTabs .statTab { font-size: 14px; padding: 4px 6px; white-space: nowrap; }
 .charTabPage .tabSkill, .charTabPage .tabNote { font: var(--type-body); font-size: 14px; line-height: 17px; }
+
+/* ---------- Бой: панель бойца по макету (аватар слева, полосы справа, плашки маны снизу) ---------- */
+.fighter { gap: 6px; padding: 7px 8px 8px; }
+.fpTop { display: flex; gap: 8px; align-items: stretch; min-width: 0; }
+.fpAva { position: relative; flex: none; display: flex; flex-direction: column; align-items: center; }
+.fpPortrait { width: 56px; height: 56px; border-radius: 12px; overflow: hidden; background: #c8221a; box-shadow: inset 0 0 0 3px var(--ui-reward), 0 3px 0 rgba(0,0,0,.5); display: grid; place-items: center; }
+.fighter.enemy .fpPortrait { background: radial-gradient(circle at 50% 35%, #9a48e6, #3a0f7a); box-shadow: inset 0 0 0 3px #b88ae8, 0 3px 0 rgba(0,0,0,.5); }
+.fighter.active .fpPortrait { box-shadow: inset 0 0 0 3px #ffd86a, 0 0 14px 3px rgba(255,216,106,.6), 0 3px 0 rgba(0,0,0,.5); }
+.fighter.enemy.active .fpPortrait { box-shadow: inset 0 0 0 3px #e8c8ff, 0 0 14px 3px rgba(200,140,255,.7), 0 3px 0 rgba(0,0,0,.5); }
+.fpPortrait .tile { width: 46px; height: 46px; display: block; }
+.fpPortrait > svg:not(.tile) { width: 56px; height: 56px; display: block; }
+.fpBadge { margin-top: -10px; position: relative; z-index: 1; min-width: 24px; height: 24px; border-radius: 12px; padding: 0 4px; box-sizing: border-box;
+  background: var(--gold-frame); box-shadow: 0 0 0 2px #1a1008; display: grid; place-items: center; font: var(--type-menu); font-size: 14px; color: #1a1008; }
+.fighter.enemy .fpBadge { background: linear-gradient(180deg, #d8a8ff, #7a34c8); color: #fff; -webkit-text-stroke: 3px #2a0a4a; paint-order: stroke fill; }
+.fpBadge .tile { width: 20px; height: 20px; display: block; }
+.fpStamp { display: none; position: absolute; left: -10px; right: -10px; top: 38px; z-index: 3; transform: rotate(-6deg); padding: 1px 0; text-align: center;
+  border-radius: 3px; background: #efe1bc; border: 2px solid #c8221a; outline: 1px dashed #c8221a; outline-offset: -5px;
+  color: #c8221a; font: var(--type-menu); font-size: 14px; line-height: 16px; white-space: nowrap; box-shadow: 0 2px 0 rgba(0,0,0,.45); pointer-events: none; }
+.fighter.enemy .fpStamp { border-color: #5a1aa8; outline-color: #5a1aa8; color: #5a1aa8; transform: rotate(6deg); }
+.fighter.active .fpStamp { display: block; }
+.fighter.active::after { display: none !important; }
+.fpInfo { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; justify-content: center; }
+.fpInfo .fighterHead { text-align: left; }
+.fpInfo .fighterHead b { font-family: var(--font-logo); font-size: 14px; line-height: 17px; -webkit-line-clamp: 2; }
+.fighter.enemy .fpInfo .fighterHead b { font-family: var(--font-head); font-size: 15px; line-height: 17px; }
+.fpInfo .fighterHead span { font-size: 14px; line-height: 16px; }
+.fighter .fpInfo .bar.hp { height: 22px; padding: 3px; box-sizing: border-box; border-radius: 11px; }
+.fighter .fpInfo .bar.hp > i { border-radius: 8px; background: linear-gradient(180deg, #ff6a4a, #e8322a 50%, #a8180e); }
+.fighter .fpInfo .bar.hp span { font: 400 14px/22px var(--font-head); color: #fff; text-shadow: 0 1px 2px #000; }
+.fighter .fpInfo .bar.shield { height: 18px; padding: 3px; box-sizing: border-box; border-radius: 9px; }
+.fighter .fpInfo .bar.shield > i { border-radius: 6px; background: linear-gradient(180deg, #8ae8ff, #2a98c8 50%, #0a5a7a); }
+.fighter .fpInfo .bar.shield span { font: 400 14px/18px var(--font-head); color: #bfeefa; text-shadow: 0 1px 2px #000; }
+.fighter .bar > i { top: 3px; bottom: 3px; left: 3px; height: auto; }
+
+/* поле: толстая рамка цвета хода */
+.board { box-shadow: 0 0 0 5px #9a48e6, 0 0 0 7px #2a0a4a, 0 0 26px rgba(180,110,255,.5); }
+.board.heroTurn { box-shadow: 0 0 0 5px #e0a840, 0 0 0 7px #6c3806, 0 0 26px rgba(255,180,70,.55); }
+.board::after { box-shadow: none !important; }
