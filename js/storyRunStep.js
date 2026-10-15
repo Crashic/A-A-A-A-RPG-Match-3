@@ -68,6 +68,7 @@ function storyRunStep(hero, slot, screen, hide) {
   if (step.mapTarget && id === 'map') { // цель на карте: сначала локация, потом враг
     const t = step.mapTarget(hero);
     const el = mapZoneId !== t.zone.id ? document.querySelector('#zoneList [data-zone="' + t.zone.id + '"]')
+      : step.type !== 'ok' && mapEnemyId === t.enemy.id ? document.getElementById('mapFight') // враг выбран — жми «В бой»
       : document.querySelector('#enemyList [data-enemy="' + t.enemy.id + '"]');
     if (el) { el.scrollIntoView({ block: 'nearest' }); storyGuide(el, storyFill(step.text, hero), step.type === 'ok' ? advance : null); } else hide();
     return;

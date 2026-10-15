@@ -2,6 +2,7 @@
 function openMap() {
   if (match3 && match3.busy && battle && !battle.over) { showToast(tr("ui.Дождитесь конца хода"), 1500); return; }
   mapZoneId = null;
+  mapEnemyId = null;
   closeBattleResult();
   renderMap();
   showScreen('map');

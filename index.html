@@ -243,10 +243,15 @@
     <button class="btn stone round back" type="button" data-back aria-label="Назад" data-i18n-aria="ui.Назад"></button>
   </header>
   <div class="mapBody">
-    <div id="zoneList" class="panel"></div>
+    <div class="panel mapZones">
+      <div class="invTitle"><span data-i18n="ui.Локации">Локации</span><span id="zoneCount"></span></div>
+      <div id="zoneList"></div>
+    </div>
     <div class="panel zonePanel">
       <div id="zoneInfo"></div>
+      <div class="invTitle"><span data-i18n="ui.Враги">Враги</span></div>
       <div id="enemyList"></div>
+      <button id="mapFight" class="btn green" type="button"></button>
     </div>
   </div>
 </section>

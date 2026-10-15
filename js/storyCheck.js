@@ -46,7 +46,8 @@ function storyCheck() {
         storyGuide(document.querySelector('#zoneList [data-zone="' + target.zone.id + '"]'), storyFill(g.toZone, hero));
         return;
       }
-      storyGuide(document.querySelector('#enemyList [data-enemy="' + target.enemy.id + '"]'), storyFill(g.toEnemy, hero));
+      storyGuide(mapEnemyId === target.enemy.id ? document.getElementById('mapFight') // враг выбран — жми «В бой»
+        : document.querySelector('#enemyList [data-enemy="' + target.enemy.id + '"]'), storyFill(g.toEnemy, hero));
       return;
     }
     hide();

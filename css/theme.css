@@ -590,3 +590,56 @@ h1 {
 .gameButtons .legendBig svg { width: 30px; height: 30px; }
 .gameSide .battleCorner { display: none; }
 @media (min-width: 1000px) and (min-height: 560px) { .gameSide .battleCorner { display: flex; } }
+
+/* ---------- Карта врагов (0.8.s, макет «Карта врагов») ---------- */
+#map { max-width: none; }
+#map .mapBody { gap: 10px; padding-right: 54px; }
+#map .mapZones { flex: 0 0 38%; min-width: 0; display: flex; flex-direction: column; gap: 6px; padding: 8px; }
+#map .zonePanel { padding: 8px; gap: 6px; }
+#map .invTitle { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex: none;
+  font: var(--type-menu); font-size: 14px; letter-spacing: 3px; color: var(--gold-ink); text-transform: uppercase;
+  padding-bottom: 4px; border-bottom: 2px dashed rgba(224,168,64,.35); }
+#map .invTitle > span:first-child { min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+#map .invTitle > span + span { flex: none; font-size: 14px; letter-spacing: 0; color: var(--text-primary); text-transform: none; }
+#zoneList { flex: 1; min-height: 0; padding: 2px 2px 6px; gap: 6px; background: none; box-shadow: none; border: 0; }
+#zoneList .zone { flex: none; min-height: 46px; padding: 4px 12px; gap: 8px; border-radius: 10px; justify-content: flex-start;
+  background: linear-gradient(180deg, #3d1d2c, #2b1420); box-shadow: inset 0 0 0 3px #8a6a58, 0 4px 0 rgba(0,0,0,.5); }
+#zoneList .zone .zText { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+#zoneList .zone b { font: 400 15px/19px var(--font-head); color: var(--text-primary); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+#zoneList .zone small { font: var(--type-caption); letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#zoneList .zone small i { font-style: normal; }
+#zoneList .zone small span { font: inherit; color: inherit; }
+#zoneList .zone.selected { transform: translateY(-3px); background: linear-gradient(180deg, #3d1d2c, #2b1420); box-shadow: inset 0 0 0 3px var(--gold-ink), 0 4px 0 rgba(0,0,0,.5); }
+#zoneList .zone.selected b { color: var(--gold-ink); }
+#zoneList .zone.locked { filter: grayscale(1) brightness(.7); opacity: 1; box-shadow: inset 0 0 0 3px #4a3a3a, 0 4px 0 rgba(0,0,0,.5); }
+.zStart { flex: none; font: 400 14px/18px var(--font-head); font-style: normal; letter-spacing: 1px; padding: 1px 6px; border-radius: 5px; background: #2f8a1a; color: #fff; text-transform: uppercase; }
+.zLock { flex: none; width: 18px; height: 18px; fill: var(--text-muted); }
+#zoneInfo { display: flex; flex-direction: column; gap: 6px; flex: none; }
+#zoneInfo .zoneDesc { margin: 0 !important; padding: 6px 10px; border-radius: 8px; background: var(--paper-fill); border: 3px solid #3a2a18;
+  box-shadow: inset 0 0 20px rgba(140,100,40,.3); color: #2b2024; font: italic 400 16px/20px var(--font-body); -webkit-line-clamp: 2; }
+#enemyList { display: flex; flex-direction: column; gap: 6px; padding: 2px; }
+#enemyList .enemyCard { flex: none; flex-direction: row; justify-content: flex-start; gap: 10px; padding: 4px 10px 4px 4px; border-radius: 12px;
+  background: rgba(239,225,188,.08); box-shadow: inset 0 0 0 3px #8a6a58; text-align: left; }
+#enemyList .enemyCard.selected { background: var(--ui-parchment); box-shadow: inset 0 0 0 3px var(--ui-reward); }
+#enemyList .enemyLvl { flex: none; width: 40px; height: 40px; box-sizing: border-box; border-radius: 10px; background: #7a34c8; border: 3px solid #b88ae8;
+  display: flex; align-items: center; justify-content: center; font: 400 18px/1 var(--font-head); color: #fff; }
+#enemyList .enemyText { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+#enemyList .enemyCard b { font: 400 16px/20px var(--font-head); color: var(--text-primary); text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#enemyList .enemyCard small { font: var(--type-small); color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#enemyList .enemyCard.selected b { color: #5a1a9e; }
+#enemyList .enemyCard.selected small { color: #2b2024; }
+#enemyList .enemyXp { flex: none; font: 400 14px/18px var(--font-head); }
+#enemyList .enemyCard.selected .enemyXp { filter: brightness(.6) saturate(1.4); }
+#enemyList .enemyCard.locked { filter: grayscale(1) brightness(.7); opacity: 1; }
+#mapFight { flex: none; width: 100%; min-height: 44px; font: var(--type-button); font-size: 20px; }
+#mapFight:disabled { filter: grayscale(.8) brightness(.8); }
+@media (min-width: 1000px) and (min-height: 560px) {
+  #map .mapBody { padding: 40px 90px 0 20px; max-height: 720px; }
+  #zoneList .zone { min-height: 58px; }
+  #enemyList .enemyLvl { width: 56px; height: 56px; font-size: 20px; }
+  #enemyList .enemyCard { padding: 8px 12px 8px 8px; }
+  #enemyList .enemyCard b { font-size: 18px; }
+  #enemyList .enemyCard small { font-size: 15px; }
+  #zoneInfo .zoneDesc { font-size: 17px; padding: 14px 16px; -webkit-line-clamp: 4; }
+  #mapFight { min-height: 64px; font-size: 26px; }
+}
