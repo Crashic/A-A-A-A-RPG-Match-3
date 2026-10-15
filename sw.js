@@ -278,6 +278,7 @@ const FILES = [
   './js/closeChangelog.js',
   './js/exitApp.js',
   './js/setupChangelog.js',
+  './js/gemTileSvg.js',
   './js/gemMiniIcon.js',
   './js/heartIcon.js',
   './js/showGemLabels.js',

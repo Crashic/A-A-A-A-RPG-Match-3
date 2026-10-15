@@ -7,8 +7,8 @@ function skillGauge(cost, mana) {
     const gem = findById(GEM_TYPES, id);
     const have = Math.min(mana[id] || 0, 99);
     const pct = Math.round(Math.min(1, have / cost[id]) * 100);
-    return `<span class="skGauge" style="--gem:${gem.color};--gem-dark:${gem.dark}"><i style="height:${pct}%"></i>` +
-      `<svg viewBox="16 16 68 68" aria-hidden="true"><path d="${gem.icon}" fill="#fff" fill-rule="evenodd" stroke="${gem.dark}" stroke-width="10" stroke-linejoin="round" paint-order="stroke" transform="${GEM_ICON_TRANSFORM}"/></svg>` +
+    return `<span class="skGauge" style="--gem:${gem.tile.bg};--gem-dark:${gem.tile.ink}"><i style="height:${pct}%"></i>` +
+      `<svg viewBox="${gem.tile.vb}" aria-hidden="true" style="overflow:visible"><path d="${gem.tile.d}" fill="#fff" fill-rule="evenodd" stroke="${gem.tile.ink}" stroke-width="2.6" stroke-linejoin="round" paint-order="stroke"/></svg>` +
       `<b>${have}<small>/${cost[id]}</small></b></span>`;
   });
   return { html: '<span class="skCost skStub">' + cols.join('') + '</span>', width: ids.length ? 10 + ids.length * 36 + (ids.length - 1) * 3 : 0 };

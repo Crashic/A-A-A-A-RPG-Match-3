@@ -518,3 +518,9 @@ h1 {
 .hintArrow.vertical { transform: translate(-50%, -50%) rotate(90deg); }
 .hintArrow svg { width: 100%; height: 100%; display: block; }
 #boardGems { z-index: 1; }
+
+/* ---------- Поле по макету: тёмная подложка в косую полоску, фишки-плитки (gemTileSvg) ---------- */
+.board { background: repeating-linear-gradient(45deg, #241a26 0 14px, #1c141e 14px 28px); }
+.cell, .cell.alt { background: rgba(0,0,0,.18); border-radius: 10px; }
+.gem svg { filter: drop-shadow(0 2px 0 rgba(0,0,0,.35)); }
+.gem.selected .gemRim { stroke: #fff; stroke-width: 5; }
