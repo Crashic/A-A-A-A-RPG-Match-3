@@ -643,3 +643,39 @@ h1 {
   #zoneInfo .zoneDesc { font-size: 17px; padding: 14px 16px; -webkit-line-clamp: 4; }
   #mapFight { min-height: 64px; font-size: 26px; }
 }
+
+/* ---------- Персонажи (0.8.t, макет «Персонажи») ---------- */
+#characters .heroRow { flex: 1; min-height: 0; width: 100%; display: flex; flex-direction: column; gap: 10px; padding: 6px 60px 6px 6px; box-sizing: border-box; }
+#slotList { flex: 1; min-height: 0; display: flex; flex-direction: row; gap: 14px; overflow-x: auto; overflow-y: hidden; padding: 4px 4px 14px; align-items: stretch; scrollbar-width: none; }
+#slotList::-webkit-scrollbar { display: none; }
+.heroSlot { flex: 0 0 190px; min-height: 0; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px; }
+.heroSlot.active { box-shadow: 0 0 0 3px #6c3806, 0 0 30px rgba(255,180,70,.6), 0 10px 0 rgba(0,0,0,.45); transform: translateY(-6px); }
+.hsPortrait { flex: 1 1 auto; min-height: 60px; width: 100%; max-width: 200px; box-sizing: border-box; border-radius: 16px; border: 3px solid var(--ui-reward);
+  background: radial-gradient(circle at 50% 35%, var(--race), #1a0e14); display: flex; align-items: flex-end; justify-content: center; overflow: hidden; }
+.hsPortrait svg { width: 85%; height: 90%; fill: #1a1412; }
+.heroSlot b { font: 400 20px/24px var(--font-head); color: var(--gold-ink); text-align: center; max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.hsSub { font: 400 15px/18px var(--font-body); color: var(--text-muted); text-align: center; max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.hsLvl { font: 400 15px/18px var(--font-head); color: var(--text-primary); padding: 3px 12px; border-radius: 8px; background: #1a0e14; box-shadow: inset 0 0 0 2px #8a6a58; }
+.heroSlot .btn { flex: none; width: 100%; min-height: 44px; margin-top: 4px; font-size: 20px; }
+.heroNew { border: 4px dashed var(--ui-reward); border-radius: 18px; background: rgba(26,14,20,.55); justify-content: center; gap: 10px; cursor: pointer; }
+.hnPlus { width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(180deg, #5cc83a, #2a7a14); box-shadow: inset 0 0 0 4px #14420a, 0 6px 0 rgba(0,0,0,.5); display: flex; align-items: center; justify-content: center; }
+.hnPlus svg { width: 36px; height: 36px; fill: #fff; }
+.heroNew small { font: var(--type-caption); letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase; }
+#deleteHero { flex: none; align-self: flex-start; width: 240px; min-height: 40px; font-size: 17px; }
+#characters .panel.heroSlot { max-width: none; width: auto; align-self: auto; }
+@media (min-width: 1000px) and (min-height: 560px) {
+  #characters .heroRow { padding: 100px 90px 30px 50px; max-height: 720px; }
+  .heroSlot { flex-basis: 305px; padding: 18px; gap: 10px; }
+  .hsPortrait { flex: none; height: 220px; width: 200px; }
+  .heroSlot b { font-size: 22px; }
+  .hsSub { font-size: 16px; }
+  .heroSlot .btn { min-height: 54px; font-size: 22px; margin-top: auto; }
+  .hnPlus { width: 100px; height: 100px; } .hnPlus svg { width: 50px; height: 50px; }
+  #deleteHero { width: 305px; min-height: 48px; }
+}
+.heroSlot > b, .hsSub, .hsLvl { flex: none; }
+#slotList { padding-top: 10px; }
+#characters { max-width: none; width: 100%; }
+#slotList > .heroSlot { flex-shrink: 0; }
+#characters .panel.heroSlot { flex: 0 0 190px; max-height: none; }
+@media (min-width: 1000px) and (min-height: 560px) { #characters .panel.heroSlot { flex-basis: 305px; } }
