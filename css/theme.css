@@ -304,3 +304,27 @@ h1 {
   background: radial-gradient(circle at 35% 35%, #ff8a72, #a8180e); box-shadow: 0 2px 0 rgba(0,0,0,.5); }
 #questsLeft .hint { color: var(--text-primary); }
 .qTabs .charTab { font-size: 14px; padding: 4px 5px; min-width: 0; }
+
+/* ---------- Журнал заданий (макет «Задания») ---------- */
+#journal .invTitle { font: var(--type-menu); font-size: 14px; letter-spacing: 3px; color: var(--gold-ink); text-transform: uppercase; padding-bottom: 4px; border-bottom: 2px dashed rgba(224,168,64,.35); }
+#journal .jCat { padding: 5px 4px; background: none; color: var(--gold-ink); font: var(--type-menu); font-size: 16px; }
+#journal .jArrow { border-top-color: var(--gold-ink); }
+#journal .jCat small { font: var(--type-caption); font-size: 14px; color: var(--text-muted); }
+#journal .jReady { width: 20px; height: 20px; background: #fbd02a; color: #1a1008; font-family: var(--font-head); font-size: 14px; }
+#journal .jQuest { margin-left: 8px; padding: 6px 10px; border-radius: 9px; background: rgba(239,225,188,.06); box-shadow: inset 0 0 0 2px var(--ui-metal);
+  color: var(--text-primary); font: var(--type-body); font-size: 16px; line-height: 19px; }
+#journal .jQuest small { font: var(--type-menu); font-size: 13px; color: var(--text-muted); }
+#journal .jQuest.ready small { color: #a8ec6a; }
+#journal .jQuest.selected { background: var(--ui-parchment); box-shadow: inset 0 0 0 2px var(--ui-reward); color: #2b2024; }
+#journal .jQuest.selected small { color: #6a4a2a; }
+#journal .jQuest.selected.ready small { color: #2f8a1a; }
+#journal .jEmpty { font: var(--type-caption); font-size: 14px; color: var(--text-muted); }
+.questCard.jBig { position: relative; padding: 12px 14px; gap: 6px; overflow: hidden; }
+.questCard.jBig .qHead b { font: var(--type-heading); font-size: 22px; line-height: 26px; }
+.questCard.jBig .qText, .questCard.jBig .qTodo { font-size: 17px; line-height: 21px; }
+.questCard.jBig .qGoal { font-size: 16px; }
+.questCard.jBig .qFoot { gap: 8px; }
+.questCard.jBig .btn.qBtn { height: 40px; padding: 0 18px; font-size: 17px; }
+.jStamp { position: absolute; right: 18px; bottom: 62px; transform: rotate(-12deg); padding: 1px 10px; border: 3px solid #b8221a; border-radius: 8px; color: #b8221a;
+  font: var(--type-menu); font-size: 18px; letter-spacing: 1px; opacity: .35; pointer-events: none; }
+.jStamp.done { border-color: #2f8a1a; color: #2f8a1a; opacity: .55; }

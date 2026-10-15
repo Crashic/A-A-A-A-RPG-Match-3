@@ -1,7 +1,7 @@
 // Журнал заданий (экран «Задания», как в WoW): слева — взятые задания по категориям (QUEST_CATEGORIES;
 // заголовок категории сворачивает её — journalCollapsed; значок «!», если в категории есть готовое к сдаче;
 // закрытые после отказа слоты — с таймером), справа — выбранное задание (questCard: «Сдать» — только когда
-// выполнено, «Отказаться» — с предупреждением).
+// выполнено, «Отказаться» — с предупреждением). Справа — большая записка со штампом «В работе» / «Готово» (макет «Агитпроп»).
 let journalSel = null;
 const journalCollapsed = {};
 function renderJournal() {
@@ -60,5 +60,12 @@ function renderJournal() {
   const title = document.createElement('p');
   title.className = 'invTitle';
   title.textContent = cat.name || '';
-  right.append(title, questCard(active[i], 'active', i));
+  const card = questCard(active[i], 'active', i);
+  card.classList.add('jBig');
+  const stamp = document.createElement('span'); // штамп поверх записки: «В работе» / «Готово»
+  const done = active[i].have >= active[i].need;
+  stamp.className = 'jStamp' + (done ? ' done' : '');
+  stamp.textContent = done ? tr("ui.ГОТОВО") : tr("ui.В РАБОТЕ");
+  card.appendChild(stamp);
+  right.append(title, card);
 }
