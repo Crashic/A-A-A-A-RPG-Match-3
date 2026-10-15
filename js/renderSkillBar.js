@@ -22,7 +22,7 @@ function renderSkillBar() {
     const stub = skillGauge(s.cost, battle.hero.mana); // корешок талона: мана наливается снизу
     b.innerHTML = stub.html + '<span class="skText"><b></b><small></small></span>';
     b.style.setProperty('--stub', stub.width + 'px');
-    if (!stub.width) b.querySelector('.skCost').remove();
+    if (!stub.width) { b.querySelector('.skCost').remove(); b.classList.add('noStub'); } // бесплатный навык — талон без корешка
     b.querySelector('.skText b').textContent = s.name;
     const wait = (battle.skill.cooldowns || {})[s.id];
     b.querySelector('.skText small').textContent = s.once && battle.skill.used[s.id] ? tr("ui.Уже использован в этом бою")

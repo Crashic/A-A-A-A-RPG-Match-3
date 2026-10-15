@@ -540,3 +540,20 @@ h1 {
 .fpInfo .fighterHead b em { font-style: normal; color: var(--gold-ink); }
 .fighter.enemy .fpInfo .fighterHead b em { color: #e8c8ff; }
 .fpInfo .fighterHead span { white-space: nowrap; }
+
+/* талон без корешка (бесплатный навык) и кнопка читов */
+.heroSkillBtns .btn.skillBtn.skillBtn2.noStub { padding-left: 12px; background: var(--ui-parchment); }
+.heroSkillBtns .btn.skillBtn.skillBtn2.noStub::after { display: none; }
+.heroSkillBtns .btn.skillBtn.killAll { height: 44px; min-height: 44px; border-radius: 9px; }
+.heroSkillBtns .btn.skillBtn.killAll small { -webkit-text-stroke: 0; color: #ffd8d0; font: var(--type-body); font-size: 14px; }
+/* лог боя ужимается под навыки, а не наезжает на них */
+.gameSide { min-height: 0; overflow: hidden; }
+.gameSide .battleCorner { flex: 1 1 0; min-height: 0; overflow: hidden; justify-content: flex-end; }
+.battleLogBox { flex: 0 1 auto; min-height: 0; }
+.battleLogBox .battleLog { flex: 0 1 66px; min-height: 0; }
+.gameSide #skillBar { flex: none; }
+/* «Фишки» — слева от лога, в одну строку: лог получает всю высоту угла */
+.gameSide .battleCorner { flex-direction: row; align-items: flex-end; gap: 6px; }
+.gameSide .battleCorner .legendBig { flex: none; align-self: flex-end; }
+.battleLogBox { flex: 1 1 auto; align-self: stretch; justify-content: flex-end; min-width: 0; }
+.battleCorner.logClosed .battleLogBox { flex: none; align-self: flex-end; }
