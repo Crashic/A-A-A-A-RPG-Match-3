@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="810" viewBox="0 0 1440 810" preserveAspectRatio="xMidYMax slice">
+<g fill="#fff" opacity="0.7"><circle cx="80" cy="40" r="1.4"></circle><circle cx="220" cy="90" r="1"></circle><circle cx="400" cy="30" r="1.5"></circle><circle cx="610" cy="70" r="1"></circle><circle cx="760" cy="24" r="1.3"></circle><circle cx="980" cy="60" r="1"></circle><circle cx="1180" cy="34" r="1.5"></circle><circle cx="1330" cy="96" r="1"></circle></g>
+<circle cx="720" cy="560" r="150" fill="#ffd27a" opacity="0.35"></circle>
+<circle cx="720" cy="560" r="96" fill="#ffe2a0" opacity="0.8"></circle>
+<g fill="#c24a3a" opacity="0.55"><ellipse cx="300" cy="380" rx="260" ry="18"></ellipse><ellipse cx="1150" cy="340" rx="300" ry="20"></ellipse><ellipse cx="760" cy="430" rx="220" ry="10"></ellipse></g>
+<!-- distant plant -->
+<g fill="#5a2034" opacity="0.85">
+<path d="M0 560 L120 520 L260 545 L420 500 L600 540 L780 505 L960 535 L1140 498 L1300 530 L1440 510 L1440 810 L0 810Z"></path>
+<rect x="1040" y="380" width="22" height="150"></rect><rect x="1080" y="420" width="18" height="110"></rect><rect x="300" y="400" width="20" height="130"></rect>
+</g>
+<g fill="#8a4a5a" opacity="0.5"><circle cx="1052" cy="368" r="18"></circle><circle cx="1066" cy="340" r="24"></circle><circle cx="1090" cy="310" r="30"></circle><circle cx="310" cy="388" r="16"></circle><circle cx="322" cy="360" r="22"></circle></g>
+<!-- mid blocks -->
+
+<g fill="#2b1420">
+<rect x="0" y="560" width="200" height="250"></rect><rect x="210" y="500" width="130" height="310"></rect><rect x="350" y="590" width="200" height="220"></rect>
+<rect x="900" y="540" width="170" height="270"></rect><rect x="1080" y="600" width="200" height="210"></rect><rect x="1290" y="480" width="150" height="330"></rect>
+<rect x="540" y="680" width="380" height="130"></rect>
+</g>
+<g fill="#ffb84d">
+<rect x="22" y="590" width="16" height="12"></rect><rect x="90" y="620" width="16" height="12"></rect><rect x="150" y="660" width="16" height="12"></rect><rect x="232" y="530" width="14" height="12"></rect><rect x="300" y="610" width="14" height="12"></rect><rect x="380" y="640" width="16" height="12"></rect><rect x="470" y="700" width="16" height="12"></rect><rect x="930" y="580" width="16" height="12"></rect><rect x="1010" y="650" width="16" height="12"></rect><rect x="1120" y="640" width="16" height="12"></rect><rect x="1220" y="690" width="16" height="12"></rect><rect x="1320" y="520" width="14" height="12"></rect><rect x="1390" y="600" width="14" height="12"></rect>
+</g>
+<g fill="#7ad0d8" opacity="0.8"><rect x="60" y="700" width="16" height="12"></rect><rect x="1170" y="740" width="16" height="12"></rect><rect x="250" y="720" width="14" height="12"></rect></g>
+<!-- pylon & wires -->
+<g stroke="#2b1420" stroke-width="5" fill="none">
+<path d="M860 810 L895 470 L930 810 M868 720 L922 720 M876 640 L914 640 M884 560 L906 560 M850 500 L940 500 M864 470 L926 470"></path>
+<path d="M940 500 Q1110 580 1300 490" stroke-width="2"></path><path d="M850 500 Q580 590 340 500" stroke-width="2"></path>
+</g>
+<!-- rooftop details -->
+<g stroke="#2b1420" stroke-width="3" fill="none"><path d="M240 500 v-30 M232 470 h16 M1330 480 v-40 M1320 450 h20 M1350 480 v-26 l10 -8"></path></g>
+</svg>

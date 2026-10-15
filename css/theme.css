@@ -1,0 +1,140 @@
+/* ===================================================================
+   Тема «Агитпроп постсовет» (макет https://claude.ai/artifact/4ssH7srg9fakUqrDazXbi8).
+   Подключается ПОСЛЕ style.css и перекрывает палитру, шрифты, панели, кнопки и ленты.
+   =================================================================== */
+
+/* ---------- Шрифты (локально, SIL OFL) ---------- */
+@font-face { font-family: "Russo One"; font-display: swap; src: url("../fonts/russo-one-cyrillic-400-normal.woff2") format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: "Russo One"; font-display: swap; src: url("../fonts/russo-one-latin-400-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Rubik Mono One"; font-display: swap; src: url("../fonts/rubik-mono-one-cyrillic-400-normal.woff2") format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: "Rubik Mono One"; font-display: swap; src: url("../fonts/rubik-mono-one-latin-400-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "PT Sans Narrow"; font-weight: 400; font-display: swap; src: url("../fonts/pt-sans-narrow-cyrillic-400-normal.woff2") format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: "PT Sans Narrow"; font-weight: 400; font-display: swap; src: url("../fonts/pt-sans-narrow-latin-400-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "PT Sans Narrow"; font-weight: 700; font-display: swap; src: url("../fonts/pt-sans-narrow-cyrillic-700-normal.woff2") format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: "PT Sans Narrow"; font-weight: 700; font-display: swap; src: url("../fonts/pt-sans-narrow-latin-700-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "PT Mono"; font-display: swap; src: url("../fonts/pt-mono-cyrillic-400-normal.woff2") format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: "PT Mono"; font-display: swap; src: url("../fonts/pt-mono-latin-400-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+
+/* ---------- Палитра и типографика ---------- */
+:root {
+  /* небо заката */
+  --bg-sky-top: #1a1430;
+  --bg-sky-mid: #7a2c3a;
+  --bg-sky-bottom: #d1572f;
+  /* панели: тёмная слива */
+  --bg-canvas: #2b1420;
+  --bg-canvas-hi: #3d1d2c;
+  --bg-cell: #1a0e14;
+  --bg-cell-alt: #24121b;
+  /* интерфейс */
+  --ui-outline: #1a1220;
+  --ui-metal: #8a6a58;          /* рамка «бумажная» */
+  --ui-reward: #e0a840;         /* золото рамок */
+  --ui-gold-shadow: #6c3806;    /* тёмная кромка золота */
+  --ui-parchment: #efe1bc;      /* кремовая бумага */
+  --ui-ribbon: #7a34c8;
+  --text-primary: #efe1bc;
+  --text-secondary: #f6e2c8;
+  --text-muted: #c8b8a0;
+  /* золото рамки */
+  --gold-frame: linear-gradient(180deg, #f2c25a 0%, #c8892a 55%, #C37212 100%);
+  --plum-fill: linear-gradient(180deg, #3d1d2c 0%, #2b1420 100%);
+  --paper-fill: linear-gradient(180deg, #f6ecd2, #e2d2aa);
+  --hard-shadow: 0 5px 0 rgba(0,0,0,.5);
+  --gold-ink: #ffd86a;
+  /* шрифты: заголовки — Russo One, текст — PT Sans Narrow, цифры и подписи — PT Mono */
+  --font-head: "Russo One", "Noto Sans Display", system-ui, sans-serif;
+  --font-body: "PT Sans Narrow", "Noto Sans", system-ui, sans-serif;
+  --font-small: "PT Mono", "IBM Plex Sans", monospace;
+  --font-logo: "Rubik Mono One", "Russo One", sans-serif;
+  --type-title: 400 40px/44px var(--font-head);
+  --type-heading: 400 22px/28px var(--font-head);
+  --type-score: 400 26px/30px var(--font-head);
+  --type-button: 400 18px/22px var(--font-head);
+  --type-menu: 400 18px/22px var(--font-head);
+  --type-body: 400 17px/22px var(--font-body);
+  --type-body-strong: 700 17px/22px var(--font-body);
+  --type-small: 400 14px/18px var(--font-body);
+  --type-stat: 400 14px/18px var(--font-small);
+  --type-caption: 400 14px/18px var(--font-small);
+  --type-title-ls: 0; --type-heading-ls: 0.01em; --type-button-ls: 0; --type-menu-ls: 0;
+}
+
+/* ---------- Фон: закатное небо и силуэт города ---------- */
+html, body { background: #1a1210; }
+body {
+  background:
+    url("../sprites/city-bg.svg") center bottom / cover no-repeat,
+    linear-gradient(180deg, #1a1430 0%, #3b1d3f 22%, #7a2c3a 44%, #d1572f 62%, #f59a3a 72%, #6a2a24 86%, #1a1210 100%);
+  background-attachment: fixed;
+}
+
+/* ---------- Логотип ---------- */
+h1 {
+  font-family: var(--font-logo);
+  color: var(--gold-ink);
+  -webkit-text-stroke: 7px #3a1e04;
+  paint-order: stroke fill;
+  text-shadow: 0 5px 0 rgba(0,0,0,.5);
+  letter-spacing: -1px;
+}
+
+/* ---------- Лента → латунная табличка ---------- */
+.ribbon {
+  padding: 4px 18px;
+  border: 3px solid transparent;
+  border-radius: 9px;
+  background: var(--plum-fill) padding-box, linear-gradient(180deg, #f2c25a, #C37212) border-box;
+  box-shadow: var(--hard-shadow);
+  font: var(--type-menu);
+  letter-spacing: 3px;
+  color: var(--gold-ink);
+  text-transform: uppercase;
+}
+.ribbon::before, .ribbon::after { display: none; }
+
+/* ---------- Панель: золотая рамка, внутри тёмная слива ---------- */
+.panel {
+  border: 4px solid transparent;
+  border-radius: 16px;
+  background: var(--plum-fill) padding-box, var(--gold-frame) border-box;
+  box-shadow: inset 0 0 0 2px #1a1220, inset 0 3px 0 rgba(255,255,255,.1), 0 0 0 2px var(--ui-gold-shadow), var(--hard-shadow);
+}
+.well {
+  border-radius: 10px;
+  background: var(--bg-cell);
+  box-shadow: inset 0 2px 4px #000, 0 0 0 2px var(--ui-metal);
+}
+/* Бумага: кремовый лист (журнал, записки, описания) */
+.paper {
+  border-radius: 8px;
+  background: var(--paper-fill);
+  border: 3px solid #3a2a18;
+  box-shadow: inset 0 0 20px rgba(140,100,40,.3);
+  color: #2b2024;
+}
+
+/* ---------- Кнопки: цветной брусок с тёмной кромкой и светлым бликом ---------- */
+.btn {
+  --edge: #1a1220;
+  --hi: #6a5a70;
+  --fill: #3a2a3a;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(180deg, var(--hi), var(--fill));
+  box-shadow: inset 0 0 0 3px var(--edge), inset 0 4px 0 rgba(255,255,255,.25), var(--hard-shadow);
+  color: #fff;
+  -webkit-text-stroke: 4px var(--edge);
+  paint-order: stroke fill;
+  text-shadow: none;
+}
+.btn small { -webkit-text-stroke: 3px var(--edge); }
+.btn.green  { --hi: #5cc83a; --fill: #2a7a14; --edge: #14420a; color: #fff; }
+.btn.red    { --hi: #ec3f2a; --fill: #a8180e; --edge: #4a0604; }
+.btn.orange { --hi: #ffd86a; --fill: #c8892a; --edge: #6c3806; color: #fff; }
+.btn.purple { --hi: #a85ae8; --fill: #5a1ca8; --edge: #2a0a4a; }
+.btn.blue   { --hi: #4a7ae8; --fill: #1f3e9e; --edge: #0a1a50; }
+.btn.stone  { --hi: #3a4a6a; --fill: #141c2c; --edge: #0a0e18; box-shadow: inset 0 0 0 3px #8aa8d8, inset 0 4px 0 rgba(255,255,255,.25), var(--hard-shadow); }
+.btn:disabled { --hi: #5a4a50; --fill: #3a2a30; --edge: #1a1220; color: var(--text-muted); filter: saturate(.4); }
+.btn.round, .btn.square { border-radius: 14px; }
+.btn:active { transform: translateY(2px); filter: brightness(.95); }
