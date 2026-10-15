@@ -4,7 +4,7 @@ function drawHintFrame(pair) {
   const [a, b] = pair;
   const r0 = Math.min(a[0], b[0]), c0 = Math.min(a[1], b[1]);
   const r1 = Math.max(a[0], b[0]), c1 = Math.max(a[1], b[1]);
-  const cell = match3.layout.cell, pad = 2;
+  const cell = match3.layout.cell, pad = Math.max(1, BOARD_GAP / 2); // рамка — на половину зазора за клетки, соседей не задевает
   const frame = document.createElement('div');
   frame.className = 'hintFrame';
   frame.style.left = (cellOffset(c0) - pad) + 'px';

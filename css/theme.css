@@ -832,3 +832,6 @@ h1 {
   box-shadow: 0 0 0 2px #e0a840, 0 0 14px 4px #ffe56a; animation: hintGlow2 1.2s ease-in-out infinite; }
 @keyframes hintGlow2 { 50% { box-shadow: 0 0 0 2px #ffd86a, 0 0 22px 7px #ffe56a; } }
 .hintArrow { width: 32px; height: 20px; filter: drop-shadow(0 3px 0 rgba(0,0,0,.5)); }
+/* 0.8.y: фишки плотнее — отступ между ними вдвое меньше (зазор клеток BOARD_GAP 2 + поле фишки 3 %) */
+.gem svg { width: 94%; height: 94%; margin: 3%; }
+.hintFrame { border-width: 3px; border-radius: 11px; }
