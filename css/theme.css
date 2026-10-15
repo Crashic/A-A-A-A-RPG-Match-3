@@ -826,3 +826,9 @@ h1 {
   #glossaryPage .gIcon { width: 64px; height: 64px; } #glossaryPage .gBody h4 { font-size: 21px; } #glossaryPage .gBody p { font-size: 17px; }
 }
 .pgPts small { white-space: nowrap; } .pgPts > div { flex-direction: row; align-items: baseline; gap: 8px; } @media (min-width: 1000px) and (min-height: 560px) { .pgPts > div { flex-direction: column; gap: 0; } }
+
+/* ---------- Поле 8×8 и подсказка хода по макету (0.8.x) ---------- */
+.hintFrame { box-sizing: border-box; border-radius: 13px; border: 5px solid #f6ecd2; background: linear-gradient(180deg, #f6ecd2, #e2d2aa);
+  box-shadow: 0 0 0 2px #e0a840, 0 0 14px 4px #ffe56a; animation: hintGlow2 1.2s ease-in-out infinite; }
+@keyframes hintGlow2 { 50% { box-shadow: 0 0 0 2px #ffd86a, 0 0 22px 7px #ffe56a; } }
+.hintArrow { width: 32px; height: 20px; filter: drop-shadow(0 3px 0 rgba(0,0,0,.5)); }
