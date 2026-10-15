@@ -272,3 +272,35 @@ h1 {
 #shop .shopHead h3 { font-size: 18px; line-height: 20px; }
 #shop .shopTabs { align-items: flex-end; }
 #shop .btn.shopReroll { margin-left: auto; margin-bottom: 4px; height: 30px; padding: 0 8px; font-size: 14px; }
+
+/* ---------- Вкладки (везде): тёмные, выбранная — золотая ---------- */
+.charTab { border: 0; border-radius: 9px; background: linear-gradient(180deg, #4a3040, #2a1620); box-shadow: inset 0 0 0 2px var(--ui-metal); color: var(--text-primary); font: var(--type-menu); font-size: 15px; }
+.charTab.selected { background: var(--gold-frame); box-shadow: inset 0 0 0 2px var(--ui-gold-shadow); color: #1a1008; }
+
+/* ---------- Задания: карточка — кремовая записка ---------- */
+.questCard { gap: 3px; padding: 8px 10px; border-radius: 6px; background: var(--paper-fill); box-shadow: inset 0 0 18px rgba(140,100,40,.35), 0 4px 0 rgba(0,0,0,.45); color: #2b2024; }
+.questCard.ready { box-shadow: inset 0 0 0 3px var(--ui-reward), inset 0 0 18px rgba(140,100,40,.35), 0 4px 0 rgba(0,0,0,.45); }
+.questCard .qHead b { font: var(--type-menu); font-size: 17px; line-height: 20px; color: #5a1a9e; }
+.questCard .qGiver { font: var(--type-caption); font-size: 14px; color: #6a4a2a; }
+.questCard .qText { font: var(--type-body); font-size: 15px; line-height: 18px; color: #2b2024; }
+.questCard .qTodo { font: var(--type-body); font-size: 15px; line-height: 18px; color: #2b2024; }
+.questCard .qTodo b { color: #7a1a5a; }
+.questCard .qGoal { font: var(--type-body-strong); font-size: 15px; color: #2b2024; }
+.questCard .qBar { background: rgba(0,0,0,.18); }
+.questCard .qFoot { padding-top: 5px; border-top: 2px dashed #8a6a42; }
+.questCard .qReward, .questCard .qReward .tape { font: var(--type-menu); font-size: 14px; color: #2b2024; }
+.questCard .qXp { color: #2f8a1a; }
+.questCard .qLeft { color: #6a4a2a; }
+.questCard .qLeft.last { color: #b8221a; }
+.questCard .btn.qBtn { height: 32px; font: var(--type-button); font-size: 15px; }
+.questCard .btn.qBtn.orange { color: #fff; }
+
+/* ---------- Доска объявлений: деревянная доска, записки на кнопках ---------- */
+#quests .shopColLeft { border: 0; background: repeating-linear-gradient(90deg, #5a3a22 0 46px, #50331e 46px 48px); box-shadow: inset 0 0 0 5px #3a2414, inset 0 0 40px rgba(0,0,0,.5), var(--hard-shadow); }
+#quests .invTitle { font: var(--type-menu); font-size: 14px; letter-spacing: 3px; color: var(--gold-ink); text-transform: uppercase; }
+#questsLeft .questCard { position: relative; margin: 8px 4px 2px; transform: rotate(-1deg); }
+#questsLeft .questCard:nth-of-type(even) { transform: rotate(1.2deg); }
+#questsLeft .questCard::before { content: ""; position: absolute; left: 50%; top: -8px; margin-left: -8px; width: 16px; height: 16px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ff8a72, #a8180e); box-shadow: 0 2px 0 rgba(0,0,0,.5); }
+#questsLeft .hint { color: var(--text-primary); }
+.qTabs .charTab { font-size: 14px; padding: 4px 5px; min-width: 0; }
