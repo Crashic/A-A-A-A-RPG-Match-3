@@ -221,3 +221,54 @@ h1 {
 
 /* ---------- «Назад» на всех экранах — в правом нижнем углу; столбец меню экрана — над ней ---------- */
 .screenHead { top: auto !important; bottom: calc(env(safe-area-inset-bottom, 0px) + 4px); flex-direction: column-reverse; }
+
+/* ---------- Торговец (макет «Завхоз Семёныч») ---------- */
+#shop .shopColLeft { flex: 0 0 56%; }
+#shop .shopHead { display: flex; align-items: center; gap: 10px; }
+#shop .shopFace { width: 54px; height: 54px; border-radius: 12px; background: radial-gradient(circle at 50% 35%, #ffe08a, #c8892a 70%); box-shadow: inset 0 0 0 3px var(--ui-gold-shadow), 0 3px 0 rgba(0,0,0,.5); }
+#shop .shopFace svg { width: 40px; height: 40px; }
+.shopWho { min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+#shop .shopHead h3 { font: var(--type-heading); font-size: 20px; line-height: 22px; color: var(--gold-ink); }
+#shop .shopQuote { position: relative; padding: 3px 10px; border-radius: 8px; background: var(--paper-fill); box-shadow: inset 0 0 0 2px var(--ui-reward); color: #2b2024; font: var(--type-body); font-size: 15px; line-height: 18px; font-style: italic; }
+.shopTabs { display: flex; gap: 4px; margin-top: 6px; border-bottom: 2px solid var(--ui-reward); }
+.shopTab { height: 32px; padding: 0 14px; border-radius: 9px 9px 0 0; background: linear-gradient(180deg, #4a3040, #2a1620); box-shadow: inset 0 0 0 2px var(--ui-metal); font: var(--type-menu); font-size: 15px; color: var(--text-primary); }
+.shopTab.active { background: var(--gold-frame); box-shadow: inset 0 0 0 2px var(--ui-gold-shadow); color: #1a1008; }
+#shop .shopStock { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin-top: 6px; }
+#shop .shopItem { position: relative; gap: 4px; padding: 6px 4px 4px; border-radius: 10px; background: var(--plum-fill); box-shadow: inset 0 0 0 2px var(--ui-metal), 0 3px 0 rgba(0,0,0,.5); }
+#shop .shopItem.r-magic { box-shadow: inset 0 0 0 2px #2f6ae8, 0 3px 0 rgba(0,0,0,.5); }
+#shop .shopItem.r-rare { box-shadow: inset 0 0 0 2px #e0a840, 0 3px 0 rgba(0,0,0,.5); }
+#shop .shopItem.r-unique { box-shadow: inset 0 0 0 2px #e8642a, 0 3px 0 rgba(0,0,0,.5); }
+#shop .shopItem.r-quest { box-shadow: inset 0 0 0 2px var(--gold-ink), 0 0 12px rgba(255,216,106,.5), 0 3px 0 rgba(0,0,0,.5); }
+#shop .shopItem.r-empty { background: var(--bg-cell); box-shadow: inset 0 2px 4px #000; }
+#shop .shopItem .invSlot { width: 48px; height: 48px; background: radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--rar, #efe1bc) 30%, transparent), #1a0e14 75%); }
+#shop .shopPrice { align-self: stretch; height: 22px; border-radius: 6px; background: var(--ui-parchment); box-shadow: inset 0 0 0 2px var(--ui-metal); display: flex; align-items: center; justify-content: center; color: #2b2024; }
+#shop .shopPrice .tape { font: var(--type-menu); font-size: 14px; color: #2b2024; gap: 3px; }
+#shop .shopPrice.poor { background: #f0c8b8; color: #a8180e; }
+#shop .shopPrice.poor .tape { color: #a8180e; }
+#shop .shopFoot { gap: 8px; margin-top: 8px; padding-top: 6px; border-top: 2px dashed rgba(224,168,64,.35); }
+#shop .shopNote { font: var(--type-caption); font-size: 14px; color: var(--text-muted); }
+#shop .btn.shopReroll { height: 40px; padding: 0 10px; font: var(--type-button); font-size: 15px; gap: 6px; }
+.priceChip { display: inline-flex; align-items: center; padding: 2px 6px; border-radius: 6px; background: var(--ui-parchment); -webkit-text-stroke: 0; }
+.priceChip .tape { font: var(--type-menu); font-size: 14px; color: #2b2024; }
+#shop .invTitle { display: flex; justify-content: space-between; align-items: baseline; font: var(--type-menu); font-size: 14px; letter-spacing: 3px; color: var(--gold-ink); padding-bottom: 4px; border-bottom: 2px dashed rgba(224,168,64,.35); text-transform: uppercase; }
+#shop .invTitle b { letter-spacing: 0; color: var(--text-primary); font-weight: 400; }
+.shopSellHint { margin: 4px 0 0; font: var(--type-caption); font-size: 14px; color: var(--text-muted); text-align: center; }
+#shop .btn.shopJunk { align-self: stretch; height: 42px; font: var(--type-button); font-size: 17px; color: #fff; }
+#shop .invTape { background: var(--bg-cell); box-shadow: inset 0 0 0 2px var(--ui-metal); }
+/* торговец: всё помещается по высоте 360 */
+#shop .shopFace { width: 44px; height: 44px; }
+#shop .shopFace svg { width: 32px; height: 32px; }
+#shop .shopItem { padding: 4px 3px 3px; gap: 3px; }
+#shop .shopItem .invSlot { width: 40px; height: 40px; }
+#shop .shopPrice { height: 20px; }
+#shop .shopTabs { margin-top: 4px; }
+#shop .shopTab { height: 28px; }
+#shop .shopStock { margin-top: 4px; gap: 5px; }
+#shop .shopFoot { margin-top: 6px; padding-top: 4px; }
+#shop .btn.shopReroll { height: 36px; }
+#shop .panel.charCol { padding: 8px 10px; }
+#shop .shopNote { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+#shop .shopQuote { font-size: 14px; line-height: 16px; padding: 2px 8px; }
+#shop .shopHead h3 { font-size: 18px; line-height: 20px; }
+#shop .shopTabs { align-items: flex-end; }
+#shop .btn.shopReroll { margin-left: auto; margin-bottom: 4px; height: 30px; padding: 0 8px; font-size: 14px; }
