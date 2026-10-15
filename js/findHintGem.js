@@ -1,5 +1,5 @@
 // Для подсказки: выбирает ход с самым длинным рядом (4+ в приоритете — они дают ещё ход)
-// и из его пары — ту фишку, которая сама встанет в ряд. Возвращает [r, c] или null, если ходов нет.
+// и из его пары — ту фишку, которая сама встанет в ряд. Возвращает [r, c] (в .pair — обе клетки хода) или null, если ходов нет.
 function findHintGem(grid) {
   const moves = listMoves(grid).sort(() => Math.random() - 0.5);
   if (!moves.length) return null;
@@ -16,5 +16,7 @@ function findHintGem(grid) {
   swapInGrid(grid, a, b);
   const inMatch = cell => matched.some(m => m[0] === cell[0] && m[1] === cell[1]);
   // фишка из a после хода стоит в b: если b в ряду — собирает ряд она, иначе — фишка из b
-  return inMatch(b) ? a : b;
+  const gem = inMatch(b) ? a : b;
+  gem.pair = [a, b]; // обе клетки хода — для рамки и стрелки подсказки (showHint)
+  return gem;
 }

@@ -4,4 +4,5 @@ function clearHint() {
   clearTimeout(match3.hintTimer);
   match3.hintTimer = null;
   document.querySelectorAll('.gem.hint').forEach(el => el.classList.remove('hint'));
+  document.querySelectorAll('.hintFrame, .hintArrow').forEach(el => el.remove());
 }

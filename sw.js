@@ -175,6 +175,7 @@ const FILES = [
   './js/clearHint.js',
   './js/scheduleHint.js',
   './js/findHintGem.js',
+  './js/drawHintFrame.js',
   './js/showHint.js',
   './js/attemptSwap.js',
   './js/isAppRotated.js',

@@ -146,7 +146,11 @@
           <circle cx="16" cy="23.5" r="2" fill="var(--text-primary)"/>
         </svg>
       </button>
-      <div id="battleLog" class="battleLog"></div>
+      <div class="battleLogBox">
+        <div id="battleZone" class="battleZone"></div>
+        <div id="battleLog" class="battleLog"></div>
+        <button id="logToggle" class="logToggle" type="button" aria-label="Свернуть журнал" data-i18n-aria="ui.Свернуть журнал"></button>
+      </div>
     </div>
   </aside>
   <div class="boardWrap">
@@ -686,6 +690,7 @@
 <script src="js/clearHint.js"></script>
 <script src="js/scheduleHint.js"></script>
 <script src="js/findHintGem.js"></script>
+<script src="js/drawHintFrame.js"></script>
 <script src="js/showHint.js"></script>
 <script src="js/attemptSwap.js"></script>
 <script src="js/isAppRotated.js"></script>

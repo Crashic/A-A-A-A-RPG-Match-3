@@ -9,7 +9,8 @@ const DEFAULT_SETTINGS = {
   gemLegendSeen: false, // подсказка «Фишки» уже показана в первом бою
   cheatsOn: false,    // режим читов: очки характеристик в бою и кнопка «KILL ALL»
   tutorialAll: true,  // обучение (подсказки со стрелкой) для всех персонажей
-  hintsSeen: {},      // подсказки «увидел новое» (HINTS), уже показанные на этом устройстве
+  hintsSeen: {},
+  logClosed: false,   // лог боя свёрнут (стрелка у лога)      // подсказки «увидел новое» (HINTS), уже показанные на этом устройстве
   lang: 'ru'          // язык интерфейса (LANGUAGES, переводы в locales/)
 };
 let settings = null;  // заполняется в main() через loadSettings()
