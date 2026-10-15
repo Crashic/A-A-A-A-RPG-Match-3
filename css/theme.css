@@ -328,3 +328,26 @@ h1 {
 .jStamp { position: absolute; right: 18px; bottom: 62px; transform: rotate(-12deg); padding: 1px 10px; border: 3px solid #b8221a; border-radius: 8px; color: #b8221a;
   font: var(--type-menu); font-size: 18px; letter-spacing: 1px; opacity: .35; pointer-events: none; }
 .jStamp.done { border-color: #2f8a1a; color: #2f8a1a; opacity: .55; }
+
+/* ---------- Ячейки инвентаря (везде): тёмная лунка, вещь подсвечена цветом редкости ---------- */
+.invSlot { background: var(--bg-cell); box-shadow: inset 0 2px 4px #000, inset 0 0 0 1.5px rgba(138,106,88,.6); }
+.invSlot.item { background: radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--rar, #efe1bc) 28%, transparent), #1a0e14 75%); box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--rar, #8a6a58) 70%, #1a0e14); }
+
+/* ---------- Шкафчик (как торговец) ---------- */
+#bank .shopHead, #bank .shopWho { display: flex; }
+#bank .shopHead { align-items: center; gap: 10px; }
+#bank .shopFace { width: 44px; height: 44px; border-radius: 12px; background: radial-gradient(circle at 50% 35%, #ffe08a, #c8892a 70%); box-shadow: inset 0 0 0 3px var(--ui-gold-shadow), 0 3px 0 rgba(0,0,0,.5); }
+#bank .shopFace svg { width: 32px; height: 32px; }
+#bank .shopWho { flex-direction: column; gap: 3px; min-width: 0; }
+#bank .shopHead h3 { font: var(--type-heading); font-size: 18px; line-height: 20px; color: var(--gold-ink); }
+#bank .shopQuote { padding: 2px 8px; border-radius: 8px; background: var(--paper-fill); box-shadow: inset 0 0 0 2px var(--ui-reward); color: #2b2024; font: var(--type-body); font-size: 14px; line-height: 16px; font-style: italic; }
+#bank .invTitle { display: flex; justify-content: space-between; align-items: baseline; margin-top: 4px; font: var(--type-menu); font-size: 14px; letter-spacing: 3px; color: var(--gold-ink); padding-bottom: 4px; border-bottom: 2px dashed rgba(224,168,64,.35); text-transform: uppercase; }
+#bank .invTitle b { letter-spacing: 0; color: var(--text-primary); font-weight: 400; }
+#bank .bankBags { justify-content: flex-start; gap: 6px; }
+#bank .bankBag { width: 38px; height: 38px; border-radius: 9px; }
+#bank .bankBag.owned { background: radial-gradient(circle at 50% 40%, rgba(224,168,64,.3), #1a0e14 75%); box-shadow: inset 0 0 0 2px var(--ui-reward); }
+#bank .bankBag.next { background: linear-gradient(180deg, #5cc83a, #2a7a14); box-shadow: inset 0 0 0 2px #14420a, inset 0 3px 0 rgba(255,255,255,.25), 0 3px 0 rgba(0,0,0,.5); color: #fff; }
+#bank .bankBag.next b { font: var(--type-heading); font-size: 22px; -webkit-text-stroke: 3px #14420a; paint-order: stroke fill; }
+#bank .shopSellHint { margin: 4px 0 0; font: var(--type-caption); font-size: 14px; color: var(--text-muted); text-align: center; }
+#bank .invTape { background: var(--bg-cell); box-shadow: inset 0 0 0 2px var(--ui-metal); }
+#bank .panel.charCol { padding: 8px 10px; }
