@@ -712,3 +712,41 @@ h1 {
   #camp .campCard small { white-space: normal; }
   .campStamp { top: 40px; }
 }
+
+/* ---------- Общак (0.8.v, макет «Общак») ---------- */
+#stash { max-width: none; width: 100%; }
+#stash .mapBody { gap: 10px; padding-right: 54px; }
+#stash .shopColLeft { flex: 0 0 50%; }
+#stash .panel.charCol { padding: 8px 10px; }
+#stash .charScroll { gap: 8px; padding: 2px 2px 14px; }
+#stash .invTitle { flex: none; display: flex; justify-content: space-between; align-items: baseline; margin: 0; font: var(--type-menu); font-size: 14px; letter-spacing: 3px;
+  color: var(--gold-ink); padding-bottom: 4px; border-bottom: 2px dashed rgba(224,168,64,.35); text-transform: uppercase; }
+#stash .invTitle span { min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+#stash .invTitle b { flex: none; letter-spacing: 0; color: var(--text-primary); font-weight: 400; text-transform: none; }
+#stash .bankBags { flex: none; display: flex; justify-content: flex-start; gap: 6px; }
+#stash .bankBag { width: 38px; height: 38px; border-radius: 9px; }
+#stash .bankBag.owned { background: radial-gradient(circle at 50% 40%, rgba(224,168,64,.3), #1a0e14 75%); box-shadow: inset 0 0 0 2px var(--ui-reward); }
+#stash .bankBag.next { background: linear-gradient(180deg, #5cc83a, #2a7a14); box-shadow: inset 0 0 0 2px #14420a, inset 0 3px 0 rgba(255,255,255,.25), 0 3px 0 rgba(0,0,0,.5); color: #fff; }
+#stash .bankBag.next b { font: var(--type-heading); font-size: 22px; -webkit-text-stroke: 3px #14420a; paint-order: stroke fill; }
+#stash .invGrid { flex: none; justify-content: start; gap: 8px; }
+#stash .stashGrid { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+#stash .bagGrid { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+#stash .invGrid > * { width: auto; height: auto; aspect-ratio: 1; border-radius: 10px; }
+#stash .invGrid > .invSlot:not(.item) { background: #1a0e14; box-shadow: inset 0 2px 4px #000; }
+.stashChips { flex: none; display: flex; gap: 8px; align-items: center; }
+.stashChip { display: flex; align-items: center; gap: 6px; padding: 6px 10px; border: 0; border-radius: 9px; background: #1a0e14; box-shadow: inset 0 0 0 2px #8a6a58; cursor: pointer; }
+.stashChip:disabled { opacity: .55; cursor: default; }
+.stashChip b { font: 400 16px/18px var(--font-head); color: var(--text-primary); }
+.chipRoll { width: 16px; height: 16px; border-radius: 50%; }
+.chipRoll.blue { background: #2f6ae8; box-shadow: inset 0 0 0 4px #1a0e14, 0 0 0 2px #2f6ae8; }
+.chipRoll.black { background: #2a2a2a; box-shadow: inset 0 0 0 4px #1a0e14, 0 0 0 2px #6a6a6a; }
+.chipRoll.white { background: #f2f2ea; box-shadow: inset 0 0 0 4px #1a0e14, 0 0 0 2px #f2f2ea; }
+#stash .stashAll { flex: none; width: 100%; min-height: 40px; font-family: var(--font-head); font-size: 18px; }
+@media (min-width: 1000px) and (min-height: 560px) {
+  #stash .mapBody { padding: 100px 90px 30px 30px; max-height: 760px; }
+  #stash .panel.charCol { padding: 16px; }
+  #stash .charScroll { gap: 12px; }
+  #stash .bagGrid { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 60%; }
+  #stash .stashAll { min-height: 48px; }
+}
+@media (min-width: 1000px) and (min-height: 560px) { #stash .mapBody { align-items: flex-start; } #stash .panel.charCol { max-height: 100%; } }
