@@ -583,3 +583,10 @@ h1 {
   #game .gameSide { flex: 0 0 min(28%, 400px); padding-top: 16px; }
   #game .boardWrap { flex: 1; width: auto; display: flex; align-items: flex-start; justify-content: center; padding-top: 16px; height: calc(var(--app-h) * .76); }
 }
+
+/* «Фишки» — справа внизу, рядом с меню боя; лог боя на телефоне не показываем (только на ПК) */
+.gameButtons { align-items: flex-end; gap: 8px; }
+.gameButtons .legendBig { width: 46px; height: 46px; margin: 0; border-radius: 14px; flex: none; }
+.gameButtons .legendBig svg { width: 30px; height: 30px; }
+.gameSide .battleCorner { display: none; }
+@media (min-width: 1000px) and (min-height: 560px) { .gameSide .battleCorner { display: flex; } }

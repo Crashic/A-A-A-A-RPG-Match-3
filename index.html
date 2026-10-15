@@ -138,14 +138,6 @@
     <div id="skillBar"></div>
     <!-- Слева внизу: «Фишки» и под ней чат-лог боя на 5 строк (js/logBattle.js) -->
     <div class="battleCorner">
-    <button id="btnLegend" class="btn stone square legendBig" aria-label="Фишки" data-i18n-aria="ui.Фишки" data-tip="Фишки: что даёт каждая" data-i18n-tip="ui.Фишки: что даёт каждая" type="button">
-        <svg viewBox="0 0 32 32" aria-hidden="true">
-          <rect x="3" y="3" width="26" height="26" rx="8" fill="var(--gem-amethyst)"/>
-          <rect x="4.5" y="4.5" width="23" height="23" rx="7" fill="none" stroke="var(--gem-amethyst-light)" stroke-width="1" opacity=".7"/>
-          <path d="M11.5 12.5 Q11.5 7.5 16 7.5 Q20.5 7.5 20.5 11.5 Q20.5 14.5 17.5 15.5 Q16 16.2 16 18.5" fill="none" stroke="var(--text-primary)" stroke-width="3" stroke-linecap="round"/>
-          <circle cx="16" cy="23.5" r="2" fill="var(--text-primary)"/>
-        </svg>
-      </button>
       <div class="battleLogBox">
         <div id="battleZone" class="battleZone"></div>
         <div id="battleLog" class="battleLog"></div>
@@ -165,6 +157,15 @@
     <!-- Навык врага: название, что делает, лор — js/renderEnemySkill.js -->
     <div id="enemySkill"></div>
     <div class="gameButtons">
+      <!-- «Фишки» — слева от меню боя -->
+  <button id="btnLegend" class="btn stone square legendBig" aria-label="Фишки" data-i18n-aria="ui.Фишки" data-tip="Фишки: что даёт каждая" data-i18n-tip="ui.Фишки: что даёт каждая" type="button">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="var(--gem-amethyst)"/>
+        <rect x="4.5" y="4.5" width="23" height="23" rx="7" fill="none" stroke="var(--gem-amethyst-light)" stroke-width="1" opacity=".7"/>
+        <path d="M11.5 12.5 Q11.5 7.5 16 7.5 Q20.5 7.5 20.5 11.5 Q20.5 14.5 17.5 15.5 Q16 16.2 16 18.5" fill="none" stroke="var(--text-primary)" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="16" cy="23.5" r="2" fill="var(--text-primary)"/>
+      </svg>
+    </button>
       <!-- Меню боя: одна кнопка, по нажатию — список с иконками (js/toggleBattleMenu.js) -->
       <button id="btnBattleMenu" class="btn stone square" type="button" aria-label="Меню" data-i18n-aria="ui.Меню" data-tip="Меню" data-i18n-tip="ui.Меню" aria-expanded="false">
         <svg viewBox="0 0 32 32" aria-hidden="true">
