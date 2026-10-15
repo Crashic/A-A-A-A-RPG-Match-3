@@ -835,3 +835,5 @@ h1 {
 /* 0.8.y: фишки плотнее — отступ между ними вдвое меньше (зазор клеток BOARD_GAP 2 + поле фишки 3 %) */
 .gem svg { width: 94%; height: 94%; margin: 3%; }
 .hintFrame { border-width: 3px; border-radius: 11px; }
+/* выбранная фишка — только обводка самой фишки (.gemRim), без рамки клетки */
+.cell.picked { box-shadow: none; }
