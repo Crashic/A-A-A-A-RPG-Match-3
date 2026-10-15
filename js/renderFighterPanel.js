@@ -4,7 +4,10 @@ function renderFighterPanel(side) {
   if (!panel.dataset.built) buildFighterPanel(panel, side === 'hero');
   const f = battle[side];
   const q = sel => panel.querySelector(sel);
-  q('[data-f="name"]').textContent = f.name.replace(/\u2011/g, '\u2011\u200B'); // после неразрывного дефиса — можно перенести строку
+  const nameEl = q('[data-f="name"]'); // первое слово светлым, остальное цветом стороны (макет «Агитпроп»)
+  const words = f.name.replace(/\u2011/g, '\u2011\u200B').split(' ');
+  nameEl.textContent = words[0] + (words.length > 1 ? ' ' : '');
+  if (words.length > 1) { const em = document.createElement('em'); em.textContent = words.slice(1).join(' '); nameEl.appendChild(em); }
   panel.classList.toggle('active', !battle.over && battle.turn === side);
   q('[data-f="stamp"]').textContent = side === 'hero' ? tr("ui.ВАШ ХОД!") : tr("ui.ХОД ВРАГА"); // штамп хода поперёк аватара, виден у активной панели
   const key = side === 'hero' ? battle.save.raceId + battle.save.classId : battle.enemyId; // аватар и значок — при смене бойца

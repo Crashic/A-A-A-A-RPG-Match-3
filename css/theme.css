@@ -524,3 +524,19 @@ h1 {
 .cell, .cell.alt { background: rgba(0,0,0,.18); border-radius: 10px; }
 .gem svg { filter: drop-shadow(0 2px 0 rgba(0,0,0,.35)); }
 .gem.selected .gemRim { stroke: #fff; stroke-width: 5; }
+
+/* ---------- Панель врага — зеркально панели героя (как в макете) ---------- */
+.fighter.enemy .fpTop { flex-direction: row-reverse; }
+.fighter.enemy .fpInfo .fighterHead { text-align: right; }
+.fighter.enemy .manaRow { flex-direction: row-reverse; }
+.fighter.enemy .manaRow .statRow { flex-direction: row-reverse; padding: 2px 2px 2px 6px; }
+.fighter.enemy .bar.mana > span { text-align: left !important; }
+.fighter.enemy .fpInfo .bar > i { left: auto; right: 3px; }
+.fighter.enemy .fpStamp { left: -10px; right: -10px; }
+/* имя: первое слово светлым, остальное золотом (герой), как в макете; уровень — в строке с именем */
+.fighter .fighterHead { flex-direction: row; flex-wrap: wrap; align-items: baseline; justify-content: space-between; column-gap: 6px; }
+.fighter.enemy .fighterHead { flex-direction: row-reverse; }
+.fpInfo .fighterHead b { color: #efe1bc; text-transform: uppercase; }
+.fpInfo .fighterHead b em { font-style: normal; color: var(--gold-ink); }
+.fighter.enemy .fpInfo .fighterHead b em { color: #e8c8ff; }
+.fpInfo .fighterHead span { white-space: nowrap; }
