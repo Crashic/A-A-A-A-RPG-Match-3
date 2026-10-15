@@ -351,3 +351,52 @@ h1 {
 #bank .shopSellHint { margin: 4px 0 0; font: var(--type-caption); font-size: 14px; color: var(--text-muted); text-align: center; }
 #bank .invTape { background: var(--bg-cell); box-shadow: inset 0 0 0 2px var(--ui-metal); }
 #bank .panel.charCol { padding: 8px 10px; }
+
+/* ---------- Бой (макет «Боевой экран») ---------- */
+/* Панели бойцов: игрок — золотая рамка, враг — фиолетовая; у того, кто ходит, — свечение и штамп */
+.fighter { border: 4px solid transparent; border-radius: 16px; padding: 8px;
+  background: var(--plum-fill) padding-box, var(--gold-frame) border-box;
+  box-shadow: inset 0 0 0 2px #1a1220, 0 0 0 2px var(--ui-gold-shadow), var(--hard-shadow); }
+.fighter.enemy { background: var(--plum-fill) padding-box, linear-gradient(180deg, #d8a8ff 0%, #9a48e6 55%, #7a34c8 100%) border-box;
+  box-shadow: inset 0 0 0 2px #1a1220, 0 0 0 2px #4a1a7a, var(--hard-shadow); }
+.fighter.active { box-shadow: inset 0 0 0 2px #1a1220, 0 0 0 2px var(--ui-gold-shadow), 0 0 22px rgba(255,180,70,.6), var(--hard-shadow); }
+.fighter.enemy.active { box-shadow: inset 0 0 0 2px #1a1220, 0 0 0 2px #4a1a7a, 0 0 22px rgba(180,110,255,.65), var(--hard-shadow); }
+.fighter.active::after { content: attr(data-stamp); position: absolute; right: -6px; top: -10px; z-index: 3; transform: rotate(8deg); padding: 1px 8px;
+  border-radius: 5px; background: #f3ead0; border: 2px solid currentColor; outline: 1px dashed currentColor; outline-offset: -5px;
+  color: #c8221a; font: var(--type-menu); font-size: 14px; line-height: 18px; letter-spacing: 1px; box-shadow: 0 3px 0 rgba(0,0,0,.5); pointer-events: none; }
+.fighter.enemy.active::after { color: #5a1aa8; left: -6px; right: auto; transform: rotate(-8deg); }
+.fighterHead b { font: var(--type-heading); font-size: 18px; line-height: 21px; color: var(--gold-ink); }
+.fighter.enemy .fighterHead b { color: #e8c8ff; font-size: 16px; line-height: 19px; }
+.fighterHead span { font: var(--type-menu); font-size: 14px; color: var(--text-muted); }
+.fighter .bar { background: #0a060c; box-shadow: inset 0 2px 4px #000; }
+
+/* Поле: рамка цвета того, кто ходит */
+.board { box-shadow: 0 0 0 3px #1a1220, var(--hard-shadow); }
+.board::after { opacity: 1; box-shadow: inset 0 0 0 3px #9a48e6, inset 0 0 14px rgba(180,110,255,.45); }
+.board.heroTurn::after { box-shadow: inset 0 0 0 3px var(--ui-reward), inset 0 0 14px rgba(255,180,70,.5); }
+
+/* Навыки — талоны: слева мана на тёмном корешке, справа кремовый талон; готовый — золотой и приподнят */
+.heroSkillBtns .btn.skillBtn.skillBtn2, .enemyActive.skillBtn2 { position: relative; overflow: hidden; padding: 3px 10px 3px 0; border-radius: 9px; opacity: 1;
+  background: linear-gradient(90deg, #2b1420 0 52px, var(--ui-parchment) 52px); box-shadow: inset 0 0 0 3px var(--ui-metal), 0 4px 0 rgba(0,0,0,.5);
+  color: #2b2024; -webkit-text-stroke: 0; justify-content: flex-start; gap: 10px; filter: none; }
+.heroSkillBtns .btn.skillBtn.skillBtn2:not(:disabled) { transform: translateY(-2px); box-shadow: inset 0 0 0 3px var(--ui-reward), 0 0 10px rgba(255,216,106,.55), 0 6px 0 rgba(0,0,0,.45); }
+.heroSkillBtns .btn.skillBtn.skillBtn2:disabled { --hi: none; filter: saturate(.6); }
+.skillBtn2 .skCost { width: 52px; justify-content: center; flex: none; }
+.skillBtn2 .skCost i { color: #fff !important; -webkit-text-stroke: 3px #1a0e14; paint-order: stroke fill; font-family: var(--font-head); font-size: 15px; }
+.heroSkillBtns .skillBtn2 b, .enemyActive.skillBtn2 b { font: var(--type-menu); font-size: 15px; line-height: 18px; color: #5a1a9e; text-align: left; }
+.heroSkillBtns .skillBtn2 small, .enemyActive.skillBtn2 small { font: var(--type-body); font-size: 14px; line-height: 16px; color: #2b2024; text-align: left; }
+.skillBtn2 .skText { align-items: flex-start; flex: 1 1 auto; }
+.enemyActive.skillBtn2 { flex-direction: row-reverse; padding: 3px 0 3px 10px; background: linear-gradient(270deg, #2b1420 0 52px, var(--ui-parchment) 52px); box-shadow: inset 0 0 0 3px #7a34c8, 0 4px 0 rgba(0,0,0,.5); }
+.enemyActive.skillBtn2.ready { box-shadow: inset 0 0 0 3px #c890ff, 0 0 10px rgba(200,140,255,.6), 0 4px 0 rgba(0,0,0,.5); }
+.enemyActive.skillBtn2 b, .enemyActive.skillBtn2 small { text-align: right !important; }
+.enemyActive.skillBtn2 .skText { align-items: flex-end; }
+
+/* Лог боя — бумажка */
+.battleLog { background: var(--paper-fill); box-shadow: inset 0 0 0 2px #3a2a18, inset 0 0 14px rgba(140,100,40,.35); }
+.battleLog p { color: #2b2024; }
+.battleLog p.log-hero { color: #7a1a5a; }
+.battleLog p.log-enemy { color: #2a5a1a; }
+.battleLog p.log-sys { color: #8a4a0a; }
+.heroSkillBtns .skillBtn2 b, .heroSkillBtns .skillBtn2 small, .enemyActive.skillBtn2 b, .enemyActive.skillBtn2 small { -webkit-text-stroke: 0; }
+.fighter.active::after { top: -16px; }
+.fighter.active::after { top: -3px; }

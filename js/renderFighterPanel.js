@@ -6,6 +6,7 @@ function renderFighterPanel(side) {
   const q = sel => panel.querySelector(sel);
   q('[data-f="name"]').textContent = f.name.replace(/\u2011/g, '\u2011\u200B'); // после неразрывного дефиса — можно перенести строку
   panel.classList.toggle('active', !battle.over && battle.turn === side);
+  panel.dataset.stamp = side === 'hero' ? tr("ui.ВАШ ХОД!") : tr("ui.ХОД ВРАГА"); // штамп хода (макет «Агитпроп»), виден у активной панели
 
   setBar(q('[data-bar="hp"]'), f.hp, f.maxHp);
   setBar(q('[data-bar="shield"]'), f.shield, f.maxShield, tr("ui.Щит ") + f.shield);
