@@ -522,7 +522,6 @@ h1 {
 /* ---------- Поле по макету: тёмная подложка в косую полоску, фишки-плитки (gemTileSvg) ---------- */
 .board { background: repeating-linear-gradient(45deg, #241a26 0 14px, #1c141e 14px 28px); }
 .cell, .cell.alt { background: rgba(0,0,0,.18); border-radius: 10px; }
-.gem svg { filter: drop-shadow(0 2px 0 rgba(0,0,0,.35)); }
 .gem.selected .gemRim { stroke: #fff; stroke-width: 5; }
 
 /* ---------- Панель врага — зеркально панели героя (как в макете) ---------- */
@@ -557,3 +556,30 @@ h1 {
 .gameSide .battleCorner .legendBig { flex: none; align-self: flex-end; }
 .battleLogBox { flex: 1 1 auto; align-self: stretch; justify-content: flex-end; min-width: 0; }
 .battleCorner.logClosed .battleLogBox { flex: none; align-self: flex-end; }
+
+/* ---------- Поле точно по макету: рамка 10 px (BOARD_FRAME) с заклёпками, подложка в косую полоску; фишки без теней ---------- */
+.board { box-sizing: border-box; border: 10px solid transparent; border-radius: 22px;
+  --frame: linear-gradient(180deg, #d8a8ff 0%, #9a48e6 55%, #7a34c8 100%);
+  --rivet: #8a5414;
+  background:
+    repeating-linear-gradient(45deg, #241a26 0 14px, #1c141e 14px 28px) padding-box,
+    radial-gradient(circle at 50% 5px, #fff 0 1px, var(--rivet) 3px, transparent 4px) border-box,
+    radial-gradient(circle at 50% calc(100% - 5px), #fff 0 1px, var(--rivet) 3px, transparent 4px) border-box,
+    radial-gradient(circle at 5px 50%, #fff 0 1px, var(--rivet) 3px, transparent 4px) border-box,
+    radial-gradient(circle at calc(100% - 5px) 50%, #fff 0 1px, var(--rivet) 3px, transparent 4px) border-box,
+    var(--frame) border-box;
+  box-shadow: 0 0 0 3px #4a1a7a, inset 0 0 0 3px #0a060c, inset 0 10px 24px rgba(0,0,0,.85), 0 0 40px rgba(180,110,255,.5), 0 10px 0 rgba(0,0,0,.5) !important; }
+.board.heroTurn { --frame: linear-gradient(180deg, #f2c25a 0%, #c8892a 55%, #C37212 100%);
+  box-shadow: 0 0 0 3px #6c3806, inset 0 0 0 3px #0a060c, inset 0 10px 24px rgba(0,0,0,.85), 0 0 40px rgba(255,180,70,.5), 0 10px 0 rgba(0,0,0,.5) !important; }
+.board::after { display: none; }
+.cell, .cell.alt { background: transparent; }
+.gem svg { filter: none; }
+/* стрелка сворачивания лога — у низа лога */
+.logToggle { top: auto; bottom: 18px; transform: none; }
+.battleLogBox { align-self: flex-end; }
+/* ПК: пропорции как в макете (1440×810): боковые колонки ~28 % ширины, поле по центру ~40 % ширины / ~72 % высоты */
+@media (min-width: 1000px) and (min-height: 560px) {
+  #game { max-width: none; gap: 20px; padding-left: 20px; padding-right: 20px; }
+  #game .gameSide { flex: 0 0 min(28%, 400px); padding-top: 16px; }
+  #game .boardWrap { flex: 1; width: auto; display: flex; align-items: flex-start; justify-content: center; padding-top: 16px; height: calc(var(--app-h) * .76); }
+}

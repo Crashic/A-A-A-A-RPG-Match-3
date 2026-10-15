@@ -6,7 +6,7 @@ function createGemElement(type) {
   el.className = 'gem';
   el.dataset.type = gem.id;
   el.innerHTML = gemTileSvg(gem, '',
-    '<rect class="gemRim" x="4" y="4" width="92" height="92" rx="23" fill="none"/>' +
+    '<rect class="gemRim" x="4" y="4" width="92" height="92" rx="18" fill="none"/>' +
     '<g class="gemStripes" clip-path="url(#gtClip)">' +
       '<polygon points="18,-5 44,-5 -5,44 -5,18" fill="#fff" opacity=".16"/>' +
       '<polygon points="54,-5 62,-5 -5,62 -5,54" fill="#fff" opacity=".12"/>' +
