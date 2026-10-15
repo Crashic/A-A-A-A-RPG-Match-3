@@ -1,29 +1,31 @@
-// Экран «Лагерь»: вступление и карточки построек (CAMP_BUILDINGS): работающие — с «Открыть», остальные «Скоро».
+// Экран «Лагерь» (макет «Лагерь»): сетка карточек построек (CAMP_BUILDINGS) — золотая плитка со значком (ico),
+// название, подпись (sub) и кнопка: работающие — зелёная «Открыть», остальные — синяя «Скоро» (или «Закрыто»)
+// со штампом «В планах пятилетки» и в серых тонах. Внизу — строка ресурсов лагеря.
 function renderCamp() {
   const box = document.getElementById('campBody');
-  box.innerHTML = tr("ui.<div class=\"panel bunkerIntro\"><h3>Лагерь</h3><p></p></div><div class=\"campGrid\"></div>");
-  box.querySelector('.bunkerIntro p').textContent = CAMP_TEXT;
-  box.querySelector('.bunkerIntro').appendChild(campResourceRow());
+  box.innerHTML = '<div class="campGrid"></div>';
   const grid = box.querySelector('.campGrid');
   for (const b of CAMP_BUILDINGS) {
-    const c = document.createElement('div');
-    c.className = 'campCard';
     const works = b.open && b.unlocked();
-    c.className = 'campCard' + (works ? ' open' : '');
+    const c = document.createElement('div');
+    c.className = 'panel campCard' + (works ? ' open' : ' soon');
     c.dataset.card = b.id;
-    c.innerHTML = iconTile(b.icon, b.color) + '<div><h4></h4><p></p></div>' +
-      (works ? '' : '<span class="campSoon">' + (b.open ? tr("ui.Закрыто") : tr("ui.Скоро")) + '</span>');
+    c.dataset.tipTitle = b.name;
+    c.dataset.tip = b.text;
+    c.innerHTML = '<span class="campIco"><svg aria-hidden="true" viewBox="0 0 24 24"><path fill-rule="evenodd"></path></svg></span>' +
+      '<h4></h4><small></small><button type="button" class="btn campOpen"></button>' +
+      (works ? '' : '<span class="campStamp"></span>');
+    c.querySelector('path').setAttribute('d', b.ico || '');
     c.querySelector('h4').textContent = b.name;
-    c.querySelector('p').textContent = b.text;
-    if (works) {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'btn green campOpen';
-      btn.textContent = tr("ui.Открыть");
-      btn.addEventListener('click', e => { e.stopPropagation(); vibrate(); b.open(); });
-      c.querySelector('div').appendChild(btn);
-    }
+    c.querySelector('small').textContent = b.sub || '';
+    const btn = c.querySelector('.btn');
+    btn.classList.add(works ? 'green' : 'blue');
+    btn.textContent = works ? tr("ui.Открыть") : b.open ? tr("ui.Закрыто") : tr("ui.Скоро");
+    btn.disabled = !works;
+    if (works) btn.addEventListener('click', e => { e.stopPropagation(); vibrate(); b.open(); });
+    else c.querySelector('.campStamp').textContent = tr("ui.В планах пятилетки");
     grid.appendChild(c);
   }
+  box.appendChild(campResourceRow());
   updateFeatureLocks();
 }

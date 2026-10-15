@@ -679,3 +679,36 @@ h1 {
 #slotList > .heroSlot { flex-shrink: 0; }
 #characters .panel.heroSlot { flex: 0 0 190px; max-height: none; }
 @media (min-width: 1000px) and (min-height: 560px) { #characters .panel.heroSlot { flex-basis: 305px; } }
+
+/* ---------- Лагерь (0.8.u, макет «Лагерь») ---------- */
+#camp { max-width: none; width: 100%; }
+#campBody { padding: 4px 58px 4px 4px; gap: 6px; }
+#camp .campGrid { flex: 1; grid-template-columns: repeat(4, 1fr); grid-auto-rows: auto; gap: 10px 12px; padding: 4px 4px 10px; }
+#camp .campCard { flex-direction: column; align-items: center; gap: 4px; padding: 8px; border-radius: 16px; min-width: 0; text-align: center; }
+#camp .campCard.soon { filter: grayscale(.85) brightness(.75); }
+.campIco { flex: none; width: 44px; height: 44px; border-radius: 10px; background: linear-gradient(180deg, #f2c25a, #c8892a); box-shadow: inset 0 0 0 2px #6c3806; display: flex; align-items: center; justify-content: center; }
+.campIco svg { width: 28px; height: 28px; fill: #1a1008; }
+#camp .campCard h4 { font: 400 16px/18px var(--font-head); color: var(--gold-ink); min-height: 36px; display: flex; align-items: center; justify-content: center; }
+#camp .campCard small { font: var(--type-caption); letter-spacing: 1px; color: var(--text-muted); }
+#camp .campCard .btn { width: 100%; min-height: 36px; margin-top: auto; font-size: 17px; }
+#camp .campCard .btn:disabled { opacity: .7; }
+.campStamp { position: absolute; left: 50%; top: 22px; width: 150px; margin-left: -75px; transform: rotate(-14deg); border: 3px solid #e85a3a; color: #ff8a72; border-radius: 8px; padding: 1px 0;
+  font: 400 14px/18px var(--font-head); text-transform: uppercase; background: rgba(26,14,20,.6); pointer-events: none; }
+#camp .campRes { flex: none; margin: 0; padding: 4px 10px; align-self: flex-start; border-radius: 12px; background: linear-gradient(180deg, #3d1d2c, #2b1420); box-shadow: inset 0 0 0 3px var(--ui-reward), 0 4px 0 rgba(0,0,0,.5); }
+@media (min-width: 1000px) and (min-height: 560px) {
+  #campBody { padding: 100px 100px 30px 40px; max-height: 760px; }
+  #camp .campGrid { gap: 24px 26px; }
+  #camp .campCard { padding: 16px; gap: 8px; min-height: 266px; }
+  .campIco { width: 84px; height: 84px; } .campIco svg { width: 50px; height: 50px; }
+  #camp .campCard h4 { font-size: 19px; line-height: 21px; min-height: 44px; }
+  #camp .campCard .btn { min-height: 48px; font-size: 19px; }
+  .campStamp { top: 40px; width: 160px; margin-left: -80px; font-size: 18px; line-height: 22px; }
+}
+#camp .campCard h4, #camp .campCard small { max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; min-height: 0; }
+#camp .campCard .btn { font-family: var(--font-head); }
+.campStamp { top: 12px; }
+@media (min-width: 1000px) and (min-height: 560px) {
+  #camp .campCard h4 { white-space: normal; min-height: 44px; display: flex; }
+  #camp .campCard small { white-space: normal; }
+  .campStamp { top: 40px; }
+}

@@ -11,21 +11,21 @@ const CAMP_ICON = '<svg viewBox="0 0 32 32" aria-hidden="true">' +
 const CAMP_TEXT = tr("ui.Общий лагерь всех ваших выживших. Разбит на пустыре между двумя воронками — место тихое, ") +
   tr("ui.если не считать воронок. Всё, что здесь построено, достаётся каждому вашему персонажу.");
 const CAMP_BUILDINGS = [
-  { id: 'registry', name: tr("ui.Реестр Героев и Пострадавших"), icon: 'note', color: 'var(--gem-ruby)',
+  { id: 'registry', sub: tr("ui.компенсации для всех персонажей"), ico: 'M5 2h11l4 4v16H5zM8 8h8v2H8zM8 12h8v2H8zM8 16h5v2H8z', name: tr("ui.Реестр Героев и Пострадавших"), icon: 'note', color: 'var(--gem-ruby)',
     text: tr("ui.Будка с окошком и табличкой «Приём по личным вопросам — никогда». Здесь оформляют компенсации всем вашим персонажам: каждые 5 уровней — новое заявление."),
     open: () => openParagon(), unlocked: () => true },
-  { id: 'storage',  name: tr("ui.Общак"),     icon: 'key',     color: 'var(--gem-sapphire)',
+  { id: 'storage', sub: tr("ui.склад на весь аккаунт"), ico: 'M6 10h12v12H6zM8.5 10V7a3.5 3.5 0 0 1 7 0v3h-2V7a1.5 1.5 0 0 0-3 0v3z',  name: tr("ui.Общак"),     icon: 'key',     color: 'var(--gem-sapphire)',
     text: tr("ui.Святое место бункерного братства: ящик из-под снарядов под нарами. Сюда все ваши персонажи кладут вещи и изоленту друг для друга. Брать из общака без спросу — западло, но вы же сами себе спрашиваете."),
     open: () => openStash(), unlocked: () => stashUnlocked() },
-  { id: 'workshop', name: tr("ui.Мастерская"),      icon: 'wrench',  color: 'var(--gem-aquamarine)',
+  { id: 'workshop', sub: tr("ui.чинить и улучшать"), ico: 'M14 3l3 1-2 3 2 2 3-2 1 3-4 3-2-1-8 8-3-3 8-8-1-2z', name: tr("ui.Мастерская"),      icon: 'wrench',  color: 'var(--gem-aquamarine)',
     text: tr("ui.Верстак, тиски и банка с непонятными болтами. Будет чинить и улучшать снаряжение. Когда найдётся второй тиск.") },
-  { id: 'fire',     name: tr("ui.Костёр"),          icon: 'tree',    color: 'var(--gem-ruby)',
+  { id: 'fire', sub: tr("ui.отдых и байки"), ico: 'M12 2c3 4 6 6 6 11a6 6 0 0 1-12 0c0-3 2-5 3-7 1 2 2 3 3 3 0-3-1-5 0-7zM4 21h16v2H4z',     name: tr("ui.Костёр"),          icon: 'tree',    color: 'var(--gem-ruby)',
     text: tr("ui.Место отдыха и баек у огня. Даст бонус отдохнувшим. Пока греет только руки и самолюбие.") },
-  { id: 'garden',   name: tr("ui.Огород"),          icon: 'bush',    color: 'var(--gem-emerald)',
+  { id: 'garden', sub: tr("ui.растит подорожник"), ico: 'M12 22V10M12 12c-4 0-7-3-7-7 4 0 7 3 7 7zM12 10c0-4 3-7 7-7 0 4-3 7-7 7z',   name: tr("ui.Огород"),          icon: 'bush',    color: 'var(--gem-emerald)',
     text: tr("ui.Шесть соток мутировавшей картошки. Будет давать травы. Картошка пока растёт сама и смотрит на вас.") },
-  { id: 'radio',    name: tr("ui.Радиоточка"),      icon: 'mic',     color: 'var(--gem-amethyst)',
+  { id: 'radio', sub: tr("ui.новости и сплетни"), ico: 'M9 2h6v12a3 3 0 0 1-6 0zM5 11a7 7 0 0 0 14 0h2a9 9 0 0 1-8 9v2h-2v-2a9 9 0 0 1-8-9z',    name: tr("ui.Радиоточка"),      icon: 'mic',     color: 'var(--gem-amethyst)',
     text: tr("ui.Ловит одну волну: «Говорит Крэшляндия». Будет приносить новости и задания. Сейчас приносит только помехи.") },
-  { id: 'still',    name: tr("ui.Самогонный цех"),  icon: 'flask',   color: 'var(--gem-topaz)',
+  { id: 'still', sub: tr("ui.зелья по ГОСТу"), ico: 'M9 1h6v3H9zM9.5 4h5v2l2.5 3v13H7V9l2.5-3z',    name: tr("ui.Самогонный цех"),  icon: 'flask',   color: 'var(--gem-topaz)',
     text: tr("ui.Стратегический объект. Назначение засекречено, запах — нет.") }
 ];
 // Общак (общий склад лагеря): обмен вещами и изолентой между персонажами аккаунта; расширяется за изоленту.
