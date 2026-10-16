@@ -1,13 +1,8 @@
 // Ходов не осталось: все фишки падают вниз за поле, на их место падает новое поле.
-// Как в Puzzle Quest, при этом сгорает вся мана у обоих бойцов.
+// Мана у бойцов сохраняется (решение автора 16.10.2026; раньше, как в Puzzle Quest, сгорала).
 async function rebuildBoard() {
   const n = BOARD_SIZE;
-  showToast(tr("ui.Ходов нет — новое поле, мана сгорела"));
-  if (battle) {
-    for (const side of ['hero', 'enemy'])
-      for (const id of MANA_COLORS) battle[side].mana[id] = 0;
-    renderBattle();
-  }
+  showToast(tr("ui.Ходов нет — новое поле"));
   let longest = 0;
   for (let r = 0; r < n; r++) {
     for (let c = 0; c < n; c++) {
