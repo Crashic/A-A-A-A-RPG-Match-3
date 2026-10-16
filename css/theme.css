@@ -904,3 +904,65 @@ h1 {
 #battleResult .resultLoot { justify-content: flex-start; }
 @media (min-width: 1000px) and (min-height: 560px) { #resultList .vicQ b { font-size: 16px; } }
 .vicBox { max-height: calc(var(--app-h) - 30px); } @media (max-height: 420px) { .vicHead small { display: none; } .vicBox { gap: 6px; } }
+
+/* ---------- Диалог сюжета (0.8.3, макет «Сюжетное задание: диалог») ---------- */
+#storyDialog { background: rgba(10,6,12,.55); }
+.dlgBox { width: min(800px, 100%); max-height: calc(var(--app-h) - 8px); display: flex; align-items: flex-start; gap: 14px; }
+.dlgPortrait { position: relative; flex: 0 0 168px; height: 236px; box-sizing: border-box; border: 4px solid transparent; border-radius: 16px;
+  background: radial-gradient(circle at 50% 38%, color-mix(in srgb, var(--npc) 80%, #c8221a), #2a0c10 72%) padding-box, var(--gold-frame) border-box;
+  box-shadow: inset 0 0 0 3px #1a1220, 0 0 0 3px #6c3806, 0 8px 0 rgba(0,0,0,.5); margin-bottom: 26px; }
+.dlgPortrait .dialogPortrait { position: absolute; inset: 0; overflow: hidden; border-radius: 12px; display: block; }
+.dlgSil { position: absolute; left: 0; bottom: 0; width: 100%; height: 88%; fill: #1a1412; }
+.dlgBadge { position: absolute; right: 8px; top: 8px; width: 40px; height: 40px; }
+.dlgBadge > *, .dlgBadge svg { width: 100%; height: 100%; }
+.dlgPlate { position: absolute; left: 10px; right: 10px; bottom: -24px; display: flex; flex-direction: column; align-items: center; padding: 4px 6px; border-radius: 9px;
+  background: linear-gradient(180deg, #3a2a1a, #1a1008); box-shadow: 0 0 0 3px #c8892a, 0 5px 0 rgba(0,0,0,.5); text-align: center; }
+.dlgPlate b { font: 400 16px/19px var(--font-head); color: var(--gold-ink); }
+.dlgPlate small { font: var(--type-caption); letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+.dlgMain { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+.dlgSpeech { position: relative; padding: 10px 14px 12px; border-radius: 12px; background: var(--paper-fill); border: 3px solid #3a2a18; box-shadow: inset 0 0 24px rgba(140,100,40,.3), 0 6px 0 rgba(0,0,0,.5); color: #2b2024; }
+.dlgSpeech::before { content: ""; position: absolute; left: -19px; top: 40px; border: 12px solid transparent; border-right: 16px solid #3a2a18; border-left: 0; }
+.dlgSpeech::after { content: ""; position: absolute; left: -13px; top: 43px; border: 9px solid transparent; border-right: 13px solid #f3e7c9; border-left: 0; }
+.dlgSpeechHead { display: flex; justify-content: space-between; font: var(--type-caption); letter-spacing: 1px; color: #6a4a2a; text-transform: uppercase; border-bottom: 2px dashed #8a6a42; padding-bottom: 4px; }
+#dialogText { margin: 8px 0 0; min-height: 0; max-height: 150px; overflow-y: auto; font: 400 17px/22px var(--font-body); color: #2b2024; }
+.dlgBtns { display: flex; gap: 12px; }
+.dlgBtns .btn { flex: 2; min-height: 44px; font: 400 18px/22px var(--font-head); }
+.dlgBtns #dialogBack { flex: 1; }
+.dlgBtns #dialogBack[hidden] { display: none; }
+.dlgOrder { position: relative; flex: 0 0 220px; box-sizing: border-box; padding: 10px 12px; border: 4px solid transparent; border-radius: 16px; transform: rotate(1.5deg);
+  background: linear-gradient(180deg, #f6ecd2, #e2d2aa) padding-box, var(--gold-frame) border-box; color: #2b2024;
+  box-shadow: inset 0 0 0 3px #3a2a18, inset 0 0 30px rgba(140,100,40,.35), 0 0 0 3px #6c3806, 0 8px 0 rgba(0,0,0,.5); display: flex; flex-direction: column; gap: 4px; }
+.dlgOrder[hidden] { display: none; }
+.dlgOrder p { margin: 0; }
+.dlgOrdKind { text-align: center; font: var(--type-caption); letter-spacing: 2px; color: #6a4a2a; text-transform: uppercase; }
+.dlgOrdTitle { display: flex; flex-direction: column; align-items: center; text-align: center; border-bottom: 3px double #8a6a42; padding-bottom: 4px; }
+.dlgOrdTitle span { font: 400 20px/22px var(--font-head); color: #2b2024; text-transform: uppercase; }
+.dlgOrdTitle b { font: 400 17px/20px var(--font-head); color: #5a1a9e; }
+.dlgOrdSec { font: 400 14px/18px var(--font-head); letter-spacing: 2px; color: #6a4a2a; text-transform: uppercase; border-bottom: 2px dashed #8a6a42; padding-bottom: 2px; }
+.dlgOrdTodo { font: 400 15px/19px var(--font-body); }
+.dlgOrdRew { display: flex; flex-wrap: wrap; gap: 6px; }
+.dlgOrdRew[hidden], .dlgOrdSec[hidden] { display: none; }
+.dlgRew { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 7px; background: #2b1420; color: #efe1bc; font: 400 14px/18px var(--font-head); }
+.dlgRew .tape { color: #efe1bc; }
+.dlgRew.r-magic { color: #7aaeff; box-shadow: inset 0 0 0 2px #4a7ae8; }
+.dlgRew.r-rare { color: #ffd86a; box-shadow: inset 0 0 0 2px #e0a840; }
+.dlgOrdStamp { position: absolute; right: 8px; top: 34px; transform: rotate(14deg); padding: 0 8px; border: 3px solid #b8221a; border-radius: 7px; color: #b8221a; font: 400 14px/18px var(--font-head); text-transform: uppercase; opacity: .75; }
+@media (min-width: 1000px) and (min-height: 560px) {
+  .dlgBox { width: min(1320px, 100%); gap: 34px; }
+  .dlgPortrait { flex-basis: 330px; height: 470px; }
+  .dlgBadge { width: 64px; height: 64px; right: 14px; top: 14px; }
+  .dlgPlate { left: 20px; right: 20px; bottom: -26px; padding: 6px 10px; }
+  .dlgPlate b { font-size: 20px; line-height: 24px; }
+  .dlgSpeech { padding: 18px 24px 18px; }
+  .dlgSpeech::before { top: 70px; } .dlgSpeech::after { top: 73px; }
+  #dialogText { font-size: 21px; line-height: 28px; max-height: 300px; }
+  .dlgBtns .btn { min-height: 56px; font-size: 22px; }
+  .dlgOrder { flex-basis: 360px; padding: 18px; gap: 8px; }
+  .dlgOrdTitle span { font-size: 26px; line-height: 28px; } .dlgOrdTitle b { font-size: 22px; line-height: 26px; }
+  .dlgOrdTodo { font-size: 17px; line-height: 22px; }
+  .dlgOrdStamp { top: 62px; font-size: 15px; }
+}
+#storyDialog { background: rgba(10,6,12,.72); }
+.dlgPortrait .dialogPortrait > svg.dlgSil { position: absolute; left: 0; bottom: 0; width: 100%; height: 88%; }
+.dlgPortrait { background: radial-gradient(circle at 50% 38%, #c8221a, #3a0e10 70%) padding-box, var(--gold-frame) border-box; }
+.dlgOrdStamp { top: -12px; right: -8px; background: rgba(239,225,188,.9); }

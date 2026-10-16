@@ -458,6 +458,7 @@ const FILES = [
   './js/storyTarget.js',
   './js/storyTarget5.js',
   './js/storyFill.js',
+  './js/storyOrderCard.js',
   './js/showDialog.js',
   './js/storyNoGuide.js',
   './js/storySkipGuide.js',

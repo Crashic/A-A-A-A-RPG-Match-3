@@ -498,12 +498,14 @@
 
 <!-- Диалог сюжета: портрет NPC, имя, реплика, «Далее» — js/showDialog.js -->
 <div id="storyDialog" class="modal">
-  <div class="modalBox dialogBox">
-    <div class="panel dialogPanel">
-      <div class="dialogHead"><span class="dialogPortrait"></span><span class="dialogWho"><b id="dialogName"></b><small id="dialogRole"></small></span></div>
-      <p id="dialogText"></p>
-      <div class="dialogFoot"><span id="dialogPage"></span><button id="dialogNext" class="btn green" type="button"></button></div>
+  <!-- Диалог сюжета по макету «Сюжетное задание: диалог»: портрет с табличкой, реплика на бумаге, «Приказ» (js/showDialog.js) -->
+  <div class="dlgBox">
+    <div class="dlgPortrait"><span class="dialogPortrait"></span><span class="dlgPlate"><b id="dialogName"></b><small id="dialogRole"></small></span></div>
+    <div class="dlgMain">
+      <div class="dlgSpeech paper"><div class="dlgSpeechHead"><span id="dialogKind"></span><span id="dialogPage"></span></div><p id="dialogText"></p></div>
+      <div class="dlgBtns"><button id="dialogBack" class="btn blue" type="button" data-i18n="ui.‹ Назад">‹ Назад</button><button id="dialogNext" class="btn green" type="button"></button></div>
     </div>
+    <div class="dlgOrder" id="dialogOrder" hidden></div>
   </div>
 </div>
 
@@ -978,6 +980,7 @@
 <script src="js/storyTarget.js"></script>
 <script src="js/storyTarget5.js"></script>
 <script src="js/storyFill.js"></script>
+<script src="js/storyOrderCard.js"></script>
 <script src="js/showDialog.js"></script>
 <script src="js/storyNoGuide.js"></script>
 <script src="js/storySkipGuide.js"></script>

@@ -17,7 +17,7 @@ function storyResume() {
       storyState(h).stage = 'journal';
       saveSlot(slot, h);
       openJournal();
-    });
+    }, storyOrderCard(hero, STORY_ACT1));
     return;
   }
   if (st.stage === 'after') {

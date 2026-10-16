@@ -43,7 +43,7 @@ function storyRunStep(hero, slot, screen, hide) {
       if (first) { const h = loadSlot(slot); storyAddActQuest(h, act); saveSlot(slot, h); }
       if (step.give) { const h = loadSlot(slot); step.give(h); saveSlot(slot, h); if (id && id !== 'game') renderScreen(id); } // NPC что-то вручает (акт «Тара» — авоська)
       advance();
-    });
+    }, first ? storyOrderCard(hero, act) : null); // в начале акта — карточка «Приказ»
     return;
   }
   if (step.type === 'reward') { storyFinishAct(); return; }
