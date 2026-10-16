@@ -8,7 +8,7 @@ function paragonEffectText(n) {
   if (n.kind === 'ini') return '+' + v + ' ' + INI_NAME;
   if (n.kind === 'shieldStart') return tr("ui.начало боя со щитом ") + v + tr("ui. % от максимума");
   if (n.kind === 'manaStart') return '+' + v + ' ' + gemName(n.gem) + tr("ui. (маны) в начале боя");
-  if (n.kind === 'tapePct') return '+' + v + tr("ui. % изоленты с Радиации");
+  if (n.kind === 'tapePct') return '+' + v + tr("ui. % изоленты с фишек");
   if (n.kind === 'xpPct') return '+' + v + tr("ui. % опыта с Документов");
   if (n.kind === 'active') return tr("ui.навык «") + n.skill.name + '»: ' + n.skill.text;
   return '';

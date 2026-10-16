@@ -23,8 +23,12 @@ async function startBattle(enemyId, saved = null) {
     skill: saved && saved.skill ? Object.assign(createSkillState(), saved.skill) : createSkillState(),
     log: saved && saved.log ? saved.log : []
   };
-  for (const side of ['hero', 'enemy']) // бой, сохранённый до новой маны, — добавить её с нуля
-    for (const id of MANA_COLORS) if (battle[side].mana[id] === undefined) battle[side].mana[id] = 0;
+  for (const side of ['hero', 'enemy']) { // бой, сохранённый до новой маны, — добавить её с нуля
+    const m = battle[side].mana;
+    if (m.sapphire !== undefined && m.topaz === undefined) m.topaz = m.sapphire; // с 0.8.9 мана — топаз, сапфир — изолента
+    delete m.sapphire;
+    for (const id of MANA_COLORS) if (m[id] === undefined) m[id] = 0;
+  }
   if (!saved) skillBattleStart(); // стартовые навыки: мана, пометки
   const current = battle;
   if (!saved) warnBagFull(save); // сумка полна — добыча упадёт и её разворуют

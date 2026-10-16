@@ -41,8 +41,8 @@ const PARAGON_NODES = [
     name: tr("ui.Талон на моральную поддержку"), reason: tr("ui.утрата веры в светлое будущее") },
   { id: 'int1',   no: 42,  x: 4, y: 3, max: 3, kind: 'stat', stat: 'int', value: 1, links: ['claim', 'xp', 'mana'],
     name: tr("ui.Возмещение за прочитанные инструкции"), reason: tr("ui.вынужденное чтение мелкого шрифта") },
-  { id: 'mana',   no: 220, x: 6, y: 4, max: 2, kind: 'manaStart', gem: 'sapphire', value: 2, links: ['spi1', 'int1'],
-    name: tr("ui.Паёк Металла на старт"), reason: tr("ui.выдан по ошибке, возврату не подлежит") }
+  { id: 'mana',   no: 220, x: 6, y: 4, max: 2, kind: 'manaStart', gem: 'topaz', value: 2, links: ['spi1', 'int1'],
+    name: tr("ui.Паёк Радиации на старт"), reason: tr("ui.выдан по ошибке, возврату не подлежит") }
 ];
 const PARAGON_ICON = '<svg viewBox="0 0 32 32" aria-hidden="true"><rect x="6" y="3" width="20" height="26" rx="2" fill="var(--ui-parchment)" stroke="var(--ui-outline)" stroke-width="2"/>' +
   '<path d="M10 9 L22 9 M10 13 L22 13 M10 17 L18 17" stroke="var(--ui-metal)" stroke-width="1.6" stroke-linecap="round"/>' +

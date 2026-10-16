@@ -8,7 +8,7 @@ const ZONES = [
   { id: 'uchet', name: tr("ui.Промквартал «Учёт и Ржавчина»"), factionId: 'council', start: ['ruiners', 'factory', 'underAdm'], min: 1, max: 15,
     gems: ['sapphire', 'pearl'],
     description: tr("ui.Панельные дворы Руинников и первые цеха Заводчан: гаражи‑склады, журналы находок, ржавые станки и таблички «Не входить — идёт инвентаризация»."),
-    field: tr("ui.Чаще выпадают Металл и Документы."),
+    field: tr("ui.Чаще выпадают Изолента и Документы."),
     enemies: [
       { id: 'e01', name: tr("ui.Прораб Ржавчин"), level: 1, hp: 0.8, atk: 0.8, skill: tr("ui.Учётная блокировка"),
         short: tr("ui.Блокирует ячейку актом — снять серией из 3 «Документов»."),
@@ -136,7 +136,7 @@ const ZONES = [
   { id: 'zapasnik', name: tr("ui.Склад «Запасник-9»"), factionId: null, start: [], min: 40, max: 55,
     gems: ['aquamarine', 'sapphire', 'ruby'],
     description: tr("ui.Огромный склад с ящиками, контейнерами, стеллажами и «чёрными списками» пропавших грузов."),
-    field: tr("ui.Чаще выпадают Детали, Металл и Топливо."),
+    field: tr("ui.Чаще выпадают Детали, Изолента и Топливо."),
     enemies: [
       { id: 'e29', name: tr("ui.Кладовщик‑Приписочник Учёт"), level: 41, hp: 1.2, atk: 0.9, skill: tr("ui.Приписка"),
         short: tr("ui.−15 % от итоговой награды."),

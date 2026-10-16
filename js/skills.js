@@ -2,20 +2,20 @@
 // Ключ — 'раса:класс'. У каждого навыка: name, lore (оттенок расы из документа),
 // text — что навык делает в бою сейчас (адаптация к текущим механикам), и механика:
 //   пассивный — type 'passive', effects: [{ on, ... }] (см. js/skillPassive*.js);
-//   активный — type 'active', кнопка в бою: cost { sapphire|amethyst: мана }, once — раз за бой,
+//   активный — type 'active', кнопка в бою: cost { topaz|amethyst: мана }, once — раз за бой,
 //     act — действие (см. js/useSkill.js); действия с полем тратят ход.
-// Мана: sapphire — Металл, amethyst — Плёнка.
+// Мана: topaz — Радиация, amethyst — Плёнка.
 const SKILLS = {
   // ----- Совет Управляющих · Руинники -----
   'ruiners:engineer': [
     { id: 'weld', name: tr("ui.Инвентарная сварка"), type: 'passive',
       lore: tr("ui.Прочность не от качества, а от «учётной надёжности» — будто каждый прут заранее внесён в ведомость."),
-      text: tr("ui.Серия из 3+ Металла даёт щит: +10% от наибольшего щита."),
-      effects: [{ on: 'gather', gem: 'sapphire', min: 3, give: 'shieldPctMax', value: 10 }] },
+      text: tr("ui.Серия из 3+ Радиации даёт щит: +10% от наибольшего щита."),
+      effects: [{ on: 'gather', gem: 'topaz', min: 3, give: 'shieldPctMax', value: 10 }] },
     { id: 'remnants', name: tr("ui.Учёт остатков"), type: 'passive',
       lore: tr("ui.Экономия через отчётность: «то, что не списано, ещё пригодится»."),
-      text: tr("ui.Бой начинается с запасом Металла — 15% от наибольшей маны (5)."),
-      effects: [{ on: 'start', give: 'mana', gem: 'sapphire', value: 5 }] }
+      text: tr("ui.Бой начинается с запасом Радиации — 15% от наибольшей маны (5)."),
+      effects: [{ on: 'start', give: 'mana', gem: 'topaz', value: 5 }] }
   ],
   'ruiners:scout': [
     { id: 'yardmark', name: tr("ui.Дворовой ориентир"), type: 'active', cost: {}, once: true,
@@ -28,9 +28,9 @@ const SKILLS = {
       effects: [{ on: 'afterActive', pct: 5 }, { on: 'gemPct', gem: 'pearl', pct: 5 }] }
   ],
   'ruiners:guard': [
-    { id: 'post', name: tr("ui.Пост по уставу"), type: 'active', cost: { sapphire: 8 }, once: false,
+    { id: 'post', name: tr("ui.Пост по уставу"), type: 'active', cost: { topaz: 8 }, once: false,
       lore: tr("ui.Сила в дисциплине и рутине: «главное — не шевелиться лишний раз»."),
-      text: tr("ui.8 Металла: 3 хода врага его урон по вам −15%. Ход не тратится."),
+      text: tr("ui.8 Радиации: 3 хода врага его урон по вам −15%. Ход не тратится."),
       act: 'ward', pct: 15, turns: 3 },
     { id: 'passcheck', name: tr("ui.Проверка пропусков"), type: 'passive',
       lore: tr("ui.Бюрократическая защита: «без формы №3 не действует»."),
@@ -49,9 +49,9 @@ const SKILLS = {
       effects: [{ on: 'stack', gem: 'aquamarine', every: 5, pct: 1, max: 5 }] }
   ],
   'factory:technician': [
-    { id: 'calibrate', name: tr("ui.Полевая калибровка"), type: 'active', cost: { sapphire: 8 }, once: true,
+    { id: 'calibrate', name: tr("ui.Полевая калибровка"), type: 'active', cost: { topaz: 8 }, once: true,
       lore: tr("ui.Заводские технари знают, как «выжать» из оборудования ещё чуть-чуть."),
-      text: tr("ui.Раз за бой, 8 Металла: меняет 1 фишку так, чтобы сложилась лучшая серия. Тратит ход."),
+      text: tr("ui.Раз за бой, 8 Радиации: меняет 1 фишку так, чтобы сложилась лучшая серия. Тратит ход."),
       act: 'calibrate' },
     { id: 'spare', name: tr("ui.Срочная замена"), type: 'passive',
       lore: tr("ui.У них всегда есть «запасная деталь под верстаком»."),
@@ -59,9 +59,9 @@ const SKILLS = {
       effects: [{ on: 'shieldBroken', gems: 2 }] }
   ],
   'factory:overseer': [
-    { id: 'access', name: tr("ui.Контроль доступа"), type: 'active', cost: { sapphire: 10 }, once: false,
+    { id: 'access', name: tr("ui.Контроль доступа"), type: 'active', cost: { topaz: 10 }, once: false,
       lore: tr("ui.Не столько сила, сколько умение «запретить» противнику делать то, что он хочет."),
-      text: tr("ui.10 Металла: 3 хода врага его урон по вам −30%. Ход не тратится."),
+      text: tr("ui.10 Радиации: 3 хода врага его урон по вам −30%. Ход не тратится."),
       act: 'ward', pct: 30, turns: 3 },
     { id: 'violation', name: tr("ui.Акт о нарушении"), type: 'passive',
       lore: tr("ui.Даже конфликт превращается в отчёт: «нарушение зафиксировано, меры приняты»."),
@@ -72,8 +72,8 @@ const SKILLS = {
   'underAdm:technician': [
     { id: 'grease', name: tr("ui.Подземная смазка"), type: 'passive',
       lore: tr("ui.Знают, как заставить старую систему работать «ещё одну смену»."),
-      text: tr("ui.Первая серия из 3+ Металла снижает урон врага по вам на 20% до конца боя."),
-      effects: [{ on: 'gather', gem: 'sapphire', min: 3, give: 'dmgReduce', value: 20, once: true }] },
+      text: tr("ui.Первая серия из 3+ Радиации снижает урон врага по вам на 20% до конца боя."),
+      effects: [{ on: 'gather', gem: 'topaz', min: 3, give: 'dmgReduce', value: 20, once: true }] },
     { id: 'reserve', name: tr("ui.Аварийный резерв"), type: 'passive',
       lore: tr("ui.Запас прочности всегда держат «на крайний случай»."),
       text: tr("ui.Раз за бой: когда здоровье падает ниже 70%, восстанавливает 10% здоровья."),
@@ -90,9 +90,9 @@ const SKILLS = {
       effects: [{ on: 'gemPct', gem: 'pearl', pct: 15 }] }
   ],
   'underAdm:keeper': [
-    { id: 'seal', name: tr("ui.Печать станции"), type: 'active', cost: { sapphire: 10 }, once: false,
+    { id: 'seal', name: tr("ui.Печать станции"), type: 'active', cost: { topaz: 10 }, once: false,
       lore: tr("ui.Защита через «учёт и контроль»: «это место официально защищено»."),
-      text: tr("ui.10 Металла: щит +20% от наибольшего. Ход не тратится."),
+      text: tr("ui.10 Радиации: щит +20% от наибольшего. Ход не тратится."),
       act: 'shield', pctMax: 20 },
     { id: 'dutylog', name: tr("ui.Журнал дежурств"), type: 'passive',
       lore: tr("ui.Стабильность — это рутина: «пока журнал ведётся, станция держится»."),
@@ -165,17 +165,17 @@ const SKILLS = {
   'underFree:scout': [
     { id: 'airsmell', name: tr("ui.Запах воздуха"), type: 'active', cost: {}, once: true,
       lore: tr("ui.Определяют ценность по запаху: «если пахнет старым железом и пылью — там что-то ценное»."),
-      text: tr("ui.Раз за бой, бесплатно: показывает ход, собирающий больше всего Радиации (изоленты). Ход не тратится."),
-      act: 'show', gem: 'topaz' },
+      text: tr("ui.Раз за бой, бесплатно: показывает ход, собирающий больше всего Изоленты. Ход не тратится."),
+      act: 'show', gem: 'sapphire' },
     { id: 'bypass', name: tr("ui.Тоннельный обход"), type: 'passive',
       lore: tr("ui.Знают «обходные пути», где патрули не ходят."),
-      text: tr("ui.Сбор Радиации ослабляет следующий удар врага на 20%."),
-      effects: [{ on: 'gather', gem: 'topaz', min: 3, give: 'ward', value: 20 }] }
+      text: tr("ui.Сбор Изоленты ослабляет следующий удар врага на 20%."),
+      effects: [{ on: 'gather', gem: 'sapphire', min: 3, give: 'ward', value: 20 }] }
   ],
   'underFree:technician': [
-    { id: 'solder', name: tr("ui.Подпольная пайка"), type: 'active', cost: { sapphire: 8 }, once: true,
+    { id: 'solder', name: tr("ui.Подпольная пайка"), type: 'active', cost: { topaz: 8 }, once: true,
       lore: tr("ui.Работают с тем, что нашли в старых щитках: «если нет новой детали, сделаем из двух старых одну хорошую»."),
-      text: tr("ui.Раз за бой, 8 Металла: ваш следующий ход +20% ко всем эффектам. Ход не тратится."),
+      text: tr("ui.Раз за бой, 8 Радиации: ваш следующий ход +20% ко всем эффектам. Ход не тратится."),
       act: 'buff', pct: 20, turns: 1 },
     { id: 'emergency', name: tr("ui.Аварийное питание"), type: 'passive',
       lore: tr("ui.Держат «тайный аккумулятор» на крайний случай."),
@@ -185,8 +185,8 @@ const SKILLS = {
   'underFree:guide': [
     { id: 'knownpath', name: tr("ui.Знакомая тропа"), type: 'passive',
       lore: tr("ui.Водят только проверенными путями: «если я это уже проходил, значит, безопасно»."),
-      text: tr("ui.Радиация даёт на 25% больше изоленты."),
-      effects: [{ on: 'gemPct', gem: 'topaz', pct: 25 }] },
+      text: tr("ui.Фишки Изоленты дают на 25% больше денег."),
+      effects: [{ on: 'gemPct', gem: 'sapphire', pct: 25 }] },
     { id: 'warning', name: tr("ui.Тихое предупреждение"), type: 'passive',
       lore: tr("ui.Слышат шаги раньше, чем видят врага: «предупреждён — значит, не попался»."),
       text: tr("ui.Урон врага по вам −10% весь бой."),

@@ -7,7 +7,7 @@ function renderStatDetails(box, hero) {
     [heartIcon(), tr("ui.Здоровье"), f.maxHp, tr("ui.Выносливость: +") + STAT_STA_HP + tr("ui. за очко сверх ") + STAT_BASE + '.'],
     [gemMiniIcon('ruby'), tr("ui.Атака (урон за Топливо)"), f.attack, tr("ui.Сила: +") + STAT_STR_PCT + tr("ui. % за очко сверх ") + STAT_BASE + '.'],
     [iconTile('compass', 'var(--gem-topaz)'), tr("ui.Шанс крита ×") + STAT_CRIT_MULT, f.critPct.toFixed(1).replace('.', ',') + ' %', tr("ui.Ловкость: ") + String(STAT_AGI_CRIT).replace('.', ',') + tr("ui. % за очко, не больше ") + STAT_CRIT_MAX + ' %.'],
-    [gemMiniIcon('sapphire'), tr("ui.Запас каждой маны"), f.manaMax, tr("ui.Интеллект: +1 за ") + STAT_INT_MANA_EVERY + tr("ui. очка сверх ") + STAT_BASE + '.'],
+    [gemMiniIcon('topaz'), tr("ui.Запас каждой маны"), f.manaMax, tr("ui.Интеллект: +1 за ") + STAT_INT_MANA_EVERY + tr("ui. очка сверх ") + STAT_BASE + '.'],
     [gemMiniIcon('amethyst'), tr("ui.Мана с фишек"), pct(f.manaPct), tr("ui.Интеллект: +") + STAT_INT_PCT + tr("ui. % за очко сверх ") + STAT_BASE + '.'],
     [gemMiniIcon('aquamarine'), tr("ui.Щит за Деталь"), f.shieldPerGem + tr("ui. (до ") + f.maxShield + ')', tr("ui.Дух усиливает щит за Детали; щит — не больше четверти здоровья.")],
     [gemMiniIcon('emerald'), tr("ui.Лечение навыками"), pct(f.healPct), tr("ui.Дух: +") + STAT_SPI_PCT + tr("ui. % за очко сверх ") + STAT_BASE + '.'],

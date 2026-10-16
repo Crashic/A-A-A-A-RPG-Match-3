@@ -9,16 +9,16 @@ const GEM_EFFECTS = {
                 text: tr("ui.Щит тому, кто ходит: поглощает урон первым, не больше четверти здоровья.") },
   emerald:    { kind: 'mana',   label: tr("ui.Травы — мана"), short: tr("ui.Мана"),
                 text: tr("ui.Зелёная мана (Травы) — тратится на активные навыки.") },
-  topaz:      { kind: 'tape',   label: tr("ui.Радиация — изолента"), short: tr("ui.Изолента"),
+  topaz:      { kind: 'mana',   label: tr("ui.Радиация — мана"), short: tr("ui.Мана"),
+                text: tr("ui.Жёлтая мана (Радиация) — тратится на активные навыки.") },
+  sapphire:   { kind: 'tape',   label: tr("ui.Изолента — деньги"), short: tr("ui.Изолента"),
                 text: tr("ui.Изолента — деньги пустошей. Достаётся только игроку.") },
-  sapphire:   { kind: 'mana',   label: tr("ui.Металл — мана"), short: tr("ui.Мана"),
-                text: tr("ui.Синяя мана (Металл) — тратится на активные навыки.") },
   amethyst:   { kind: 'mana',   label: tr("ui.Плёнка — мана"), short: tr("ui.Мана"),
                 text: tr("ui.Фиолетовая мана (Плёнка) — тратится на активные навыки.") },
   pearl:      { kind: 'xp',     label: tr("ui.Документы — опыт"), short: tr("ui.Опыт"),
                 text: tr("ui.Опыт — только игроку. Остаётся даже при поражении.") }
 };
-const MANA_COLORS = ['sapphire', 'emerald', 'amethyst']; // три маны: Металл, Травы, Плёнка — на навыки и заклинания
+const MANA_COLORS = ['topaz', 'emerald', 'amethyst']; // три маны: Радиация, Травы, Плёнка — на навыки и заклинания
 
 const EXTRA_TURN_RUN = 4;        // ряд из 4+ — ход повторяется
 const EXTRA_TURN_GROUP = 5;      // или 5+ одинаковых вместе (крест, «Г», «Т») — тоже ещё ход

@@ -6,7 +6,7 @@ const RACES = [
     note: tr("ui.«Потерять прут в картотеке — тоже успех: значит, он учтён»"),
     unavailable: 'nomad',
     classes: {
-      engineer: { text: tr("ui.+1% к Арматуре"), gem: 'sapphire', pct: 1 },
+      engineer: { text: tr("ui.+1% к Радиации"), gem: 'topaz', pct: 1 },
       scout:    { text: tr("ui.+1% к тайникам") },
       guard:    { text: tr("ui.+1% к удержанию точек") } } },
   { id: 'factory', name: tr("ui.Заводчане"), factionId: 'council', icon: 't:factory', color: 'var(--gem-sapphire)',

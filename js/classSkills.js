@@ -4,21 +4,21 @@
 //   pierce — мимо щита врага; breakShield — сносит весь щит врага до удара;
 //   drain — враг теряет столько каждой маны; ward — ослабляет удары врага { pct, turns };
 //   selfShieldPct — щит себе, % от наибольшего; lifesteal — лечит себя на этот % от урона.
-// Мана: sapphire — Металл, emerald — Травы, amethyst — Плёнка.
+// Мана: topaz — Радиация, emerald — Травы, amethyst — Плёнка.
 const CLASS_SKILLS = {
-  engineer: { id: 'c-engineer', name: tr("ui.Арматурный аргумент"), cost: { sapphire: 10 }, cooldown: 3,
+  engineer: { id: 'c-engineer', name: tr("ui.Арматурный аргумент"), cost: { topaz: 10 }, cooldown: 3,
     act: 'strike', mult: 5,
     text: tr("ui.Удар арматурой: урон ×5 от атаки."),
     lore: tr("ui.Аргумент весомый, гнутый и с печатью ОТК. Возражения принимаются в письменном виде, посмертно.") },
-  scout: { id: 'c-scout', name: tr("ui.Рогатка-78"), cost: { sapphire: 8 }, cooldown: 3,
+  scout: { id: 'c-scout', name: tr("ui.Рогатка-78"), cost: { topaz: 8 }, cooldown: 3,
     act: 'strike', mult: 4, pierce: true,
     text: tr("ui.Выстрел гайкой: урон ×4 от атаки мимо щита врага."),
     lore: tr("ui.Рогатка образца 1978 года. Гарантия кончилась в 1979-м, меткость — нет. Гайки, кстати, казённые — верните.") },
-  guard: { id: 'c-guard', name: tr("ui.Стоять, документы!"), cost: { sapphire: 8 }, cooldown: 3,
+  guard: { id: 'c-guard', name: tr("ui.Стоять, документы!"), cost: { topaz: 8 }, cooldown: 3,
     act: 'strike', mult: 3, ward: { pct: 30, turns: 2 },
     text: tr("ui.Удар дубинкой: урон ×3; два хода враг бьёт на 30 % слабее."),
     lore: tr("ui.Пока враг ищет паспорт, прописку и справку о прививках, он не дерётся. Он страдает.") },
-  technician: { id: 'c-technician', name: tr("ui.Короткое замыкание"), cost: { sapphire: 10 }, cooldown: 4,
+  technician: { id: 'c-technician', name: tr("ui.Короткое замыкание"), cost: { topaz: 10 }, cooldown: 4,
     act: 'strike', mult: 4, breakShield: true,
     text: tr("ui.Сносит весь щит врага, затем урон ×4."),
     lore: tr("ui.Если искрит — значит, работает. Щиты на батарейках гаснут первыми, вместе с бровями.") },
@@ -26,7 +26,7 @@ const CLASS_SKILLS = {
     act: 'strike', mult: 3, drain: 5,
     text: tr("ui.Урон ×3; враг теряет по 5 каждой маны."),
     lore: tr("ui.Выговор с занесением и лишением премии. Бьёт по самооценке и по карману одновременно. Премию всё равно никто не видел с 1986-го.") },
-  keeper: { id: 'c-keeper', name: tr("ui.Связка ключей"), cost: { sapphire: 10 }, cooldown: 4,
+  keeper: { id: 'c-keeper', name: tr("ui.Связка ключей"), cost: { topaz: 10 }, cooldown: 4,
     act: 'strike', mult: 4, selfShieldPct: 25,
     text: tr("ui.Урон ×4 связкой ключей и щит себе — 25 % от наибольшего."),
     lore: tr("ui.Ни одна дверь в пустошах уже не открывается, но лоб — запросто. Звенит солидно.") },
@@ -34,7 +34,7 @@ const CLASS_SKILLS = {
     act: 'strike', mult: 5,
     text: tr("ui.Поджог сухой травы под врагом: урон ×5."),
     lore: tr("ui.Сухая трава, капля бензина и немного энтузиазма. Пожарная часть не приедет: её тоже сожгли.") },
-  mechanic: { id: 'c-mechanic', name: tr("ui.Ключ на 32"), cost: { sapphire: 8 }, cooldown: 3,
+  mechanic: { id: 'c-mechanic', name: tr("ui.Ключ на 32"), cost: { topaz: 8 }, cooldown: 3,
     act: 'strike', mult: 3, selfShieldPct: 20,
     text: tr("ui.Урон ×3 гаечным ключом и щит себе — 20 % от наибольшего."),
     lore: tr("ui.Подходит ко всем гайкам и к одной голове. Голова, как правило, после этого не подходит ни к чему.") },

@@ -1,5 +1,5 @@
 // Боец-герой в начале боя: как createFighter, но с характеристиками героя (heroStats → applyStats)
-// и свойствами снаряжения (gearTotals): здоровье, шанс крита, изолента с Радиации и опыт с Документов.
+// и свойствами снаряжения (gearTotals): здоровье, шанс крита, изолента с фишек Изоленты и опыт с Документов.
 function createHeroFighter(save) {
   const g = gearTotals(save);
   const f = createFighter(save.name, save.level);
