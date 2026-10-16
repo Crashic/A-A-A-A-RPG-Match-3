@@ -468,6 +468,7 @@ const FILES = [
   './js/showQuestDone.js',
   './js/storyNoGuide.js',
   './js/storySkipGuide.js',
+  './js/storyGuideSel.js',
   './js/storyGuide.js',
   './js/storyGuideOk.js',
   './js/tutorialManaGem.js',

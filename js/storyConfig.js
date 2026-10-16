@@ -389,7 +389,7 @@ const STORY_ACT7 = {
     { type: 'event', event: 'stash', screen: 'stash', via: 'camp', card: 'storage', cardScreen: 'camp',
       sel: ['#stashRight .invGrid .invSlot.item', '#stash .invGrid .invSlot.item'],
       text: tr("ui.Положи вещь в общак — нажми на неё в сумке.") },
-    { type: 'ok', screen: 'stash', sel: '#stash .stashTape',
+    { type: 'ok', screen: 'stash', sel: ['#stash .stashChips', '#stash .stashAll'],
       text: tr("ui.Изоленту тоже можно сдать — и забрать другим персонажем. Общак не ворует. В отличие от Кузьмича. Шучу.") },
     { type: 'dialog', lines: {
       council: [tr("ui.Обжились? Вот и хорошо. Жилплощадь не приватизировать — она государственная, просто государства нет.")],

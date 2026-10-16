@@ -10,6 +10,8 @@ function setupStoryBlock() {
     if (!box.querySelector('.tutOk').hidden) return false;
     const el = storyGuide.el;
     if (el && el.isConnected && el.contains(t)) return true;
+    // экран перерисовался и цель — уже новый элемент: узнаём её по тому же селектору (storyGuideSel)
+    if (el && !el.isConnected && storyGuide.sel) { const hit = t.closest(storyGuide.sel); if (hit) { storyGuide.el = hit; return true; } }
     return !!t.closest('#board'); // поле боя (учебный бой ограничивает ходы сам)
   };
   const block = e => {

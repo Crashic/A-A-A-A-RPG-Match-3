@@ -10,6 +10,7 @@ function storyGuide(el, text, onOk) {
   }
   box.dataset.story = '1';
   storyGuide.el = el; // цель: только на неё можно нажать (setupStoryBlock)
+  storyGuide.sel = storyGuideSel(el); // запасной селектор, если экран перерисуют
   storyGuide.onOk = onOk || null;
   const skip = box.querySelector('.tutHide');
   skip.hidden = false;

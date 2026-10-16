@@ -16,7 +16,7 @@ function setupTips() {
   });
   document.addEventListener('click', e => {
     const el = find(e);
-    if (!el || el.closest('button')) return;
+    if (!el || el.closest('button') || e.target.closest('button, a, input, select')) return; // кнопка внутри карточки с подсказкой — нажимается
     e.stopPropagation();
     if (tipOwner === el) hideTip(); else showTip(el, el.dataset.tipTitle || '', el.dataset.tip);
   }, true);

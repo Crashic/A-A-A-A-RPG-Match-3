@@ -1067,3 +1067,7 @@ h1 {
 #turnPlate.shake.show { animation: plateShake .35s; }
 @keyframes plateShake { 20%, 60% { transform: translate(calc(-50% - 6px), -10%); } 40%, 80% { transform: translate(calc(-50% + 6px), -10%); } }
 @media (min-width: 1000px) and (min-height: 560px) { #turnPlate { padding: 6px 20px; } #turnPlate b { font-size: 22px; line-height: 26px; } }
+/* 0.8.7: подсказки «куда нажать» без пульсации на весь экран — затемнение ровное, кольцо не мигает */
+#tutorial .tutRing { animation: none !important; }
+#tutorial .tutRing.nudge { animation: tutShake .35s !important; }
+@keyframes tutShake { 25% { translate: -5px 0; } 75% { translate: 5px 0; } }
