@@ -16,6 +16,5 @@ function turnInQuest(index) {
   vibrate([30, 40, 30]);
   updateNotifyBadges();
   storyEvent('turnin', q.uid); // сюжет, акт 4
-  if (ups) showLevelUp(hero.level, ups);
-  showToast(tr("ui.Задание сдано") + (item ? ': ' + item.name : '') + (ups ? tr("ui. · новый уровень!") : ''), 3000);
+  showQuestDone(q, item, ups ? () => showLevelUp(hero.level, ups) : null); // окно «Задание сдано!», затем новый уровень
 }

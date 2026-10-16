@@ -12,6 +12,7 @@ function showTutorial(step, el) {
   Object.assign(ring.style, { left: r.left - pad + 'px', top: r.top - pad + 'px', width: r.width + pad * 2 + 'px', height: r.height + pad * 2 + 'px' });
   const bubble = box.querySelector('.tutBubble');
   bubble.querySelector('p').textContent = step.text;
+  if (step.id !== 'story' && bubble.querySelector('.tutWho')) bubble.querySelector('.tutWho').textContent = '';
   bubble.querySelector('.tutOk').hidden = !!step.auto;
   // пузырь — с той стороны, где больше места
   const bw = Math.min(300, appW - 16);

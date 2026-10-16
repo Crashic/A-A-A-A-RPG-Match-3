@@ -14,5 +14,8 @@ function storyGuide(el, text, onOk) {
   const skip = box.querySelector('.tutHide');
   skip.hidden = false;
   skip.textContent = tr("ui.Пропустить обучение");
+  const hero = loadSlot(getActiveSlot());
+  const who = box.querySelector('.tutWho');
+  if (who) who.textContent = hero ? STORY_NPCS[storyFaction(hero)].name : '';
   showTutorial({ id: 'story', text, auto: !onOk }, el);
 }

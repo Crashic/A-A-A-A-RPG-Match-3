@@ -3,7 +3,8 @@
 // меню боя, кнопка меню боя (видно, пока список закрыт) и «Персонаж» на карточке героя в главном меню.
 function updateNotifyBadges() {
   const hero = loadSlot(getActiveSlot());
-  const quest = !!(hero && hero.quests && (hero.quests.active || []).some(q => q.have >= q.need));
+  const ready = hero && hero.quests ? (hero.quests.active || []).filter(q => q.have >= q.need).length : 0;
+  const quest = ready > 0;
   // «Персонаж»: свободные очки или в сумках осталось не больше одной ячейки
   const stats = !!(hero && (statPointsFree(hero) > 0 || bagFreeSlots(hero) <= 1));
   const mark = (el, on, tip) => {
@@ -20,6 +21,10 @@ function updateNotifyBadges() {
   document.querySelectorAll('.sideMenu [data-act="journal"]').forEach(b => mark(b, quest));
   document.querySelectorAll('.sideMenu [data-act="char"]').forEach(b => mark(b, stats));
   mark(document.getElementById('btnJournalGame'), quest);
+  // «Задания»: зелёная цифра — сколько можно сдать (макет «Подсказки по заданиям», п. 5)
+  const count = el => { const d = el && el.querySelector(':scope > .notifyDot'); if (d) { d.textContent = quest ? String(ready) : '!'; d.classList.toggle('ok', quest); } };
+  document.querySelectorAll('.sideMenu [data-act="journal"]').forEach(count);
+  count(document.getElementById('btnJournalGame'));
   mark(document.getElementById('btnCharGame'), stats);
   mark(document.getElementById('btnCharacter'), stats);
   mark(document.getElementById('btnBattleMenu'), quest || stats);

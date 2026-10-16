@@ -69,6 +69,7 @@ function applyMatchEffects(cells) {
   if (isHero) { // собранные героем фишки — для заданий «Собрать фишки» (questProgress)
     battle.gained.gems = battle.gained.gems || {};
     for (const id in count) battle.gained.gems[id] = (battle.gained.gems[id] || 0) + count[id];
+    questLiveCheck(); // тост прогресса и трекер заданий
   }
   if (isHero) skillAfterGather(count, run);
   else skillAfterHeroHit();

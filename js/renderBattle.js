@@ -7,4 +7,5 @@ function renderBattle() {
   document.getElementById('board').classList.toggle('heroTurn', !battle.over && battle.turn === 'hero');
   renderSkillBar();
   renderEnemySkill();
+  renderQuestTrack(); // трекер заданий справа над меню боя
 }

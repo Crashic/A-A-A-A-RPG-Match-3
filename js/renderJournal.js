@@ -32,7 +32,7 @@ function renderJournal() {
       b.className = 'jQuest' + (x.uid === journalSel ? ' selected' : '') + (x.have >= x.need ? ' ready' : '');
       b.innerHTML = '<span></span><small></small>';
       b.firstChild.textContent = x.title;
-      b.lastChild.textContent = x.have >= x.need ? tr("ui.готово") : x.have + ' / ' + x.need;
+      b.lastChild.textContent = x.have >= x.need ? tr("ui.Сдать") : x.have + ' / ' + x.need; // готовое — зелёная строка с плашкой «СДАТЬ»
       b.dataset.uid = x.uid;
       b.addEventListener('click', e => { e.stopPropagation(); vibrate(); journalSel = x.uid; renderJournal(); storyEvent('journalSel', x.uid); });
       left.appendChild(b);

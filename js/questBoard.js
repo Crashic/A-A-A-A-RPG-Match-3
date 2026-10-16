@@ -16,7 +16,10 @@ function questBoard(hero) {
     q.day = day;
     q.daily = [];
     for (let i = 0; i < QUEST_DAILY_BOARD_SIZE; i++) q.daily.push(rollQuest(hero, 'daily'));
+    const before = q.active.length;
     q.active = q.active.filter(x => x.cat !== 'daily' || x.have >= x.need);
+    const burned = before - q.active.length;
+    if (burned) setTimeout(() => questToast('burn', { title: burned + ' ' + plural(burned, tr("ui.задание"), tr("ui.задания"), tr("ui.заданий")) }), 400); // «СГОРЕЛО»
     changed = true;
   }
   return changed;
