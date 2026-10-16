@@ -1071,3 +1071,6 @@ h1 {
 #tutorial .tutRing { animation: none !important; }
 #tutorial .tutRing.nudge { animation: tutShake .35s !important; }
 @keyframes tutShake { 25% { translate: -5px 0; } 75% { translate: 5px 0; } }
+/* 0.8.8: добыча (вещи, ресурсы, изолента) — по правому краю */
+#battleResult .resultLoot { justify-content: flex-end; }
+#battleResult .resultLoot .stashChip { cursor: default; }

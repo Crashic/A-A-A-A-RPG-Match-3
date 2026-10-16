@@ -1,5 +1,5 @@
 // Окно итогов боя по макету «Окно победы»: штамп «ПОБЕДА!»/«ПОРАЖЕНИЕ», кто повержен и где; слева — опыт (полоса уровня
-// с прибавкой), изолента плашками и ресурсы лагеря; справа — добыча иконками (renderResultLoot, касание — окно вещи)
+// с прибавкой); справа — добыча: вещи, ресурсы и изолента плашками, по правому краю (renderResultLoot, касание — окно вещи)
 // и бумажный блок «Задания · прогресс за бой» (+N или штамп «ГОТОВО»). Кнопки «Ещё раз» и «Продолжить».
 let battleLevelUp = null; // { level, ups } — показать окно нового уровня после итогов
 function showBattleResult(r) {
@@ -44,31 +44,31 @@ function showBattleResult(r) {
     lv.textContent = tr("ui.Новый уровень!") + ' ' + r.level;
     left.appendChild(lv);
   }
-  // изолента — плашки по цветам
-  sec(left, tr("ui.Изолента"), r.tape ? tr("ui.с радиации") : '');
-  const chips = document.createElement('div');
-  chips.className = 'vicChips';
-  let rest = Math.max(0, Math.floor(r.tape || 0));
-  for (const k of TAPE_KINDS) {
-    const n = Math.floor(rest / k.value);
-    rest -= n * k.value;
-    if (!n && !(k.id === 'white' && !chips.children.length)) continue;
-    const c = document.createElement('span');
-    c.className = 'stashChip';
-    c.innerHTML = '<i class="chipRoll ' + k.id + '"></i><b></b>';
-    c.querySelector('b').textContent = n;
-    chips.appendChild(c);
-  }
-  left.appendChild(chips);
   // добыча и ресурсы (касание по вещи — окно с «Продать»/«Надеть» и сравнением)
   const res = r.resources || {};
-  if ((r.added || []).length || Object.keys(res).length || (r.lost && r.lost.length)) {
+  if ((r.added || []).length || Object.keys(res).length || (r.lost && r.lost.length) || r.tape) {
     sec(right, tr("ui.Добыча"), (r.added || []).length ? tr("ui.касание — продать или надеть") : '');
     const loot = document.createElement('div');
     loot.className = 'resultLoot';
     right.appendChild(loot);
     resultLoot = r.added || [];
     renderResultLoot(loot, res);
+    // изолента — плашками по цветам в той же строке, после вещей и ресурсов
+    let rest = Math.max(0, Math.floor(r.tape || 0));
+    for (const k of TAPE_KINDS) {
+      const n = Math.floor(rest / k.value);
+      rest -= n * k.value;
+      if (!n) continue;
+      const c = document.createElement('span');
+      c.className = 'stashChip';
+      c.dataset.tipTitle = tr("ui.Изолента");
+      c.dataset.tip = tr("ui.С радиации — уже в карманах.");
+      c.innerHTML = '<i class="chipRoll ' + k.id + '"></i><b></b>';
+      c.querySelector('b').textContent = n;
+      loot.appendChild(c);
+    }
+    const empty = loot.querySelector(':scope > small');
+    if (empty && loot.children.length > 1) empty.remove();
     if (r.lost && r.lost.length) {
       const p = document.createElement('p');
       p.className = 'vicLost';
