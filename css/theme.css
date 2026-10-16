@@ -837,3 +837,70 @@ h1 {
 .hintFrame { border-width: 3px; border-radius: 11px; }
 /* выбранная фишка — только обводка самой фишки (.gemRim), без рамки клетки */
 .cell.picked { box-shadow: none; }
+
+/* ---------- Окно итогов боя (0.9.a, макет «Окно победы») ---------- */
+#battleResult { background: rgba(10,6,12,.62); }
+.vicBox { position: relative; width: min(760px, 100%); max-height: calc(var(--app-h) - 8px); box-sizing: border-box; margin-top: 22px;
+  display: flex; flex-direction: column; gap: 8px; padding: 34px 14px 12px; border: 4px solid transparent; border-radius: 18px;
+  background: linear-gradient(180deg, #3d1d2c, #2b1420) padding-box, var(--gold-frame) border-box;
+  box-shadow: inset 0 0 0 3px #1a1220, 0 0 0 3px #6c3806, 0 0 60px rgba(255,180,70,.5), 0 8px 0 rgba(0,0,0,.5); }
+.vicStamp { position: absolute; left: 50%; top: -24px; transform: translateX(-50%) rotate(-4deg); padding: 4px 22px 6px; border-radius: 10px; white-space: nowrap;
+  background: #efe1bc; border: 4px solid #c8221a; box-shadow: inset 0 0 0 2px #efe1bc, inset 0 0 0 4px #c8221a, 0 6px 0 rgba(0,0,0,.5);
+  font: 400 32px/1 var(--font-logo); color: #c8221a; text-transform: uppercase; }
+#battleResult.lost .vicStamp { border-color: #5a1aa8; color: #5a1aa8; box-shadow: inset 0 0 0 2px #efe1bc, inset 0 0 0 4px #5a1aa8, 0 6px 0 rgba(0,0,0,.5); }
+#battleResult.lost .vicBox { box-shadow: inset 0 0 0 3px #1a1220, 0 0 0 3px #6c3806, 0 8px 0 rgba(0,0,0,.5); }
+.vicHead { flex: none; display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; }
+.vicHead b { font: 400 18px/22px var(--font-head); color: var(--gold-ink); }
+.vicHead small { font: var(--type-caption); letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase; }
+.vicCols { flex: 1 1 auto; min-height: 0; display: flex; gap: 16px; overflow-y: auto; }
+.vicCol { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.vicCol[hidden] { display: none; }
+.vicSec { flex: none; margin: 0; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font: 400 14px/18px var(--font-head); letter-spacing: 3px;
+  color: var(--gold-ink); text-transform: uppercase; padding-bottom: 3px; border-bottom: 2px dashed rgba(224,168,64,.35); }
+.vicSec b { font: 400 14px/18px var(--font-body); letter-spacing: 0; color: var(--text-primary); text-transform: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vicXp { flex: none; display: flex; align-items: center; gap: 8px; }
+.vicLvl { font: 400 15px/18px var(--font-head); color: var(--text-primary); white-space: nowrap; }
+.vicBar { position: relative; flex: 1; height: 14px; border-radius: 7px; background: #0a060c; box-shadow: inset 0 0 0 2px #3a2a18; overflow: hidden; }
+.vicBar i { position: absolute; left: 0; top: 0; bottom: 0; background: linear-gradient(180deg, #fff4a0, #fbd02a 55%, #d8960a); }
+.vicBar em { position: absolute; top: 0; bottom: 0; background: repeating-linear-gradient(45deg, #fff 0 6px, #fff4a0 6px 12px); opacity: .9; transition: width .8s; }
+.vicNum { font: var(--type-stat); color: var(--text-primary); white-space: nowrap; }
+.vicLevelUp { margin: 0; font: 400 16px/20px var(--font-head); color: #a8ec6a; }
+.vicChips { flex: none; display: flex; gap: 8px; flex-wrap: wrap; }
+.vicChips .stashChip { cursor: default; }
+#battleResult .resultLoot { flex: none; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+#battleResult .resultLoot .invSlot { width: 46px; height: 46px; border-radius: 10px; }
+#battleResult .resultLoot .resultRes { display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 9px; background: #1a0e14; box-shadow: inset 0 0 0 2px #8a6a58; }
+#battleResult .resultLoot .resultRes b { font: 400 15px/18px var(--font-head); color: var(--text-primary); }
+#battleResult .resultLoot small { font: var(--type-caption); color: var(--text-muted); }
+.vicLost { margin: 0; font: var(--type-caption); color: #ff8a72; }
+.vicQuests { flex: none; display: flex; flex-direction: column; gap: 5px; padding: 6px 10px; border-radius: 8px; background: var(--paper-fill); border: 3px solid #3a2a18; box-shadow: inset 0 0 20px rgba(140,100,40,.3); color: #2b2024; }
+.vicQHead { margin: 0; font: var(--type-caption); letter-spacing: 1px; text-transform: uppercase; border-bottom: 2px dashed #8a6a42; padding-bottom: 3px; }
+.vicQ { display: flex; align-items: center; gap: 8px; }
+.vicQ b { flex: 1; min-width: 0; font: 400 15px/18px var(--font-head); color: #5a1a9e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vicQBar { flex: none; width: 70px; height: 8px; border-radius: 4px; background: #c8b48a; overflow: hidden; }
+.vicQBar i { display: block; height: 100%; background: #5a1a9e; }
+.vicQ.done .vicQBar { display: none; }
+.vicQN { flex: none; font: 400 14px/18px var(--font-head); white-space: nowrap; }
+.vicQN em { font-style: normal; color: #2f8a1a; }
+.vicQStamp { flex: none; padding: 0 8px; border: 3px solid #2f8a1a; border-radius: 6px; transform: rotate(-4deg); font: 400 14px/18px var(--font-head); letter-spacing: 1px; color: #2f8a1a; text-transform: uppercase; }
+.vicBtns { flex: none; display: flex; gap: 12px; }
+.vicBtns .btn { flex: 2; min-height: 44px; font: 400 20px/24px var(--font-head); }
+.vicBtns #resultAgain { flex: 1; }
+@media (min-width: 1000px) and (min-height: 560px) {
+  .vicBox { width: 780px; padding: 64px 26px 22px; gap: 14px; margin-top: 50px; }
+  .vicStamp { top: -52px; font-size: 54px; padding: 8px 34px 10px; border-width: 5px; }
+  .vicHead b { font-size: 22px; line-height: 26px; }
+  .vicCols { flex-direction: column; gap: 14px; overflow: visible; }
+  .vicBar { height: 18px; }
+  #battleResult .resultLoot .invSlot { width: 64px; height: 64px; }
+  .vicQ b { font-size: 16px; } .vicQBar { width: 160px; height: 10px; }
+  .vicBtns .btn { min-height: 56px; font-size: 22px; }
+}
+#resultList.vicCols { margin: 0; padding: 0; border-radius: 0; background: none; list-style: none; }
+#resultList .vicQ b { font: 400 15px/18px var(--font-head); color: #5a1a9e; font-variant-numeric: normal; }
+#resultList .vicSec b, #resultList .stashChip b { font-variant-numeric: normal; }
+#resultList .vicSec b { font: 400 14px/18px var(--font-body); color: var(--text-primary); }
+#resultList .stashChip b { font: 400 16px/18px var(--font-head); color: var(--text-primary); }
+#battleResult .resultLoot { justify-content: flex-start; }
+@media (min-width: 1000px) and (min-height: 560px) { #resultList .vicQ b { font-size: 16px; } }
+.vicBox { max-height: calc(var(--app-h) - 30px); } @media (max-height: 420px) { .vicHead small { display: none; } .vicBox { gap: 6px; } }

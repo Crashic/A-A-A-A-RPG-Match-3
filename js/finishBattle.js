@@ -25,6 +25,8 @@ function finishBattle(won, surrendered = false) {
   storyBattleEnd(save, won, e.id); // сюжет: бой с целью задания (победа или поражение)
   result.levelUps = grantXp(save, result.killXp + result.gemXp);
   result.level = save.level;
+  result.xp = save.xp || 0; result.xpNeed = xpToNext(save.level); // полоса опыта в окне итогов
+  const zone = zoneOfEnemy(e.id); result.zone = zone ? zone.name : '';
   saveSlot(battle.slot, save);
   if (won) storyEvent('win', e.id); // сюжет: победа над целью (акт 6)
   battle.gained = { xp: 0, tape: 0 }; // уже начислено в сохранение

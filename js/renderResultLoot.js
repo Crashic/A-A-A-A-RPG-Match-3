@@ -3,7 +3,7 @@
 // res — ресурсы { id: сколько } (значок + число, они уже в лагере).
 let resultLoot = [];
 function renderResultLoot(box, res) {
-  box = box || document.querySelector('#resultList .resultLoot');
+  box = box || document.querySelector('#battleResult .resultLoot');
   if (!box) return;
   if (res) box.dataset.res = JSON.stringify(res);
   res = JSON.parse(box.dataset.res || '{}');

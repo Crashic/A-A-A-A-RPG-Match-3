@@ -508,14 +508,14 @@
 </div>
 
 <div id="battleResult" class="modal">
-  <div class="modalBox">
-    <div class="ribbon" id="resultTitle"></div>
-    <div class="panel">
-      <ul id="resultList"></ul>
-      <div class="confirmButtons">
-        <button id="resultMap" class="btn stone" type="button" data-i18n="ui.Закрыть">Закрыть</button>
-        <button id="resultAgain" class="btn green" type="button" data-i18n="ui.Ещё раз">Ещё раз</button>
-      </div>
+  <!-- Окно итогов боя по макету «Окно победы»: штамп, враг, опыт, изолента, ресурсы, добыча, задания (js/showBattleResult.js) -->
+  <div class="vicBox">
+    <div class="vicStamp" id="resultTitle"></div>
+    <div class="vicHead"><b id="vicEnemy"></b><small id="vicSub"></small></div>
+    <div id="resultList" class="vicCols"><div class="vicCol" id="vicLeft"></div><div class="vicCol" id="vicRight"></div></div>
+    <div class="vicBtns">
+      <button id="resultAgain" class="btn blue" type="button" data-i18n="ui.Ещё раз">Ещё раз</button>
+      <button id="resultMap" class="btn green" type="button" data-i18n="ui.Продолжить">Продолжить</button>
     </div>
   </div>
 </div>
