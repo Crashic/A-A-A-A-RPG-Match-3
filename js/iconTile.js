@@ -1,6 +1,8 @@
 // Плитка-иконка (фракция, раса, класс, пол) в стиле фишек: сквиркл цвета color,
 // силуэт тёмным тоном этого цвета, «Внутренний ободок». color — 'var(--gem-…)'.
 function iconTile(key, color) {
+  if (key && key.startsWith('t:') && ORIGIN_TILES[key.slice(2)]) return originTileSvg(key.slice(2)); // расы и классы — плитки «Агитпроп»
+  if (key && key.startsWith('t:') && ORIGIN_TILES[key.slice(2)]) return originTileSvg(key.slice(2)); // расы и классы — плитки «Агитпроп»
   let d, rule;
   if (GEM_ICON_KEYS[key]) {
     d = findById(GEM_TYPES, GEM_ICON_KEYS[key]).icon;

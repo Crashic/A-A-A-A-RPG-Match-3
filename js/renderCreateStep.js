@@ -1,7 +1,9 @@
-// Рисует текущий экран создания: «Сервер», «Происхождение» (фракции и расы) или «Класс».
+// Рисует текущий экран создания: «Сервер» или «Анкета-плакат» (раса, пол, класс и имя на одном экране — renderHeroStep).
 function renderCreateStep() {
-  if (creation.step === 'server') renderServerStep();
-  else if (creation.step === 'origin') renderOriginStep();
-  else renderClassStep();
+  const hero = creation.step !== 'server';
+  document.getElementById('create').classList.toggle('heroStep', hero);
+  document.getElementById('createPoster').hidden = !hero;
+  if (hero) renderHeroStep();
+  else renderServerStep();
   tutorialCheck();
 }

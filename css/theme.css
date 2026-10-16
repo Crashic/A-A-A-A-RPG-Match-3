@@ -1081,3 +1081,67 @@ h1 {
   #bunkerBody .bunkerCard { padding: 18px; gap: 8px; }
   #bunkerBody .bunkerCard .btn { margin-top: auto; height: 52px; }
 }
+
+/* ---------- Создание персонажа: «Анкета-плакат» (макет «Создание персонажа · C») ---------- */
+#create.heroStep { max-width: none; }
+#create.heroStep .createHead { display: none; }
+#create.heroStep .createBody { gap: 6px; }
+#create.heroStep #createLeft { flex: 0 0 152px; padding: 6px 8px; display: flex; flex-direction: column; gap: 4px; overflow: hidden; }
+.hsLab { margin: 0; font: 12px/1.1 'PT Mono', monospace; letter-spacing: .5px; white-space: nowrap; text-transform: uppercase; color: #ffd86a; }
+.hsRight .hsLab { color: #7a1210; }
+.hsFaction { display: flex; flex-direction: column; gap: 3px; }
+.hsFacName { margin: 0; height: 18px; border-radius: 4px; padding-left: 6px; font: 13px/18px 'Russo One', sans-serif; color: #fff; text-shadow: 0 1px 0 #0006; }
+.f-council .hsFacName { background: #c8221a; } .f-union .hsFacName { background: #4f9a32; } .f-press .hsFacName { background: #2f6fc0; }
+.hsRaces { display: flex; justify-content: center; gap: 5px; }
+.hsTile { padding: 0; border: 0; background: none; width: 40px; height: 40px; border-radius: 9px; line-height: 0; }
+.hsTile .tile { width: 40px; height: 40px; }
+.hsTile.sel { box-shadow: 0 0 0 2px #ffd86a, 0 0 10px #ffd86a; }
+.hsGender { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: auto; }
+.hsGender .hsLab { margin-right: auto; }
+.hsGen { width: 32px; height: 32px; border-radius: 50%; border: 2px solid #8a5a14; background: #2b1420; color: #f6e7b8; font-size: 18px; line-height: 1; padding: 0; }
+.hsGen.sel { border-color: #ffd86a; color: #ffd86a; box-shadow: 0 0 8px #ffd86a; }
+.hsRandom { min-height: 34px; font-size: 15px; }
+#createPoster { flex: 0 0 214px; position: relative; overflow: hidden; border-radius: 8px; border: 3px solid #e0a840; box-shadow: 0 3px 0 #1a0c12;
+  background: repeating-conic-gradient(from 0deg at 50% 64%, #ffffff14 0 6deg, transparent 6deg 22.5deg), radial-gradient(circle at 50% 60%, #e0453a, #7a1210); }
+.hsSlogan { position: absolute; left: 8px; top: 6px; margin: 0; font: 13px/1.1 'Rubik Mono One', sans-serif; color: #ffd86a; text-shadow: 0 1px 0 #000; max-width: 140px; }
+.hsSil { position: absolute; left: 32px; right: 32px; top: 38px; bottom: 78px; display: flex; align-items: flex-end; justify-content: center; }
+.hsSil svg { height: 100%; fill: #1a0c12; }
+.hsBadges { position: absolute; right: 6px; top: 6px; display: flex; flex-direction: column; gap: 4px; }
+.hsBadges .tile { width: 30px; height: 30px; }
+.hsName { position: absolute; left: 12px; right: 12px; bottom: 30px; }
+.hsInput { width: 100%; box-sizing: border-box; height: 34px; border: 0; border-radius: 5px; padding: 0 8px; text-align: center;
+  background: linear-gradient(#ffe9a0, #c88a2a); color: #2a1a14; font: 17px 'Russo One', sans-serif; box-shadow: 0 2px 0 #5a3a10; outline: none; }
+.hsInput::placeholder { color: #6a4a20; font-size: 15px; }
+.hsWho { position: absolute; left: 6px; right: 6px; bottom: 8px; margin: 0; text-align: center; font: 12px/1.1 'PT Mono', monospace; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#create.heroStep #createRight.hsRight { flex: 1; min-width: 0; padding: 6px 8px; display: flex; flex-direction: column; gap: 3px; overflow: hidden; }
+.hsTop { display: flex; gap: 8px; min-height: 0; }
+.hsClasses { flex: 0 0 auto; display: grid; grid-template-columns: repeat(2, 112px); gap: 2px 4px; align-content: start; }
+.hsCls { display: flex; align-items: center; gap: 4px; padding: 2px; border: 0; border-radius: 5px; background: none; color: #2a1a14; font: 13px 'Russo One', sans-serif; text-align: left; min-width: 0; }
+.hsCls .tile { flex: none; width: 26px; height: 26px; }
+.hsCls span { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.hsCls.sel { background: #2b1420; color: #ffd86a; }
+.hsCls.dim { filter: grayscale(1); opacity: .5; }
+.hsAbout { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.hsAbout b { font: 16px 'Russo One', sans-serif; color: #7a1210; font-weight: 400; }
+.hsDesc { margin: 0; font-size: 14px; line-height: 1.15; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+.hsAbout i { font: 12px/1.15 'PT Mono', monospace; color: #3c7a2a; font-style: normal; }
+.hsSkills { display: flex; flex-direction: column; gap: 3px; min-height: 0; }
+.hsSkill { display: flex; align-items: center; gap: 6px; height: 24px; flex: none; padding: 0 6px; border-radius: 4px; background: #ead6aa; min-width: 0; }
+.hsSkill svg { width: 18px; height: 18px; flex: none; }
+.hsSkill b { flex: none; font: 13px 'Russo One', sans-serif; font-weight: 400; color: #2a1a14; }
+.hsSkill span { font-size: 13px; color: #5a4030; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.hsFoot { margin-top: auto; display: flex; align-items: center; gap: 8px; }
+.hsFoot .createWhy { flex: 1; margin: 0; text-align: center; font-size: 13px; color: #a8180e; }
+.hsBack { min-height: 36px; padding: 0 12px; font-size: 15px; }
+.hsCreate { min-height: 38px; padding: 0 18px; font-size: 17px; }
+@media (min-width:1000px) and (min-height:560px) {
+  #create.heroStep #createLeft { flex-basis: 220px; gap: 10px; }
+  .hsTile, .hsTile .tile { width: 56px; height: 56px; }
+  #createPoster { flex-basis: 330px; }
+  .hsSlogan { font-size: 18px; max-width: 220px; } .hsBadges .tile { width: 44px; height: 44px; } .hsInput { height: 44px; font-size: 22px; } .hsWho { font-size: 14px; }
+  .hsLab { font-size: 14px; } .hsFacName { height: 24px; font-size: 16px; line-height: 24px; } .hsGen { width: 40px; height: 40px; font-size: 22px; } .hsRandom { min-height: 44px; }
+  .hsClasses { grid-template-columns: repeat(2, 150px); gap: 6px; }
+  .hsCls { font-size: 15px; } .hsCls .tile { width: 36px; height: 36px; }
+  .hsSkill { height: 34px; } .hsSkill b, .hsSkill span { font-size: 15px; }
+  .hsDesc { font-size: 16px; -webkit-line-clamp: 6; }
+}
