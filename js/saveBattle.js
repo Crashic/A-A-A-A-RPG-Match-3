@@ -7,6 +7,7 @@ function saveBattle() {
     hero: battle.hero,
     enemy: battle.enemy,
     turn: battle.turn,
+    turnNo: battle.turnNo || 1,
     gained: battle.gained,
     skill: battle.skill,
     log: battle.log,

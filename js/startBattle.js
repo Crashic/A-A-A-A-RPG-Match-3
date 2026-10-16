@@ -16,6 +16,7 @@ async function startBattle(enemyId, saved = null) {
     enemyInfo: e,
     hero: saved ? saved.hero : createHeroFighter(save), // с характеристиками героя
     enemy: saved ? saved.enemy : createEnemyFighter(e), // с характеристиками врага
+    turnNo: saved ? saved.turnNo || 1 : 1, // номер хода (табличка «чей ход»)
     turn: saved ? saved.turn : 'hero', // новый бой — жребий по наглости (rollFirstTurn) ниже
     over: false,
     gained: saved ? Object.assign({ xp: 0, tape: 0 }, saved.gained) : { xp: 0, tape: 0 },
@@ -43,6 +44,7 @@ async function startBattle(enemyId, saved = null) {
   await startMatch3(saved ? saved.grid : null);
   if (flip) await flip;
   if (battle !== current) return;
+  showTurnPlate(); // табличка «чей ход»
   if (!saved) storyEvent('battle', e.id); // сюжет: начат бой с целью (акт 6)
   if (battle.tutorial) tutorialStep(); // учебный бой: первая фаза
   else showFirstLegend(); // в первом бою — подсказка, какая фишка что даёт

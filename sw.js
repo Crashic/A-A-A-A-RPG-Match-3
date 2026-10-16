@@ -251,6 +251,7 @@ const FILES = [
   './js/scoreMove.js',
   './js/chooseEnemyMove.js',
   './js/enemyTurn.js',
+  './js/showTurnPlate.js',
   './js/endTurn.js',
   './js/showBattleResult.js',
   './js/closeBattleResult.js',

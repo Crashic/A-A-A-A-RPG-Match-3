@@ -1050,3 +1050,20 @@ h1 {
 .questCard.locked .qTimer { font: 400 18px/22px var(--font-small); color: var(--gold-ink); }
 .questCard.locked .qText { color: #c8b8a0 !important; }
 .qdStamp { right: -10px; top: -14px; background: #2b1420; }
+
+/* ---------- Табличка «чей ход» (0.8.6, макет «Подсказка: чей ход», вариант A) ---------- */
+/* штампы на аватарах больше не показываем — их заменяет табличка */
+.fighter.active .fpStamp, .fighter .fpStamp { display: none !important; }
+.fighter.active::after { content: none !important; }
+.boardWrap { position: relative; }
+#turnPlate { position: absolute; left: 50%; top: 0; z-index: 8; transform: translate(-50%, -30%) scale(.8); opacity: 0; pointer-events: none;
+  transition: opacity .15s, transform .15s; display: flex; align-items: center; gap: 8px; padding: 4px 14px; border-radius: 9px; white-space: nowrap;
+  background: linear-gradient(180deg, #3a2a1a, #1a1008); box-shadow: 0 0 0 3px #c8892a, 0 0 0 5px #6c3806, 0 4px 0 5px rgba(0,0,0,.45); }
+#turnPlate.show { opacity: 1; transform: translate(-50%, -10%) scale(1); }
+#turnPlate b { font: 400 18px/22px var(--font-head); color: var(--gold-ink); text-transform: uppercase; }
+#turnPlate small { font: var(--type-caption); color: var(--text-muted); }
+#turnPlate.enemy { background: linear-gradient(180deg, #2a1640, #140a20); box-shadow: 0 0 0 3px #9a48e6, 0 0 0 5px #4a1a7a, 0 4px 0 5px rgba(0,0,0,.45); }
+#turnPlate.enemy b { color: #dcaaff; }
+#turnPlate.shake.show { animation: plateShake .35s; }
+@keyframes plateShake { 20%, 60% { transform: translate(calc(-50% - 6px), -10%); } 40%, 80% { transform: translate(calc(-50% + 6px), -10%); } }
+@media (min-width: 1000px) and (min-height: 560px) { #turnPlate { padding: 6px 20px; } #turnPlate b { font-size: 22px; line-height: 26px; } }

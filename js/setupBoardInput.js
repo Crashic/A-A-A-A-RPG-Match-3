@@ -4,6 +4,7 @@ function setupBoardInput() {
   let drag = null; // { cell, x, y, moved }
 
   board.addEventListener('pointerdown', e => {
+    if (battle && !battle.over && battle.turn === 'enemy') { setTimeout(() => showTurnPlate(false, true), 0); return; } // в ход врага — тряска таблички
     if (!match3 || match3.busy) return;
     const cell = cellFromPoint(e.clientX, e.clientY);
     if (!cell) return;
