@@ -144,6 +144,7 @@ const WEAPON_IN_BAG = '#character .invGrid .invSlot.item[data-slot="weapon"]';
 // Герой, у которого сумка уже надета (старые сохранения), акт пропускает (skip).
 const BAG_IN_INV = '#character .invGrid .invSlot.item[data-slot="bag"]';
 const JUNK_IN_INV = '#character .invGrid .invSlot.item[data-slot="junk"]';
+const SHOP_JUNK = '#shopRight .invGrid .invSlot.item[data-slot="junk"]'; // хлам в сумке у торговца (акт «Товарообмен»)
 const STORY_ACT_BAG = {
   id: 'actBag', title: tr("ui.Тара"), reward: { tape: 10 },
   todo: tr("ui.Персонаж: пришить гнездо «+», надеть авоську от Семёныча, продать хлам"),
@@ -223,7 +224,7 @@ const STORY_ACT2 = {
 };
 const STORY_ACT3 = {
   id: 'act3', title: tr("ui.Товарообмен"), reward: { tape: 30 },
-  todo: tr("ui.Бункер → Завхоз Семёныч: продать вещь из сумки и купить «Особый заказ»"), // коротко, что сделать (questTodo)
+  todo: tr("ui.Бункер → Завхоз Семёныч: продать хлам из сумки и купить «Особый заказ»"), // коротко, что сделать (questTodo)
   prepare: hero => addToBag(hero, [makeJunk(hero.level)]), // чтобы было что продать
   steps: [
     { type: 'dialog', lines: {
@@ -240,9 +241,9 @@ const STORY_ACT3 = {
       tr("ui.Продашь — получишь изоленту. Хлам и обычные вещи можно сдать разом, кнопкой «Сдать хлам»."),
       tr("ui.А каска — вон, в «Особом заказе». Последняя. Предыдущую носил Петренко, теперь носят Петренко.")],
       ok: tr("ui.Понял") },
-    { type: 'event', event: 'openItem', screen: 'shop', via: 'bunker', card: 'shop', sel: '#shopRight .invGrid .invSlot.item',
-      text: tr("ui.Нажми на вещь в своей сумке.") },
-    { type: 'event', event: 'sell', modal: 'itemInfo', screen: 'shop', backSel: '#shopRight .invGrid .invSlot.item', sel: '#itemInfoButtons [data-role="sell"]',
+    { type: 'event', event: 'openItem', screen: 'shop', via: 'bunker', card: 'shop', sel: SHOP_JUNK, test: (hero, data) => data === 'junk',
+      text: tr("ui.Нажми на хлам в своей сумке — серую вещь. Хорошее не продавай, пригодится.") },
+    { type: 'event', event: 'sell', modal: 'itemInfo', screen: 'shop', backSel: SHOP_JUNK, sel: '#itemInfoButtons [data-role="sell"]',
       text: tr("ui.Жми «Продать». Деньги — сразу, сдачи — никогда.") },
     { type: 'ok', screen: 'shop', sel: '#shopLeft .shopStock',
       text: tr("ui.Слева — прилавок. Товар меняется с новым уровнем и раз в несколько побед. Сумки — там же: больше сумок — больше влезет добычи.") },

@@ -31,6 +31,6 @@ function openJunkInfo(where) {
   btn(tr("ui.Выбросить"), 'red', () => { close(); dropItem(where.bag); });
   btn(tr("ui.Продать"), 'orange', () => { close(); sellItem(where.bag); });
   box.classList.add('open');
-  storyEvent('openItem'); // сюжет: открыто окно вещи
+  storyEvent('openItem', 'junk'); // сюжет: открыто окно хлама
   storyJunkStep(); // урок про хлам после первой победы
 }
