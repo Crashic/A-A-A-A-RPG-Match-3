@@ -1,9 +1,11 @@
-// Рисует текущий экран создания: «Сервер» или «Анкета-плакат» (раса, пол, класс и имя на одном экране — renderHeroStep).
+// Рисует текущий экран создания: «Сервер и режим» (renderServerStep) или «Анкета-плакат» (раса, пол, класс и имя — renderHeroStep).
+// Оба шага — одна раскладка: слева выбор, по центру плакат #createPoster, справа бумажная анкета.
 function renderCreateStep() {
-  const hero = creation.step !== 'server';
-  document.getElementById('create').classList.toggle('heroStep', hero);
-  document.getElementById('createPoster').hidden = !hero;
-  if (hero) renderHeroStep();
-  else renderServerStep();
+  document.getElementById('create').classList.add('heroStep');
+  const poster = document.getElementById('createPoster');
+  poster.hidden = false;
+  poster.className = '';
+  if (creation.step === 'server') renderServerStep();
+  else renderHeroStep();
   tutorialCheck();
 }

@@ -1,43 +1,68 @@
-// Первый шаг создания: шуточный выбор сервера (он один — Крэшляндия) и режима PvE / PvP / Hardcore.
-// Слева — сервер и три режима, справа — описание и «Выбрать происхождение».
+// Первый шаг создания по макету «Сервер и режим · B «Анкета»» (раскладка как у renderHeroStep):
+// слева — сервер (он один — Крэшляндия) и три режима плитками; по центру — плакат «Выбери судьбу!» цвета режима;
+// справа — анкета с описанием сервера и режима, «‹ Назад» и «Выбрать происхождение ›».
 function renderServerStep() {
   const d = creation.draft;
-  const left = document.getElementById('createLeft');
-  left.className = 'panel serverGrid';
-  left.innerHTML = '';
-  const title = text => { const p = document.createElement('p'); p.className = 'classTitle'; p.textContent = text; left.appendChild(p); };
-  title(tr("ui.Сервер"));
-  for (const s of SERVERS)
-    left.appendChild(originButton(s, { selected: d.serverId === s.id }, () => { d.serverId = s.id; renderCreateStep(); }, 'server'));
-  title(tr("ui.Режим"));
-  for (const m of GAME_MODES)
-    left.appendChild(originButton(m, { selected: d.modeId === m.id }, () => { d.modeId = m.id; renderCreateStep(); }, 'mode'));
+  const el = (tag, cls, text) => {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  };
+  const pickRow = (item, selected, onClick) => {
+    const b = el('button', 'hsPickRow' + (selected ? ' sel' : ''));
+    b.type = 'button';
+    b.dataset.tip = item.name;
+    b.innerHTML = iconTile(item.icon, item.color) + '<span></span>';
+    b.querySelector('span').textContent = item.name;
+    b.addEventListener('click', () => { vibrate(); onClick(); });
+    return b;
+  };
 
-  const right = document.getElementById('createRight');
-  right.className = 'panel createInfo';
-  right.innerHTML = '';
-  const info = document.createElement('div');
-  info.className = 'infoText arrowList';
-  const add = (tag, text, cls) => { const el = document.createElement(tag); if (cls) el.className = cls; el.textContent = text; info.appendChild(el); };
+  const left = document.getElementById('createLeft');
+  left.className = 'panel hsLeft';
+  left.innerHTML = '';
+  left.appendChild(el('p', 'hsLab', tr("ui.0 · Сервер")));
+  for (const s of SERVERS) left.appendChild(pickRow(s, d.serverId === s.id, () => { d.serverId = s.id; renderCreateStep(); }));
+  left.appendChild(el('p', 'hsLab', tr("ui.Режим")));
+  for (const m of GAME_MODES) left.appendChild(pickRow(m, d.modeId === m.id, () => { d.modeId = m.id; renderCreateStep(); }));
+  const back = el('button', 'btn red hsBack hsLeftBack', tr("ui.‹ Назад"));
+  back.type = 'button';
+  back.addEventListener('click', () => { vibrate(); createStepBack(); });
+  left.appendChild(back);
+
   const server = findById(SERVERS, d.serverId);
   const mode = findById(GAME_MODES, d.modeId);
-  add('h3', server.name);
-  add('p', server.status, 'sub');
-  add('p', server.description);
+  const poster = document.getElementById('createPoster');
+  poster.className = 'mode-' + (mode ? mode.id : 'none');
+  poster.innerHTML = '<p class="hsSlogan"></p><div class="hsModeBig"></div><p class="hsModeName"></p><p class="hsModeTitle"></p>';
+  poster.querySelector('.hsSlogan').textContent = tr("ui.Выбери судьбу!");
   if (mode) {
-    add('h3', mode.name + ' — ' + mode.title, 'modeTitle');
-    add('p', mode.description);
-    add('p', mode.note, 'note');
-  } else {
-    add('p', tr("ui.Выберите режим. Пока он ни на что не влияет, но гордиться им можно уже сейчас."), 'note');
-  }
-  right.appendChild(info);
+    poster.querySelector('.hsModeBig').innerHTML = iconTile(mode.icon, mode.color);
+    poster.querySelector('.hsModeName').textContent = mode.name;
+    poster.querySelector('.hsModeTitle').textContent = mode.title;
+  } else poster.querySelector('.hsModeTitle').textContent = tr("ui.Выберите режим слева");
 
-  const next = document.createElement('button');
+  const right = document.getElementById('createRight');
+  right.className = 'paper hsRight hsServer';
+  right.innerHTML = '';
+  right.appendChild(el('b', 'hsH', server.name));
+  const st = el('p', 'hsStatus');
+  st.innerHTML = '<span class="hsLamp"></span>';
+  st.appendChild(document.createTextNode(server.status));
+  right.appendChild(st);
+  right.appendChild(el('p', 'hsText', server.description));
+  right.appendChild(el('hr', 'hsDash'));
+  if (mode) {
+    right.appendChild(el('b', 'hsH', mode.name + ' — ' + mode.title));
+    right.appendChild(el('p', 'hsText', mode.description));
+    right.appendChild(el('p', 'hsNote', mode.note));
+  } else right.appendChild(el('p', 'hsNote', tr("ui.Выберите режим. Пока он ни на что не влияет, но гордиться им можно уже сейчас.")));
+  const foot = el('div', 'hsFoot');
+  const next = el('button', 'btn green hsCreate', mode ? tr("ui.Выбрать происхождение ›") : tr("ui.Выберите режим"));
   next.type = 'button';
-  next.className = 'btn green';
-  next.textContent = mode ? tr("ui.Выбрать происхождение") : tr("ui.Выберите режим");
   next.disabled = !mode;
   next.addEventListener('click', () => { vibrate(); creation.step = 'origin'; renderCreateStep(); });
-  right.appendChild(next);
+  foot.appendChild(next);
+  right.appendChild(foot);
 }

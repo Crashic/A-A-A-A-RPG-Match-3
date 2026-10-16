@@ -1,23 +1,23 @@
 // Серверы и режимы игры (шуточные). Выбираются первым шагом создания персонажа и показываются в его карточке.
 // Пока ни на что не влияют — только надпись.
 const SERVERS = [
-  { id: 'crashland', name: tr("ui.Крэшляндия"), short: tr("ui.Крэшляндия"), icon: 'ruins', color: 'var(--gem-sapphire)',
+  { id: 'crashland', name: tr("ui.Крэшляндия"), short: tr("ui.Крэшляндия"), icon: 't:crashland', color: 'var(--gem-sapphire)',
     status: tr("ui.Онлайн (обычно) · пинг: да · население: вы и тараканы"),
     description: tr("ui.Единственный сервер на всю постсоветскую сеть. Стоит в подвале бункера на табуретке, охлаждается форточкой. ") +
       tr("ui.Падает по вторникам, по праздникам и когда Семёныч включает чайник. Другие серверы были, но их продали на запчасти.") }
 ];
 const GAME_MODES = [
-  { id: 'pve', name: 'PvE', short: 'PvE', icon: 'shield', color: 'var(--gem-emerald)',
+  { id: 'pve', name: 'PvE', short: 'PvE', icon: 't:pve', color: 'var(--gem-emerald)',
     title: tr("ui.Мирный труд"),
     description: tr("ui.Игрок против окружающей среды. Среда, как обычно, против игрока. Тут вас бьют только мутанты, ") +
       tr("ui.радиация, налоговая инспекция Совета и собственная криворукость."),
     note: tr("ui.Рекомендовано для тех, кто пришёл за историей, лутом и душевным покоем (покой не гарантируется).") },
-  { id: 'pvp', name: 'PvP', short: 'PvP', icon: 'fist', color: 'var(--gem-ruby)',
+  { id: 'pvp', name: 'PvP', short: 'PvP', icon: 't:pvp', color: 'var(--gem-ruby)',
     title: tr("ui.Сосед — тоже враг"),
     description: tr("ui.Всё то же самое, но теперь вас может побить ещё и живой человек. Соседи по бункеру на этом режиме ") +
       tr("ui.здороваются только кулаком, а очередь за водой считается рейдом."),
     note: tr("ui.Других игроков на сервере пока нет. Вас это не спасёт, вы будете драться с собой.") },
-  { id: 'hardcore', name: 'Hardcore', short: 'Hardcore', icon: 'radiation', color: 'var(--gem-topaz)',
+  { id: 'hardcore', name: 'Hardcore', short: 'Hardcore', icon: 't:hardcore', color: 'var(--gem-topaz)',
     title: tr("ui.Одна жизнь, ноль нервов"),
     description: tr("ui.Умер — значит умер. Без воскрешений, без «ещё разок», без справки из поликлиники. ") +
       tr("ui.Персонаж отправляется в стенгазету «Они не сдали норматив»."),

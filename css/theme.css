@@ -1145,3 +1145,31 @@ h1 {
   .hsSkill { height: 34px; } .hsSkill b, .hsSkill span { font-size: 15px; }
   .hsDesc { font-size: 16px; -webkit-line-clamp: 6; }
 }
+
+/* «Сервер и режим» (макет «Сервер и режим · B «Анкета»») — та же раскладка, что у анкеты героя */
+.hsPickRow { display: flex; align-items: center; gap: 8px; padding: 2px; border: 0; border-radius: 9px; background: none; color: #f6e7b8; font: 15px 'Russo One', sans-serif; text-align: left; }
+.hsPickRow .tile { flex: none; width: 40px; height: 40px; border-radius: 9px; }
+.hsPickRow.sel .tile { box-shadow: 0 0 0 2px #ffd86a, 0 0 10px #ffd86a; }
+.hsPickRow.sel { color: #ffd86a; }
+.hsPickRow span { min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 14px; }
+.hsLeftBack { margin-top: auto; min-height: 34px; }
+#createPoster.mode-pve { background: repeating-conic-gradient(from 0deg at 50% 50%, #ffffff14 0 6deg, transparent 6deg 22.5deg), radial-gradient(circle at 50% 55%, #5cc83a, #14420a); }
+#createPoster.mode-hardcore { background: repeating-conic-gradient(from 0deg at 50% 50%, #ffffff1c 0 6deg, transparent 6deg 22.5deg), radial-gradient(circle at 50% 55%, #fbd02a, #8a5a0a); }
+#createPoster.mode-none { background: radial-gradient(circle at 50% 55%, #5a4a50, #1a1220); }
+.hsModeBig { position: absolute; left: 50%; top: 32%; transform: translate(-50%, -50%); width: 46%; aspect-ratio: 1; }
+.hsModeBig .tile { width: 100%; height: 100%; }
+.hsModeName { position: absolute; left: 0; right: 0; top: 60%; margin: 0; text-align: center; font: 28px 'Russo One', sans-serif; color: #fff; text-shadow: 0 2px 0 #000; }
+.hsModeTitle { position: absolute; left: 6px; right: 6px; top: calc(60% + 40px); margin: 0; text-align: center; font: 13px 'PT Mono', monospace; color: #ffe9a0; text-transform: uppercase; text-shadow: 0 1px 0 #000; }
+.hsServer { gap: 4px !important; }
+.hsH { font: 16px 'Russo One', sans-serif; font-weight: 400; color: #7a1210; }
+.hsStatus { margin: 0; font: 12px 'PT Mono', monospace; color: #3c7a2a; }
+.hsLamp { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #5cc83a; box-shadow: 0 0 6px #5cc83a; margin-right: 5px; }
+.hsText { margin: 0; font-size: 14px; line-height: 1.2; }
+.hsNote { margin: 0; font-size: 14px; line-height: 1.2; font-style: italic; color: #5a4030; }
+.hsDash { width: 100%; border: 0; border-top: 1px dashed #8a6a40; margin: 2px 0; }
+.hsServer .hsFoot { justify-content: flex-end; }
+@media (min-width:1000px) and (min-height:560px) {
+  .hsPickRow { font-size: 18px; } .hsPickRow .tile { width: 56px; height: 56px; }
+  .hsModeName { font-size: 40px; } .hsModeTitle { font-size: 16px; top: calc(60% + 56px); }
+  .hsH { font-size: 20px; } .hsText, .hsNote { font-size: 17px; } .hsStatus { font-size: 14px; }
+}
